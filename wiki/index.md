@@ -50,6 +50,9 @@ papers:
   - slug: softmimicgen-data-generation-system-scalable-robot
     title: "SoftMimicGen: A Data Generation System for Scalable Robot Learning in Deformable Object Manipulation"
     tags: [deformable, data-generation, imitation-learning, mimicgen, non-rigid-registration, isaac-lab, sim-to-real, dynamic-manipulation, whipping, threading, folding, humanoid, surgical, bimanual]
+  - slug: ropedreamer-kinematic-recurrent-state-space-model
+    title: "RopeDreamer: A Kinematic Recurrent State Space Model for Dynamics of Flexible Deformable Linear Objects"
+    tags: [DLO, deformable-linear-object, dynamics-prediction, world-model, RSSM, quaternion, kinematic-chain, latent-dynamics, robot-learning, knot-topology]
     importance: 3
     domain: Robotics
 
@@ -156,6 +159,9 @@ concepts:
   - slug: automated-demo-generation-deformable
     title: "Automated Demonstration Generation for Deformable Manipulation"
     tags: [deformable, data-generation, imitation-learning, mimicgen, non-rigid-registration, trajectory-transfer, robot-learning]
+  - slug: quaternionic-rssm-dlo
+    title: "Quaternionic Kinematic RSSM for DLOs"
+    tags: [DLO, world-model, RSSM, latent-dynamics, quaternion, kinematic-chain, dual-decoder]
     maturity: emerging
 
 topics:
@@ -216,6 +222,12 @@ people:
     name: "Masoud Moghani"
     affiliation: "NVIDIA / University of Toronto"
     tags: [robotics, deformable-manipulation, imitation-learning, data-generation, surgical-robotics]
+  - slug: tim-missal
+    name: "Tim Missal"
+    affiliation: "TU Darmstadt"
+  - slug: jan-peters
+    name: "Jan Peters"
+    affiliation: "TU Darmstadt; DFKI; hessian.AI; Robotics Institute Germany"
 
 ideas:
 
@@ -351,6 +363,9 @@ claims:
   - slug: mimicgen-style-pipeline-scales-to-dynamic-deformables
     title: "MimicGen-style automated data generation pipelines scale to dynamic deformable manipulation across diverse embodiments"
     tags: [data-generation, deformable, imitation-learning, mimicgen, whipping, threading, folding, robot-learning, sim-to-real]
+  - slug: quaternionic-kinematic-rssm-reduces-dlo-rollout-error
+    title: "Quaternionic kinematic RSSM with dual-decoder reconstruction+prediction reduces 50-step rollout error 40.5% over baseline RSSM/GNN on DLO dynamics"
+    tags: [DLO, world-model, RSSM, quaternion, latent-dynamics, rollout-error, topology, robot-learning]
     status: proposed
     confidence: 0.45
     domain: Robotics
