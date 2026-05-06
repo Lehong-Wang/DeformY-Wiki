@@ -6,16 +6,31 @@ papers:
     tags: [DLO, deformable-linear-object, cosserat-rod, simulation, sim-to-real, robot-learning, dataset, isaac-sim]
     importance: 3
     domain: Robotics
+  - slug: ropedreamer-kinematic-recurrent-state-space-model
+    title: "RopeDreamer: A Kinematic Recurrent State Space Model for Dynamics of Flexible Deformable Linear Objects"
+    tags: [DLO, deformable-linear-object, dynamics-prediction, world-model, RSSM, quaternion, kinematic-chain, latent-dynamics, robot-learning, knot-topology]
+    importance: 3
+    domain: Robotics
 
 concepts:
   - slug: cosserat-isaac-cosimulation
     title: "Cosserat-Isaac Co-Simulation"
     tags: [DLO, simulation, cosserat-rod, isaac-sim, sim-to-real, robot-learning]
     maturity: emerging
+  - slug: quaternionic-rssm-dlo
+    title: "Quaternionic Kinematic RSSM for DLOs"
+    tags: [DLO, world-model, RSSM, latent-dynamics, quaternion, kinematic-chain, dual-decoder]
+    maturity: emerging
 
 topics:
 
 people:
+  - slug: tim-missal
+    name: "Tim Missal"
+    affiliation: "TU Darmstadt"
+  - slug: jan-peters
+    name: "Jan Peters"
+    affiliation: "TU Darmstadt; DFKI; hessian.AI; Robotics Institute Germany"
 
 ideas:
 
@@ -27,6 +42,12 @@ claims:
     tags: [DLO, sim-to-real, cosserat-rod, robot-learning, PPO]
     status: weakly_supported
     confidence: 0.55
+    domain: Robotics
+  - slug: quaternionic-kinematic-rssm-reduces-dlo-rollout-error
+    title: "Quaternionic kinematic RSSM with dual-decoder reconstruction+prediction reduces 50-step rollout error 40.5% over baseline RSSM/GNN on DLO dynamics"
+    tags: [DLO, world-model, RSSM, quaternion, latent-dynamics, rollout-error, topology, robot-learning]
+    status: proposed
+    confidence: 0.45
     domain: Robotics
 
 Summary:
