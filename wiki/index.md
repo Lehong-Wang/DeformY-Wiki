@@ -6,11 +6,20 @@ papers:
     tags: [DLO, deformable-linear-object, cosserat-rod, simulation, sim-to-real, robot-learning, dataset, isaac-sim]
     importance: 3
     domain: Robotics
+  - slug: self-curriculum-model-based-reinforcement-learning
+    title: "Self-Curriculum Model-based Reinforcement Learning for Shape Control of Deformable Linear Objects"
+    tags: [DLO, deformable-linear-object, shape-control, MBRL, self-curriculum, goal-conditioned-RL, visual-servoing, sim-to-real, robot-learning]
+    importance: 3
+    domain: Robotics
 
 concepts:
   - slug: cosserat-isaac-cosimulation
     title: "Cosserat-Isaac Co-Simulation"
     tags: [DLO, simulation, cosserat-rod, isaac-sim, sim-to-real, robot-learning]
+    maturity: emerging
+  - slug: self-curriculum-goal-generation
+    title: "Self-Curriculum Goal Generation via Imagined Evaluation"
+    tags: [GCRL, curriculum-learning, model-based-RL, goal-generation, DLO, robot-learning]
     maturity: emerging
 
 topics:
@@ -27,6 +36,12 @@ claims:
     tags: [DLO, sim-to-real, cosserat-rod, robot-learning, PPO]
     status: weakly_supported
     confidence: 0.55
+    domain: Robotics
+  - slug: two-stage-mbrl-jacobian-servo-zero-shot-dlo-shape-control
+    title: "Two-stage self-curriculum MBRL + Jacobian visual servoing achieves zero-shot sim-to-real DLO shape control across varied size and material"
+    tags: [DLO, MBRL, sim-to-real, shape-control, curriculum-learning, visual-servoing, robot-learning]
+    status: proposed
+    confidence: 0.45
     domain: Robotics
 
 Summary:
