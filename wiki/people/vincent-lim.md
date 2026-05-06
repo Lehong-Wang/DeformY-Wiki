@@ -16,6 +16,7 @@ date_updated: 2026-05-06
 ## Key papers
 
 - [[planar-robot-casting-real2sim2real-self-supervised]] (ICRA 2022) — co-first author. Introduces Planar Robot Casting and the Real2Sim2Real pipeline.
+- [[self-supervised-learning-dynamic-planar-manipulation]] (arXiv 2024) — co-author. Direct extension of Real2Sim2Real from fixed-end to free-end cable.
 
 ## Recent work
 

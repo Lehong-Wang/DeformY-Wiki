@@ -43,7 +43,7 @@ The implicit framing is the design lever: by *not* naming the latent physics par
 - **Action parametrisation:** $a = (q_s, q_g, vel, acc)$ where $q_s, q_g$ are start and end base-joint angles, $vel$ is cruising velocity, $acc$ is acceleration. The policy fixes $q_s = 3.14\,\text{rad}$ and $acc = 3.14\,\text{rad/s}^2$, and lets $q_g$ be set by the obstacle's top-edge position; only $vel$ is predicted.
 - **SysID action:** fixed $\bar{a} = (3.14, 1.04, 3.14, 8)$. Predefined and identical across all environments and runs.
 - **Input tensor:** five $m\times m$ channels — (1) broadcast $\bar{a}$, (2) trajectory map $\bar{\tau}$, (3) depth map $d$, (4) segmentation map $s \in \{0,\ldots,5\}$ (soft tool / interactive object / tool-connected object / PoI goal / agent / other), (5) broadcast auxiliary fixed-action parameters.
-- **Network:** ResNet (CNN with skip connections, [[he-deep-residual-learning-2016]] family — see related), trained with MSE between $\hat{vel}$ and ground-truth $vel$ from successful samples. PyTorch-Lightning, AdamW, batch 96, 37 epochs on a single RTX 3090.
+- **Network:** ResNet (CNN with skip connections, He et al. 2016 family), trained with MSE between $\hat{vel}$ and ground-truth $vel$ from successful samples. PyTorch-Lightning, AdamW, batch 96, 37 epochs on a single RTX 3090.
 - **Domain randomisation:** friction coefficient, rope length / radius / mass, payload dimensions / mass, obstacle wall length / width / position. Per-environment: 1 SysID run + ≤25 cast attempts; failed (overshoot/undershoot/collision) episodes are discarded.
 - **Simulator:** MuJoCo. Splits 0.8 / 0.1 / 0.1 train / val / test.
 

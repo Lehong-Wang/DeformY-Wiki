@@ -77,6 +77,8 @@ The principal weakness is the manually-annotated critical point. In flying-knot 
 
 ## Related
 
+- [[task-level-ilc-cross-rope-transfer-2-to-5-trials]]
+- [[task-level-ilc-real-hardware-flying-knot-100pct-under-10-trials]]
 - [[task-level-iterative-learning-control]] — the method introduced here; the paper's principal new concept
 - [[critical-point-objective]] — the trajectory-weighting trick that makes Task-Level ILC work on deformables
 - [[optimization-based-inverse-model]] — QP-form inverse model (Drake + Clarabel) used at each ILC step

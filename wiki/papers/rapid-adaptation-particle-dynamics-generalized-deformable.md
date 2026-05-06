@@ -36,7 +36,7 @@ Concretely, [[rma-particle-dynamics-adaptation]] separates the privileged input 
 
 ## Method
 
-**Setup.** RL is formulated as an MDP $\mathcal{M}=\langle\mathcal{S},\mathcal{O},\mathcal{A},\mathbb{T},\mathcal{R},\gamma,\rho_0,\mathcal{H}\rangle$ where $\mathcal{S}$ is observable only in simulation. Reward is binary task success plus a small dense distance shaping term. Training uses [[OmniGibson]] (BEHAVIOR-1K stack) on a simulated 22-DOF TIAGo bimanual mobile manipulator; depth at $224\times 224$, 3 Hz. Action space spans full DOF: 3-DOF omnidirectional base, 7-DOF $\times$ 2 arms, 1-DOF torso, 2-DOF head, 1-DOF $\times$ 2 grippers.
+**Setup.** RL is formulated as an MDP $\mathcal{M}=\langle\mathcal{S},\mathcal{O},\mathcal{A},\mathbb{T},\mathcal{R},\gamma,\rho_0,\mathcal{H}\rangle$ where $\mathcal{S}$ is observable only in simulation. Reward is binary task success plus a small dense distance shaping term. Training uses OmniGibson (BEHAVIOR-1K stack) on a simulated 22-DOF TIAGo bimanual mobile manipulator; depth at $224\times 224$, 3 Hz. Action space spans full DOF: 3-DOF omnidirectional base, 7-DOF $\times$ 2 arms, 1-DOF torso, 2-DOF head, 1-DOF $\times$ 2 grippers.
 
 **Phase I — Privileged teacher.** Train end-to-end with RL:
 1. **Shape Encoder** $\mu_s$: input is recent ground-truth particle positions of the deformable object plus recent robot actions; output is shape embedding $z_t^s$.
@@ -133,7 +133,7 @@ For ΩmegaWiki, the paper's lasting contribution is the [[rma-particle-dynamics-
 - [[dynamic-manipulation-deformable-objects-3d-simulation]] — 3D dynamic deformable manipulation benchmark (DIDP)
 - [[learning-accurate-whole-body-throwing-high]] — ETH whole-body throwing with residual policy (rigid analog)
 - [[implicit-physics-aware-policy-dynamic-manipulation]] — physics-aware policy for dynamic rigid-via-soft manipulation
-- [[flying-knot-ilc]] — iterative learning control for dynamic deformable shaping
+- [[learning-deformable-object-manipulation-using-task]] — Task-Level ILC for dynamic deformable shaping (Suresh & Atkeson, CMU 2026)
 - [[daxbench-benchmarking-deformable-object-manipulation-differentiable]] — differentiable benchmark for deformables; possible substrate for RAPiD-style training
 - [[softmimicgen-data-generation-system-scalable-robot]] — automated demonstration generation; complementary to RAPiD's sim-only training
 - [[ropedreamer-kinematic-recurrent-state-space-model]] — recurrent latent dynamics for ropes
