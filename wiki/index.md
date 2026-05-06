@@ -22,6 +22,9 @@ papers:
   - slug: planar-robot-casting-real2sim2real-self-supervised
     title: "Real2Sim2Real: Self-Supervised Learning of Physical Single-Step Dynamic Actions for Planar Robot Casting"
     tags: [DLO, deformable-linear-object, robot-casting, sim-to-real, real2sim2real, self-supervised, isaac-gym, pybullet, differential-evolution, autolab]
+  - slug: dynamic-manipulation-deformable-objects-3d-simulation
+    title: "Dynamic Manipulation of Deformable Objects in 3D: Simulation, Benchmark and Learning Strategy"
+    tags: [DLO, deformable-linear-object, diffusion-policy, test-time-adaptation, reduced-order-model, GVS, cosserat-rod, benchmark, 3D-rope-manipulation, simulation, sim-only]
     importance: 4
     domain: Robotics
 
@@ -71,6 +74,17 @@ concepts:
   - slug: differential-evolution-sim-tuning
     title: "Differential Evolution Simulator Tuning"
     tags: [sim-to-real, system-identification, optimization, simulator-tuning, DLO]
+  - slug: dynamics-informed-diffusion-policy
+    title: "Dynamics-Informed Diffusion Policy (DIDP)"
+    tags: [DLO, diffusion-policy, imitation-learning, trajectory-optimization, reduced-order-model, robot-learning]
+    maturity: emerging
+  - slug: physics-informed-test-time-adaptation
+    title: "Physics-Informed Test-Time Adaptation (PITA) for Diffusion Sampling"
+    tags: [diffusion-policy, test-time-adaptation, score-based-sampling, physics-prior, robot-learning, DLO]
+    maturity: emerging
+  - slug: reduced-order-gvs-model
+    title: "Reduced-Order GVS (Geometric Variable Strain) Model"
+    tags: [DLO, cosserat-rod, simulation, reduced-order-model, differentiable-simulation, soft-robotics]
     maturity: emerging
 
 topics:
@@ -97,6 +111,9 @@ people:
   - slug: vincent-lim
     title: "Vincent Lim"
     affiliation: "AUTOLAB, UC Berkeley (at time of paper)"
+  - slug: guanzhou-lan
+    title: "Guanzhou Lan"
+    affiliation: "Northwestern Polytechnical University"
 
 ideas:
 
@@ -142,6 +159,17 @@ claims:
     tags: [DLO, sim-to-real, real2sim2real, robot-casting, free-end-cable, supervised-learning]
     status: supported
     confidence: 0.8
+  - slug: didp-3d-rope-tip-targeting-success-rates
+    title: "DIDP reaches 84.3% within 5 cm and 20.8% within 1 cm tip-to-goal on a 3D reduced-order Cosserat rope-whipping benchmark"
+    tags: [DLO, diffusion-policy, benchmark, success-rate, sim-only, 3D-rope-manipulation, GVS]
+    status: supported
+    confidence: 0.7
+    domain: Robotics
+  - slug: physics-informed-tta-improves-diffusion-policy-on-dynamic-dlo
+    title: "Physics-informed test-time adaptation during diffusion sampling materially improves over plain diffusion policy on dynamic DLO tasks"
+    tags: [diffusion-policy, test-time-adaptation, physics-prior, DLO, sim-only, robot-learning]
+    status: weakly_supported
+    confidence: 0.6
     domain: Robotics
 
 Summary:
