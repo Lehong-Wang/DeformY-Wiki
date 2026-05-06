@@ -6,16 +6,37 @@ papers:
     tags: [DLO, deformable-linear-object, cosserat-rod, simulation, sim-to-real, robot-learning, dataset, isaac-sim]
     importance: 3
     domain: Robotics
+  - slug: learning-accurate-whole-body-throwing-high
+    title: "Learning Accurate Whole-body Throwing with High-frequency Residual Policy and Pullback Tube Acceleration"
+    tags: [throwing, whole-body-control, legged-manipulator, residual-policy, MPC, reinforcement-learning, sim-to-real, ANYmal, dynamic-manipulation, robust-control]
+    importance: 4
+    domain: Robotics
 
 concepts:
   - slug: cosserat-isaac-cosimulation
     title: "Cosserat-Isaac Co-Simulation"
     tags: [DLO, simulation, cosserat-rod, isaac-sim, sim-to-real, robot-learning]
     maturity: emerging
+  - slug: high-frequency-residual-policy
+    title: "High-frequency Residual Policy"
+    tags: [residual-policy, reinforcement-learning, whole-body-control, fast-feedback, sim-to-real]
+    maturity: emerging
+  - slug: pullback-tube-acceleration
+    title: "Pullback Tube Acceleration"
+    tags: [robust-control, throwing, convex-optimization, backward-reachable-tube, real-time-MPC, release-uncertainty]
+    maturity: emerging
+  - slug: whole-body-prehensile-throwing
+    title: "Whole-body Prehensile Throwing"
+    tags: [throwing, whole-body-control, legged-manipulator, loco-manipulation, dynamic-manipulation]
+    maturity: emerging
 
 topics:
 
 people:
+  - slug: yuntao-ma
+    name: "Yuntao Ma"
+    affiliation: "Robotic Systems Lab, ETH Zürich"
+    tags: [legged-robotics, whole-body-control, residual-policy, sim-to-real, loco-manipulation]
 
 ideas:
 
@@ -27,6 +48,18 @@ claims:
     tags: [DLO, sim-to-real, cosserat-rod, robot-learning, PPO]
     status: weakly_supported
     confidence: 0.55
+    domain: Robotics
+  - slug: hf-residual-tube-stack-enables-accurate-whole-body-throwing
+    title: "100 Hz nominal MPC + 400 Hz RL residual + pullback-tube optimizer enables 0.276 m mean landing error at 6 m on ANYmal-D + DynaArm"
+    tags: [throwing, residual-policy, whole-body, pullback-tube, ANYmal, sim-to-real]
+    status: supported
+    confidence: 0.75
+    domain: Robotics
+  - slug: legged-base-contributes-major-angular-impulse-in-throwing
+    title: "Whole-body coordination contributes ~53% additional angular impulse over arm-only throwing on a legged mobile manipulator"
+    tags: [throwing, whole-body, base-motion, legged-manipulator, angular-impulse, loco-manipulation]
+    status: supported
+    confidence: 0.7
     domain: Robotics
 
 Summary:
