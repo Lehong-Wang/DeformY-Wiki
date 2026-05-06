@@ -1,0 +1,185 @@
+\section{Methodology}
+\begin{wrapfigure}{R}{0.56\textwidth}
+      \vspace*{-23pt}
+    \begin{minipage}{0.56\textwidth}
+      \begin{algorithm}[H]
+\caption{One Step Prediction with DEFORM} 
+\label{alg:long time horizon}
+\textbf{Inputs}: $\pred{X}{t}, \pred{V}{t}, \textbf{u}_t$
+\begin{algorithmic}[1]
+% \State Align end edges with $\textbf{u}_t$ \Comment{assumption.\ref{assum:grasp condition}}
+\State $\bm{\theta}^*_t(\textbf{X}_t) = \argmin_{\bm{\theta}_t} P(\textbf{X}_t, \bm{\theta}_t,\bm{\alpha})$ \Comment{\secref{sec:Differentiable DER}}
+% \State  $\textit{\textbf{M}}\ddot{\textbf{X}}_{t} = -\frac{\partial P(\textbf{X}_t, \bm{\theta}_t(\textbf{X}_t),\bm{\alpha}}{\partial  \textbf{X}_{t}}$
+% \Comment{\eqref{eq:Integration}} 
+\State $\hat{\textbf{V}}_{t+1} = \hat{\textbf{V}}_t-\Delta_tM^{-1}\frac{\partial P(\textbf{X}_t, \bm{\theta}^*_t(\textbf{X}_t,\bm{\alpha}),\bm{\alpha})}{\partial \textbf{X}_{t}}$ \Comment{\eqref{eq:Semi-Euler1}}   
+\State $\hat{\textbf{X}}_{t+1} = \hat{\textbf{X}}_t + \Delta_t\hat{\textbf{V}}_{t+1} + \text{DNN}$ \Comment{\secref{sec:integration_NN}}
+\State Inextensibility Enforcement on $\hat{\textbf{X}}_{t+1}$ 
+\Comment{\secref{sec:inextensiblity methodology}}
+\State $\hat{\textbf{V}}_{t+1} = (\hat{\textbf{X}}_{t+1} - \hat{\textbf{X}}_t)/\Delta_t$ \Comment{Velocity Update}
+\end{algorithmic}
+\Return $\pred{X}{t+1}, \pred{V}{t+1}$
+\end{algorithm}
+    \end{minipage}
+    \vspace*{-6pt}
+  \end{wrapfigure}
+This section first introduces DDER, a reformulation of DER to ensure differentiability, which enables efficient DER model parameter estimation using real-world data.
+Next, this section describes how to incorporate a learning-assisted integration method to improve the speed of DLO simulation and accuracy.
+Finally, this section describes a position-based constraint that enforces inextensibility while preserving momentum, which results in improved numerical stability during simulation.
+These results are combined in a prediction algorithm that is described in Algorithm \ref{alg:long time horizon}.
+This algorithm can be run over multiple steps to generate an accurate prediction of the state of the DLO over a long time horizon. 
+
+\subsection{Differentiable Discrete Elastic Rods (DDER)}
+\label{sec:Differentiable DER}
+
+We first develop a reformulation of DER such that the DER model is differentiable with respect to any model variables (i.e., material properties, and DNN weights).
+We call this extension Differentiable Discrete Elastic Rods (DDER).
+To do this, we implement DDER in PyTorch \cite{pytorch} by taking advantage of its automatic differentiation functionality. 
+Unfortunately, simulating the DDER model to predict $\hat{\textbf{X}}_{t+1}$ using \eqref{eq:Semi-Euler1} and \eqref{eq:Semi-Euler2}
+also requires solving an optimization problem \eqref{eq:opt_theta}. 
+As a result, to minimize the prediction loss, we need to solve a bi-level optimization problem at each time $t$. 
+For instance, if we train a learning model to identify the material parameters by minimizing a prediction loss between experimentally collected ground truth data $\textbf{X}_{t+1}$ and our model prediction $\hat{\textbf{X}}_{t+1}$ for each time $t$, then 
+the following bi-level optimization problem needs to be solved: 
+\begin{align}
+    \label{eq:pzoptcost}
+    & &\underset{\bm{\alpha}}{\min} \hspace{0.5cm}& \|\textbf{X}_{t+1}- \hat{\textbf{X}}_{t+1}(\bm{\theta}^*_t)\|_2 \hspace{3cm}    \\
+    &&& \bm{\theta}^*_t = \argmin_{\bm{\theta}_t} P(\hat{\textbf{X}}_t, \vertindu_t, \bm{\theta}_t,\bm{\alpha}) 
+\end{align}
+Note that  $\hat{\textbf{X}}_{t+1}$ depends on the previously computed $\bm{\theta}^*_t$ due to \eqref{eq:Semi-Euler1} and \eqref{eq:Semi-Euler2}.
+To compute the gradient of this optimization problem with respect to $\bm{\alpha}$, one can perform implicit differentiation, which we implement using Theseus \cite{theseus}. 
+
+\subsection{Integration Method with Residual Learning}
+\label{sec:integration_NN}
+% \begin{figure}
+%     \centering
+%      \includegraphics[width=0.4\textwidth]{figures/tracking error.png}
+%      \caption{\textbf{Experiment Setup: Need to be edited}}
+%     \label{fig:primal-dual}
+% \end{figure}
+
+% As discussed in \secref{sec:integration}, solving DER requires numerical integration. The choice balances accuracy, stability, and speed. 
+% To preserve real-time modeling efficiency, it is crucial to keep the integration time step $\Delta t$ within a practical magnitude. Euler method, though has the minimum computational, does not perform well with large time steps \cite{LargeStepSimulation}. 
+% Other Explicit methods such as higher-order solvers, e.g., RK4 \cite{RK4}, which perform sequential dynamic integration, could potentially reduce computational speed. 
+% On the other hand, implicit methods necessitate the computation of Hessian and gradient for modeling, presenting challenges in deriving those for solving \Eqref{eq:Integration}. 
+% Although the auto-gradient feature of PyTorch can potentially provides gradient and hessian, storing gradients may decelerate the inference process. 
+To compensate for numerical errors that arise from discrete integration methods and to improve the numerical stability of the algorithm that we use to simulate the DDER model, we incorporate a learning-based framework into the integration method as follows: 
+% Using Euler integration and first-order differentiable equation as example.
+% \begin{defn}
+% \label{residual integration learning}
+% Let physics-based modeling to be $\dot{\textbf{X}} = F(\textbf{X}, \textbf{u})$, a learning layer DNN is introduced inside the integration method
+% \begin{equation}
+%         \textbf{X}_\text{t+1} = \textbf{X}_t + \Delta t F(\textbf{X}_t, \textbf{u}_\textbf{t}) + \text{DNN}
+%        \label{eq:NN-Semi-Euler1}
+% \end{equation}
+% Such learning structure is defined as residual integration learning. 
+% \end{defn}
+\begin{align}
+    \begin{split}
+        \hat{\textbf{V}}_{t+1} &= \hat{\textbf{V}}_t-\Delta_tM^{-1}\Big(\frac{\partial P(\hat{\textbf{X}}_t, \bm{\theta}^*_t(\hat{\textbf{X}}_t, \bm{\alpha}),\bm{\alpha})}{\partial \textbf{X}_{t}} + \text{DNN}(\hat{\textbf{X}}_t, \bm{\alpha})\Big), \label{eq:NN-Semi-Euler1}
+        \end{split} \\  
+                \hat{\textbf{X}}_{t+1} &= \hat{\textbf{X}}_t + \Delta_t \Big(\hat{\textbf{V}}_{t+1} + \text{DNN}(\hat{\textbf{X}}_t, \hat{\textbf{V}}_t, \bm{\alpha})\Big),
+       \label{eq:NN-Semi-Euler3}
+       %  \hat{\textbf{X}}_{t+1} &= \hat{\textbf{X}}_t + \Delta_t\Big(\hat{\textbf{V}}_{t+1} + \text{DNN}(\hat{\textbf{V}}_t)\Big),
+       % \label{eq:NN-Semi-Euler2}
+\end{align}
+where $\text{DNN}$ denotes a deep neural network. 
+We utilize a structure similar to residual learning \cite{resnet}, with one major difference: we define a shortcut connection that is equal to the integration method that is derived from the DDER physics-based modeling.
+Unlike pure learning methods, the short cut connection grounds the DNN in physical laws while also leveraging data-driven insights.
+As shown in the ablation study results, this approach significantly improves modeling performance. Additioanl discussion of section can be found in Appendix \ref{appendix:NN discussion}. Implementation details of the DNN structure can be found in Appendix \ref{appendix:DNN Structurey}.
+\textbf{Note that this contribution can also be applied to standard DER models, but does not improve performance as much as it does when combined with our DDER modeling approach as we illustrate in this paper.}
+
+
+\subsection{Improved Inextensiblity Enforcement with PBD}
+\label{sec:inextensiblity methodology}
+To enforce inextensibility \emph{and} conserve momentum after simulating the DLO forward for a single time step \eqref{eq:NN-Semi-Euler3}, we enforce an additional constraint on the DLO in a manner similar to the PBD method \cite{PBD}. 
+First, we define a constraint function between spatially successive vertices at each time step:
+\reducevspacebefore
+\begin{equation}
+    \text{C}(\hat{\textbf{x}}^i_{t+1}, \hat{\textbf{x}}^{i+1}_{t+1}) = | ||\hat{\textbf{x}}^i_{t+1} - \hat{\textbf{x}}^{i+1}_{t+1}||_2 - ||\overline{\textbf{e}}_i||_2 |
+    \label{eq:PBD_constraint3}
+\end{equation}
+\reducevspaceafter
+
+where $\overline{\textbf{e}}$ denotes the edge between vertices $i$ and $i+1$ when the DLO is undeformed.
+Note that this constraint is non-zero if the distance between successive vertices of the DLO changes.
+The PBD method iteratively modifies the positions of each of the vertex using a pair of correction terms, $\Delta \hat{\textbf{x}}^i_{t+1}$ and $\Delta \hat{\textbf{x}}^{i+1}_{t+1}$, until the following constraint is satisfied: 
+\reducevspacebefore
+\begin{equation}
+    \text{C}(\hat{\textbf{x}}^i_{t+1} + \Delta \hat{\textbf{x}}^i_{t+1}, \hat{\textbf{x}}^{i+1}_{t+1} + \Delta \hat{\textbf{x}}^{i+1}_{t+1}) < \epsilon,
+    \label{eq:PBD_constraint4}
+\end{equation}
+\reducevspaceafter
+
+where $\epsilon > 0$ is a user-specified threshold.
+\Revise{The correction, $\Delta \hat{\textbf{x}}^i_{t+1}$ and $\Delta \hat{\textbf{x}}^{i+1}_{t+1}$, are applied iteratively until the constraint falls below some user specified threshold, $\epsilon > 0$.}{}
+To calculate the correction terms, PBD typically applies a Taylor Approximation of the constraint and sets this equal to zero (\textit{i.e.}, the correction to the vertex locations are chosen to ensure that the constraint is satisfied).
+The correction term is then given by:
+\reducevspacebefore
+\begin{equation}
+    \label{eq:inext1}
+    \Delta \hat{\textbf{x}}^i_{t+1} = C(\hat{\textbf{x}}^i_{t+1},\hat{\textbf{x}}^{i+1}_{t+1})\frac{\hat{\textbf{x}}^{i+1}_{t+1} - \hat{\textbf{x}}^{i}_{t+1}}{||\hat{\textbf{x}}^{i+1}_{t+1} - \hat{\textbf{x}}^{i}_{t+1}||_2}
+\end{equation}
+\vspace{-10pt}
+% Similarly, PBD corrects the predicted velocity to be $\hat{V}_{t+1} = (\hat{\textbf{X}}_{t+1} - \hat{\textbf{X}}_{t})/\Delta_t$.
+
+% correction with GaussSeidel\cite{Gauss} to ensure stability,  and update the predicted velocity to be $\hat{V}_{t+1} = (\hat{\textbf{X}}_{t+1} - \hat{\textbf{X}}_{t})/\Delta_t$.
+
+Notably, this correction to the vertex location does not ensure that the linear and angular momentum is preserved.
+\Revise{}{}To ensure that linear and angular momentum is conserved after the correction is applied, one needs to ensure that the following pair of equations are satisfied:
+\reducevspacebefore
+\begin{equation}
+    \label{eq:momentum} 
+    \sum_{i=3}^{n-2} \textit{\textbf{M}}^i \cdot \Delta \hat{\textbf{x}}^i_{t+1} = \textbf{0} \text{ and } 
+    \sum_{i=3}^{n-2} \textbf{r}^i \times (\textit{\textbf{M}}^i \cdot \Delta \hat{\textbf{x}}^i_{t+1}) = \textbf{0}
+\end{equation}
+\reducevspaceafter
+
+
+% \begin{equation}
+%     \sum_{i=3}^{n-2} \textbf{r}^i \times (\textit{\textbf{M}}^i \cdot \Delta \hat{\textbf{x}}^i_{t+1}) = \textbf{0},
+%         \label{eq:rotationm}
+% \end{equation}
+
+where $\textbf{r}^i$ is the vector between $\hat{\textbf{x}}^i_{t+1}$ and a common rotation center.
+Note in particular that if the mass matrix associated with each vertex is not identical, then the correction proposed in \eqref{eq:inext1} leads to a violation of \eqref{eq:momentum}\Revise{and \eqref{eq:rotationm}}{}.
+To address this issue, we modify the correction proposed in \eqref{eq:inext1} by multiplying it by a $\beta \in \R$ that is inversely correlated with the weight ratio between successive vertices (i.e., let  $\beta^{i} = \frac{\textit{\textbf{M}}^{i+1}}{(||\textit{\textbf{M}}^{i}||_2+||\textit{\textbf{M}}^{i+1}||_2)}$ and $\beta^{i+1} = \frac{\textit{\textbf{M}}^{i}}{(||\textit{\textbf{M}}^{i}||_2 + ||\textit{\textbf{M}}^{i+1}||_2)}$).
+Then, if we let the correction between successive steps be equal to $\beta^i \Delta \hat{\textbf{x}}^i_{t+1}$, one can ensure that \eqref{eq:momentum} is satisfied. 
+Verification proof can be found in Appendix \ref{appendix:Verification proof}.
+Pseudo code to enforce inextensibility while preserving momentum can be found in Appendix \ref{appendix:Inextensibility Enforcement Pseudo Code}. 
+
+
+
+
+% Rather than compute the successive corrections in an ad hoc manner, in this paper we compute these corrections in a manner than conserves the linear and angular momentum.
+
+
+% To define this correction size, let $\textbf{r}^i$ be the vector of the $\hat{\textbf{x}}^i_{t+1}$ to a common rotation center.
+% \begin{equation}
+%     \sum_{i=3}^{n-2} \textit{\textbf{M}}^i \cdot \Delta \textbf{x}^i_{t+1} = \textbf{0}
+%     \label{eq:linearm}
+% \end{equation}
+% \begin{equation}
+%     \sum_{i=3}^{n-2} \textbf{r}^i \times (\textit{\textbf{M}}^i \cdot \Delta \textbf{x}^i_{t+1}) = \textbf{0}
+%         \label{eq:rotationm}
+% \end{equation}
+% Notice that under assupmtion \ref{assum:grasp condition}, inextensility only applys onto the internal vertices. To derive $\Delta \textbf{x}^i_{t+1}$, we approximate the constraint as following.
+% \begin{equation}
+%     \text{C} (\hat{\textbf{x}}^i_{t+1} + \Delta \textbf{x}^i_{t+1}) \approx  \text{C}(\hat{\textbf{x}}^i_{t+1}) + \frac{\delta C(\hat{\textbf{x}}^i_{t+1})}{\delta\hat{\textbf{x}}^i_{t+1}}\Delta \textbf{x}^i_{t+1} = 0
+%     \label{eq:PBD_constraint1}
+% \end{equation}
+% However, naively solving above equation for $i$ and $i+1$ will result in $\Delta \textbf{x}^i_{t+1} = -\Delta \textbf{x}^{i+1}_{t+1}$ as following:
+% \begin{equation}
+%     \label{eq:inext1}
+%     \Delta \textbf{x}^i_{t+1} = C(\hat{\textbf{x}}^i_{t+1})\frac{\hat{\textbf{x}}^{i+1}_{t+1} - \hat{\textbf{x}}^{i}_{t+1}}{||\hat{\textbfperception{x}}^{i+1}_{t+1} - \hat{\textbf{x}}^{i}_{t+1}||_2}
+% \end{equation}
+% If mass matrices are not identical among vertices, such formalation violates \eqref{eq:linearm} and \eqref{eq:rotationm}. To leverage the effect of mass, $\beta^i\in\R$ is introduced as scalar onto $\Delta \textbf{x}^i_{t+1}$ as $\beta^i \Delta \textbf{x}^i_{t+1}$. \eqref{eq:linearm} and \eqref{eq:rotationm} indicate that the correction $\Delta \textbf{x}^i_{t+1}$ should be inversely correlated to its weight ratio with respect to $\textbf{x}^i_{t+1}$ and $\textbf{x}^{i-1}_{t+1}$. Based on pair constraint setting of \eqref{eq:PBD_constraint1}, one can find a pair of $\beta^{i} = \textit{\textbf{M}}^{i+1}/(||\textit{\textbf{M}}^{i}||_2+||\textit{\textbf{M}}^{i+1}||_2), \beta^{i+1} = \textit{\textbf{M}}^{i}/(||\textit{\textbf{M}}^{i}||_2 + ||\textit{\textbf{M}}^{i+1}||_2)$, that satisfies both \eqref{eq:linearm} and \eqref{eq:rotationm}.
+% % Such formulation leverage the weights (e.g., nodes with larger weights are less likely to be moved) while Finally solving \eqref{eq:PBDmass} for $i$ and $i+1$ with Newtwon method allows us to obtain following position correction for a pair of vertices.
+% % \begin{equation}
+% %     \label{eq:inext1}
+% %     \Delta \textbf{x}^i_{t+1} = \frac{\textit{\textbf{M}}^{i+1}C(\hat{\textbf{x}}^i_{t+1})}{||\textit{\textbf{M}}^i||_2+||\textit{\teperceptionxtbf{M}}^{i+1}||_2}\frac{\hat{\textbf{x}}^i_{t+1} - \hat{\textbf{x}}^{i+1}_{t+1}}{||\hat{\textbf{x}}^i_{t+1} - \hat{\textbf{x}}^{i+1}_{t+1}||_2}
+% % \end{equation}
+% % \begin{equation}
+% %     \label{eq:inext2}
+% %     \Delta \textbf{x}^{i+1}_{t+1} = \frac{-\textit{\textbf{M}}^iC(\hat{\textbf{x}}^i_{t+1})}{||\textit{\textbf{M}}^i||_2+||\textit{\textbf{M}}^{i+1}||_2}\frac{\hat{\textbf{x}}^i_{t+1} - \hat{\textbf{x}}^{i+1}_{t+1}}{||\hat{\textbf{x}}^i_{t+1} - \hat{\textbf{x}}^{i+1}_{t+1}||_2}
+% % \end{equation}
+% Based above formulation, PBD proposes to impose correction with GaussSeidel\cite{Gauss} to ensure stability,  and update the predicted velocity to be $\hat{V}_{t+1} = (\hat{\textbf{X}}_{t+1} - \hat{\textbf{X}}_{t})/\Delta_t$.
+

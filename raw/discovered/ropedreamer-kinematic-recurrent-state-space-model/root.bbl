@@ -1,0 +1,128 @@
+\begin{thebibliography}{10}
+
+\bibitem{waltersson_planning_2022}
+G.~A. Waltersson, R.~Laezza, and Y.~Karayiannidis, ``Planning and {Control} for {Cable}-routing with {Dual}-arm {Robot},'' in {\em 2022 {International} {Conference} on {Robotics} and {Automation} ({ICRA})}, (Philadelphia, PA, USA), pp.~1046--1052, IEEE, May 2022.
+
+\bibitem{wilson_cable_2023}
+A.~Wilson, H.~Jiang, W.~Lian, and W.~Yuan, ``Cable {Routing} and {Assembly} using {Tactile}-driven {Motion} {Primitives},'' 2023.
+
+\bibitem{sudry_hierarchical_2023}
+M.~Sudry, T.~Jurgenson, A.~Tamar, and E.~Karpas, ``Hierarchical {Planning} for {Rope} {Manipulation} using {Knot} {Theory} and a {Learned} {Inverse} {Model},'' in {\em Proceedings of {The} 7th {Conference} on {Robot} {Learning}}, vol.~229 of {\em Proceedings of {Machine} {Learning} {Research}}, pp.~1596--1609, PMLR, 2023.
+
+\bibitem{grannen_untangling_2021}
+J.~Grannen, P.~Sundaresan, B.~Thananjeyan, J.~Ichnowski, A.~Balakrishna, V.~Viswanath, M.~Laskey, J.~Gonzalez, and K.~Goldberg, ``Untangling {Dense} {Knots} by {Learning} {Task}-{Relevant} {Keypoints},'' in {\em Proceedings of the 2020 {Conference} on {Robot} {Learning}}, pp.~782--800, PMLR, Oct. 2021.
+\newblock ISSN: 2640-3498.
+
+\bibitem{guler_towards_2025}
+B.~Guler, K.~Pompetzki, S.~Manschitz, and J.~Peters, ``Towards {Assistive} {Teleoperation} for {Knot} {Untangling},'' in {\em German {Robotics} {Conference} ({GRC})}, Mar. 2025.
+
+\bibitem{gu_learning_2025}
+F.~Gu, H.~Sang, Y.~Zhou, J.~Ma, R.~Jiang, Z.~Wang, and B.~He, ``Learning {Graph} {Dynamics} {With} {Interaction} {Effects} {Propagation} for {Deformable} {Linear} {Objects} {Shape} {Control},'' {\em IEEE Transactions on Automation Science and Engineering}, vol.~22, pp.~10881--10892, 2025.
+
+\bibitem{oono_graph_2021}
+K.~Oono and T.~Suzuki, ``Graph {Neural} {Networks} {Exponentially} {Lose} {Expressive} {Power} for {Node} {Classification},'' Jan. 2021.
+\newblock arXiv:1905.10947 [cs].
+
+\bibitem{giovanni_how_2024}
+F.~D. Giovanni, T.~K. Rusch, M.~M. Bronstein, A.~Deac, M.~Lackenby, S.~Mishra, and P.~Veličković, ``How does over-squashing affect the power of {GNNs}?,'' Feb. 2024.
+\newblock arXiv:2306.03589 [cs].
+
+\bibitem{alon_bottleneck_2021}
+U.~Alon and E.~Yahav, ``On the {Bottleneck} of {Graph} {Neural} {Networks} and its {Practical} {Implications},'' Mar. 2021.
+\newblock arXiv:2006.05205 [cs].
+
+\bibitem{hafner_dream_2020}
+D.~Hafner, T.~Lillicrap, J.~Ba, and M.~Norouzi, ``Dream to {Control}: {Learning} {Behaviors} by {Latent} {Imagination},'' Mar. 2020.
+\newblock arXiv:1912.01603 [cs].
+
+\bibitem{yan_learning_2020}
+W.~Yan, A.~Vangipuram, P.~Abbeel, and L.~Pinto, ``Learning {Predictive} {Representations} for {Deformable} {Objects} {Using} {Contrastive} {Estimation},'' Mar. 2020.
+\newblock arXiv:2003.05436 [cs].
+
+\bibitem{zhang_deformable_2021}
+W.~Zhang, K.~Schmeckpeper, P.~Chaudhari, and K.~Daniilidis, ``Deformable {Linear} {Object} {Prediction} {Using} {Locally} {Linear} {Latent} {Dynamics},'' Mar. 2021.
+\newblock arXiv:2103.14184 [cs].
+
+\bibitem{lee_sample-efficient_2022}
+R.~Lee, M.~Hamaya, T.~Murooka, Y.~Ijiri, and P.~Corke, ``Sample-{Efficient} {Learning} of {Deformable} {Linear} {Object} {Manipulation} in the {Real} {World} {Through} {Self}-{Supervision},'' {\em IEEE Robotics and Automation Letters}, vol.~7, pp.~573--580, Jan. 2022.
+
+\bibitem{yan_self-supervised_2020}
+M.~Yan, Y.~Zhu, N.~Jin, and J.~Bohg, ``Self-{Supervised} {Learning} of {State} {Estimation} for {Manipulating} {Deformable} {Linear} {Objects},'' Oct. 2020.
+\newblock arXiv:1911.06283 [cs].
+
+\bibitem{yue_lstm-gcn_2025}
+Z.~Yue, X.~Zhang, Y.~Wang, S.~Jiang, and J.~Zhao, ``{LSTM}-{GCN} {Hybrid} {Architecture} for {Model} {Predictive} {Control} of {Deformable} {Linear} {Objects},'' in {\em 2025 {IEEE} {International} {Conference} on {Mechatronics} and {Automation} ({ICMA})}, pp.~303--309, Aug. 2025.
+\newblock ISSN: 2152-744X.
+
+\bibitem{yu_hybrid_2025}
+Y.~Yu, H.~Yang, J.~Tan, and X.~Wang, ``A {Hybrid} {Force}-{Position} {Strategy} for {Shape} {Control} of {Deformable} {Linear} {Objects} {With} {Graph} {Attention} {Networks},'' Aug. 2025.
+\newblock arXiv:2508.07319 [cs].
+
+\bibitem{yu_shape_2022}
+M.~Yu, H.~Zhong, and X.~Li, ``Shape {Control} of {Deformable} {Linear} {Objects} with {Offline} and {Online} {Learning} of {Local} {Linear} {Deformation} {Models},'' Feb. 2022.
+\newblock arXiv:2109.11091 [cs].
+
+\bibitem{yang_learning_2021}
+Y.~Yang, J.~A. Stork, and T.~Stoyanov, ``Learning to {Propagate} {Interaction} {Effects} for {Modeling} {Deformable} {Linear} {Objects} {Dynamics},'' in {\em 2021 {IEEE} {International} {Conference} on {Robotics} and {Automation} ({ICRA})}, pp.~1950--1957, May 2021.
+\newblock ISSN: 2577-087X.
+
+\bibitem{li_deformnet_2024}
+C.~Li, Z.~Ai, T.~Wu, X.~Li, W.~Ding, and H.~Xu, ``{DeformNet}: {Latent} {Space} {Modeling} and {Dynamics} {Prediction} for {Deformable} {Object} {Manipulation},'' Feb. 2024.
+\newblock arXiv:2402.07648 [cs].
+
+\bibitem{xiang_trackdlo_2023}
+J.~Xiang, H.~Dinkel, H.~Zhao, N.~Gao, B.~Coltin, T.~Smith, and T.~Bretl, ``{TrackDLO}: {Tracking} {Deformable} {Linear} {Objects} {Under} {Occlusion} {With} {Motion} {Coherence},'' {\em IEEE Robotics and Automation Letters}, vol.~8, pp.~6179--6186, Oct. 2023.
+
+\bibitem{choi_mbest_2023}
+A.~Choi, D.~Tong, B.~Park, D.~Terzopoulos, J.~Joo, and M.~K. Jawed, ``{mBEST}: {Realtime} {Deformable} {Linear} {Object} {Detection} {Through} {Minimal} {Bending} {Energy} {Skeleton} {Pixel} {Traversals},'' {\em IEEE Robotics and Automation Letters}, vol.~8, pp.~4863--4870, Aug. 2023.
+\newblock arXiv:2302.09444 [cs].
+
+\bibitem{caporali_rt-dlo_2023}
+A.~Caporali, K.~Galassi, B.~L. Žagar, R.~Zanella, G.~Palli, and A.~C. Knoll, ``{RT}-{DLO}: {Real}-{Time} {Deformable} {Linear} {Objects} {Instance} {Segmentation},'' {\em IEEE Transactions on Industrial Informatics}, vol.~19, pp.~11333--11342, Nov. 2023.
+
+\bibitem{mudarisov_limitations_2025}
+T.~Mudarisov, M.~Burtsev, T.~Petrova, and R.~State, ``Limitations of {Normalization} in {Attention} {Mechanism},'' Oct. 2025.
+\newblock arXiv:2508.17821 [cs].
+
+\bibitem{patro_mamba-360_2024}
+B.~N. Patro and V.~S. Agneeswaran, ``Mamba-360: {Survey} of {State} {Space} {Models} as {Transformer} {Alternative} for {Long} {Sequence} {Modelling}: {Methods}, {Applications}, and {Challenges},'' Apr. 2024.
+\newblock arXiv:2404.16112 [cs].
+
+\bibitem{yu_global_2023}
+M.~Yu, K.~Lv, H.~Zhong, S.~Song, and X.~Li, ``Global {Model} {Learning} for {Large} {Deformation} {Control} of {Elastic} {Deformable} {Linear} {Objects}: {An} {Efficient} and {Adaptive} {Approach},'' {\em IEEE Transactions on Robotics}, vol.~39, pp.~417--436, Feb. 2023.
+
+\bibitem{jin_robust_2019}
+S.~Jin, C.~Wang, and M.~Tomizuka, ``Robust {Deformation} {Model} {Approximation} for {Robotic} {Cable} {Manipulation},'' in {\em 2019 {IEEE}/{RSJ} {International} {Conference} on {Intelligent} {Robots} and {Systems} ({IROS})}, pp.~6586--6593, Nov. 2019.
+\newblock ISSN: 2153-0866.
+
+\bibitem{gu_survey_2023}
+F.~Gu, Y.~Zhou, Z.~Wang, S.~Jiang, and B.~He, ``A {Survey} on {Robotic} {Manipulation} of {Deformable} {Objects}: {Recent} {Advances}, {Open} {Challenges} and {New} {Frontiers},'' Dec. 2023.
+\newblock arXiv:2312.10419 [cs].
+
+\bibitem{hafner_learning_2019}
+D.~Hafner, T.~Lillicrap, I.~Fischer, R.~Villegas, D.~Ha, H.~Lee, and J.~Davidson, ``Learning {Latent} {Dynamics} for {Planning} from {Pixels},'' in {\em Proceedings of the 36th {International} {Conference} on {Machine} {Learning}}, pp.~2555--2565, PMLR, May 2019.
+\newblock ISSN: 2640-3498.
+
+\bibitem{hinton_reducing_2006}
+G.~E. Hinton and R.~R. Salakhutdinov, ``Reducing the {Dimensionality} of {Data} with {Neural} {Networks},'' {\em Science}, vol.~313, pp.~504--507, July 2006.
+
+\bibitem{kingma_auto-encoding_2022}
+D.~P. Kingma and M.~Welling, ``Auto-{Encoding} {Variational} {Bayes},'' Dec. 2022.
+\newblock arXiv:1312.6114 [stat].
+
+\bibitem{battaglia_interaction_2016}
+P.~W. Battaglia, R.~Pascanu, M.~Lai, D.~Rezende, and K.~Kavukcuoglu, ``Interaction {Networks} for {Learning} about {Objects}, {Relations} and {Physics},'' Dec. 2016.
+\newblock arXiv:1612.00222 [cs].
+
+\bibitem{li_propagation_2019}
+Y.~Li, J.~Wu, J.-Y. Zhu, J.~B. Tenenbaum, A.~Torralba, and R.~Tedrake, ``Propagation {Networks} for {Model}-{Based} {Control} {Under} {Partial} {Observation},'' Apr. 2019.
+\newblock arXiv:1809.11169 [cs].
+
+\bibitem{todorov_mujoco_2012}
+E.~Todorov, T.~Erez, and Y.~Tassa, ``{MuJoCo}: {A} physics engine for model-based control,'' in {\em 2012 {IEEE}/{RSJ} {International} {Conference} on {Intelligent} {Robots} and {Systems}}, pp.~5026--5033, Oct. 2012.
+\newblock ISSN: 2153-0866.
+
+\bibitem{kauffman_unknotting_2016}
+L.~H. Kauffman, ``The {Unknotting} {Problem},'' in {\em Open {Problems} in {Mathematics}} (J.~Nash, John~Forbes and M.~T. Rassias, eds.), pp.~303--345, Cham: Springer International Publishing, 2016.
+
+\end{thebibliography}

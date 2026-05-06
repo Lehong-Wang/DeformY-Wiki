@@ -1,0 +1,32 @@
+\section{Introduction}
+
+Dynamic manipulation and management of linear deformable objects such as ropes, chains, vacuum cords, charger cables, power cables, tethers, and dog leashes are common in daily life. For example, a person vacuuming may find that the vacuum power cable is stuck on a chair, and use dynamic manipulation to ``vault'' the cable over the chair. If the first motion does not succeed, the human can try again, adapting their motion to the failure.  In this paper, we explore how a robot can teach itself to perform three tasks:
+
+\begin{description}[align=left,leftmargin=0pt]
+    \item[Task 1: Vaulting] The robot dynamically manipulates a cable to move from one side of an obstacle to another. %A success is when the rope lands on the other side of the obstacle, and a failure is when the rope remains on the same side of the obstacle, or lands on top of it.
+    %% I think these measures of success are somewhat implied here, and should be discussed in detail in the experiments. -JI 
+    \item[Task 2: Knocking] The robot dynamically manipulates a cable to knock a target object off an obstacle. %A success is when the rope knocks the target so it moves in any way, and a failure is when the target stays stationary.
+    %% I think these measures of success are somewhat implied here, and should be discussed in detail in the experiments. -JI 
+    \item[Task 3: Weaving] The robot dynamically manipulates a cable to weave it between three obstacles. %A success is when the cable forms an interweaving shape between the obstacles, and a failure is any other case.
+    % \item \textbf{Task 4: Twirling. } Whip the rope in a jump-rope pattern. \harry{TODO: Finalize. Will get it done by the end of this week.}
+\end{description} 
+
+% \input{figure_tasks}
+To accomplish these tasks, we propose to generate trajectories using a parameterized function. To reduce the complexity of parameterizing actions, we compute minimum-jerk trajectories using DJ-GOMP~\cite{GOMP, DJGOMP} that take as input the apex point in the trajectory.  This point, combined with task-specific starting and ending arm configurations, are used to generate a single high-speed trajectory for a physical UR5 robot. 
+\input{teaser_new}
+We present a self-supervised deep imitation learning pipeline that learns to predict the apex point given target positions. Using a simulator we develop for vaulting, with a simulated UR5, we obtain an example action that completes the vaulting task. For any of the three tasks in the real world (see Fig.~\ref{fig:teaser_new}), we then have the physical UR5 continually execute actions based on the action computed in simulation, with noise added to increase dataset diversity. While the robot performs actions, one end of the cable is attached to its gripper, and the other is fixed to a wall. (Hereafter, we use \emph{cable} to refer to any 1D deformable object with low stiffness, such as ropes, cords, and strings.) This process results in a self-supervised procedure for collecting a large dataset. We use the resulting data to train a deep neural network policy to predict an action (i.e., the apex point) given a target position. %The physical experiments setup is shown in Fig.\ref{fig:teaser_new}.
+%The system learns using physical trials on a UR5 robot. 
+
+This paper contributes:
+\begin{enumerate}
+    \item Three novel dynamic cable manipulation tasks: vaulting, knocking, and weaving.
+    \item INDy, a self-supervised framework for collecting data and learning a dynamic manipulation policy using parameterized minimum-jerk trajectories.
+    \item A simulation platform to experiment with novel tasks and policy learning.
+    \item Physical experiments evaluating the policies with a UR5 robot on 5 different cables.
+\end{enumerate}
+
+
+%While humans often accomplish such motions, it is difficult for a robot to generate a feasible trajectory to accomplish this task.
+% The key notion we tackle in this paper making the rope manipulation dynamic---with few swift motions of a its manipulator arm a robot accomplishes a task.  We contrast this to prior work that explored quasi-static manipulation of cables in a 2D space, such as knot-tying~\cite{knot_planning_2003, nair_rope_2017}, shape-matching~\cite{nair_rope_2017,yan2020learning} and untangling~\cite{rope_untangling_2013,grannen2020untangling}, few attempt to manipulate cables dynamically in a full 3D space. \jeffi{TODO: reword to place dynamic manipulation in context.}
+%To reduce increase the repeatability of actions, we reset the cable each time by pulling it taut and slowing dropping it before each dynamic motion.
+%and does not explicitly model cable dynamics (see Section~\ref{sec:method} for details). To minimize the damage to the robot, we generate a trajectory defined by those three points (start, learned 3D apex point, and end) with minimal jerk.

@@ -1,0 +1,769 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%2345678901234567890123456789012345678901234567890123456789012345678901234567890
+%        1         2         3         4         5         6         7         8
+\documentclass[letterpaper, 10 pt, conference]{ieeeconf}  % Comment this line out if you need a4paper
+%\documentclass[a4paper, 10pt, conference]{ieeeconf}      % Use this line for a4 paper
+\IEEEoverridecommandlockouts                              % This command is only needed if 
+                                                          % you want to use the \thanks command
+\overrideIEEEmargins                                      % Needed to meet printer requirements.
+\usepackage{url}
+%\usepackage{multicol,multirow}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx,color}
+\usepackage{adjustbox}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{verbatim}
+\usepackage{multicol}
+\usepackage{subfig}
+\usepackage{caption}
+%\usepackage{enumitem}
+\usepackage{gensymb}
+\usepackage{siunitx} % Daniel: added based on Jeff's prior papers. (needs to be paired with next line :) -Jeff)
+\sisetup{detect-all} % <-- fixes fonts in siunitx
+\usepackage{pythonhighlight} % try to highlight python code
+\graphicspath{{figures/}}
+\newcommand{\ba}{\mathbf{a}}
+\newcommand{\bd}{\mathbf{d}}
+\newcommand{\bm}{\mathbf{m}}
+\newcommand{\bo}{\mathbf{o}}
+\newcommand{\br}{\mathbf{r}}
+\newcommand{\bs}{\mathbf{s}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\bu}{\mathbf{u}}
+\newcommand{\state}{\mathbf{s}}
+\newcommand{\vmax}{v_{\rm max}}
+\newcommand{\ie}{i.e., }
+\newcommand{\eg}{e.g., }
+
+% Daniel: for better argmax and argmin.
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\minimize}{minimize}
+
+%\usepackage[dvipsnames]{xcolor} % Daniel: was causing an issue and doesn't seem necessary ?
+\usepackage{pifont}
+\newcommand{\cmark}{\textcolor[HTML]{59a14f}{\ding{51}}}%
+\newcommand{\xmark}{\textcolor[HTML]{e15759}{\ding{55}}}%
+
+% Daniel: feel free to add your names with your favorite color!
+% Wrap around the shared "\remark" command for consistency, and to make it easy to turn all remarks off by defining an empty command. -Jeff
+% Thanks! -Daniel (do we want \bf, some had it, some did not?)  (We don't need bf for now -Daniel)
+% Heh... except KG ones :)
+\newcommand{\remark}[3]{{\color{#2}[#1: #3]}}
+% \renewcommand{\remark}[3]{} % To disable all remarks, uncomment
+\newcommand{\daniel}[1]{\remark{Daniel}{blue}{#1}}
+\newcommand{\jonathan}[1]{\remark{Jonathan}{cyan}{#1}}
+\newcommand{\harry}[1]{\remark{Harry}{green}{#1}}
+\newcommand{\Vincent}[1]{\remark{Vincent}{purple}{#1}}
+\newcommand{\Lawrence}[1]{\remark{Lawrence}{orange}{#1}}
+\definecolor{britishracinggreen}{rgb}{0.23, 0.53, 0.19}
+\newcommand{\raven}[1]{\remark{Raven}{britishracinggreen}{#1}}
+\newcommand{\jeffi}[1]{\remark{JI}{red}{#1}}
+
+\newcommand{\KG}[2]{{\color{red} \bf [#2 (per KG #1)]}}
+
+\definecolor{navy}{rgb}{0,0,0.5}
+\newcommand{\NEW}[1]{{\color{navy} #1}}
+
+% Daniel: AH! importing this package makes it much better to make tables, in my opinion, since we can put a long caption at the table title. It does create a warning but I"m not sure how to fix this.
+%\usepackage{caption}
+%\usepackage[font={footnotesize}]{caption}
+\usepackage[font={small}]{caption}
+% Daniel: argh I thought this would avoid capital 'TABLE' text but doesn't seem to be working...
+\def\tablename{Table}
+
+
+\title{\LARGE \bf
+Self-Supervised Learning of Dynamic \\ Planar Manipulation of Free-End Cables
+}
+
+\author{Jonathan Wang$^{1,*}$, Huang Huang$^{1,*}$, Vincent Lim$^{1}$, Harry Zhang$^{1}$,\\ Jeffrey Ichnowski$^1$, Daniel Seita$^1$, Yunliang Chen$^1$, Ken Goldberg$^1$% <-this % stops a space
+\thanks{*Equal contribution.}% <-this % stops a space
+\thanks{$^{1}$AUTOLAB at the University of California, Berkeley, USA.}%
+%\thanks{Correspondence to: {\tt\small jnwang19@berkeley.edu}}%
+}
+\begin{document}
+
+
+\maketitle
+\thispagestyle{empty}
+\pagestyle{empty}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{abstract}
+Dynamic manipulation of free-end cables has applications for cable management in homes, warehouses and manufacturing plants.
+% via casting cables to distant locations without navigation, threading cables around other objects, and speeding up downstream untangling and coiling tasks. 
+% This type of manipulation is challenging for robots, because in contrast to rigid objects, it is difficult to model the configuration of deformable objects.
+%This is further compounded by dynamic manipulation settings, where it is harder to model physics effects such as friction, inertia, stiffness, and turbulence as compared to static settings. Deep learning is a promising approach to learn robotic manipulation policies from data, which may alleviate the need to develop complex physics models. 
+We present a supervised learning approach for dynamic manipulation of free-end cables, focusing on the problem of getting the cable endpoint to a designated target position, which may lie outside the reachable workspace of the robot end effector.
+We present a simulator, tune it to closely match experiments with physical cables, and then collect training data for learning dynamic cable manipulation. We evaluate with 3 cables and a physical UR5 robot. Results over 32$\times$5 trials on 3 cables suggest that a physical UR5 robot can attain a median error distance ranging from 22$\%$ to 35$\%$ of the cable length among cables, outperforming an analytic baseline by 21$\%$ and a Gaussian Process baseline by 7$\%$ with lower interquartile range (IQR).
+Supplementary material is available at \url{https://tinyurl.com/dyncable}.
+\end{abstract}
+
+\section{Introduction}\label{sec:intro}
+
+Dynamic free-end cable manipulation is useful in a wide variety of cable management settings in homes and warehouses. For example, in a decluttering setting with cables, humans may dynamically manipulate a cable to a distant location to efficiently move it out of the way, cast it towards a human partner, or hang it over a hook or beam. Dynamic cable manipulation may also be advantageous when a cable must be passed through an obstacle to be retrieved on another side, requiring precision in the location of the cable endpoint. Casting a free-end cable radially outward from a base and subsequently pulling the cable toward the base --- which we refer to as ``polar casting'' and test in Section~\ref{ssection:methods} --- may be limited in free-end reachability, motivating the use of high-speed, dynamic motions. We use the generic term \emph{cable} to refer to a 1D deformable object with minimal stiffness, which includes ropes, wires, and threads. 
+
+In this paper, we present a self-supervised learning procedure that, given the target location of a cable endpoint, generates a dynamic manipulation trajectory. Targets $(r, \theta)$ are defined in polar coordinates with radius $r$ and angle $\theta$ with respect to the robot base. We focus on planar dynamic cable manipulation tasks in which the cable lies on a surface and (after a reset action) a robot must dynamically adjust the cable via planar motions.
+See Figure~\ref{fig:teaser} for an overview.
+In prior work~\cite{harry_rope_2021}, we explored dynamic manipulation of fixed-end cables. In this work, we consider free-end cables, where the far end is unconstrained. 
+We develop a simulation environment for learning dynamic manipulation of free-end cables in PyBullet~\cite{coumans2019}. We efficiently tune the simulator with differential tuning~\cite{de_tuning_2020} and train policies in simulation to get cable endpoints to reach desired targets. We perform physical experiments evaluating dynamic cable manipulation policies on a UR5 robot.
+The contributions of this paper are:
+
+% Daniel: I made the teaser using this Google Drawings link (edit: Ken suggested putting a figure below the frame by frame)
+% https://docs.google.com/drawings/d/1tDfWyiBDUluU7JLmluSt3xEHl69Izt3LtgMRnR9j2qA/edit?usp=sharing
+% https://docs.google.com/drawings/d/16wsRFynYQLfQ_LGW2mBD5og_tEpLV1wOF85wOkApxWk/edit
+\begin{figure}[t]
+\center
+\includegraphics[width=0.49\textwidth]{teaser-v04-min.png}
+\caption{
+Examples of dynamic cable manipulation trajectories with a UR5 robot. After a reset (Section~\ref{ssec:resets}), the robot performs a dynamic planar action (Section~\ref{ssec:action}) with two waypoints. The top two rows show a frame-by-frame frontal view of the UR5 as it pulls towards one waypoint (A,B,C) and then towards the second (D,E,F) to get the cable endpoint to reach a desired target. The bottom image shows a top-down view of the setup. There are 32 target positions on the workspace plane marked with small tape, which we use to evaluate performance. The overlaid grid lines are spaced \SI{0.5}{\meter} apart. We additionally overlay a successful trial repeated 5 times, marked by the star target (lower right), and a failure trial repeated 5 times, marked by the red cross (upper left). 
+}
+\vspace{-16pt}
+\label{fig:teaser}
+\end{figure}
+
+\begin{enumerate}
+    \item Formulation of the dynamic planar manipulation of free-end cables problem.
+    \item A dynamic simulator in PyBullet that can be tuned to accurately model dynamic planar cable manipulation.
+    \item A dataset of 108,000 simulated trials and 1,120 physical trials with 3 cables and the UR5 robot.
+    \item Physical experiments with a UR5 robot and 3 cables suggesting the presented method can achieve median error distance less than 35$\%$ of the cable lengths.% among 3 cables.
+\end{enumerate}
+% Supplementary material is available at 
+% \url{https://tinyurl.com/dyncable}.
+%\begin{figure}[t]
+%\center
+%\includegraphics[width=0.49\textwidth]{overview.png}
+%\caption{
+%\Lawrence{Maybe we should illustrate the cable movement through time, divided into different stages as in the fly fishing papar? The figure on the left would look very nice but the fly fishing illustration may be also okay. We can potentially show the target, the two waypoints, robot actions, and the motion of the cable between stages as a sequence in one picture.} \daniel{I recommend removing this figure.}
+%}
+%\vspace*{-10pt}
+%\label{fig:overview}
+%\end{figure}
+\section{Related Work}\label{sec:rw}
+
+% Daniel: removing as per Prof G feedback 03/05 "too generic."
+% This paper builds on extensive prior research in data-driven robotics, deformable object manipulation, and dynamic manipulation. While using learned, data-driven techniques for robot manipulation has become a highly effective technique for generalizing to a wide variety of objects, as judged from strong empirical results~\cite{levine_finn_2016,mahler2019learning,dense_object_nets_2018,QT-Opt,openai-dactyl,rubik_cube_2019}, the majority of approaches focus primarily on manipulation of rigid objects in largely static settings such as a bin with objects, in contrast to the dynamic setting we consider with a deformable free-end cable.
+
+% This paper builds on extensive prior research in 1D deformable object manipulation and dynamic manipulation. 
+\subsection{1D Deformable Object Manipulation}
+
+Manipulation of 1D deformable objects such as cables has a long history in robotics. Some representative applications include surgical suturing~\cite{robot_heart_surgery_2006,suturing_autolab_2016, zhang2016health, zhang2021robots, zhang2020dex}, knot-tying~\cite{van_den_berg_2010,case_study_knots_1991,knot_planning_2003,tying_precisely_2016, sim2019personalization, elmquist2022art, avigal20206, avigal2021avplug, devgon2020orienting}, untangling ropes~\cite{rope_untangling_2013,grannen2020untangling,tactile_cable_2020, lim2021planar, lim2022real2sim2real}, deforming wires~\cite{wire_insertion_1997}, and inserting cables into obstacles~\cite{tight_tolerance_insertion_2015}. We refer the reader to Sanchez~et~al.~\cite{manip_deformable_survey_2018} for a survey. % would be nice to say "a recent survey." but is 2018 considered "recent"? :) -JI
+
+There has been a recent surge in using learning-based techniques for manipulating cables. A common setting is to employ pick-and-place actions with quasistatic dynamics so that the robot deforms the cable through a series of small adjustments, while allowing the cable to settle between actions. Under this paradigm, prior work has focused on cable manipulation using techniques such as learning from demonstrations~\cite{zeng_transporters_2020,seita_bags_2021, eisner2022flowbot3d, pan2022tax, pan2023tax, zhang2023flowbot++} and self-supervised learning~\cite{nair_rope_2017,ZSVI_2018}.
+%generative modeling~\cite{wang_visual_planning_2019}, state estimation~\cite{state_estimation_LDO}, and dense object descriptors~\cite{priya_2020}.
+Prior work has also explored the use of quasistatic simulators~\cite{corl2020softgym} to train cable manipulation policies using reinforcement learning for eventual transfer to physical robots~\cite{lerrel_2020,yan_fabrics_latent_2020, yao2023apla, shen2024diffclip, jin2024multi}. In this work, we develop a fully dynamic simulator for dynamic cable manipulation to accelerate data collection for training policies, with transfer to a physical UR5 robot.
+Other cable manipulation settings that do not necessarily assume quasistatic dynamics include sliding cables~\cite{one_hand_knotting_tactile_2007,zhu_sliding_cables_2019} or using tactile feedback~\cite{tactile_cable_2020} to inform policies. This paper focuses on dynamic planar actions to manipulate cables from one configuration to another.
+
+
+\subsection{Dynamic Manipulation of Cables}
+
+In dynamic manipulation settings, a robot takes actions rapidly to quickly move objects towards desired configurations, as exemplified by applications such as swinging items~\cite{swingbot_2020,diabolo_2020} or tossing objects to target bins~\cite{zeng_tossing_2019}. As with robot manipulation, these approaches tend to focus on dynamic manipulation of rigid objects.
+
+A number of analytic physics models have been developed to describe the dynamics of moving cables, which can then be used for subsequent planning. For example,~\cite{fly_fishing_2004} present a two-dimensional dynamic casting model of fly fishing. They model the fly line as a long elastica and the fly rod as a flexible Euler-Bernoulli beam, and propose a system of differential equations to predict the movement of the fly line in space and time. 
+In contrast to continuum models,~\cite{wang2011analysis} propose using a finite-element model to represent the fly line by a series of rigid cylinders that are connected by massless hinges. These works focus on developing mathematical models for cables, and do not test on physical robots.
+%While finite element models are widely used in motion planning for deformable objects manipulation~\cite{yoshida2015simulation,duenser2018interactive,li2018model}, these works tend to focus on tasks where quasistatic assumptions may be tasks assumpdifferent tasks such as .
+%See~\cite{li2018model} for a review on model-based manipulation planning of deformable objects.
+
+In the context of robotic dynamic-cable manipulation,
+Yamakawa~et~al.~\cite{dynamic_knotting_2010,yamakawa2012simple,high_speed_knotting_2013,one_hand_knotting_tactile_2007} demonstrate that a high-speed manipulator can effectively tie knots by dynamic snapping motions. They simplify the modelling of cable deformation by assuming each cable component follows the robot end-effector motion with constant time-delay. Kim and Shell~\cite{kim2016using} study a novel robot system with a flexible rope-like structure attached as a tail that can be used to strike objects of interest at high speed. This high-speed setting allows them to construct primitive motions that exploit the dynamics of the tail. They adopt the Rapidly-exploring Random Tree (RRT)~\cite{RRT_2001} and a particle-based representation to address the uncertainty of the object’s state transition. In contrast to these works, we aim to control cables for tasks in which we may be unable to rely on these simplifying assumptions.
+
+%In the context of cable manipulation, Yamakawa~et~al.~\cite{dynamic_knotting_2010,yamakawa2012simple,high_speed_knotting_2013,one_hand_knotting_tactile_2007} focus on dynamic manipulation of cables using robot arms moving at high speeds, enabling them to model cable deformation algebraically under the assumption that the effect of gravity is negligible. \raven{yeah, I think we also assume the gravity is negligible but should we point this out here?} Results show that a single multi-fingered robot arm can effectively tie knots by initially whipping cables upwards. As we are interested in getting cable endpoints to reach desired targets that may be far from the robot end effector's range of motion, it is infeasible to assume a model where each cable component follows the robot end-effector motion with constant time-delay, as in Yamakawa~et~al. Instead, we use a learning-based method.
+
+%Kim and Shell~\cite{kim2016using} use a small-scale mobile robot with a cable attached as a tail to manipulate small objects by leveraging inter-object friction to drag or strike the object of interest. While their work aims to tackle dynamic cable control, it relies heavily on physics models for motion primitives that are only applicable to dragging objects via cables, and uses a RRT-based graph search algorithm to address the stochasticity in the system. \daniel{Will revise (Prof G 3/1 feedback)} We avoid the modeling of the cable physics and we aim to control cables for tasks which dynamically cannot rely on the same dragging motion primitives.
+
+%Drigalski~et~al~\cite{diabolo_2020} present an approach for robots to play diabolo \raven{should we not cite this paper or make this citation more related to our study?}. They train agents manipulating two sticks connected by a string, and the model is run on a dual robot arm system. The arms perform dynamic, swinging motions on the gripped sticks and string to manipulate the diabolo. In their work, they use an analytical model to predict the diabolo’s motion as a function of the sticks’ trajectory. \daniel{Will revise (Prof G 3/1 feedback)} In this paper, we use a learned model to predict the cable endpoint position given an action and we are interested in finding the action to produce a certain cable configuration.
+
+%\Lawrence{I am summarizing this very new paper Adi brought up. I think that is more related to our setting than Harry's paper since it is also doing free-end.}
+
+Two closely related prior works are Zhang~et~al.~\cite{harry_rope_2021} and Zimmermann~et~al.~\cite{zimmermanndynamic}. Zhang~et~al.~\cite{harry_rope_2021} propose a self-supervised learning technique for dynamic manipulation of fixed-end cables for vaulting, knocking, and weaving tasks. They parameterize actions by computing a motion using a quadratic program and learning the apex point of the trajectory. In contrast to Zhang~et~al., we use \emph{free-end} cables. Zimmermann~et~al.~\cite{zimmermanndynamic} also study the dynamic manipulation of deformable objects in the free-end setting. They model elastic objects using the finite-element method~\cite{bathe2006finite} and use optimal control techniques for trajectory optimization. They study the task of whipping, which aims to find a trajectory such that the free end of the cable hits a predefined target with maximum speed, and laying a cloth on the table. Their simulated motions perform well for simple dynamical systems such as a pendulum, while
+%but since their model depends on good parameter estimation, its
+performance decreases for more complex systems like soft bodies due to the mismatch between simulation and the real world. We develop a learned, data-driven approach for robotic manipulation of free-end cables, focus on planar manipulation, and are interested in finding the best action such that the free end of the cable achieves a target position on the plane.
+
+\section{Problem Statement}\label{sec:PS}
+
+We consider a 6-DOF robot arm which controls a free-end cable with a small weight at the free end. The robot continually grips one end of the cable throughout each dynamic motion. We assume the cable endpoint lies on the plane and the robot end-effector takes actions at a fixed height slightly above the plane. The full configuration of the cable and the environment is infinite dimensional and complex to model, and we are interested in the cable endpoint. Thus, we concisely represent the state as ${\state=(r, \theta)}$, indicating the endpoint position on the plane in polar coordinates, with the robot base located at $(0, 0)$. The objective is to produce a policy $\pi$ that, when given the desired target ${\state^{(d)}=(r_d, \theta_d)}$ for the endpoint, outputs a dynamic arm action ${\ba=\pi(\state^{(d)})}$ that robustly achieves $\state^{(d)}$.
+%We assume access to a dataset of $N$ pairs of end positions and actions, denoted as ${\mathcal{D} = \{ (\state^{(d)}, \ba)^{(i)} \}_{i=1}^N}$ to supervise $f_{\rm inv}$ \KG{Move to Section \ref{ssec:data-gen}}. 
+For notational convenience, we define $g_{\rm p2c} : \mathbb{R}^2 \to \mathbb{R}^2$ to be a function which converts a 2D point represented in polar coordinates to its 2D Cartesian coordinates. We also restrict targets $(r_d, \theta_d)$ such that they are reachable, that is, $r_d \leq r_{\rm max} + r_c$, where $r_{\rm max}$ is the maximal distance from the base to the robot wrist, and $r_c$ is cable length.
+
+\begin{figure*}[t]
+\center
+\includegraphics[width=1.00\textwidth]{process_diagram_v2.png}
+\caption{
+The process flow for learning dynamic planar cable manipulation (see Section~\ref{sec:method}). We find a reset motion (a) that consistently brings the cable to a fixed, reset state. We design and parameterize trajectories (b) for dynamically moving the cable endpoint, and execute these trajectories in real (c) to generate $\mathcal{D}_{\rm tune}$, which is then used to tune the dynamic simulator (d). We compare performance of system parameters to select those that maximize coverage and repeatability (e), and use these fixed parameters to generate $\mathcal{D}_{\rm sim}$ (f) and $ \mathcal{D}_{\rm real}$. We learn $f_{\rm forw}$ using $\mathcal{D}_{\rm sim}$ along with fine-tuning on $\mathcal{D}_{\rm real}$. The $f_{\rm forw}$ is evaluated on real targets with a physical robot.
+}
+\vspace*{-10pt}
+\label{fig:process}
+\end{figure*}
+
+\section{Learning Framework}\label{sec:method}
+
+Variations in cable properties such as mass, stiffness, and friction, mean that a robot may require different trajectories to get endpoints to reach the same target. Directly estimating cable configurations after a motion is challenging due to complex dynamics and the difficulty of state estimation.
+In this work, we use the following pipeline for manipulating cable endpoints towards desired targets, summarized in Figure~\ref{fig:process}. To reduce uncertainty in state estimation, we start each motion from a consistent initial state. We do this with a \emph{reset procedure} with high \emph{repeatabilty} (Section~\ref{sec:resets-repeat}). 
+Next, for a given cable, we collect video observations of cable motions that start from the reset state (Section~\ref{ssec:data-gen}). We use this dataset to automate the tuning of a cable simulator to match the behavior of a physical cable (Section~\ref{ssec:simulator}).
+From simulated data, we then train a neural network model that maps trajectories to predicted endpoints that the policy $\pi$ plans through to output a trajectory that achieves the desired target (Section~\ref{ssec:supervised}).
+
+%To avoid motions that lead to self-collision and loops, we generate parameterized training trajectories, in which the system parameters are chosen to reduce motions that are unrepeatable. \jeffi{$\leftarrow$ is this accurate?}
+
+%Additionally, even with an accurate model of the cable's properties, state estimation is difficult.
+%While position in a planar (non-overlapping) configuration can be estimated from an image, some part of the cable's state will may not be observable, e.g., due to overlaps, self-occlusions, and torsion.
+%In this work, we propose to reduce uncertainty in state estimation by (1) starting each motion from a consistent initial state, and (2) avoiding motions that lead to self-collision and loops, which decrease repeatability.
+% hmm... can we say that we eliminate or reduce the problem somehow as part of our method overview?
+
+% This next paragraph is meant to be 1:1 with the subsections that follow.
+%The pipeline we propose is thus:
+%create a \emph{reset} motion and measure its \emph{repeatability} (Section~\ref{sec:resets-repeat});
+%record a dataset of observations from trajectories that start from the reset state (Section~\ref{ssec:data-gen});
+%create a cable simulator which we tune to match the data (Section~\ref{ssec:simulator}) and then train a trajectory generation model that we use to compute trajectories to hit target locations (Section~\ref{ssec:supervised}).
+
+%\jeffi{I think we need to provide an overview of the method, including resets/repeatability, sim-to-real, and the rest, before jumping into resets and repeatability.  I also recommend we top-level sections that are abstract, e.g. "Preliminaries", "Background", "Setup", "Method", etc...  So "Resets and Repeatability" and "Simulation to Reality" would be either under their own top-level section, or moved into the Methods section.}
+
+
+\subsection{Manual Reset and Repeat to Measure Repeatability}\label{sec:resets-repeat}
+
+A prerequisite for this problem is that actions corresponding to state transitions must be repeatable. We design and parameterize trajectories with the goal of maximizing repeatability, which we measure by executing the same $\ba$ multiple times, and recording the variance in the final endpoint location.
+To get the cable into a \emph{reset} state, the robot performs a sequence of trajectories that reliably places the cable into a consistent state. We find an open-loop sequence that includes lifting the cable off a surface and letting it hang until it comes to rest. This may be part of a reliable reset method, as it undoes torsion consistently with sufficient time. For further details, see Section~\ref{ssec:resets} and Figure~\ref{fig:reset}. %Other trajectories may be appropriate for the reset motion, such as slowly laying the cable to rest on a surface.
+% , shaking to undo loops, casting with fixed motion, or dragging in a fixed direction across a surface.  While the specifics of a closed-loop reset procedure are beyond the scope of this paper, as long as the result of running the reset results in a consistent state, it should be sufficient use with the methods proposed in this paper. 
+
+\subsection{Dataset Generation}\label{ssec:data-gen}
+
+To facilitate training, we take inspiration from Hindsight Experience Replay (HER)~\cite{HER_2017} by executing an action $\ba$, recording the resulting endpoint location $(r_d, \theta_d)$, and assuming that it was the intended target. We store each transition $(\ba, \bs)$ in the dataset. We create three datasets for the cable: $\mathcal{D}_{\rm tune}$, real trajectories for tuning the simulator (Section~\ref{ssec:diff-ev}), $\mathcal{D}_{\rm sim}$, trajectories executed in the tuned simulator to train a forward dynamics model (Section~\ref{ssec:supervised}), and $\mathcal{D}_{\rm real}$, real trajectories used for fine-tuning the model trained on simulation examples. For notational convenience, we define a model $f$ trained on $\mathcal{D}_{\rm sim} + \mathcal{D}_{\rm real}$ as a model pre-trained on $\mathcal{D}_{\rm sim}$ and later fine-tuned with $\mathcal{D}_{\rm real}$. As discussed in Section~\ref{ssec:data-collect}, $\mathcal{D}_{\rm tune}$ and $\mathcal{D}_{\rm real}$ are both from real trajectories, but may have been generated from different system parameters.
+
+
+\subsection{Cable Simulator}
+\label{ssec:simulator}
+
+% \begin{figure}[t]
+% \center
+% \includegraphics[width=0.49\textwidth]{sim_real.png}
+% \caption{
+% \textbf{Above:} The extracted cable endpoint positions at each time step spaced 100 milliseconds apart. The pixel coordinates of each waypoint are converted to simulation coordinates using the robot base as a reference point.
+% \textbf{Below:} The same trajectory is run in the simulator, and the distance between the cable endpoint and the waypoint at each time step is used as a metric to for optimizing the simulation parameters. In this example, the simulated endpoint location matches the ground truth endpoint location, but the cable configuration is different, demonstrating a limitation with the optimization metric. The cables are highlighted for the purpose of visibility. \jonathan{Remove this figure because it will be in process diagram}
+% }
+% \vspace*{-10pt}
+% \label{fig:tasks-1}
+% \end{figure}
+  
+We create a dynamic simulation environment to efficiently collect data for policy training. Using the PyBullet~\cite{coumans2019} physics engine, we model cables as a string of capsule-shaped rigid bodies held together by 6-DOF spring constraints, as the adjustable angular stiffness values of these constraints can model twist and bend stiffness of cables. The environment also includes a flat plane as the worksurface, and a robot with the same IK as the physical robot. We tune 10 cable and worksurface parameters to best capture cable physics: twist stiffness, bend stiffness, mass, lateral friction, spinning friction, rolling friction, endpoint mass, linear damping, angular damping, and worksurface friction, and tune the parameters (Section~\ref{ssec:diff-ev}).
+
+% \jeffi{TODO: Discuss all parameters of the simulator.  The following section can then just focus on the parameter tuning.  Also move discussion of things like 1/480s time step.} \Vincent{I think the sentences following "We tune a total of 10 cable and worksurface ..." and the discussion about the parameters should go into the DE section, since our choice of parameters depends on some DE details.} \daniel{Good point, but otherwise this subsection doesn't have enough content. Maybe just mention the setting, the UR5 there using the same IK as physical robot, and the hyperparameters that are most relevant}
+
+%\section{Method}\label{sec:method}
+
+% In this section, we describe how we propose to address dynamic manipulation of free-end cables, including the action parameterization and the supervised learning procedure. We use this procedure to deploy 2D planar manipulation on a physical UR5 robot.
+
+\subsection{Training the Trajectory Generation Model} % WAS: \subsection{Supervised Learning Procedure}
+\label{ssec:supervised}
+
+% Daniel: describe how we made the figure here (makes it easier later when we have to reproduce or change things).
+% Repeatability analysis code: https://drive.google.com/drive/u/1/folders/1lOLcdcte6Y93qHPSpJW4S0B8wxWaAS4O
+% Cable coverage code: https://drive.google.com/drive/u/1/folders/1mue6nc8kTV23KwfAd06cI6mjy87W531B
+% \begin{figure}[t]
+% \center
+% \includegraphics[width=0.49\textwidth]{empty.png}
+% \caption{
+% \daniel{TODO show the figure Jonathan has where he samples the grid, has the robot aim to cast the cable endpoint out to the end, then pulls back ...}
+% }
+% %\vspace*{-10pt}
+% \label{fig:sampling-1}
+% \end{figure}
+
+We generate trajectories via a learned forward dynamics model. The policy $\pi$ first samples multiple input actions $\ba$ to form a set $\mathcal{A}$ of candidate actions. It then passes each action through the forward dynamics model $f_{\rm forw}$, which outputs the predicted endpoint location $(\hat{x}, \hat{y})$ in Cartesian space. Given a target endpoint $\bs$ (in polar coordinates), the action ${\ba = \pi(\bs)}$ selected is the one minimizing the Euclidean distance between the predicted and target endpoints:
+\begin{equation}\label{eq:finv}
+\pi(\bs) = \argmin_{\ba \in \mathcal{A}} \; \| f_{\rm forw}(\ba) - g_{\rm p2c}(\bs) \|_2
+\end{equation}
+where both $f_{\rm forw}(\ba)$ and $g_{\rm p2c}(\bs)$ are expressed in Cartesian (not polar) coordinates. We generate a dataset $\mathcal{D}_{\rm sim}$ for the cable via grid-sampled actions using the cable simulator with tuned parameters to match real, and then use it to train $f_{\rm forw}$.
+
+
+\section{Evaluation}
+\label{sec:experiments}
+
+\begin{figure}[t]
+  \center
+%   \includegraphics[width=0.49\textwidth]{figures/cables-brightened-v01-min.png}
+  \includegraphics[width=0.38\textwidth]{figures/cable.jpg}
+  \caption{
+  Three cables used in physical experiments, with two polyester ropes and one braided iron wire. Each endpoint has an attached mass, either hooks (first two) or a magnet (third cable). From top to bottom, the cable lengths are \SI{0.62}{\meter}, \SI{0.65}{\meter}, and \SI{0.67}{\meter} without the attachment, and \SI{0.67}{\meter}, \SI{0.68}{\meter}, and \SI{0.68}{\meter} with the attachment. The diameters are \SI{0.011}{\meter}, \SI{0.002}{\meter}, and \SI{0.007}{\meter}.
+  }
+  \vspace*{-10pt}
+  \label{fig:cables}
+\end{figure}
+
+We instantiate and evaluate the presented method from Section~\ref{sec:method} on a physical UR5 robot (Figure~\ref{fig:teaser}) with three cables of different properties (Figure~\ref{fig:cables}). We use a table that is \SI{2.75}{\meter} wide and extends \SI{1.50}{\meter} from the base of the robot. Each cable has a weighted attachment, either a hook or a magnet to resemble a home or industrial setting in which the passing of the cable sets up a downstream task such as plugging into a mating part. The table is covered with foam boards for protection and to create a consistent friction coefficient. To facilitate data collection, we attach a green markers to the cables. We record observations from an overhead Logitech Brio 4K webcam recording 1920$\times$1080 video at 60 frames per second.
+
+% Daniel: commenting out based on Prof G 03/05 feedback.
+% In the following subsections, we describe the reset procedure (Section~\ref{ssec:resets}),
+% a parameterized trajectory generator that uses a low-dimensional input to create a sweeping dynamic motion (Section~\ref{ssec:action}),
+% physical data collection process (Section~\ref{ssec:phys-data}),
+% simulator tuning with DE (Section~\ref{ssec:diff-ev}),
+% system parameter selection to maximize endpoint coverage (Section~\ref{ssec:sys-param}), 
+% training trajectory generation models with augmented simulation data (Section~\ref{ssec:model-training}), and
+% fine-tuning with physical data.
+% \jeffi{What happened to fine tuning?}
+% \daniel{these subsections are almost correct, just missing a few?}
+
+
+\subsection{Reset}\label{ssec:resets}
+
+We define the following reset procedure:
+\begin{enumerate}
+\item Lift the cable vertically up with the free-end touching the worksurface to prevent the cable from dangling.
+\item Continue to lift the cable up such that the free-end loses contact with the worksurface.
+\item Let the cable hang for 3 seconds to stabilize.
+\item Perform polar casting to swing the free-end forward to land at $(r_d, \theta_d=0)$, then slowly pull the cable towards the robot until the reset position is reached.
+\end{enumerate}
+Figure~\ref{fig:reset} shows a frame-by-frame overview of the reset procedure, which the UR5 robot executes before each dynamic planar cable manipulation action (see Section~\ref{ssec:action}) to ensure the same initial cable configuration.
+
+% Daniel: used this Google Drawings link:
+% https://docs.google.com/drawings/d/1YUM0bSBXjaxqRHHwdzOSntUtTckdKUSIxoEV3tcVGU8/edit
+\begin{figure}[t]
+\center
+\includegraphics[width=0.49\textwidth]{resets-v01-min.png}
+\caption{
+Overview of the reset procedure with the UR5, which occurs at the start of each dynamic manipulation. The photos show a frame-by-frame side view of the UR5 as it resets by letting the cable settle (A,B), pulling back (C), casting forward (D,E), and dragging back slightly (F). See Section~\ref{ssec:resets} for more details. After this reset, the robot executes planar actions, as described in Section~\ref{ssec:action}.
+}
+\vspace*{-15pt}
+\label{fig:reset}
+\end{figure}
+
+\subsection{Planar Action Variables}\label{ssec:action}
+For dynamic manipulation, the robot must take an action that induces the cable to swing to reach the target.  We desire several action properties: (1) it should be a quick non-stop and smooth motion, (2) it should require a low-dimensional input that facilitates data generation and training, (3) it has a subset of parameters that can be fixed yet still allow the varying parameters to generate motions that will carry out the task, and (4) it should be interpretable.  We hand craft a function to have these properties based on observing a human attempting the same task, and observe that most motions arc one direction, then arc back, before coming to a stop. 
+
+%Each action $\ba$ defines a dynamic trajectory of the robot. We test action parameterizations that replicate recorded human-generated trajectories of free driving the robot to dynamically move the cable towards a target. We notice the trajectories can be represented by two splines that are parameterized in polar coordinates. We use two splines as opposed to one because the second is required to produce an inertial planar motion that accelerates the endpoint in the direction of the end effector's velocity. \jonathan{Possibly support the reasoning with the coverage metric of using a single spline} \jonathan{Need to revise the reasoning and better integrate it with below explanation}
+
+To design the trajectory function, we define a coordinate frame and set of coordinates that the trajectory function uses to define an action (Figure~\ref{fig:spline}).
+An offset $r_0$ from the reset position defines the origin of a polar coordinate frame.  %When $r_0 = 0.845$, the polar coordinate frame is centered on the base, and when $r_0 > 0.845$, the origin is behind the robot relative to the workspace. 
+In this coordinate frame, we define 3 polar coordinates that define the motion.  The motion starts at $(r_0, \theta_0)$ then interpolates through $(r_1, \theta_1)$ and comes to a rest at $(r_2, \theta_2)$.
+We use an inverse kinematic (IK) solver to compute the robot configuration through the motion.  We observe that when polar coordinate origin aligns with the base of the robot, the angular coefficient corresponds 1:1 with the base rotation angle $\phi_1$, and the IK solution for that joint is trivial.
+To increase the sweeping range of the robot, we also include a wrist joint rotation $\phi_3$ in the trajectory function.
+
+% ???  I'm not sure we need to hence the "maybe" lol gotcha. I'll move the notes to comments
+The handcrafted trajectory function parameterizes each action by a fixed set of \emph{system parameters} and a variable set of \emph{action variables}.
+The system parameters are: the origin offset $r_0$ and the maximum linear velocity $\vmax$.
+Increasing $r_0$ creates a wider circle, thus flattening the arc.  In Figure~\ref{fig:spline}, the smaller value of $r_0$ results in the blue arc, while the larger value of $r_0$ results in the flatter green arc. Once we determine the system parameters (Section~\ref{ssec:sys-param}), they remain fixed, and only the action variables vary during training.
+%The system parameters are $r_0$, the 2D distance from the reset position of the end effector to the origin in the polar coordinate frame, and $\vmax$, the maximum joint velocity of the end effector. The $r_0$ can be modified to produce trajectories that vary in curvature, as seen in Figure~\ref{fig:spline}. Larger values for $r_0$ will produce ``flatter'' splines whereas smaller values will produce splines with more curvature. In practice, we find that the flatness of the action and the maximum velocity $\vmax$ in the jerk-limited motion significantly impact the cable endpoint coverage over the workspace (see Section~\ref{ssec:sys-param}). Once we select the system parameters, they are fixed and not included in the actions $\ba$ for learning the inverse model $f_{\rm inv}$.
+
+%We represent the robot as a 3 joint mechanism in the global frame: a rotation joint at the base $\phi_1$, a prismatic joint $d_2$ along the direction from the base to the wrist, and a rotation angle $\phi_3$ with respect to $d_2$. In the polar coordinate frame, we define $(r, \theta)$ to be the position of the end effector, and $\psi$ as the angle of the wrist. Using a standard IK solver, the 6-DOF robot can achieve any $(\phi_1, d_2, \phi_3)$, which corresponds to moving the end effector to $(r, \theta, \psi)$ in polar space.
+\begin{figure}[t]
+\center
+\includegraphics[width=0.4\textwidth]{spline_figure.png}
+\caption{
+Example of two sets of splines that are traced by the end effector during the trajectory (Equation \ref{eq:act2_wrist}) of the UR5, for two different $r_0$ values: $r_0 \in \{0.6, 2.0\}$ (not drawn to scale). The reset procedure brings the end effector to $(r_0, \theta_0)$ in the polar space before the start of each dynamic motion. Decreasing $r_0$ increases the curvature of the trajectory. 
+}
+\vspace*{-10pt}
+\label{fig:spline}
+\end{figure}
+
+We consider two sets of action variables, $A_1$ and $A_2$. The set $A_1$ consists of three values:
+\begin{equation}\label{eq:act2}
+    \ba = (\theta_1, \theta_2, r_2),
+\end{equation}
+while the set $A_2$ consists of four:
+\begin{equation}\label{eq:act2_wrist}
+    \ba = (\theta_1, \theta_2, r_2, \psi).
+\end{equation}
+The first three parameters correspond to coefficients of polar coordinates that define the motion (Fig.~\ref{fig:spline}).  The fourth is the wrist joint's rotation about the $z$-axis.  We convert these coordinates to a trajectory in polar coordinates by using a cubic spline to smoothly interpolate the radial coefficient from $r_0$ to $r_2$, and by using a maximum-velocity spline to interpolate the angular coefficient from $\theta_0$ to $\theta_1$ and from $\theta_1$ to $\theta_2$, with maximum velocity $\vmax$.  We implement the maximum-velocity spline with a jerk-limited bang-bang control, having observed that the UR5 has difficulty following trajectories with high jerk~\cite{ichnowski2020djgomp}. We assume a direction change between the two angular splines, and thus the angular velocity and acceleration at $\theta_1$ is 0.  Once we have the polar coordinate trajectory of the end effector, we convert it to a trajectory in joint space using an IK solver by discretizing the trajectory at the time interval of the robot's control cycle.
+%With a fixed reset location $(r_0, \theta_0)$ given by the reset motion in Section~\ref{sec:resets-repeat}, the trajectory of the end effector passes through two waypoints $(r_1, \theta_1)$ and $(r_2, \theta_2)$ in polar space while maintaining a fixed height, as shown in Figure~\ref{fig:spline}, where $\theta$ changes with jerk-limited, maximum velocity $\vmax$. A limited jerk velocity reduces the stochasticity caused by a jerk-intensive motion. The $r$ changes from $r_0$ to $r_2$ using a cubic spline $f(t)$ as a function of time, where $f'(t_{r_0}) = f''(t_{r_0}) = f'(t_{r_2}) = f''(t_{r_2}) = 0$. \jonathan{TODO Verify this is accurate}. Here, $r_1$ is equal to $f(T_{\theta_1})$, where $T_{\theta_1}$ is the time it takes to change from $\theta_0$ to $\theta_1$. 
+% $\theta_1$ and $\theta_2$ translate to rotation of the base joint, while $r_2$ translates to rotation in the shoulder and elbow joints. By keeping most of the joints besides the base joint fixed throughout the trajectory, we reduce unnecessary motions that contribute to unpredictable cable behavior.
+% Because we deal with 2D planar manipulation, the $z$ coordinate is fixed throughout the trajectory.
+%\raven{This is hard to explain and we need to discuss how to make this clear. Basically, when we generate the spline action, we didn't generate in the polar coordinate whose origin is the robot base. Since we just want to generate the spline action with the starting point ($r_0$, $\theta_0$) fixed, we can do this in the action space. Since $r_0$ is directly related to the flatness of the generated spline, if we want to generate actions with different flatness, we need to change $r_0$. However, the reset position is fixed in real and we can only move the origin further or near to change $r_0$. I hope this could explain this better but again Jeff would be the best person to explain. }
+% The polar coordinate parameters are in a different coordinate space than the real world coordinate space. For instance, the fixed parameter $r_0$ does not represent the physical distance between the robot base and the end effector. 
+
+We observe the coverage space for $A_1$ is limited in practice (Figure~\ref{fig:coverage}), and thus consider the action set $A_2$. %, the wrist rotation angle $\psi$ about the z-axis:
+% \begin{equation}\label{eq:act2_wrist}
+%     \ba = (\theta_1, \theta_2, r_2, \psi).
+% \end{equation}
+When using $A_2$, the wrist rotates $\psi - \theta_2$ radians with a maximum velocity spline rotation. In an ablation study in Section~\ref{ssec:system-ablation}, we examine the impact of the wrist angle parameter.
+
+This parameterization allows us to take advantage of the symmetrical aspect of the problem. For all datasets, we sample actions such that $\theta_1 < 0$, $\theta_2 > 0$, and $\psi \geq \theta_2$, to obtain targets on the right of the workspace axis of symmetry. If $(\theta_1, \theta_2, r_2, \psi)$ produces target $(r_d, \theta_d)$, $(-\theta_1, -\theta_2, r_2, -\psi)$ will produce $(r_d, -\theta_d)$. Therefore, during evaluation, for targets $(r_d, \theta_d)$ on the left of the axis, we take $\pi((r_d, -\theta_d)) = (\hat{\theta}_1, \hat{\theta}_2, \hat{r}_2, \hat{\psi})$ and output $(-\hat{\theta}_1, -\hat{\theta}_2, \hat{r}_2, -\hat{\psi})$.
+
+% For both splines, 
+% the maximum change in radians per second of the angle of the end effector $\theta$ is set to 2 radians/s, which is fast enough to produce a large range of reachable cable endpoints, but not so fast such that the cable is uncontrollable. 
+% the maximum acceleration and jerk are set at maximum values according to the UR5 specification. A standard IK solver is applied to convert the end effector trajectory from coordinate space into joint space.
+
+\subsection{Self-Supervised Physical Data Collection}\label{ssec:phys-data}
+To create $\mathcal{D}_{\rm tune}$, we generate and execute physical trajectories $(\theta_1, \theta_2, r_2, \psi)$, uniformly sampling each parameter such that the trajectory does not violate joint limits.
+The execution for each trajectory is about \SI{20}{\second}, including \SI{15}{\second} for the reset motion and \SI{5}{\second} for the planar motion, thus motivating the need for more efficient self-supervised data generation in simulation. Videos for each planar motion are recorded. We collect physical trajectories for tuning the simulator and fine tuning the model.
+% For the tuning of the simulator, we set $r_0 = 0.6$ and $\vmax = 1.8$, as a higher velocity can exhibit more complex cable behavior that should be modeled by the simulator. For the tuning of the 
+% Collecting data for 200 trajectories takes approximately one hour, motivating the need for more efficient data generation in simulation.
+
+\subsection{Simulator Tuning}\label{ssec:diff-ev}
+Instead of using grid search or random search,
+%~\cite{random_search_2012}
+we search for parameters using Differential Evolution (DE)~\cite{de_tuning_2020}, optimizing for a similarity metric. DE does not require a differentiable optimization metric, and scales reasonably with a large number of parameters compared to grid search and Bayesian optimization~\cite{de_tuning_2020}.% See the Appendix for details.%on the DE procedure we use.
+
+We denote the collective set of PyBullet simulation parameters as $\theta_{\rm sim}$. For each trajectory $m_j$ in the training set $\mathcal{D}_{\rm tune}$ of $M$ total \emph{physical} trajectories, we record the 2D location of the cable endpoint, $p_t = g_{\rm p2c}(\bs_{\rm real}) = (x_t, y_t)$, at each time step $t$ spaced \SI{100}{\milli\second} apart (see Figure~\ref{fig:process}(d)). The tuning objective is to find parameters $\theta_{\rm sim}$ that minimize the average $L^2$ distance between the cable endpoint in simulation, $\hat{p}_t = g_{\rm p2c}(\bs_{\rm sim}) = (\hat{x}_t, \hat{y}_t)$, to the real waypoint at each $t$:
+\begin{equation}\label{eq:tuning}
+    \minimize_{\theta_{\rm sim}} \;\; \epsilon_{\rm trajs} = {\frac{1}{M}\sum_{j}^M{\frac{1}{N_j}\sum_i^{N_j}{\lVert p_i - \hat{p}_i \rVert}_2}}.
+\end{equation}
+The number of waypoints compared for each trajectory is $N_j = \lfloor {T_j}/{100} \rfloor$, where $T_j$ is the duration of $m_j$ in milliseconds. For each cable, we collect 60 physical trajectories and evaluate on an additional 20 trajectories where $(\theta_1, \theta_2, r_2, \psi)$, for each trajectory are uniformly sampled. Increasing the number of trajectories to 80 leads to an increase in $\epsilon_{\rm trajs}$ by $2\% - 12\%$, suggesting that additional trajectories would not improve tuning.
+
+\begin{table}[t]
+  \setlength\tabcolsep{5.0pt}
+  %\vspace{-1em}
+  \centering
+  \caption{
+    Results for Differential Evolution (Section~\ref{ssec:diff-ev}) on a set of 20 validation trajectories for 3 cables (see Figure~\ref{fig:cables}). The two metrics are the median final $L^2$-distance, which is the 2D Euclidean distance between endpoint locations in simulation and reality after a trajectory terminates, and $\epsilon_{\rm trajs}$, defined in Equation $\ref{eq:tuning}$. We compare the performance of parameters found by DE with that of PyBullet's default parameter settings. Values are expressed in percentages of cable length.
+  }
+  \small
+  \begin{tabular}{@{}lllll}
+  \toprule
+  Metric & Cable 1  & Cable 2  & Cable 3  \\
+  \midrule
+  (Default) Median final $L^2$-distance & 35.0\% & 25.8\% & 24.5\% \\
+  (Default) $\epsilon_{\rm trajs}$ & 38.2\% & 29.4\% & 24.5\% \\
+  (DE) Median final $L^2$-distance & \textbf{14.7}\%  & \textbf{12.2}\% & \textbf{14.5}\% \\
+  (DE) $\epsilon_{\rm trajs}$ & \textbf{28.4}\% & \textbf{23.4}\% & \textbf{18.7}\% \\
+  \toprule
+  \end{tabular}
+  \vspace*{-10pt}
+  \label{tab:tuning}
+\end{table}  
+
+% Daniel: let's keep tables at the top of the page using [t].
+% \begin{table}[t]
+%   \setlength\tabcolsep{5.0pt}
+%   %\vspace{-1em}
+%   \centering
+%   \caption{
+%     Results for Differential Evolution (Section~\ref{ssec:diff-ev}) on a set of 20 validation trajectories over all 3 cables (see Figure~\ref{fig:cables}). The two metrics are the final $L^2$-distance, which is the 2D Euclidean distance between endpoint locations between simulation and reality after a trajectory terminates, and $\epsilon_{\rm trajs}$, defined in Equation $\ref{eq:tuning}$. We compare the performance of parameters found by DE with that of PyBullet's default parameter settings. Values are averaged across the 20 trajectories, and expressed in percentages of cable length.
+%   }
+%   \small
+%   \begin{tabular}{@{}lllll}
+%   \toprule
+%   Metric & Cable 1  & Cable 2  & Cable 3  \\
+%   \midrule
+%   (Default) Final $L^2$-distance & 38.2\% & 27.5\% & 27.5\% \\
+%   (Default) $\epsilon_{\rm trajs}$ & 38.2\% & 29.4\% & 24.5\% \\
+%   (DE) Final $L^2$-distance & \textbf{20.5}\%  & \textbf{19.2}\% & \textbf{16.6}\% \\
+%   (DE) $\epsilon_{\rm trajs}$ & \textbf{28.4}\% & \textbf{23.4}\% & \textbf{18.7}\% \\
+%   \toprule
+%   \end{tabular}
+%   \vspace*{-10pt}
+%   \label{tab:tuning}
+% \end{table}  
+
+Table~\ref{tab:tuning} compares similarity between cable behavior in simulation and real. For each cable, DE was able to reduce the discrepancy in the endpoint location throughout and after the trajectory, compared to PyBullet's default parameter settings. While $50\%$ of trajectories have final $L^2$-distance less than $15\%$, evaluation results suggest a reality gap still remains for certain trajectories, motivating the use of fine-tuning as discussed in Section~\ref{ssec:data-collect}.
+
+
+\subsection{System Parameter Selection}\label{ssec:sys-param}
+
+\begin{figure}[t]
+\centering
+\subfloat{\includegraphics[width=0.39\textwidth]{figures/Coverage_Comparison.png}}
+
+\subfloat{\includegraphics[width=0.39\textwidth]{figures/Coverage_Comparison_wrist.png}}
+\caption{
+Plots showing the area on the workspace plane that is reachable by the cable endpoint across sampled trajectories for each system parameter combination in simulation, with simulation parameters tuned for Cable 1. The reachable area of the endpoint is defined by a semicircle with radius $r_{\rm max} + r_c$. Each plot is generated by executing grid sampled actions $(\theta_1, \theta_2, r_2)$ with $\theta_1 < 0$ and $\theta_2 > 0$ in the simulator (and $\psi \geq \theta_2$ if with $\psi$), reflecting endpoints across the vertical axis due to symmetrical actions, and applying a concave hull to the coordinates of the endpoints. All planar actions can achieve coverage beyond the area reachable by polar casting.
+}
+\label{fig:coverage}
+\vspace*{-10pt}
+\end{figure}
+
+To find the optimal $(r_0, \vmax)$ combination that maximizes endpoint coverage and repeatability, we search in simulation and real. For all grid samples, we filter actions that exceed joint or velocity limits. We use ${r_0 \in \{0.6, 1.0, 2.0 \}}$ and $\vmax \in \{1.2,1.5,1.8\}$ for $3\times3=9$ combinations. For each $r_0$ and $\vmax$ pair, we generate actions $\ba=(\theta_1,\theta_2,r_2)$ via grid sampling. We generate $15\times15\times15$ actions with $15$ values for each parameter and execute them in simulation. We evaluate the endpoint coverage for each $(r_0, \vmax)$ combination by aggregating all resulting endpoints from these actions. Fig.~\ref{fig:coverage} compares endpoint coverage among different $(r_0, \vmax)$ combinations, overlaid on top of a semicircle with radius $r_{\rm max} + r_c$, representing the maximum possible coverage.
+
+Higher velocity actions tend to give higher coverage, but also higher uncertainty, resulting in less repeatability. To evaluate the repeatability, we execute each sampled action 5 times in the physical environment and calculate the standard deviation of the distance between the cable endpoint position to the mean position. For trials where the cable endpoint leaves the table (i.e., ``off-table''), we remove these trials from the standard deviation calculation. To evaluate repeatability for a given $r_0$ and $\vmax$, we average the standard deviations across actions generated via grid sampling. We seek an $r_0$ and $\vmax$ combination that maintains repeatability with high coverage.
+% 
+% We notice results have high variance from $\vmax=1.8$, suggesting it is suboptimal. While the coverage of $\vmax=1.2$ is limited
+
+With the $r_0$ that maximizes coverage, we evaluate the effect of the additional wrist rotation parameter $\psi$ on coverage and repeatability. 
+For $\vmax \in \{1.2,1.5,1.8\}$, we generate $15\times15\times15$ actions for $a=(\theta_1,\theta_2,r_2)$ and $10\times10\times10\times5$ actions for $a=(\theta_1,\theta_2,r_2, \psi)$ and execute them in simulation to evaluate coverage. In real, we generate and execute $5\times5\times5$ actions for $a=(\theta_1,\theta_2,r_2)$ with $\vmax \in \{1.2,1.5\}$ and $3\times3\times3\times3$ actions for $a=(\theta_1,\theta_2,r_2, \psi)$ with $\vmax \in \{1.5,1.8\}$ to evaluate repeatability.
+
+\subsection{Training Data Collection and Model Training}\label{ssec:data-collect}
+
+After selecting the most ideal system parameters for coverage and repeatability, we use actions generated with these fixed values to learn a forward dynamics model as in Section~\ref{ssec:supervised}. To generate training data $\mathcal{D}_{\rm sim}$, we grid sample $\theta_1$, $\theta_2$, $r_2$ and $\psi$, and generate 36,000 $(\ba, \bs)$ simulated transitions to train $f_{\rm forw}$ to predict $\bs$ given $\ba$. We additionally execute 200 grid-sampled actions and record the transitions in the physical setup to generate $\mathcal{D}_{\rm real}$, which is used for fine-tuning the dynamics model with real data.
+
+% \subsection{Model Training}\label{ssec:model-training}
+
+We use a feedforward neural network for $f_{\rm forw}$, with 4 fully connected layers with 256 hidden units each. The model is trained to minimize the $L^2$ error on data from $\mathcal{D}_{\rm sim}$:
+\begin{equation}\label{eq:forw}
+    \sum_{(\ba, \bs) \in \mathcal{D}_{\rm sim}} {\lVert f_{\rm forw}(\ba) - g_{\rm p2c}(\bs) \rVert}_2.
+\end{equation}
+During evaluation, we sample 50,000 candidate actions using a grid sample on the joint-limit-abiding action variables, and select the action that minimizes the $L^2$ distance between the predicted and desired endpoints (see Equation~\ref{eq:finv}).
+
+% We apply an HSV mask to isolate the green target marker in the pre-processed image observation and use contour detection to extract the pixel location of the target, which is then converted to corresponding $(x, y)$ coordinates in simulation. For our learning based method, we uniformly sample 1,000 actions such that $\ba$ produce trajectories that are within joint limit, and execute the action that minimizes the $\ell_2$ distance between the predicted cable endpoint from the dynamics model and desired cable endpoint.
+
+% Since some edge target positions require more stochastic actions to arrive, we evaluate the \emph{repeatability} of the target locations by repeating the \textbf{same} action output by the model three times and calculate the mean and variance of the distance between the end position of cable and the target position. The median and variance distance of each target position are reported.
+
+% We manually sample 15 target locations on the right side of the robot base and take the images. We then generate another 15 target locations by flipping the images horizontally such that we get 30 target locations in total that are symmetrical to the y axis of the robot base. We manually sample another 2 target locations in the center as a compliment. We use the same 32 target locations for all cables to consistently evaluate model performance. 
+\begin{figure}[!tbp]
+    \centering
+    %\includegraphics[width=\columnwidth]{figures/Repeatability_Analysis.png}
+    \includegraphics[width=0.49\columnwidth]{figures/r0.6_vmax2_imgs_ellipses.jpg}
+    \includegraphics[width=0.49\columnwidth]{figures/r0.6_vmax3_imgs_ellipses.jpg}
+    \includegraphics[width=0.49\columnwidth]{figures/r0.6_vmax2.5_wrist_imgs_ellipses.jpg}
+    \includegraphics[width=0.49\columnwidth]{figures/r0.6_vmax3_wrist_imgs_ellipses.jpg}
+    \caption{
+    Repeatability analysis for Cable 1. The points of each color correspond to the locations of the 5 trials with the same action. A 95\% confidence ellipse is fit for each cluster. A small red triangle around the number indicates that there is at least one off-table trial for that action (see Sec.~\ref{sec:results}). Lower $\vmax$ actions without $\psi$ are shown to be more repeatable than higher $\vmax$ actions with $\psi$.
+}
+\label{fig:repeat}
+\vspace*{-10pt}
+\end{figure}
+
+\begin{figure*}[!h]
+    \centering
+    % \includegraphics[width=\textwidth]{figures/figure8.png}
+    \includegraphics[width=\textwidth]{figures/Asset_2.png}
+    \caption{
+    Evaluation results of the forward dynamics models trained with $\mathcal{D}_{\rm sim} + \mathcal{D}_{\rm real}$ for each cable. The number represents each target and the point represents each endpoint corresponding to the target with the same color. The ellipse is the 95\% confidence ellipse and the dashed line connects the center of the ellipse to the target representing the mean error distance. A red triangle indicates there is at least one off-table trial or occluded trial for this target. There are 7 off-table trials for Cable 2 and 1 off-table trial for Cable 3. 
+}
+\label{fig:repeat_multi_cable}
+\vspace*{-10pt}
+\end{figure*}
+
+\section{Results}\label{sec:results}
+
+%In this section, we report results of the trained models and compare with two baselines.
+%(Section~\ref{ssection:methods}), \emph{Polar Casting} and \emph{Gaussian Process Regression}. We then describe ablations of the proposed method (Section~\ref{ssec:system-ablation}), and report physical experiments (Section~\ref{ssec:physical-evaluation}).
+%For each cable, we compare performance on 32 fixed target locations. Each target location is extracted from an overhead image of the workspace with a green marker indicating the desired cable endpoint location. We sample the target locations symmetrically to cover most of the workspace, as shown in Figure~\ref{fig:teaser} (bottom half).
+We extract the endpoint position of the cable from an overhead image after each executed action. For off-table cases and occluded case where the endpoint is occluded by the robot arm, we exclude them from the error analysis. We'll address the avoidance of these cases in the future work.
+% For trials where the cable endpoint leaves the table (i.e., ``off-table''), we remove these trials for repeatability calculations since we require calculating a standard deviation. 
+% For error analysis of off-table cases, we set the error distance to be the cable length, since we observe that for all off-table cases the distance of the target to the table edge is less than the distance of the end effector to the table edge. Thus, the cable length is a conservative distance to the target for off-table cases.
+% For error analysis of off-table cases, we set the error distance to be the cable length. We validate that this is a conservative error distance by manually going through the off-table cases and estimating the endpoints based on the videos.
+%For trials where the cable endpoints are occluded by the robot arm, we manually estimate the endpoint positions using recordings of the trials.
+
+\subsection{Methods}\label{ssection:methods}
+
+We benchmark performance of the forward dynamics model trained on (1) $\mathcal{D}_{\rm real}$ only, (2), $\mathcal{D}_{\rm sim}$ only, and (3) $\mathcal{D}_{\rm sim}$ first, then fine-tuned on $\mathcal{D}_{\rm real}$. See Section~\ref{ssec:data-gen} for dataset details. Along with these three forward models, we test with two baseline methods, one analytic and one learned:
+
+\textbf{Polar Casting.} Given a target cable endpoint location $(r_d, \theta_d)$, first perform a casting motion that causes the free endpoint to land at $(r_{\rm max} + r_c, \theta)$. To perform this motion, the robot rotates $\theta_d$ radians, and executes a predefined casting motion. After the casting motion, the robot slowly pulls the cable toward the base for a distance of $r_{\rm max} + r_c - r_d$. Targets $(r_d, \theta_d)$ achievable by this method are limited to the circular segment seen in Figure~\ref{fig:coverage}. In Cartesian coordinates, the arm is limited to a minimum $y$ coordinate of $\SI{0.466}{\meter}+r_c$ to prevent the end effector from hitting the robot's supporting table, where $\SI{0.466}{\meter}$ is the distance from the center of the robot base to the edge of the table. 
+
+% $r_c \leq r_d \leq 1+r_c$, where $r_c$ is the cable length, as the robot cannot pull closer than $r_c$ without hitting the base. 
+
+\textbf{Forward Dynamics Model learned with Gaussian Process.} As a learning baseline, we use Gaussian Process regression, which is commonly used in motion planning and machine learning~\cite{Gaussian_process_ML}. Using $\mathcal{D}_{\rm sim}$, we train a Gaussian Process regressor to predict the cable endpoint location  $(\hat{x}, \hat{y})$ given input action $\ba$.
+
+
+% \textbf{Actions with Polar Trajectory}. We plan through the learned dynamics model to output an action $\mathbf{a}$ that the robot executes by having the end effector follow the trajectory defined by the action parameterization. 
+% \textbf{Actions without wrist rotation, $r_0 = 2$.} The forward dynamics model uses $(\theta_1, \theta_2, r_2)$ for each input action.
+% \textbf{Actions without wrist rotation, $r_0 = 0.6$.}
+% \textbf{Actions with wrist rotation, $r_0 = 0.6$.} The forward dynamics model uses $(\theta_1, \theta_2, r_2, \theta_{wrist})$ for each input action.
+
+
+\subsection{System Ablation Comparison}
+\label{ssec:system-ablation}
+
+We compare the performance of models across $(r_0, \vmax)$ values and perform an ablation for including $\psi$ (Equation~\ref{eq:act2_wrist}).
+
+\subsubsection{Coverage}
+From simulation, we find that ${r_0 = 0.6}$ and ${\vmax = 1.8}$ provide the maximal coverage of $66.3\%$ of the reachable workspace. Comparing with other $r_0$ values with the same $\vmax$, $r_0=0.6$ tends to result in the maximum coverage, which is visualized in the top of Figure~\ref{fig:coverage}. We thus choose $r_0=0.6$.
+% , defined to be a semicircle with radius $r_{\rm max} + r_c$. 
+The bottom of Figure~\ref{fig:coverage} compares the coverage with and without $\psi$ using $r_0 = 0.6$. The graph shows adding $\psi$ notably increases coverage, confirming the hypothesis in Section~\ref{ssec:action}. 
+
+\subsubsection{Repeatability}
+% The off-table trials are not included in the calculation of average standard deviation across actions. 
+The physical repeatability evaluation results are shown in Figure~\ref{fig:repeat}. We observe that $\vmax = 1.2$ produces the most repeatable actions with an average standard deviation of $1.27\%$ (of cable length) across actions compared to $3.70\%$ for $\vmax = 1.8$, but offers minimal coverage $21.3\%$ of the reachable area in simulation. While $\vmax=1.8$ with $\psi$ offers the most coverage $79.7\%$, it has the least repeatability with an average standard deviation of $4.72\%$. To balance coverage and repeatability, we select $\vmax=1.5$ with $\psi$, which has a coverage of $76.9\%$ and an average standard deviation of $1.93\%$. Compared to trials using $\vmax=1.8$ with $\psi$, trials using $\vmax = 1.5$ with $\psi$ also have $17.1\%$ fewer off-table cases.
+% Because both $\vmax =1.5$ with $\psi$ and $\vmax = 1.8$ with $\psi$ provide sufficient coverage to reach targets on the workspace, with coverages of $76.9\%$ and $79.7\%$ respectively, we choose $r_0 = 0.6$, $\vmax = 1.5$ with $\psi$.
+
+
+% Model 1 has $r_0 = 0.2$ and action parameterization 1. Model 2 has $r_0 = 0.6$ and action parameterization 2. Model 3 has $r_0 = 0.6$ and action parameterization 1. We analyze the coverage of models generated in simulation as shown in Figure~\ref{fig:coverage}. The results show a wider coverage on side of model 3 brought by the addition trajectory parameter of wrist rotation angle $\psi$. A wider range in the center of model 1 aligns with the fact that smaller $r_0$ corresponds to more curvy splines that narrows the coverage on the side but extend the coverage in the center. The results of physical experiments on cable 1 for all the three models without any fine tuning are summarized in Table~\ref{tab:error} which emphasizes the importance of $\psi$. By comparing both the coverage and physical success rate, we use the setting of model 2 for subsequent experiments.
+
+% Daniel: move to top.
+\begin{table}[t]
+  \setlength\tabcolsep{5.0pt}
+  %\vspace{-1em}
+  \vspace{1pt}
+  \centering
+  \caption{
+    Physical evaluation results on Cable 1, of the 2 baselines and the dynamics model $f_{\rm forw}$ trained on three different datasets. All distances are expressed as a percentage of cable length (\SI{0.62}{\meter}).
+  }
+  \begin{adjustbox}{width=\columnwidth,center}
+    \centering
+  \small
+  \begin{tabular}{@{}lrrrrr}
+  \toprule
+  Model & Median & 1st Quartile & 3rd Quartile & Min & Max \\
+  \midrule
+Polar Casting & 43\%  & 14\%   & 76\% & 4\% & 106\%  \\
+Gaussian Process with $\mathcal{D}_{\rm sim}$ & 29\% & 20\% & 59\% & 4\% & 159\% \\
+$f_{\rm forw}$ with $\mathcal{D}_{\rm real}$ & 59\% & 43\% & 83\% & 3\% & 117\%  \\
+$f_{\rm forw}$ with $\mathcal{D}_{\rm sim}$ & 29\% & 15\% & 39\% & 1\%& 113\%\\
+$f_{\rm forw}$ with $\mathcal{D}_{\rm sim} + \mathcal{D}_{\rm real}$ & \textbf{22\%} &\textbf{ 9\%} & \textbf{38\%} & \textbf{0\%} & \textbf{78\% } \\
+  \toprule
+  \end{tabular}
+  \end{adjustbox}
+  \label{tab:error}
+\vspace*{-5pt}
+\end{table}  
+\subsection{Physical Evaluation Results}
+\label{ssec:physical-evaluation}
+We evaluate 3 dynamics models on Cable 1, which are trained on only $\mathcal{D}_{\rm real}$, only $\mathcal{D}_{\rm sim}$, and $\mathcal{D}_{\rm sim}$ with fine-tuning on $\mathcal{D}_{\rm real}$ (i.e., $\mathcal{D}_{\rm sim} + \mathcal{D}_{\rm real}$). We find that training on $\mathcal{D}_{\rm sim}$ and fine-tuning on $\mathcal{D}_{\rm real}$ yields the best performance. Table~\ref{tab:error} summarizes physical results. The best model produces actions that have a median error distance of $22\%$ from the target. Compared to the baselines, the policy $\pi$ (Equation~\ref{eq:finv}) using the dynamics model has a lower median error distance to the target and lower IQR. Although polar casting is accurate for targets within its reachability, the limited coverage greatly increases its median distance. Training $f_{\rm forw}$ on only $\mathcal{D}_{\rm real}$ has a much higher median endpoint deviation distance, suggesting that it overfits to $\mathcal{D}_{\rm real}$ due to its small size, motivating the need to pre-train $f_{\rm forw}$ with $\mathcal{D}_{\rm sim}$. The performance improvement after fine-tuning on $\mathcal{D}_{\rm real}$ suggests real examples are useful for closing the sim-to-real gap.
+
+% Daniel: let's put tables at the top of the page.
+\begin{table}[t]
+  \setlength\tabcolsep{5.0pt}
+  %\vspace{-1em}
+  \centering
+  \caption{
+    Physical evaluation results of 3 cables (see Figure~\ref{fig:cables}) with 32 target positions for each cable, using the dynamics model $f_{\rm forw}$ trained with $\mathcal{D}_{\rm sim} + \mathcal{D}_{\rm real}$. All distances are expressed as percentages of cable length. 
+  }
+  \small
+  \begin{adjustbox}{width=\columnwidth,center}
+    \centering
+  \begin{tabular}{@{}lrrrrr}
+  \toprule
+  Cable      & Median & 1st Quartile & 3rd Quartile  & Min & Max   \\
+  \midrule
+  Cable 1    & 22\% & 9\% & 38\%& 0\% &78\%   \\
+  Cable 2    & 24\% & 14\% & 35\%& 1\% &77\%   \\
+  Cable 3   & 34\% & 24\% & 50\%& 6\% & 89\% \\
+  \toprule
+  \end{tabular}
+  \end{adjustbox}
+  \vspace{-5pt}
+  \label{tab:results}
+\end{table}  
+
+% Daniel: Ken wanted this below Figure 1.
+% \begin{figure}[t]
+% \center
+% \includegraphics[width=0.49\textwidth]{figures/gridlines.png}
+% \caption{The 32 target positions on the workspace plane, shown with small tape. The target positions are chosen to cover most of the reachable space to thoroughly evaluate the model performance. The grid lines shown are 0.5 m apart. There are 5 trials of a successful case, marked by the star target, and 5 trials of a failure case, marked by the red cross. The successful case has median endpoint deviation of 0.05 m, while the unsuccessful case has a median endpoint deviation of 0.33 m.}
+% %\vspace*{-10pt}
+% \label{fig:results-1}
+% \end{figure}
+
+We evaluate the performance for all 32 target positions for all cables using $f_{\rm forw}$ trained with $\mathcal{D}_{\rm sim} + \mathcal{D}_{\rm real}$, and repeat each output action 5 times per target.
+The 95\% confidence ellipses in Figure~\ref{fig:repeat_multi_cable} show the underlying dynamic noise of the system and the distance between the target and the center of the ellipse shown by the dashed line represents the model error. Results are summarized in Table \ref{tab:results}. We attribute the error to two sources: simulator error from examples in $\mathcal{D}_{\rm sim}$ that do not represent real cable behavior, and learning error from the forward dynamic model. Table~\ref{tab:tuning} shows the simulator tuning error, but while Cable 3 exhibits the smallest sim-to-real gap, its physical performance is the worst among all 3. We conjecture that the circular magnet at the end of Cable 3 increases stochasticity. In experiments, the magnet frequently rotates after the rest of the cable stabilizes, moving the endpoint further from the target. In future work, we will investigate whether using a different optimization strategy for tuning will mitigate this problem. While we model the extra mass at the endpoint, we may consider modeling irregular shapes to reduce the sim-to-real gap. 
+
+% \begin{figure}[!tbp]
+%   %\begin{minipage}[b]{0.40\textwidth}
+%         \includegraphics[width=\columnwidth]{figures/targets_with_gridlines.png}
+%     \caption{
+%     The 32 target positions on the workspace plane, shown with small tape. The target positions are chosen to cover most of the reachable space to thoroughly evaluate the model performance. \daniel{Need to: (1) add a scale to indicate true length, (2) better align with figure below} % \Lawrence{(1) still needs to be done.} \jeffi{Can we overlay a grid to match the fig.~\ref{fig:repeat}?}
+%     }
+%     \label{fig:target}
+%   %\end{minipage}
+% \end{figure}
+
+\section{Conclusion and Future Work}\label{sec:conclusion}
+
+In this paper, we present a self-supervised learning procedure for learning dynamic planar manipulation of 3 free-end cables. Experiments suggest that tuning a simulator to match the physics of real cables, then training models from data generated in simulation, results in promising physical manipulation to get cable endpoints towards desired targets.
+
+The self-supervised fine-tuning process relies on executing hundreds of trajectories in the physical setup, which may be infeasible in other dynamic manipulation domains. Hence, we will explore dynamics randomization~\cite{dynamics_randomization_2018}. The presented method also relies on learning a separate set of simulation parameters for each cable, motivating meta-learning~\cite{maml} approaches to rapidly adapt to other cables.
+
+% Daniel: don't make this tiny font.
+\section*{Acknowledgments}
+
+{\footnotesize
+This research was performed at the AUTOLAB at UC Berkeley in affiliation with the Berkeley AI Research (BAIR) Lab, the CITRIS ``People and Robots'' (CPAR) Initiative, and the Real-Time Intelligent Secure Execution (RISE) Lab. The authors were supported in part by donations from Toyota Research Institute and by equipment grants from PhotoNeo, NVidia, and Intuitive Surgical. Daniel Seita is supported by a Graduate Fellowship for STEM Diversity (GFSD). We thank our colleagues Ashwin Balakrishna, Ellen Novoseller, and Brijen Thananjeyan.
+}
+
+
+
+% \clearpage Daniel: can do this if needed
+%\footnotesize
+\bibliographystyle{IEEEtranS}
+\bibliography{example}
+% Back to normal size.
+\normalsize
+\cleardoublepage
+\appendices
+
+
+\end{document}
+% Daniel (March 05) "commenting out" via putting end document above, we'll re-insert as needed.
+
+%%%%%%%%%%%%
+% APPENDIX %
+%%%%%%%%%%%%
+
+This appendix is structured as follows:
+
+\begin{itemize}
+    \item In Appendix~\ref{app:method-details} we discuss the presented method in further detail.
+    \item In Appendix~\ref{app:exp-details} we present experiment details.
+    \item In Appendix~\ref{app:exp-results} we describe additional results.
+\end{itemize}
+
+
+\section{Additional Method Details}\label{app:method-details}
+
+Here we describe additional details of the method.
+\daniel{Maybe describe things like how we tuned things, etc. Could also describe how errors propagate throughout time as in Figure~\ref{fig:fly-fishing} but adapted to our setting.}
+
+\subsection{Simulator Tuning via Differential Evolution}
+
+\begin{table}[t]
+  \setlength\tabcolsep{3.0pt}
+  %\vspace{-1em}
+  \centering
+  \caption{
+  PyBullet simulation parameters for dynamic cable manipulation tasks across all cables we test in physical experiments (see Figure~\ref{fig:cables}). The stiffness, friction, and damping constants are unit-less, and the mass per segment is in kilograms. \jeffi{We should minimally move this to the experiments section.  We may also consider moving the table to supplemental material. While its important for our experiments, it doesn't tell the reader much, other than the cables have different parameters.}
+  } 
+  \small
+  \begin{tabular}{@{}lcccc}
+  \toprule
+  PyBullet       & & & & Range \\ 
+  Hyperparameter & Cable 1 & Cable 2 & Cable 3  & Explored \\
+  \midrule
+  Twist stiffness       & 1.90 & 2.83 & 3.20 & $[0, 5]$ \\
+  Bend stiffness        & 3.32 & 2.69 & 1.75 & $[0, 5]$ \\
+  Mass per segment      & 1.66 & 1.93 & 0.60 & $[0.3, 2]$ \\
+  Lateral friction      & 0.41 & 0.83 & 0.70 & $[0.3, 2]$ \\
+  Spinning friction     & 0.01 & 0.01 & 0.04 & $[0, 0.1]$ \\
+  Rolling friction      & 0.88 & 1.04 & 1.15 & $[0, 1.5]$ \\
+  Scaled endpoint mass  & 4.34 & 4.28 & 3.52 & $[1\textrm{x}, 5\textrm{x}]$ \\
+  Linear damping        & 0.62 & 0.83 & 0.45 & $[0, 1.5]$ \\
+  Angular damping       & 12.2 & 8.74 & 1.10 & $[1, 20]$ \\
+  Table friction        & 0.53 & 0.14 & 0.46 & $[0,1]$ \\
+  \bottomrule
+  \end{tabular}
+  %\vspace{-0.5em}
+  \label{tab:hparams-sim}
+\end{table}
+
+\daniel{Note: commenting out text we had here based on Prof Goldberg's suggestion 03/05}
+
+% At generation $0$, the algorithm initializes a size $N$ population of candidate parameter vectors via Latin Hypercube sampling. After each generation, each parameter vector in the current generation produces a `child' vector, which each element in the vector is derived from a combination of the parent, the best-performing individual in the current generation, and $2$ random population members. This heuristic permits enough stochasticity to sufficiently explore the parameter search space, while converging toward an optimum.
+
+% We use a ``best1bin'' strategy to optimize for the minimum deviation in trajectory across 80 different trajectories. In this technique, each child parameter array is created by either choosing a parameter for its parent array, or a combination of the current best (lowest cost) array and two random parameter arrays, where ${\rm Unif}(0, 1) > CR$ selects the parameter from the parent array. $CR$, the crossover probability, affects the frequency at which a child inherits a parameter from its parent, or from a mutated version of the most fit individual. An additional parameter, $F = {\rm Unif}(F_{\rm min}, F_{\rm max})$, is the differential weight. For each generation, $f \sim F$ is sampled, and a large $f$ increases the search space of the algorithm, but decreases convergence rate. We choose DE parameters that were consistent with Collins~et~al., because their results showed that DE was able to find PyBullet parameters that were more optimal than its default settings, in relatively low convergence time. We use $CR = 0.7$, $F = 0.5 - 1.0$, and population size of $N = 1D$, where $D$ is the number of simulation dynamics parameters. Convergence is set to be the standard deviation of the population reaching below $1\%$ of the population mean.
+
+% Comparing the selected parameters with Collins~et~al.~\cite{de_tuning_2020}, who explore a similar physics engine tuning problem, we also optimize over mass, lateral friction, rolling friction, sliding friction, linear damping, and angular damping. Two other parameters the authors claim were most influential were time step and maximum joint velocity. We do not vary PyBullet's time step because decreasing it from 1/480s causes the cable, modeled as discrete capsules, to exhibit unstable behavior such as breaking apart, while increasing the time step greatly decreases the simulation speed. We find that running DE with the maximum joint velocities as parameters as opposed to the original set increased the deviation in cable trajectory by 11\% for one cable, most likely due to an increase in the search space. Tuning maximum joint velocities also increases the duration of the algorithm by 60\% due to an additional 6 parameters to the population size.
+
+\begin{figure}[h]
+\center
+\includegraphics[width=0.3\textwidth]{real_vs_sim.png}
+\caption{
+\Lawrence{Maybe we can compare real vs sim as in the fly fishing paper? It would be nice to illustrate how the errors propagate through time} \daniel{Why is this figure here?} \Lawrence{I was thinking that it may be good to show the readers how our parameter tuning did by illustrating the sim to real gap visually. But we probably don't have time to do this anyway.} \daniel{Moving to appendix, I think something like this could be useful for further investigation}
+}
+\vspace*{-10pt}
+\label{fig:fly-fishing}
+\end{figure}
+
+\begin{figure}[t]
+\center
+\includegraphics[width=0.49\textwidth]{param_illustration.png}
+\caption{
+\Lawrence{Maybe somewhere we can illustrate our action parameters as in the fly fishing paper?} \daniel{Why do we have this figure here?}\Lawrence{I am talking about the figure that Jonathan mentioned TODO. Just a placeholder, ours can be different.} \daniel{OK sounds good, let's iterate upon this figure}
+}
+\vspace*{-10pt}
+\label{fig:action_param}
+\end{figure}
+
+\section{Additional Experiment Details}\label{app:exp-details}
+
+\daniel{Commenting out text here based on Prof Goldberg's suggestion 03/05}
+
+%Since the overhead camera is not perfectly parallel to the plane of the table, we put four fiducial markers on the corners of the foam boards. We process the image by using the fiducial markers to detect the corners of the table, crop out the residual area, and apply a perspective shift to mitigate perspective effects. 
+
+%Due to the irregular shapes of the hooks, we find that the end of the cable would bounce out in random directions when colliding with the table during the reset tossing motion. To mitigate this uncertainty, we pull the cable back slightly after the tossing motion to straighten the cable. In addition, the foam boards on the table can help in uncertainty reduction. 
+
+\section{Additional Results}\label{app:exp-results}
+
+\begin{figure*}[t]
+\center
+\includegraphics[width=0.98\textwidth]{combined.png}
+\caption{
+\daniel{Add caption, remove excess whitespace (are we using tight layout?)}
+\Lawrence{Are we going to put this image in the appendix? If so, I will re-create the image with appropriate data. This is just half of the result as we have symmetric targets as well.} \jonathan{This is a temporary placeholder figure. We will update this when we obtain results for our most recent models}
+}
+%\vspace*{-10pt}
+\label{fig:endpoints-1}
+\end{figure*}
+
+See Figure~\ref{fig:endpoints-1}? \daniel{Please describe}
+
+  
+\end{document}

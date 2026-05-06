@@ -1,0 +1,15 @@
+{
+   "sources" : [
+      {
+         "usage" : "toplevel",
+         "filename" : "root.tex"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "IEEEtran.bst"
+      }
+   ],
+   "process" : {
+      "compiler" : "pdflatex"
+   }
+}

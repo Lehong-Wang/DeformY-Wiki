@@ -1,0 +1,241 @@
+\begin{thebibliography}{31}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Bristow et~al.(2006)Bristow, Tharayil, and Alleyne]{ilc_survey}
+D.A. Bristow, M.~Tharayil, and A.G. Alleyne.
+\newblock A survey of iterative learning control.
+\newblock \emph{IEEE Control Systems Magazine}, 26\penalty0 (3):\penalty0
+  96--114, 2006.
+\newblock \doi{10.1109/MCS.2006.1636313}.
+
+\bibitem[Chen et~al.(2018)Chen, Zhu, Papandreou, Schroff, and Adam]{deeplabv3}
+Liang-Chieh Chen, Yukun Zhu, George Papandreou, Florian Schroff, and Hartwig
+  Adam.
+\newblock Encoder-decoder with atrous separable convolution for semantic image
+  segmentation.
+\newblock In Vittorio Ferrari, Martial Hebert, Cristian Sminchisescu, and Yair
+  Weiss, editors, \emph{Computer Vision -- ECCV 2018}, pages 833--851, Cham,
+  2018. Springer International Publishing.
+
+\bibitem[Chi and Song(2021)]{chi2021garmentnets}
+Cheng Chi and Shuran Song.
+\newblock Garmentnets: Category-level pose estimation for garments via
+  canonical space shape completion.
+\newblock In \emph{The IEEE International Conference on Computer Vision
+  (ICCV)}, 2021.
+
+\bibitem[Colomé and Torras(2018)]{8344486}
+Adrià Colomé and Carme Torras.
+\newblock Dimensionality reduction for dynamic movement primitives and
+  application to bimanual manipulation of clothes.
+\newblock \emph{IEEE Transactions on Robotics}, 34\penalty0 (3):\penalty0
+  602--615, 2018.
+\newblock \doi{10.1109/TRO.2018.2808924}.
+
+\bibitem[Colomé et~al.(2015)Colomé, Planells, and Torras]{7139990}
+Adrià Colomé, Antoni Planells, and Carme Torras.
+\newblock A friction-model-based framework for reinforcement learning of
+  robotic tasks in non-rigid environments.
+\newblock In \emph{2015 IEEE International Conference on Robotics and
+  Automation (ICRA)}, pages 5649--5654, 2015.
+\newblock \doi{10.1109/ICRA.2015.7139990}.
+
+\bibitem[Ha and Song(2021)]{ha2021flingbot}
+Huy Ha and Shuran Song.
+\newblock Flingbot: The unreasonable effectiveness of dynamic manipulation for
+  cloth unfolding.
+\newblock \emph{arXiv preprint arXiv:2105.03655}, 2021.
+
+\bibitem[Hietala et~al.(2021)Hietala, Blanco-Mulero, Alcan, and Kyrki]{finnish}
+Julius Hietala, David Blanco-Mulero, Gokhan Alcan, and Ville Kyrki.
+\newblock Closing the sim2real gap in dynamic cloth manipulation.
+\newblock \emph{arXiv preprint arXiv:2109.04771}, 2021.
+
+\bibitem[Hoque et~al.(2020)Hoque, Seita, Balakrishna, Ganapathi, Tanwani,
+  Jamali, Yamane, Iba, and Goldberg]{fabric_vsf_2020}
+Ryan Hoque, Daniel Seita, Ashwin Balakrishna, Aditya Ganapathi, Ajay Tanwani,
+  Nawid Jamali, Katsu Yamane, Soshi Iba, and Ken Goldberg.
+\newblock {VisuoSpatial Foresight for Multi-Step, Multi-Task Fabric
+  Manipulation}.
+\newblock In \emph{Robotics: Science and Systems (RSS)}, 2020.
+
+\bibitem[Jangir et~al.(2020)Jangir, Alenyà, and Torras]{dyn_cloth_rl}
+Rishabh Jangir, Guillem Alenyà, and Carme Torras.
+\newblock Dynamic cloth manipulation with deep reinforcement learning.
+\newblock In \emph{2020 IEEE International Conference on Robotics and
+  Automation (ICRA)}, pages 4630--4636, 2020.
+\newblock \doi{10.1109/ICRA40945.2020.9196659}.
+
+\bibitem[Jin et~al.(2021)Jin, Romeres, Ragunathan, Jha, and
+  Tomizuka]{trajopt_berkeley}
+Shiyu Jin, Diego Romeres, Arvind Ragunathan, Devesh~K Jha, and Masayoshi
+  Tomizuka.
+\newblock Trajectory optimization for manipulation of deformable objects:
+  Assembly of belt drive units.
+\newblock \emph{arXiv preprint arXiv:2106.00898}, 2021.
+
+\bibitem[Kawaharazuka et~al.(2019)Kawaharazuka, Ogawa, Tamura, and
+  Nabeshima]{japan_shake}
+Kento Kawaharazuka, Toru Ogawa, Juntaro Tamura, and Cota Nabeshima.
+\newblock Dynamic manipulation of flexible objects with torque sequence using a
+  deep neural network.
+\newblock In \emph{2019 International Conference on Robotics and Automation
+  (ICRA)}, pages 2139--2145, 2019.
+\newblock \doi{10.1109/ICRA.2019.8793513}.
+
+\bibitem[Li et~al.(2015)Li, Yue, Xu, Grinspun, and Allen]{peter_model}
+Yinxiao Li, Yonghao Yue, Danfei Xu, Eitan Grinspun, and Peter~K. Allen.
+\newblock Folding deformable objects using predictive simulation and trajectory
+  optimization.
+\newblock In \emph{2015 IEEE/RSJ International Conference on Intelligent Robots
+  and Systems (IROS)}, pages 6000--6006, 2015.
+\newblock \doi{10.1109/IROS.2015.7354231}.
+
+\bibitem[Lim et~al.(2021)Lim, Huang, Chen, Wang, Ichnowski, Seita, Laskey, and
+  Goldberg]{casting}
+Vincent Lim, Huang Huang, Lawrence~Yunliang Chen, Jonathan Wang, Jeffrey
+  Ichnowski, Daniel Seita, Michael Laskey, and Ken Goldberg.
+\newblock Planar robot casting with real2sim2real self-supervised learning.
+\newblock \emph{arXiv preprint arXiv:2111.04814}, 2021.
+
+\bibitem[Lin et~al.(2021)Lin, Wang, Huang, and Held]{lin2021VCD}
+Xingyu Lin, Yufei Wang, Zixuan Huang, and David Held.
+\newblock Learning visible connectivity dynamics for cloth smoothing.
+\newblock In \emph{Conference on Robot Learning}, 2021.
+
+\bibitem[Loshchilov and Hutter(2019)]{adamw}
+Ilya Loshchilov and Frank Hutter.
+\newblock Decoupled weight decay regularization.
+\newblock In \emph{ICLR}, 2019.
+
+\bibitem[Mason and Lynch(1993)]{dynamic_og}
+Matthew~T. Mason and Kevin Lynch.
+\newblock Dynamic manipulation.
+\newblock In \emph{Proceedings of (IROS) IEEE/RSJ International Conference on
+  Intelligent Robots and Systems}, volume~1, pages 152 -- 159, July 1993.
+
+\bibitem[Moore et~al.(1993)Moore, Johnson, and Grimble]{ilc_book}
+Kevin~L. Moore, M.~Johnson, and Michael~J. Grimble.
+\newblock \emph{Iterative Learning Control for Deterministic Systems}.
+\newblock Springer-Verlag, Berlin, Heidelberg, 1993.
+\newblock ISBN 0387197079.
+
+\bibitem[Nah et~al.(2020)Nah, Krotov, Russo, Sternad, and Hogan]{bio_whip}
+Moses~C. Nah, Aleksei Krotov, Marta Russo, Dagmar Sternad, and Neville Hogan.
+\newblock Dynamic primitives facilitate manipulating a whip.
+\newblock In \emph{2020 8th IEEE RAS/EMBS International Conference for
+  Biomedical Robotics and Biomechatronics (BioRob)}, pages 685--691, 2020.
+\newblock \doi{10.1109/BioRob49111.2020.9224399}.
+
+\bibitem[Nair et~al.(2017)Nair, Chen, Agrawal, Isola, Abbeel, Malik, and
+  Levine]{7989247}
+Ashvin Nair, Dian Chen, Pulkit Agrawal, Phillip Isola, Pieter Abbeel, Jitendra
+  Malik, and Sergey Levine.
+\newblock Combining self-supervised learning and imitation for vision-based
+  rope manipulation.
+\newblock In \emph{2017 IEEE International Conference on Robotics and
+  Automation (ICRA)}, pages 2146--2153, 2017.
+\newblock \doi{10.1109/ICRA.2017.7989247}.
+
+\bibitem[Pathak et~al.(2018)Pathak, Mahmoudieh, Luo, Agrawal, Chen, Shentu,
+  Shelhamer, Malik, Efros, and Darrell]{8575448}
+Deepak Pathak, Parsa Mahmoudieh, Guanghao Luo, Pulkit Agrawal, Dian Chen, Fred
+  Shentu, Evan Shelhamer, Jitendra Malik, Alexei~A. Efros, and Trevor Darrell.
+\newblock Zero-shot visual imitation.
+\newblock In \emph{2018 IEEE/CVF Conference on Computer Vision and Pattern
+  Recognition Workshops (CVPRW)}, pages 2131--21313, 2018.
+\newblock \doi{10.1109/CVPRW.2018.00278}.
+
+\bibitem[Ruggiero et~al.(2018)Ruggiero, Lippiello, and Siciliano]{8280543}
+Fabio Ruggiero, Vincenzo Lippiello, and Bruno Siciliano.
+\newblock Nonprehensile dynamic manipulation: A survey.
+\newblock \emph{IEEE Robotics and Automation Letters}, 3\penalty0 (3):\penalty0
+  1711--1718, 2018.
+\newblock \doi{10.1109/LRA.2018.2801939}.
+
+\bibitem[Schulman et~al.(2016)Schulman, Ho, Lee, and Abbeel]{abbeel_early}
+John Schulman, Jonathan Ho, Cameron Lee, and Pieter Abbeel.
+\newblock \emph{Learning from Demonstrations Through the Use of Non-rigid
+  Registration}, pages 339--354.
+\newblock Springer International Publishing, Cham, 2016.
+\newblock ISBN 978-3-319-28872-7.
+\newblock \doi{10.1007/978-3-319-28872-7_20}.
+\newblock URL \url{https://doi.org/10.1007/978-3-319-28872-7_20}.
+
+\bibitem[Seita et~al.(2021)Seita, Florence, Tompson, Coumans, Sindhwani,
+  Goldberg, and Zeng]{goal_transporter}
+Daniel Seita, Pete Florence, Jonathan Tompson, Erwin Coumans, Vikas Sindhwani,
+  Ken Goldberg, and Andy Zeng.
+\newblock Learning to rearrange deformable cables, fabrics, and bags with
+  goal-conditioned transporter networks.
+\newblock In \emph{2021 IEEE International Conference on Robotics and
+  Automation (ICRA)}, pages 4568--4575, 2021.
+\newblock \doi{10.1109/ICRA48506.2021.9561391}.
+
+\bibitem[Sundaresan et~al.(2020)Sundaresan, Grannen, Thananjeyan, Balakrishna,
+  Laskey, Stone, Gonzalez, and Goldberg]{ken_dense_descriptor}
+Priya Sundaresan, Jennifer Grannen, Brijen Thananjeyan, Ashwin Balakrishna,
+  Michael Laskey, Kevin Stone, Joseph~E. Gonzalez, and Ken Goldberg.
+\newblock Learning rope manipulation policies using dense object descriptors
+  trained on synthetic depth data.
+\newblock In \emph{2020 IEEE International Conference on Robotics and
+  Automation (ICRA)}, pages 9411--9418, 2020.
+\newblock \doi{10.1109/ICRA40945.2020.9197121}.
+
+\bibitem[Tabata et~al.(2021)Tabata, Seki, Tsuji, and Hiramitsu]{japan_rope}
+Kenta Tabata, Hiroaki Seki, Tokuo Tsuji, and Tatsuhiro Hiramitsu.
+\newblock Casting manipulation of unknown string by robot arm.
+\newblock In \emph{2021 IEEE/RSJ International Conference on Intelligent Robots
+  and Systems (IROS)}, pages 668--674, 2021.
+\newblock \doi{10.1109/IROS51168.2021.9635837}.
+
+\bibitem[Todorov et~al.(2012)Todorov, Erez, and Tassa]{mujoco}
+Emanuel Todorov, Tom Erez, and Yuval Tassa.
+\newblock Mujoco: A physics engine for model-based control.
+\newblock In \emph{2012 IEEE/RSJ International Conference on Intelligent Robots
+  and Systems}, pages 5026--5033, 2012.
+\newblock \doi{10.1109/IROS.2012.6386109}.
+
+\bibitem[Xu et~al.(2020)Xu, He, Wu, and Song]{xu2020learning}
+Zhenjia Xu, Zhanpeng He, Jiajun Wu, and Shuran Song.
+\newblock Learning 3d dynamic scene representations for robot manipulation.
+\newblock \emph{arXiv preprint arXiv:2011.01968}, 2020.
+
+\bibitem[Yamakawa et~al.(2011)Yamakawa, Namiki, and Ishikawa]{fast_hand}
+Yuji Yamakawa, Akio Namiki, and Masatoshi Ishikawa.
+\newblock Motion planning for dynamic folding of a cloth with two high-speed
+  robot hands and two high-speed sliders.
+\newblock In \emph{2011 IEEE International Conference on Robotics and
+  Automation}, pages 5486--5491, 2011.
+\newblock \doi{10.1109/ICRA.2011.5979606}.
+
+\bibitem[Yoshida et~al.(2015)Yoshida, Ayusawa, Ramirez-Alpizar, Harada, Duriez,
+  and Kheddar]{optimal_planning}
+Eiichi Yoshida, Ko~Ayusawa, Ixchel~G. Ramirez-Alpizar, Kensuke Harada,
+  Christian Duriez, and Abderrahmane Kheddar.
+\newblock Simulation-based optimal motion planning for deformable object.
+\newblock In \emph{2015 IEEE International Workshop on Advanced Robotics and
+  its Social Impacts (ARSO)}, pages 1--6, 2015.
+\newblock \doi{10.1109/ARSO.2015.7428219}.
+
+\bibitem[Zeng et~al.(2019)Zeng, Song, Lee, Rodriguez, and
+  Funkhouser]{tossingbot}
+Andy Zeng, Shuran Song, Johnny Lee, Alberto Rodriguez, and Thomas Funkhouser.
+\newblock Tossingbot: Learning to throw arbitrary objects with residual
+  physics.
+\newblock 2019.
+
+\bibitem[Zhang et~al.(2021)Zhang, Ichnowski, Seita, Wang, Huang, and
+  Goldberg]{zhang2021robots}
+Harry Zhang, Jeffrey Ichnowski, Daniel Seita, Jonathan Wang, Huang Huang, and
+  Ken Goldberg.
+\newblock Robots of the lost arc: Self-supervised learning to dynamically
+  manipulate fixed-endpoint cables.
+\newblock In \emph{2021 IEEE International Conference on Robotics and
+  Automation (ICRA)}, pages 4560--4567. IEEE, 2021.
+
+\end{thebibliography}

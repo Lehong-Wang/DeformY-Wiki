@@ -1,0 +1,305 @@
+\begin{thebibliography}{43}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Abbeel et~al.(2006)Abbeel, Quigley, and Ng]{abbeel2006using}
+Pieter Abbeel, Morgan Quigley, and Andrew~Y Ng.
+\newblock Using inaccurate models in reinforcement learning.
+\newblock In \emph{International Conference on Machine Learning (ICML)}, 2006.
+
+\bibitem[Aboaf et~al.(1988)Aboaf, Atkeson, and Reinkensmeyer]{aboaf1988task}
+Eric~W Aboaf, Christopher~G Atkeson, and David~J Reinkensmeyer.
+\newblock Task-level robot learning.
+\newblock \emph{IEEE International Conference on Robotics and Automation
+  (ICRA)}, 1988.
+
+\bibitem[Ajay et~al.(2018)Ajay, Wu, Fazeli, Bauza, Kaelbling, Tenenbaum, and
+  Rodriguez]{ajay2018augmenting}
+Anurag Ajay, Jiajun Wu, Nima Fazeli, Maria Bauza, Leslie~P Kaelbling, Joshua~B
+  Tenenbaum, and Alberto Rodriguez.
+\newblock Augmenting physical simulators with stochastic neural networks: Case
+  study of planar pushing and bouncing.
+\newblock \emph{IEEE/RSJ International Conference on Intelligent Robots and
+  Systems (IROS)}, 2018.
+
+\bibitem[Badrinarayanan et~al.(2017)Badrinarayanan, Kendall, and
+  Cipolla]{badrinarayanan2015segnet}
+Vijay Badrinarayanan, Alex Kendall, and Roberto Cipolla.
+\newblock Segnet: A deep convolutional encoder-decoder architecture for image
+  segmentation.
+\newblock \emph{IEEE Transactions on Pattern Analysis and Machine Intelligence
+  (TPAMI)}, 2017.
+
+\bibitem[Chaval-Dafle et~al.(2014)Chaval-Dafle, Rodriguez, Paolini, {Tang},
+  {Srinivasa}, {Erdmann}, {Mason}, {Lundberg}, {Staab}, and
+  {Fuhlbrigge}]{dafle2014extrinsic}
+Nikhil Chaval-Dafle, Alberto Rodriguez, R.~Paolini, B.~{Tang}, S.~S.
+  {Srinivasa}, M.~{Erdmann}, M.~T. {Mason}, I.~{Lundberg}, H.~{Staab}, and
+  T.~{Fuhlbrigge}.
+\newblock Extrinsic dexterity: In-hand manipulation with external forces.
+\newblock In \emph{IEEE International Conference on Robotics and Automation
+  (ICRA)}, 2014.
+
+\bibitem[Coumans and Bai(2016--2018)]{coumans2018}
+Erwin Coumans and Yunfei Bai.
+\newblock Pybullet, a python module for physics simulation for games, robotics
+  and machine learning.
+\newblock \url{http://pybullet.org}, 2016--2018.
+
+\bibitem[Curless and Levoy(1996)]{curless1996volumetric}
+Brian Curless and Marc Levoy.
+\newblock A volumetric method for building complex models from range images.
+\newblock In \emph{Special Interest Group on Computer GRAPHics and Interactive
+  Techniques (SIGGRAPH)}, 1996.
+
+\bibitem[Diankov()]{diankov_thesis}
+Rosen Diankov.
+\newblock \emph{Automated Construction of Robotic Manipulation Programs}.
+\newblock PhD thesis, Carnegie Mellon University, Robotics Institute.
+
+\bibitem[Fazeli et~al.(2017)Fazeli, Zapolsky, Drumwright, and
+  Rodriguez]{fazeli2017learning}
+Nima Fazeli, Samuel Zapolsky, Evan Drumwright, and Alberto Rodriguez.
+\newblock Learning data-efficient rigid-body contact models: Case study of
+  planar impact.
+\newblock \emph{Conference on Robot Learning (CoRL)}, 2017.
+
+\bibitem[Gai et~al.(2013)Gai, Kobayashi, Hoshino, and Emaru]{gai2013motion}
+Yizhi Gai, Yukinori Kobayashi, Yohei Hoshino, and Takanori Emaru.
+\newblock Motion control of a ball throwing robot with a flexible robotic arm.
+\newblock \emph{World Academy of Science, Engineering and Technology (WASET)},
+  2013.
+
+\bibitem[Ghadirzadeh et~al.(2017)Ghadirzadeh, Maki, Kragic, and
+  Bj{\"o}rkman]{ghadirzadeh2017deep}
+Ali Ghadirzadeh, Atsuto Maki, Danica Kragic, and M{\aa}rten Bj{\"o}rkman.
+\newblock Deep predictive policy training using reinforcement learning.
+\newblock \emph{IEEE/RSJ International Conference on Intelligent Robots and
+  Systems}, 2017.
+
+\bibitem[Girshick(2015)]{girshick2015fast}
+Ross Girshick.
+\newblock Fast r-cnn.
+\newblock In \emph{IEEE International Conference on Computer Vision (ICCV)},
+  2015.
+
+\bibitem[Glorot and Bengio(2010)]{glorot2010understanding}
+Xavier Glorot and Yoshua Bengio.
+\newblock Understanding the difficulty of training deep feedforward neural
+  networks.
+\newblock In \emph{International Conference on Artificial Intelligence and
+  Statistics (AISTATS)}, 2010.
+
+\bibitem[He et~al.(2016)He, Zhang, Ren, and Sun]{he2016deep}
+Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun.
+\newblock Deep residual learning for image recognition.
+\newblock \emph{IEEE Conference on Computer Vision and Pattern Recognition
+  (CVPR)}, 2016.
+
+\bibitem[Higuera et~al.(2017)Higuera, Meger, and Dudek]{higuera2017adapting}
+Juan Camilo~Gamboa Higuera, David Meger, and Gregory Dudek.
+\newblock Adapting learned robotics behaviours through policy adjustment.
+\newblock In \emph{IEEE International Conference on Robotics and Automation
+  (ICRA)}, 2017.
+
+\bibitem[Hu et~al.(2010)Hu, Chien, Chang, Su, and Kai]{hu2010ball}
+Jwu-Sheng Hu, Ming-Chih Chien, Yung-Jung Chang, Shyh-Haur Su, and Chen-Yu Kai.
+\newblock A ball-throwing robot with visual feedback.
+\newblock \emph{IEEE/RSJ International Conference on Intelligent Robots and
+  Systems}, 2010.
+
+\bibitem[Jiang et~al.(2018)Jiang, Sun, and Liu]{jiang2018data}
+Yifeng Jiang, Jiazheng Sun, and C~Karen Liu.
+\newblock Data-augmented contact model for rigid body simulation.
+\newblock \emph{arXiv}, 2018.
+
+\bibitem[Johannink et~al.(2019)Johannink, Bahl, Nair, Luo, Kumar, Loskyll,
+  Ojea, Solowjow, and Levine]{johannink2018residual}
+Tobias Johannink, Shikhar Bahl, Ashvin Nair, Jianlan Luo, Avinash Kumar,
+  Matthias Loskyll, Juan~Aparicio Ojea, Eugen Solowjow, and Sergey Levine.
+\newblock Residual reinforcement learning for robot control.
+\newblock \emph{IEEE International Conference on Robotics and Automation
+  (ICRA)}, 2019.
+
+\bibitem[Kloss et~al.(2018)Kloss, Schaal, and Bohg]{kloss2017combining}
+Alina Kloss, Stefan Schaal, and Jeannette Bohg.
+\newblock Combining learned and analytical models for predicting action
+  effects.
+\newblock \emph{IEEE International Conference on Robotics and Automation
+  (ICRA)}, 2018.
+
+\bibitem[Kober et~al.(2011)Kober, {\"O}ztop, and
+  Peters]{kober2011reinforcement}
+Jens Kober, Erhan {\"O}ztop, and Jan Peters.
+\newblock Reinforcement learning to adjust robot movements to new situations.
+\newblock \emph{International Joint Conferences on Artificial Intelligence
+  (IJCAI)}, 2011.
+
+\bibitem[Long et~al.(2015)Long, Shelhamer, and Darrell]{long2015fully}
+Jonathan Long, Evan Shelhamer, and Trevor Darrell.
+\newblock Fully convolutional networks for semantic segmentation.
+\newblock \emph{IEEE Conference on Computer Vision and Pattern Recognition
+  (CVPR)}, 2015.
+
+\bibitem[Lynch and Mason(1999)]{lynch1999dynamic}
+Kevin~M Lynch and Matthew~T Mason.
+\newblock Dynamic nonprehensile manipulation: Controllability, planning, and
+  experiments.
+\newblock \emph{The International Journal of Robotics Research}, 1999.
+
+\bibitem[Mahler et~al.(2017)Mahler, Liang, Niyaz, Laskey, Doan, Liu, Ojea, and
+  Goldberg]{mahler2017dex}
+Jeffrey Mahler, Jacky Liang, Sherdil Niyaz, Michael Laskey, Richard Doan, Xinyu
+  Liu, Juan~Aparicio Ojea, and Ken Goldberg.
+\newblock Dex-net 2.0: Deep learning to plan robust grasps with synthetic point
+  clouds and analytic grasp metrics.
+\newblock \emph{Robotics: Science and Systems (RSS)}, 2017.
+
+\bibitem[Mahler et~al.(2019)Mahler, Matl, Satish, Danielczuk, DeRose, McKinley,
+  and Goldberg]{mahler2019learning}
+Jeffrey Mahler, Matthew Matl, Vishal Satish, Michael Danielczuk, Bill DeRose,
+  Stephen McKinley, and Ken Goldberg.
+\newblock Learning ambidextrous robot grasping policies.
+\newblock \emph{Science Robotics}, 2019.
+
+\bibitem[Mason and Lynch(1993)]{mason1993dynamic}
+Matthew~T Mason and Kevin~M Lynch.
+\newblock Dynamic manipulation.
+\newblock \emph{IEEE/RSJ International Conference on Intelligent Robots and
+  Systems (IROS)}, 1993.
+
+\bibitem[Mori et~al.(2009)Mori, Ueda, and Ogasawara]{mori20091}
+Wataru Mori, Jun Ueda, and Tsukasa Ogasawara.
+\newblock 1-dof dynamic pitching robot that independently controls velocity,
+  angular velocity, and direction of a ball: Contact models and motion
+  planning.
+\newblock \emph{IEEE International Conference on Robotics and Automation
+  (ICRA)}, 2009.
+
+\bibitem[Morrison et~al.(2018)Morrison, Tow, McTaggart, Smith, Kelly-Boxall,
+  Wade-McCue, Erskine, Grinover, Gurman, Hunn, et~al.]{morrison2018cartman}
+Douglas Morrison, Adam~W Tow, M~McTaggart, R~Smith, N~Kelly-Boxall,
+  S~Wade-McCue, J~Erskine, R~Grinover, A~Gurman, T~Hunn, et~al.
+\newblock Cartman: The low-cost cartesian manipulator that won the amazon
+  robotics challenge.
+\newblock \emph{IEEE International Conference on Robotics and Automation
+  (ICRA)}, 2018.
+
+\bibitem[Newcombe et~al.(2011)Newcombe, Izadi, Hilliges, Molyneaux, Kim,
+  Davison, Kohi, Shotton, Hodges, and Fitzgibbon]{newcombe2011kinectfusion}
+Richard~A Newcombe, Shahram Izadi, Otmar Hilliges, David Molyneaux, David Kim,
+  Andrew~J Davison, Pushmeet Kohi, Jamie Shotton, Steve Hodges, and Andrew
+  Fitzgibbon.
+\newblock Kinectfusion: Real-time dense surface mapping and tracking.
+\newblock In \emph{IEEE International Symposium on Mixed and Augmented Reality
+  (ISMAR)}, 2011.
+
+\bibitem[Pastor et~al.(2013)Pastor, Kalakrishnan, Binney, Kelly, Righetti,
+  Sukhatme, and Schaal]{pastor2013learning}
+Peter Pastor, Mrinal Kalakrishnan, Jonathan Binney, Jonathan Kelly, Ludovic
+  Righetti, Gaurav Sukhatme, and Stefan Schaal.
+\newblock Learning task error models for manipulation.
+\newblock In \emph{IEEE International Conference on Robotics and Automation
+  (ICRA)}, 2013.
+
+\bibitem[Sajjan et~al.(2020)Sajjan, Moore, Pan, Nagaraja, Lee, Zeng, and
+  Song]{sajjan2020cleargrasp}
+Shreeyak~S Sajjan, Matthew Moore, Mike Pan, Ganesh Nagaraja, Johnny Lee, Andy
+  Zeng, and Shuran Song.
+\newblock Cleargrasp: 3d shape estimation of transparent objects for
+  manipulation.
+\newblock \emph{IEEE International Conference on Robotics and Automation
+  (ICRA)}, 2020.
+
+\bibitem[Satish et~al.(2018)Satish, Mahler, and Goldberg]{satish2018on}
+Vishal Satish, Jeffrey Mahler, and Ken Goldberg.
+\newblock On-policy dataset synthesis for learning deep robot grasping policies
+  based on fully-convolutional grasp quality neural networks.
+\newblock \emph{IEEE Robotics and Automation Letters (RA-L)}, 2018.
+
+\bibitem[Schaul et~al.(2016)Schaul, Quan, Antonoglou, and
+  Silver]{schaul2015prioritized}
+Tom Schaul, John Quan, Ioannis Antonoglou, and David Silver.
+\newblock Prioritized experience replay.
+\newblock \emph{International Conference on Learning Representations}, 2016.
+
+\bibitem[Senoo et~al.(2008)Senoo, Namiki, and Ishikawa]{senoo2008high}
+Taku Senoo, Akio Namiki, and Masatoshi Ishikawa.
+\newblock High-speed throwing motion based on kinetic chain approach.
+\newblock \emph{IEEE/RSJ International Conference on Intelligent Robots and
+  Systems (IROS)}, 2008.
+
+\bibitem[Silver et~al.(2018)Silver, Allen, Tenenbaum, and
+  Kaelbling]{silver2018residual}
+Tom Silver, Kelsey Allen, Josh Tenenbaum, and Leslie Kaelbling.
+\newblock Residual policy learning.
+\newblock \emph{arXiv}, 2018.
+
+\bibitem[Taylor and Rodriguez(2019)]{taylor2019optimal}
+Orion Taylor and Alberto Rodriguez.
+\newblock Optimal shape and motion planning for dynamic planar manipulation.
+\newblock \emph{Autonomous Robots}, 43\penalty0 (2):\penalty0 327--344, 2019.
+
+\bibitem[Xu et~al.(2019)Xu, Wu, Zeng, Tenenbaum, and Song]{xu2019densephysnet}
+Zhenjia Xu, Jiajun Wu, Andy Zeng, Joshua~B Tenenbaum, and Shuran Song.
+\newblock Densephysnet: Learning dense physical object representations via
+  multi-step dynamic interactions.
+\newblock \emph{Robotics: Science and Systems (RSS)}, 2019.
+
+\bibitem[Yen-Chen et~al.(2020)Yen-Chen, Zeng, Isola, and Lin]{yen2020learning}
+Lin Yen-Chen, Shuran Zeng, Andy~Song, Phillip Isola, and Tsung-Yi Lin.
+\newblock Learning to see before learning to act: Visual pre-training for
+  manipulation.
+\newblock \emph{IEEE International Conference on Robotics and Automation
+  (ICRA)}, 2020.
+
+\bibitem[Zakka et~al.(2020)Zakka, Zeng, Lee, and Song]{zakka2020form2fit}
+Kevin Zakka, Andy Zeng, Johnny Lee, and Shuran Song.
+\newblock Form2fit: Learning shape priors for generalizable assembly from
+  disassembly.
+\newblock \emph{IEEE International Conference on Robotics and Automation
+  (ICRA)}, 2020.
+
+\bibitem[Zeng(2019)]{zeng2019thesis}
+Andy Zeng.
+\newblock \emph{Learning Visual Affordances for Robotic Manipulation}.
+\newblock PhD thesis, Princeton University, 2019.
+
+\bibitem[Zeng et~al.(2017)Zeng, Song, Nie{\ss}ner, Fisher, Xiao, and
+  Funkhouser]{zeng20163dmatch}
+Andy Zeng, Shuran Song, Matthias Nie{\ss}ner, Matthew Fisher, Jianxiong Xiao,
+  and Thomas Funkhouser.
+\newblock 3dmatch: Learning local geometric descriptors from rgb-d
+  reconstructions.
+\newblock In \emph{IEEE Conference on Computer Vision and Pattern Recognition
+  (CVPR)}, 2017.
+
+\bibitem[Zeng et~al.(2018{\natexlab{a}})Zeng, Song, Welker, Lee, Rodriguez, and
+  Funkhouser]{zeng2018learning}
+Andy Zeng, Shuran Song, Stefan Welker, Johnny Lee, Alberto Rodriguez, and
+  Thomas Funkhouser.
+\newblock Learning synergies between pushing and grasping with self-supervised
+  deep reinforcement learning.
+\newblock \emph{IEEE/RSJ International Conference on Intelligent Robots and
+  Systems (IROS)}, 2018{\natexlab{a}}.
+
+\bibitem[Zeng et~al.(2018{\natexlab{b}})Zeng, Song, Yu, Donlon, Hogan, Bauza,
+  Ma, Taylor, Liu, Romo, et~al.]{zeng2018robotic}
+Andy Zeng, Shuran Song, Kuan-Ting Yu, Elliott Donlon, Francois~R Hogan, Maria
+  Bauza, Daolin Ma, Orion Taylor, Melody Liu, Eudald Romo, et~al.
+\newblock Robotic pick-and-place of novel objects in clutter with
+  multi-affordance grasping and cross-domain image matching.
+\newblock \emph{IEEE International Conference on Robotics and Automation
+  (ICRA)}, 2018{\natexlab{b}}.
+
+\bibitem[Zeng et~al.(2019)Zeng, Song, Lee, Rodriguez, and
+  Funkhouser]{zeng2019tossingbot}
+Andy Zeng, Shuran Song, Johnny Lee, Alberto Rodriguez, and Thomas Funkhouser.
+\newblock Tossingbot: Learning to throw arbitrary objects with residual
+  physics.
+\newblock \emph{Robotics: Science and Systems (RSS)}, 2019.
+
+\end{thebibliography}

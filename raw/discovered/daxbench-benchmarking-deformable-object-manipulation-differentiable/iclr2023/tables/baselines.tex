@@ -1,0 +1,39 @@
+\begin{table}[t]
+    \centering
+    \fontsize{8}{8}\selectfont
+    \begin{tabular}{c c c c c c c c c}
+\toprule
+Paradigms &\multicolumn{3}{c}{Reinforcement Learning} 
+& \multicolumn{2}{c}{Imitation Learning}
+& \multicolumn{3}{c}{Planning}
+\\
+\cmidrule(lr){1-1}
+\cmidrule(lr){2-4}
+\cmidrule(lr){5-6}
+\cmidrule(lr){7-9}
+Methods & PPO & SHAC & APG & Transporter & ILD & CEM-MPC & diff-MPC & diff-CEM-MPC  \\
+\cmidrule(lr){1-1}
+\cmidrule(lr){2-4}
+\cmidrule(lr){5-6}
+\cmidrule(lr){7-9}
+ 
+\# expert demos &
+\NA & \NA & \NA &
+10 & 1 &
+\NA & \NA  & \NA
+\\  [0.5em]
+Reward function  & \cmark & \cmark & \cmark & \NA & \NA & \cmark & \cmark  & \cmark   \\
+\cmidrule(lr){1-1}
+\cmidrule(lr){2-4}
+\cmidrule(lr){5-6}
+\cmidrule(lr){7-9}
+
+ Differentiability & \xmark & \cmark & \cmark & \xmark & \cmark & \xmark & \cmark & \cmark \\  
+\bottomrule
+    \end{tabular}
+    \caption{\textbf{Methods on Deformable Object Manipulation with respect to different setups.} 
+    }
+\label{tab:deformable_manipulation_methods}
+\end{table}   
+
+

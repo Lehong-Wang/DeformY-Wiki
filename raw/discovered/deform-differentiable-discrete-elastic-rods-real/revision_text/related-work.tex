@@ -1,0 +1,32 @@
+\section{Related Work}
+\label{sec:related_work}
+
+\textbf{Learning-Based Modeling.}
+Latent dynamics modeling approaches, such as graph neural networks (GNN)~\cite{GNN_baseline} and Bidirectional LSTM (Bi-LSTM)~\cite{bi-LSTM_baseline}, reason over vertices spatially to formulate latent dynamics of DLOs for predicting their behavior in 2-D.
+Unfortunately, as we illustrate in this paper through real-world experiments, these methods are unable to accurate describe the behavior of DLOs during dynamic motions in 3D.
+
+\textbf{Physics-Based Modeling.}
+Traditionally, DLOs have been modeled using physics-based approaches.
+Examples include mass-spring system models~\cite{LargeStepSimulation, diffcloth, Liu:2013:FSM},  Position-Based Dynamics (PBD) models~\cite{directionalrigidity, diminishingridgidity, xpbd},  Discrete Elastic Rod (DER) models~\cite{originalDER, originalDER2, DERapp1, DERapp2}, or Finite Element Method (FEM) models~\cite{garcia2006optimized, sin2013vega, koessler2021efficient}.
+Although easy to implement, the mass-spring system imposes unnecessary stiffness to enforce inextensibility, resulting in instability during simulation.
+FEM models accurately modeling DLO behavior, but are impractical for real-time prediction due to their prohibitive computational costs.
+PBD and DER methods have been applied in planning and control frameworks for manipulation tasks due to their computational efficiency \cite{diminishingridgidity, xpbd, DER_manipulation1, DER_manipulation2, DER_manipulation3}.
+However, PBD models are sensitive to parameter selection and assume quasi-static behavior.
+As illustrated in this paper, this results in low accuracy during dynamic manipulation.
+Though DER models have been qualitatively validated to describe the 3D behavior of DLOs, we illustrate that their quantitative performance while describing dynamic motion is lacking.
+
+\textbf{Differentiable Modeling Framework.} 
+Differentiable models are computational frameworks where every operation is differentiable with respect to the input parameters.
+Importantly, a differentiable model enables integration into a learning framework to improve learning and can enable efficient parameter auto-tuning via gradient-based optimization during training.
+There are differentiable models for deformable objects, such as DiffCloth~\cite{LargeStepSimulation, diffcloth} and XPBD~\cite{xpbd}, but these models tend to suffer from numerical instability.
+This makes it challenging to apply these modeling frameworks while trying to perform parameter identification for real-world DLO manipulation.
+To address these limitations, this paper proposes a differentiable DER model, called DDER, which is incorporated into a learning framework to achieve numerical stability.
+This results in better predictive performance for dynamic DLO behavior when compared to state-of-the-art methods and enables auto-tuning of DLO parameters using limited real-world data.
+
+
+% Crucially, as shown in \Zac{add reference}, this can significantly reduce the amount of real-world data collection required when auto-tuning the parameters, but this has not been applied to DLO modeling. 
+% There are differentiable modeling frameworks for deformable objects, such as DiffCloth~\cite{LargeStepSimulation, diffcloth}, which is based on the mass-spring system model. 
+% Though this modeling framework is differentiable, the mass-spring system enforces inextensibility in a stiff manner that leads to numerical instabilities during simulation.
+% This makes it challenging to apply this modeling framework while trying to perform parameter identification.
+% To address these limitations, this paper proposes a differentiable DER model, called DDER, which is incorporated into a learning framework that enables better predictive performance when compared to state-of-the-art methods and auto-tuning of DLO parameters using limited real-world data.
+

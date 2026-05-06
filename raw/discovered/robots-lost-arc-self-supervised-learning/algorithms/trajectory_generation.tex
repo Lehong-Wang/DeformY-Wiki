@@ -1,0 +1,18 @@
+% sketch of QP algorithm description
+% might be better to put as text, with reference to GOMP.
+% but if we want to go this route, we'd need to fill in a few more details.
+\begin{algorithm}
+\caption{Trajectory Generation}
+\begin{algorithmic}[1]
+\label{alg:trajgen}
+\REQUIRE $\vec{q}_0$ is the start configuration of the motion, $\vec{q}_\mathrm{mid}$ is the mid configuration of the motion, $\vec{q}_\mathrm{end}$ is the end configuration of the motion
+\FOR{$H \leftarrow 1 \ldots $}
+\STATE discretize trajectory
+\STATE setup quadratic program subject to configuration, velocity, acceleration, and jerk limits.
+\STATE solve QP
+\IF {QP was solved}
+\RETURN extract trajectory from QP
+\ENDIF
+\ENDFOR
+\end{algorithmic}
+\end{algorithm}

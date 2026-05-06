@@ -1,0 +1,33 @@
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+% \usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{footmisc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{algorithm}
+% \usepackage{subcaption}
+\usepackage[noend]{algorithmic}
+\usepackage[dvipsnames]{xcolor} % load before tikz
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{hyperref}
+\let\labelindent\relax % include this right before \usepackge{enumitem}.  See https://tex.stackexchange.com/a/188555
+\usepackage{enumitem} % for \begin{description}[align=left]
+\usepackage{booktabs} % for professional tables
+
+\usetikzlibrary{math,shapes,positioning}
+\usepackage[font={small}]{caption}
+\usepackage[caption=false, font=footnotesize]{subfig}
+\usepackage{listings}
+
+\newcommand{\argmin}{\operatornamewithlimits{argmin}}
+% Integer range https://tex.stackexchange.com/questions/304662/typesetting-an-integer-interval
+\newcommand{\irange}[2]{[#1 \nobreak\mathinner{\ldotp\ldotp}\nobreak #2]}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+
+\newcommand{\daniel}[1]{{\color{blue}Daniel: {#1}}}
+\newcommand{\jeffi}[1]{{\color{ForestGreen}Jeff: {#1}}}
+\newcommand{\harry}[1]{{\color{orange}Harry: {#1}}}
+\newcommand{\jonathan}[1]{{\color{teal}Jonathan: {#1}}}

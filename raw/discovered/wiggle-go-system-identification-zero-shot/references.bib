@@ -1,0 +1,552 @@
+# IRP
+@misc{chi_iterative_2022,
+	title = {Iterative {Residual} {Policy}: for {Goal}-{Conditioned} {Dynamic} {Manipulation} of {Deformable} {Objects}},
+	shorttitle = {Iterative {Residual} {Policy}},
+	rul = {http://arxiv.org/abs/2203.00663},
+	abstract = {This paper tackles the task of goal-conditioned dynamic manipulation of deformable objects. This task is highly challenging due to its complex dynamics (introduced by object deformation and high-speed action) and strict task requirements (defined by a precise goal specification). To address these challenges, we present Iterative Residual Policy (IRP), a general learning framework applicable to repeatable tasks with complex dynamics. IRP learns an implicit policy via delta dynamics -- instead of modeling the entire dynamical system and inferring actions from that model, IRP learns delta dynamics that predict the effects of delta action on the previously-observed trajectory. When combined with adaptive action sampling, the system can quickly optimize its actions online to reach a specified goal. We demonstrate the effectiveness of IRP on two tasks: whipping a rope to hit a target point and swinging a cloth to reach a target pose. Despite being trained only in simulation on a fixed robot setup, IRP is able to efficiently generalize to noisy real-world dynamics, new objects with unseen physical properties, and even different robot hardware embodiments, demonstrating its excellent generalization capability relative to alternative approaches. Video is available at https://youtu.be/7h3SZ3La-oA},
+	urldate = {2024-10-10},
+	publisher = {arXiv},
+	author = {Chi, Cheng and Burchfiel, Benjamin and Cousineau, Eric and Feng, Siyuan and Song, Shuran},
+	month = apr,
+	year = {2022},
+	note = {arXiv:2203.00663 },
+	keywords = {Computer Science - Robotics},
+	file = {arXiv Fulltext PDF:/Users/arthurjakobsson/Zotero/storage/T37U85EL/Chi et al. - 2022 - Iterative Residual Policy for Goal-Conditioned Dynamic Manipulation of Deformable Objects.pdf:application/pdf;arXiv.org Snapshot:/Users/arthurjakobsson/Zotero/storage/AYJI9YCT/2203.html:text/html},
+}
+
+# robots of the lost arc
+@misc{zhang_robots_2024,
+	title = {Robots of the {Lost} {Arc}: {Self}-{Supervised} {Learning} to {Dynamically} {Manipulate} {Fixed}-{Endpoint} {Cables}},
+	shorttitle = {Robots of the {Lost} {Arc}},
+	rul = {http://arxiv.org/abs/2011.04840},
+	doi = {10.48550/arXiv.2011.04840},
+	abstract = {We explore how high-speed robot arm motions can dynamically manipulate cables to vault over obstacles, knock objects from pedestals, and weave between obstacles. In this paper, we propose a self-supervised learning framework that enables a UR5 robot to perform these three tasks. The framework finds a 3D apex point for the robot arm, which, together with a task-specific trajectory function, defines an arcing motion that dynamically manipulates the cable to perform tasks with varying obstacle and target locations. The trajectory function computes minimum-jerk motions that are constrained to remain within joint limits and to travel through the 3D apex point by repeatedly solving quadratic programs to find the shortest and fastest feasible motion. We experiment with 5 physical cables with different thickness and mass and compare performance against two baselines in which a human chooses the apex point. Results suggest that a baseline with a fixed apex across the three tasks achieves respective success rates of 51.7\%, 36.7\%, and 15.0\%, and a baseline with human-specified, task-specific apex points achieves 66.7\%, 56.7\%, and 15.0\% success rate respectively, while the robot using the learned apex point can achieve success rates of 81.7\% in vaulting, 65.0\% in knocking, and 60.0\% in weaving. Code, data, and supplementary materials are available at https: //sites.google.com/berkeley.edu/dynrope/home.},
+	urldate = {2025-04-22},
+	publisher = {arXiv},
+	author = {Zhang, Harry and Ichnowski, Jeffrey and Seita, Daniel and Wang, Jonathan and Huang, Huang and Goldberg, Ken},
+	month = may,
+	year = {2024},
+	note = {arXiv:2011.04840 },
+	keywords = {Computer Science - Artificial Intelligence, Computer Science - Robotics},
+	file = {Preprint PDF:/Users/arthurjakobsson/Zotero/storage/A2GP2HW7/Zhang et al. - 2024 - Robots of the Lost Arc Self-Supervised Learning to Dynamically Manipulate Fixed-Endpoint Cables.pdf:application/pdf;Snapshot:/Users/arthurjakobsson/Zotero/storage/9ECKIVN6/2011.html:text/html},
+}
+
+
+# RMA
+
+
+@misc{kumar_rma_2021,
+	title = {{RMA}: {Rapid} {Motor} {Adaptation} for {Legged} {Robots}},
+	shorttitle = {{RMA}},
+	rul = {http://arxiv.org/abs/2107.04034},
+	doi = {10.48550/arXiv.2107.04034},
+	abstract = {Successful real-world deployment of legged robots would require them to adapt in real-time to unseen scenarios like changing terrains, changing payloads, wear and tear. This paper presents Rapid Motor Adaptation (RMA) algorithm to solve this problem of real-time online adaptation in quadruped robots. RMA consists of two components: a base policy and an adaptation module. The combination of these components enables the robot to adapt to novel situations in fractions of a second. RMA is trained completely in simulation without using any domain knowledge like reference trajectories or predefined foot trajectory generators and is deployed on the A1 robot without any fine-tuning. We train RMA on a varied terrain generator using bioenergetics-inspired rewards and deploy it on a variety of difficult terrains including rocky, slippery, deformable surfaces in environments with grass, long vegetation, concrete, pebbles, stairs, sand, etc. RMA shows state-of-the-art performance across diverse real-world as well as simulation experiments. Video results at https://ashish-kmr.github.io/rma-legged-robots/},
+	urldate = {2025-04-15},
+	publisher = {arXiv},
+	author = {Kumar, Ashish and Fu, Zipeng and Pathak, Deepak and Malik, Jitendra},
+	month = jul,
+	year = {2021},
+	note = {arXiv:2107.04034 },
+	keywords = {Computer Science - Artificial Intelligence, Computer Science - Robotics, Computer Science - Computer Vision and Pattern Recognition, Computer Science - Machine Learning},
+	file = {Preprint PDF:/Users/arthurjakobsson/Zotero/storage/EUZT32AQ/Kumar et al. - 2021 - RMA Rapid Motor Adaptation for Legged Robots.pdf:application/pdf;Snapshot:/Users/arthurjakobsson/Zotero/storage/C8HYAC65/2107.html:text/html},
+}
+
+# GenORM and GenDOM
+
+
+@misc{kuroki_genorm_2025,
+	title = {{GenORM}: {Generalizable} {One}-shot {Rope} {Manipulation} with {Parameter}-{Aware} {Policy}},
+	shorttitle = {{GenORM}},
+	rul = {http://arxiv.org/abs/2306.09872},
+	doi = {10.48550/arXiv.2306.09872},
+	abstract = {Due to the inherent uncertainty in their deformability during motion, previous methods in rope manipulation often require hundreds of real-world demonstrations to train a manipulation policy for each rope, even for simple tasks such as rope goal reaching, which hinder their applications in our ever-changing world. To address this issue, we introduce GenORM, a framework that allows the manipulation policy to handle different deformable ropes with a single real-world demonstration. To achieve this, we augment the policy by conditioning it on deformable rope parameters and training it with a diverse range of simulated deformable ropes so that the policy can adjust actions based on different rope parameters. At the time of inference, given a new rope, GenORM estimates the deformable rope parameters by minimizing the disparity between the grid density of point clouds of real-world demonstrations and simulations. With the help of a differentiable physics simulator, we require only a single real-world demonstration. Empirical validations on both simulated and real-world rope manipulation setups clearly show that our method can manipulate different ropes with a single demonstration and significantly outperforms the baseline in both environments (62\% improvement in in-domain ropes, and 15\% improvement in out-of-distribution ropes in simulation, 26\% improvement in real-world), demonstrating the effectiveness of our approach in one-shot rope manipulation.},
+	urldate = {2025-04-20},
+	publisher = {arXiv},
+	author = {Kuroki, So and Guo, Jiaxian and Matsushima, Tatsuya and Okubo, Takuya and Kobayashi, Masato and Ikeda, Yuya and Takanami, Ryosuke and Yoo, Paul and Matsuo, Yutaka and Iwasawa, Yusuke},
+	month = jan,
+	year = {2025},
+	note = {arXiv:2306.09872 },
+	keywords = {Computer Science - Artificial Intelligence, Computer Science - Robotics, Computer Science - Machine Learning},
+	file = {Preprint PDF:/Users/arthurjakobsson/Zotero/storage/NS5HKBRL/Kuroki et al. - 2025 - GenORM Generalizable One-shot Rope Manipulation with Parameter-Aware Policy.pdf:application/pdf;Snapshot:/Users/arthurjakobsson/Zotero/storage/UJMYZ3JJ/2306.html:text/html},
+}
+
+@misc{kuroki_gendom_2025,
+	title = {{GenDOM}: {Generalizable} {One}-shot {Deformable} {Object} {Manipulation} with {Parameter}-{Aware} {Policy}},
+	shorttitle = {{GenDOM}},
+	rul = {http://arxiv.org/abs/2309.09051},
+	doi = {10.48550/arXiv.2309.09051},
+	abstract = {Due to the inherent uncertainty in their deformability during motion, previous methods in deformable object manipulation, such as rope and cloth, often required hundreds of real-world demonstrations to train a manipulation policy for each object, which hinders their applications in our ever-changing world. To address this issue, we introduce GenDOM, a framework that allows the manipulation policy to handle different deformable objects with only a single real-world demonstration. To achieve this, we augment the policy by conditioning it on deformable object parameters and training it with a diverse range of simulated deformable objects so that the policy can adjust actions based on different object parameters. At the time of inference, given a new object, GenDOM can estimate the deformable object parameters with only a single real-world demonstration by minimizing the disparity between the grid density of point clouds of real-world demonstrations and simulations in a differentiable physics simulator. Empirical validations on both simulated and real-world object manipulation setups clearly show that our method can manipulate different objects with a single demonstration and significantly outperforms the baseline in both environments (a 62\% improvement for in-domain ropes and a 15\% improvement for out-of-distribution ropes in simulation, as well as a 26\% improvement for ropes and a 50\% improvement for cloths in the real world), demonstrating the effectiveness of our approach in one-shot deformable object manipulation.},
+	urldate = {2025-04-21},
+	publisher = {arXiv},
+	author = {Kuroki, So and Guo, Jiaxian and Matsushima, Tatsuya and Okubo, Takuya and Kobayashi, Masato and Ikeda, Yuya and Takanami, Ryosuke and Yoo, Paul and Matsuo, Yutaka and Iwasawa, Yusuke},
+	month = jan,
+	year = {2025},
+	note = {arXiv:2309.09051 },
+	keywords = {Computer Science - Artificial Intelligence, Computer Science - Robotics},
+	file = {Preprint PDF:/Users/arthurjakobsson/Zotero/storage/M7S3WH82/Kuroki et al. - 2025 - GenDOM Generalizable One-shot Deformable Object Manipulation with Parameter-Aware Policy.pdf:application/pdf;Snapshot:/Users/arthurjakobsson/Zotero/storage/3SXU5JSR/2309.html:text/html},
+}
+
+
+# Real2Sim2Real (rope model)
+
+
+@misc{lim_planar_2022,
+	title = {Planar {Robot} {Casting} with {Real2Sim2Real} {Self}-{Supervised} {Learning}},
+	rul = {http://arxiv.org/abs/2111.04814},
+	doi = {10.48550/arXiv.2111.04814},
+	abstract = {This paper introduces the task of \{{\textbackslash}em Planar Robot Casting (PRC)\}: where one planar motion of a robot arm holding one end of a cable causes the other end to slide across the plane toward a desired target. PRC allows the cable to reach points beyond the robot workspace and has applications for cable management in homes, warehouses, and factories. To efficiently learn a PRC policy for a given cable, we propose Real2Sim2Real, a self-supervised framework that automatically collects physical trajectory examples to tune parameters of a dynamics simulator using Differential Evolution, generates many simulated examples, and then learns a policy using a weighted combination of simulated and physical data. We evaluate Real2Sim2Real with three simulators, Isaac Gym-segmented, Isaac Gym-hybrid, and PyBullet, two function approximators, Gaussian Processes and Neural Networks (NNs), and three cables with differing stiffness, torsion, and friction. Results with 240 physical trials suggest that the PRC policies can attain median error distance (as \% of cable length) ranging from 8\% to 14\%, outperforming baselines and policies trained on only real or only simulated examples. Code, data, and videos are available at https://tinyurl.com/robotcast.},
+	urldate = {2025-04-25},
+	publisher = {arXiv},
+	author = {Lim, Vincent and Huang, Huang and Chen, Lawrence Yunliang and Wang, Jonathan and Ichnowski, Jeffrey and Seita, Daniel and Laskey, Michael and Goldberg, Ken},
+	month = jun,
+	year = {2022},
+	note = {arXiv:2111.04814 },
+	keywords = {Computer Science - Robotics},
+	file = {Preprint PDF:/Users/arthurjakobsson/Zotero/storage/J4JGVCWC/Lim et al. - 2022 - Planar Robot Casting with Real2Sim2Real Self-Supervised Learning.pdf:application/pdf;Snapshot:/Users/arthurjakobsson/Zotero/storage/AL7WG9PJ/2111.html:text/html},
+}
+
+
+# Segment Anything 2
+
+@article{ravi2024sam2,
+  title={SAM 2: Segment Anything in Images and Videos},
+  author={Ravi, Nikhila and Gabeur, Valentin and Hu, Yuan-Ting and Hu, Ronghang and Ryali, Chaitanya and Ma, Tengyu and Khedr, Haitham and R{\"a}dle, Roman and Rolland, Chloe and Gustafson, Laura and Mintun, Eric and Pan, Junting and Alwala, Kalyan Vasudev and Carion, Nicolas and Wu, Chao-Yuan and Girshick, Ross and Doll{\'a}r, Piotr and Feichtenhofer, Christoph},
+  journal={arXiv preprint arXiv:2408.00714},
+  url={https://arxiv.org/abs/2408.00714},
+  year={2024}
+}
+
+# System ID history
+
+@inproceedings{CNN_sysID,
+author = {Guo, Xiaoxiao and Li, Wei and Iorio, Francesco},
+title = {Convolutional Neural Networks for Steady Flow Approximation},
+year = {2016},
+isbn = {9781450342322},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/2939672.2939738},
+doi = {10.1145/2939672.2939738},
+abstract = {In aerodynamics related design, analysis and optimization problems, flow fields are simulated using computational fluid dynamics (CFD) solvers. However, CFD simulation is usually a computationally expensive, memory demanding and time consuming iterative process. These drawbacks of CFD limit opportunities for design space exploration and forbid interactive design. We propose a general and flexible approximation model for real-time prediction of non-uniform steady laminar flow in a 2D or 3D domain based on convolutional neural networks (CNNs). We explored alternatives for the geometry representation and the network architecture of CNNs. We show that convolutional neural networks can estimate the velocity field two orders of magnitude faster than a GPU-accelerated CFD solver and four orders of magnitude faster than a CPU-based CFD solver at a cost of a low error rate. This approach can provide immediate feedback for real-time design iterations at the early stage of design. Compared with existing approximation models in the aerodynamics domain, CNNs enable an efficient estimation for the entire velocity field. Furthermore, designers and engineers can directly apply the CNN approximation model in their design space exploration algorithms without training extra lower-dimensional surrogate models.},
+booktitle = {Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining},
+pages = {481–490},
+numpages = {10},
+keywords = {surrogate models, machine learning, convolutional neural networks, computational fluid dynamics},
+location = {San Francisco, California, USA},
+series = {KDD '16}
+}
+
+@inproceedings{Ahmed2009SurrogateBasedAD,
+  title={Surrogate-Based Aerodynamic Design Optimization: Use of Surrogates in Aerodynamic Design Optimization},
+  author={M. Y. M. Ahmed and Ning Qin},
+  year={2009},
+  url={https://api.semanticscholar.org/CorpusID:68115986}
+}
+
+# RMA extensions
+
+
+@misc{liang_rapid_2024,
+	title = {Rapid {Motor} {Adaptation} for {Robotic} {Manipulator} {Arms}},
+	rul = {http://arxiv.org/abs/2312.04670},
+	doi = {10.48550/arXiv.2312.04670},
+	abstract = {Developing generalizable manipulation skills is a core challenge in embodied AI. This includes generalization across diverse task configurations, encompassing variations in object shape, density, friction coefficient, and external disturbances such as forces applied to the robot. Rapid Motor Adaptation (RMA) offers a promising solution to this challenge. It posits that essential hidden variables influencing an agent's task performance, such as object mass and shape, can be effectively inferred from the agent's action and proprioceptive history. Drawing inspiration from RMA in locomotion and in-hand rotation, we use depth perception to develop agents tailored for rapid motor adaptation in a variety of manipulation tasks. We evaluated our agents on four challenging tasks from the Maniskill2 benchmark, namely pick-and-place operations with hundreds of objects from the YCB and EGAD datasets, peg insertion with precise position and orientation, and operating a variety of faucets and handles, with customized environment variations. Empirical results demonstrate that our agents surpass state-of-the-art methods like automatic domain randomization and vision-based policies, obtaining better generalization performance and sample efficiency.},
+	urldate = {2025-04-15},
+	publisher = {arXiv},
+	author = {Liang, Yichao and Ellis, Kevin and Henriques, João},
+	month = mar,
+	year = {2024},
+	note = {arXiv:2312.04670 },
+	keywords = {Computer Science - Artificial Intelligence, Computer Science - Robotics, Computer Science - Computer Vision and Pattern Recognition, Computer Science - Machine Learning},
+	file = {Preprint PDF:/Users/arthurjakobsson/Zotero/storage/ZMCM2BY2/Liang et al. - 2024 - Rapid Motor Adaptation for Robotic Manipulator Arms.pdf:application/pdf;Snapshot:/Users/arthurjakobsson/Zotero/storage/DX35RPGL/2312.html:text/html},
+}
+
+@misc{qi_-hand_2022,
+	title = {In-{Hand} {Object} {Rotation} via {Rapid} {Motor} {Adaptation}},
+	rul = {http://arxiv.org/abs/2210.04887},
+	doi = {10.48550/arXiv.2210.04887},
+	abstract = {Generalized in-hand manipulation has long been an unsolved challenge of robotics. As a small step towards this grand goal, we demonstrate how to design and learn a simple adaptive controller to achieve in-hand object rotation using only fingertips. The controller is trained entirely in simulation on only cylindrical objects, which then - without any fine-tuning - can be directly deployed to a real robot hand to rotate dozens of objects with diverse sizes, shapes, and weights over the z-axis. This is achieved via rapid online adaptation of the controller to the object properties using only proprioception history. Furthermore, natural and stable finger gaits automatically emerge from training the control policy via reinforcement learning. Code and more videos are available at https://haozhi.io/hora},
+	urldate = {2025-04-15},
+	publisher = {arXiv},
+	author = {Qi, Haozhi and Kumar, Ashish and Calandra, Roberto and Ma, Yi and Malik, Jitendra},
+	month = oct,
+	year = {2022},
+	note = {arXiv:2210.04887 },
+	keywords = {Computer Science - Artificial Intelligence, Computer Science - Robotics, Computer Science - Computer Vision and Pattern Recognition, Computer Science - Machine Learning},
+	file = {Preprint PDF:/Users/arthurjakobsson/Zotero/storage/KR7YYN7L/Qi et al. - 2022 - In-Hand Object Rotation via Rapid Motor Adaptation.pdf:application/pdf;Snapshot:/Users/arthurjakobsson/Zotero/storage/DRR6V27E/2210.html:text/html},
+}
+
+# Iterative related works REREAD
+
+@ARTICLE{bristow_survey_2006,
+  author={Bristow, D.A. and Tharayil, M. and Alleyne, A.G.},
+  journal={IEEE Control Systems Magazine}, 
+  title={A survey of iterative learning control}, 
+  year={2006},
+  volume={26},
+  number={3},
+  pages={96-114},
+  keywords={Iterative methods;Learning systems;Control systems;Open loop systems;Error correction;Radio control;Adaptive control;Chemical industry;Muscles;Motion control},
+  doi={10.1109/MCS.2006.1636313}}
+
+@INPROCEEDINGS{yamakawa_simple_2012,
+  author={Yamakawa, Yuji and Namiki, Akio and Ishikawa, Masatoshi},
+  booktitle={2012 IEEE International Conference on Robotics and Automation}, 
+  title={Simple Model and Deformation Control of a Flexible Rope using Constant, High-Speed Motion of a Robot Arm}, 
+  year={2012},
+  volume={},
+  number={},
+  pages={2249-2254},
+  keywords={Joints;Robot kinematics;Gravity;Mathematical model;Robot motion;Deformable models},
+  doi={10.1109/ICRA.2012.6224763}}
+
+
+@article{yamakawa_dynamic_2013,
+author = {Yuji Yamakawa and Akio Namiki and Masatoshi Ishikawa},
+title ={Dynamic High-Speed Knotting of a Rope by a Manipulator},
+journal = {International Journal of Advanced Robotic Systems},
+volume = {10},
+number = {10},
+pages = {361},
+year = {2013},
+doi = {10.5772/56783},
+URL = {https://doi.org/10.5772/56783},
+eprint = { https://doi.org/10.5772/56783},
+abstract = { In this paper we suggest an entirely new strategy for the dexterous manipulation of a linear flexible object, such as rope or a cable, with a high-speed manipulator. We deal with a flexible rope as one example of the linear flexible object. The strategy involves manipulating the object at high-speed. By moving the robot at high-speed, we can assume that the dynamic behaviour of the flexible rope can be obtained by performing algebraic calculations of the high-speed robot motion. Based on this assumption, we derive a dynamic deformation model of the flexible rope and confirm the validity of the proposed model. Then we perform a simulation of dynamic, high-speed knotting based on the proposed model. We also discuss the possibility of forming the knot based on a simple analysis model. Finally, we show experimental results demonstrating dynamic, high-speed knotting with a high-speed manipulator. }
+}
+
+@misc{nair_combining_2017,
+      title={Combining Self-Supervised Learning and Imitation for Vision-Based Rope Manipulation}, 
+      author={Ashvin Nair and Dian Chen and Pulkit Agrawal and Phillip Isola and Pieter Abbeel and Jitendra Malik and Sergey Levine},
+      year={2017},
+      eprint={1703.02018},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/1703.02018}, 
+}
+
+@misc{yu_shape_2022,
+      title={Shape Control of Deformable Linear Objects with Offline and Online Learning of Local Linear Deformation Models}, 
+      author={Mingrui Yu and Hanzhong Zhong and Xiang Li},
+      year={2022},
+      eprint={2109.11091},
+      archivePrefix={arXiv},
+      primaryClass={cs.RO},
+      url={https://arxiv.org/abs/2109.11091}, 
+}
+
+# RMA background reading
+
+@misc{tobin_domain_2017,
+      title={Domain Randomization for Transferring Deep Neural Networks from Simulation to the Real World}, 
+      author={Josh Tobin and Rachel Fong and Alex Ray and Jonas Schneider and Wojciech Zaremba and Pieter Abbeel},
+      year={2017},
+      eprint={1703.06907},
+      archivePrefix={arXiv},
+      primaryClass={cs.RO},
+      url={https://arxiv.org/abs/1703.06907}, 
+}
+
+@inproceedings{peng_simtoreal_2018,
+   title={Sim-to-Real Transfer of Robotic Control with Dynamics Randomization},
+   url={http://dx.doi.org/10.1109/ICRA.2018.8460528},
+   DOI={10.1109/icra.2018.8460528},
+   booktitle={2018 IEEE International Conference on Robotics and Automation (ICRA)},
+   publisher={IEEE},
+   author={Peng, Xue Bin and Andrychowicz, Marcin and Zaremba, Wojciech and Abbeel, Pieter},
+   year={2018},
+   month=may, pages={3803–3810} }
+
+
+# Sim2Real
+
+@misc{matas_simreal_2018,
+      title={Sim-to-Real Reinforcement Learning for Deformable Object Manipulation}, 
+      author={Jan Matas and Stephen James and Andrew J. Davison},
+      year={2018},
+      eprint={1806.07851},
+      archivePrefix={arXiv},
+      primaryClass={cs.RO},
+      url={https://arxiv.org/abs/1806.07851}, 
+}
+
+
+# simulators
+
+@misc{Genesis,
+          author = {Genesis Authors},
+          title = {Genesis: A Generative and Universal Physics Engine for Robotics and Beyond},
+          month = {December},
+          year = {2024},
+          url = {https://github.com/Genesis-Embodied-AI/Genesis}
+        }
+
+@misc{newtonphysicsengine,
+  author = {NVIDIA and Google DeepMind and Disney Research},
+  title = {Newton Physics Engine},
+  year = {2025},
+  publisher = {Linux Foundation},
+}
+
+@misc{drake,
+ author = "Russ Tedrake and the Drake Development Team",
+ title = "Drake: Model-based design and verification for robotics",
+ year = 2019,
+ url = "https://drake.mit.edu"
+}
+
+# CMA-ES
+
+@ARTICLE{cmaes,
+  author={Hansen, Nikolaus and Ostermeier, Andreas},
+  journal={Evolutionary Computation}, 
+  title={Completely Derandomized Self-Adaptation in Evolution Strategies}, 
+  year={2001},
+  volume={9},
+  number={2},
+  pages={159-195},
+  keywords={Evolution strategy;self-adaptation;strategy parameter control;step size control;de-randomization;derandomized self-adaptation;covariance matrix adaptation;evolution path;cumulation;cumulative path length control},
+  doi={10.1162/106365601750190398}}
+
+@misc{zhao2025multiobjectivecovariancematrixadaptation,
+      title={Multi-Objective Covariance Matrix Adaptation MAP-Annealing}, 
+      author={Shihan Zhao and Stefanos Nikolaidis},
+      year={2025},
+      eprint={2505.20712},
+      archivePrefix={arXiv},
+      primaryClass={cs.NE},
+      url={https://arxiv.org/abs/2505.20712}, 
+}
+
+# xarm7
+
+@misc{ufactory2022xarm7,
+  author = {UFACTORY},
+  title = {UFactory xArm 7 - 7 DOF Collaborative Robot},
+  year = {2022},
+  url = {https://www.ufactory.cc/products/xarm-7-2020},
+  note = {Accessed: 2024-01-26}
+}
+
+# PSC Access
+
+@inproceedings{accessgrant,
+author = {Boerner, Timothy J. and Deems, Stephen and Furlani, Thomas R. and Knuth, Shelley L. and Towns, John},
+title = {ACCESS: Advancing Innovation: NSF’s Advanced Cyberinfrastructure Coordination Ecosystem: Services \& Support},
+year = {2023},
+isbn = {9781450399852},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3569951.3597559},
+doi = {10.1145/3569951.3597559},
+abstract = {As the National Science Foundation evolves its investments in cyberinfrastructure, it has made a significant investment in the ACCESS (Advanced Cyberinfrastructure Coordination Ecosystem: Services \& Support) program instantiating a novel set of services along with a novel governance and management model. Research cyberinfrastructure (CI) is a key catalyst for discovery and innovation and plays a critical role in ensuring U.S. leadership in science and engineering, economic competitiveness, and national security, consistent with NSF’s mission. Funding of a set of awards through the ACCESS program has established a suite of CI coordination services targeted at supporting a broad and diverse set of requirements, researchers, and usage modalities spanning all areas of science and engineering research and education complemented by support for the collective and coordinated operation of the overall ACCESS program.},
+booktitle = {Practice and Experience in Advanced Research Computing 2023: Computing for the Common Good},
+pages = {173–176},
+numpages = {4},
+keywords = {Federation, NSF ACCESS, Research Computing, cyberinfrastructure ecosystems},
+location = {Portland, OR, USA},
+series = {PEARC '23}
+}
+
+# rope model original 
+
+
+@article{fritzkowski_dynamics_2010,
+	title = {Dynamics of a rope modeled as a multi-body system with elastic joints},
+	volume = {46},
+	issn = {1432-0924},
+	url = {https://doi.org/10.1007/s00466-010-0524-y},
+	doi = {10.1007/s00466-010-0524-y},
+	abstract = {A discrete model of a rope with spiral springs in joints is considered, the aim being to include transverse elasticity of the rope. Elastic characteristic of the springs is derived on the basis of simple geometrical formulas and the classical curvature-bending moment relationship for beams. Lagrange’s equations of motion are presented and their complexity is discussed from the computational point of view. Numerical experiments are performed for a system with both scleronomic and rheonomic constraints. The influence of the elasticity on behaviour of the model is analyzed. Results validity is examined in terms of basic energy principles.},
+	number = {6},
+	journal = {Computational Mechanics},
+	author = {Fritzkowski, Paweł and Kamiński, Henryk},
+	month = nov,
+	year = {2010},
+	pages = {901--909},
+}
+
+@article{ren2024grounded,
+  title={Grounded sam: Assembling open-world models for diverse visual tasks},
+  author={Ren, Tianhe and Liu, Shilong and Zeng, Ailing and Lin, Jing and Li, Kunchang and Cao, He and Chen, Jiayu and Huang, Xinyu and Chen, Yukang and Yan, Feng and others},
+  journal={arXiv preprint arXiv:2401.14159},
+  year={2024}
+}
+
+@article{karaev2410cotracker3,
+  title={Cotracker3: Simpler and better point tracking by pseudo-labelling real videos, 2024},
+  author={Karaev, Nikita and Makarov, Iurii and Wang, Jianyuan and Neverova, Natalia and Vedaldi, Andrea and Rupprecht, Christian},
+  journal={URL https://arxiv. org/abs/2410.11831}
+}
+
+@misc{wang2024selfsupervisedlearningdynamicplanar,
+      title={Self-Supervised Learning of Dynamic Planar Manipulation of Free-End Cables}, 
+      author={Jonathan Wang and Huang Huang and Vincent Lim and Harry Zhang and Jeffrey Ichnowski and Daniel Seita and Yunliang Chen and Ken Goldberg},
+      year={2024},
+      eprint={2405.09581},
+      archivePrefix={arXiv},
+      primaryClass={cs.RO},
+      url={https://arxiv.org/abs/2405.09581}, 
+}
+
+@article{tiboni2023dropo,
+  title={DROPO: sim-to-real transfer with offline domain randomization (2022)},
+  author={Tiboni, G and Arndt, K and Kyrki, V},
+  journal={arXiv Preprint}
+}
+
+@inproceedings{hu2019chainqueen,
+  title={Chainqueen: A real-time differentiable physical simulator for soft robotics},
+  author={Hu, Yuanming and Liu, Jiancheng and Spielberg, Andrew and Tenenbaum, Joshua B and Freeman, William T and Wu, Jiajun and Rus, Daniela and Matusik, Wojciech},
+  booktitle={2019 International conference on robotics and automation (ICRA)},
+  pages={6265--6271},
+  year={2019},
+  organization={IEEE}
+}
+
+@inproceedings{jatavallabhula2021gradsim,
+  title={gradsim: Differentiable simulation for system identification and visuomotor control},
+  author={Murthy, J Krishna and Macklin, Miles and Golemo, Florian and Voleti, Vikram and Petrini, Linda and Weiss, Martin and Considine, Breandan and Parent-L{\'e}vesque, J{\'e}r{\^o}me and Xie, Kevin and Erleben, Kenny and others},
+  booktitle={International conference on learning representations},
+  year={2020}
+}
+
+@article{chen2024deform,
+  title={Differentiable discrete elastic rods for real-time modeling of deformable linear objects},
+  author={Chen, Yizhou and Zhang, Yiting and Brei, Zachary and Zhang, Tiancheng and Chen, Yuzhen and Wu, Julie and Vasudevan, Ram},
+  journal={arXiv preprint arXiv:2406.05931},
+  year={2024}
+}
+
+@article{si2024difftactile,
+  title={Difftactile: A physics-based differentiable tactile simulator for contact-rich robotic manipulation},
+  author={Si, Zilin and Zhang, Gu and Ben, Qingwei and Romero, Branden and Xian, Zhou and Liu, Chao and Gan, Chuang},
+  journal={arXiv preprint arXiv:2403.08716},
+  year={2024}
+}
+
+@article{jnadi2026scope,
+  title={SCOPE: Smooth Convex Optimization for Planned Evolution of Deformable Linear Objects},
+  author={Jnadi, Ali and Salloum, Hadi and Kholodov, Yaroslav and Gasnikov, Alexander and Almaghout, Karam},
+  journal={arXiv preprint arXiv:2601.19742},
+  year={2026}
+}
+
+@inproceedings{artinian2024optimal,
+  title={Optimal Cosserat-based deformation control for robotic manipulation of linear objects},
+  author={Azad, Artinian and Quentin, Huet and Faiz, Ben Amar and V{\'e}ronique, Perdereau},
+  booktitle={2023 IEEE/ASME International Conference on Advanced Intelligent Mechatronics (AIM)},
+  pages={381--388},
+  year={2023},
+  organization={IEEE}
+}
+
+@inproceedings{lin2020softgym,
+  title={Softgym: Benchmarking deep reinforcement learning for deformable object manipulation},
+  author={Lin, Xingyu and Wang, Yufei and Olkin, Jake and Held, David},
+  booktitle={Conference on Robot Learning},
+  pages={432--448},
+  year={2021},
+  organization={PMLR}
+}
+
+@article{zhao2023learning,
+  title={Learning fine-grained bimanual manipulation with low-cost hardware},
+  author={Zhao, Tony Z and Kumar, Vikash and Levine, Sergey and Finn, Chelsea},
+  journal={arXiv preprint arXiv:2304.13705},
+  year={2023}
+}
+
+@article{luo2024multistage,
+  title={Multistage cable routing through hierarchical imitation learning},
+  author={Luo, Jianlan and Xu, Charles and Geng, Xinyang and Feng, Gilbert and Fang, Kuan and Tan, Liam and Schaal, Stefan and Levine, Sergey},
+  journal={IEEE Transactions on Robotics},
+  volume={40},
+  pages={1476--1491},
+  year={2024},
+  publisher={IEEE}
+}
+
+@article{yang2022learning,
+  title={Learning differentiable dynamics models for shape control of deformable linear objects},
+  author={Yang, Yuxuan and Stork, Johannes A and Stoyanov, Todor},
+  journal={Robotics and Autonomous Systems},
+  volume={158},
+  pages={104258},
+  year={2022},
+  publisher={Elsevier}
+}
+
+@article{wang2022offline,
+  title={Offline-online learning of deformation model for cable manipulation with graph neural networks},
+  author={Wang, Changhao and Zhang, Yuyou and Zhang, Xiang and Wu, Zheng and Zhu, Xinghao and Jin, Shiyu and Tang, Te and Tomizuka, Masayoshi},
+  journal={IEEE Robotics and Automation Letters},
+  volume={7},
+  number={2},
+  pages={5544--5551},
+  year={2022},
+  publisher={IEEE}
+}
+
+@article{viljoen2024cable,
+  title={Cable shaping with MPC: A reliable, fast, and real-time feasible formulation},
+  author={Viljoen, Ruan and Mamedov, Shamil and Ubbink, Johan and Decr{\'e}, Wilm and Aertbeli{\"e}n, Erwin and Swevers, Jan and De Schutter, Joris},
+  journal={IFAC-PapersOnLine},
+  volume={58},
+  number={25},
+  pages={156--161},
+  year={2024},
+  publisher={Elsevier}
+}
+
+@article{sun2023nonlinear,
+  title={Nonlinear MPC for full-pose manipulation of a cable-suspended load using multiple UAVs},
+  author={Sun, Sihao and Franchi, Antonio},
+  journal={arXiv preprint arXiv:2301.08545},
+  year={2023}
+}
+
+@article{sun2025agile,
+  title={Agile and cooperative aerial manipulation of a cable-suspended load},
+  author={Sun, Sihao and Wang, Xuerui and Sanalitro, Dario and Franchi, Antonio and Tognon, Marco and Alonso-Mora, Javier},
+  journal={Science Robotics},
+  volume={10},
+  number={107},
+  pages={eadu8015},
+  year={2025},
+  publisher={American Association for the Advancement of Science}
+}
+
+@article{pinto2018asymmetric,
+  title={Asymmetric actor critic for image-based robot learning},
+  author={Pinto, Lerrel and Andrychowicz, Marcin and Welinder, Peter and Zaremba, Wojciech and Abbeel, Pieter},
+  journal={arXiv preprint arXiv:1710.06542},
+  year={2017}
+}
+
+@article{wang2024cts,
+  title={Cts: Concurrent teacher-student reinforcement learning for legged locomotion},
+  author={Wang, Hongxi and Luo, Haoxiang and Zhang, Wei and Chen, Hua},
+  journal={IEEE Robotics and Automation Letters},
+  year={2024},
+  publisher={IEEE}
+}
+
+@inproceedings{chen2022efficiently_new,
+  title={Efficiently learning single-arm fling motions to smooth garments},
+  author={Chen, Lawrence Yunliang and Huang, Huang and Novoseller, Ellen and Seita, Daniel and Ichnowski, Jeffrey and Laskey, Michael and Cheng, Richard and Kollar, Thomas and Goldberg, Ken},
+  booktitle={The International Symposium of Robotics Research},
+  pages={36--51},
+  year={2022},
+  organization={Springer}
+}
+
+
+@inproceedings{chen2022garment,
+  title={Efficiently learning single-arm fling motions to smooth garments},
+  author={Chen, Lawrence Yunliang and Huang, Huang and Novoseller, Ellen and Seita, Daniel and Ichnowski, Jeffrey and Laskey, Michael and Cheng, Richard and Kollar, Thomas and Goldberg, Ken},
+  booktitle={The International Symposium of Robotics Research},
+  pages={36--51},
+  year={2022},
+  organization={Springer}
+}

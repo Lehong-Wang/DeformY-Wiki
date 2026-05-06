@@ -1,0 +1,52 @@
+% \begin{tabular}{l|l|c|c|c}
+% \multicolumn{2}{c}{}&\multicolumn{2}{c}{Real}&\\
+% \cline{3-4}
+% \multicolumn{2}{c|}{}&Successes&Failures&\multicolumn{1}{c}\\
+% \cline{2-4}
+% \multirow{2}{*}{Simulation}& Successes & $a$ & $b$\\
+% \cline{2-4}
+% & Failures & $c$ & $d$\\
+% % \cline{2-4}
+% % \multicolumn{1}{c}{} & \multicolumn{1}{c}{Total} & \multicolumn{1}{c}{$a+c$} & \multicolumn{    1}{c}{$b+d$} & \multicolumn{1}{c}{$N$}\\
+% \end{tabular}
+
+% \begin{table}
+%     \vspace*{5pt}
+% \centering
+% \caption{Success rates of different vaulting apex points performed in simulation and real across 15 trials.}
+% {    
+% \begin{tabular}{cc|ccc}
+% \multicolumn{2}{c}{}
+%             &   \multicolumn{2}{c}{Real} \\
+%     &   match   & differ &   Success &   Failure              \\ 
+%     \cline{2-4}
+% % \rotatebox[origin=c]{90}{Simulation}
+%     Simulation
+%     & Success   & 46.67\%&20\%\\
+%     & Failure    & 13.33\%&20\%\\ 
+%     \cline{2-4}
+%     \end{tabular}
+%     \vspace*{-10pt}
+%  }
+%  \label{table:sim_to_real}
+% \end{table}
+ 
+ \begin{table}
+    \vspace*{4pt}
+\centering
+\caption{Number of successes and failures for vaulting in simulation and physical environments across 15 trials, evaluating a different apex point on a different obstacle position for each trial. Listed are the number of cases that succeed in both sim and real, fail in sim but succeed in real, succeed in sim but fail in real, and fail in both sim and real. The correlation between success rates in the two environments is surprisingly high.}
+%\vspace{0.3cm}
+ \begin{tabular}{ 
+l c c}
+% \multicolumn{4}{c}{Task 1 Results}\\
+ \toprule
+   & \#Success (Simulation) & \#Failure (Simulation) \\
+  \midrule
+  \#Success (Physical)&7&2\\
+  \#Failure (Physical)&3&3\\
+ \bottomrule
+\end{tabular}
+\vspace*{-5pt}
+
+\label{table:sim_to_real}
+\end{table}

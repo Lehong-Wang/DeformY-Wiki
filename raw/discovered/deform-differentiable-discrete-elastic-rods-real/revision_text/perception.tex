@@ -1,0 +1,185 @@
+\section{DLO Tracking with Modeling}
+\label{sec:tracking}
+
+This section describes how we can use DEFORM to perform robust DLO tracking.
+Notably, DEFORM enables us to deal with occlusions without requiring a frame-by-frame sensor update of the state of the DLO. 
+In particular, this is possible due to our model accurately predicting the state of the DLO over long time horizons. 
+As a result, we utilize a GMM model because it is independent of time. 
+The state estimation approach is outlined in Algorithm~\ref{code:state estimation}. 
+Additionally, Algorithm~\ref{code:DLO tracking} summarizes the perception pipeline that describes the tracking of DLOs with state estimation and initial state estimation using DEFORM.
+
+\begin{algorithm}[t]
+\caption{State Estimation with Presence of Occlusion} 
+\label{code:state estimation}
+% Initial State Estimation
+% \begin{algorithmic}[1]
+% \Require $\textbf{S}_1$ \Comment{RGB-D Camera}
+% \If{Fully Observable}
+% \State DLO Initialization $\leftarrow \text{GMM}(\textbf{S}_1)$
+% \Else{}
+% \State DLO Initialization $\leftarrow$ Guess
+% \State DLO Initialization $\leftarrow \textbf{S}_1$ 
+% \While {DLO not Reaches Static State}   
+%          \State Execute DEFORM \Comment{\textbf{Algorithm. \ref{alg:long time horizon}, Assumption.\ref{assum: static initial}}}
+% \EndWhile
+% \State Return $\pred{X}{1}, \hat{\textbf{V}}_1 = \textbf{0}$
+% \end{algorithmic}
+\textbf{Inputs}: $\pred{X}{t+1}$\Comment{Algorithm. \ref{alg:long time horizon}}
+\begin{algorithmic}[1]
+% \While {$t = 1$ \textbf{to} $T$}
+%     \State Execute DEFORM  \Comment{\textbf{Algorithm. \ref{alg:long time horizon}}}
+% \EndWhile
+% \State Return $\pred{X}{T+1}, \hat{\textbf{V}}_{T+1}$
+\State $\textbf{S}_{T+1} \leftarrow \text{RGB-D Camera}$
+\State $\tilde{\textbf{S}}_{T+1} \leftarrow \text{filter}(\pred{X}{t+1}, \textbf{S}_{T+1})$
+\State Unoccluded $\pred{X}{t+1} \leftarrow $ Depth Matching($\tilde{\textbf{S}}_{T+1}$, $\pred{X}{t+1}$)
+\State $n_{\tilde{}}+1$ groups $\leftarrow \text{DBSCAN}(\tilde{\textbf{S}}_{T+1})$
+\For {each group}
+\State GMM Number j $\leftarrow $ Match(Unoccluded $\pred{X}{t+1}$, group)
+\State Mixture Center $\leftarrow$ GMM(group,  j)
+\EndFor
+% \State \textbf{\textcolor{blue}{for}} \Review{}{each group}{} \textbf{\textcolor{blue}{do}}
+% \State\hspace{\algorithmicindent}\Review{}{GMM Number j $\leftarrow $ Match(Unoccluded $\pred{X}{t+1}$, group)}{}
+% \State\hspace{\algorithmicindent}\Review{}{Mixture Center $\leftarrow$ GMM(group,  j)}{}
+% \State \textbf{\textcolor{blue}{end for}}
+% \State \textbf{\textcolor{blue}{for}} \Review{}{each $\pred{X}{t+1}$}{} \textbf{\textcolor{blue}{do}}
+\For{each $\pred{X}{t+1}$}
+% \State \hspace{\algorithmicindent}\textbf{\textcolor{blue}{if}} \Review{}{observed}{} \textbf{\textcolor{blue}{then}}
+\If{Observed} 
+\State Vertex $\leftarrow$ Associated Mixture Center
+\Else
+% \State \hspace{\algorithmicindent}\textbf{\textcolor{blue}{else}}
+\State Vertex $\leftarrow$ Predicted Vertex
+\EndIf{}
+% \State \hspace{\algorithmicindent}\textbf{\textcolor{blue}{end if}}
+% \State \textbf{\textcolor{blue}{end for}}
+\EndFor
+\State \Return: Vertices
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[t]
+\caption{Tracking DLO with Modeling} 
+\label{code:DLO tracking}
+\textbf{Initial State Estimation}
+\begin{algorithmic}[1]
+\Require $\textbf{S}_1 \leftarrow $ RGB-D Camera
+\State DLO Initial Guess $\leftarrow \textbf{S}_1$
+\While{DLO not Static}
+\State Execute DEFORM \Comment{Algorithm. \ref{alg:long time horizon}, Assumption.\ref{assum: static initial}}
+\EndWhile
+% \State \textbf{\textcolor{blue}{while}} \Review{}{DLO not Static}{} \textbf{\textcolor{blue}{do}}
+%          \State \hspace{\algorithmicindent} \Review{}{Execute DEFORM \Comment{Algorithm. \ref{alg:long time horizon}, Assumption.\ref{assum: static initial}}}{}
+% \textbf{\textcolor{blue}{end while}}
+\State Return $\pred{X}{1}, \hat{\textbf{V}}_1 = \textbf{0}$
+\end{algorithmic}
+\textbf{Tracking DLO under Manipulation}
+\begin{algorithmic}[1]
+% \State \textbf{\textcolor{blue}{while}} \Review{}{Tracking DLO}{} \textbf{\textcolor{blue}{do}} 
+% \State\hspace{\algorithmicindent}\textbf{\textcolor{blue}{while}} \Review{}{Predicting DLO}{} \textbf{\textcolor{blue}{do}}
+% \State \hspace{\algorithmicindent} \hspace{\algorithmicindent} \Review{}{Execute DEFORM \Comment{Algorithm.\ref{alg:long time horizon}}}{}
+% \State\hspace{\algorithmicindent}\textbf{\textcolor{blue}{end while}}
+% \State \hspace{\algorithmicindent}\Review{}{State Estimation and Correction \Comment{Algorithm.\ref{code:state estimation}}}{}
+% \State\textbf{\textcolor{blue}{end while}}
+\While{Tracking DLO}
+\While{Predicting DLO}
+\State Execute DEFORM \Comment{Algorithm. \ref{alg:long time horizon}}
+\EndWhile
+\State State Estimation and Correction
+\EndWhile
+\end{algorithmic}
+\end{algorithm}
+
+
+% This section describes the perception pipeline that is used to verify the usefulness of modeling for robust DLO tracking and reducing perception frequency. 
+% We assume prediction time to be extensively long so that the previous perception's geometry correlation with current perception can not be established efficiently. 
+% Therefore, we keep GMM as it is to be time independent.
+
+% \subsection{State Estimation}
+
+
+\subsection{State Estimation in the Presence of Occlusions}
+% \subsection{Prediction as Point Cloud Filter}
+\label{section: filter}
+
+% State estimation of DLO is crucial to initiate or refine prediction. 
+Suppose that we are given access to an RGB-D sensor observing our DLO during manipulation and suppose that we translate these measurements at time step $t$ into a point cloud which we denote by  $\textbf{S}_t = \{s_t^1, s_t^m, \dots, s_t^M\} \Rdim{M}{3}$.
+% \Yizhou{I made the change but it has overlap with related work...}
+
+% \Zac{what makes this a problem?} \Zac{move this sentence up to after "If the DLO..."?} \Yizhou{problem: if set the number of mixtures in the GMM equal to the number of vertices of the DLO under occlusion, then unoccluded part will be overcrowed with vertices while occluded part does not have any vertices, which violates vertices distributions along DLOs.}
+% let K to be the cluster number of point cloud, one can approximate DLO's keypoints as $\Tilde{\textbf{S}}_t = \text{GMM}(\textbf{S}_t, K)$  \cite[Section III.A]{Tomi2}. 
+% When DLO is fully observable, K is set to be number of vertices n. 
+% However, observe that $\Tilde{\textbf{S}}_t = \text{GMM}(\textbf{S}_t, K)$ does not have temporal correlation with previous observations. 
+% Such temporal independence imposes challenge to address occlusion. 
+% Recent literature \cite{cdcpd, cdcpd2, SPR, Tomi1, Tomi2} introduces local geometric regularization to leverage new observation $\textbf{S}_t$ and previous observation $\textbf{S}_{t-1}$. 
+% Despite their success, geometric locality of those modeling methods require perception at each time step and could introduce unnecessary computational costs from perception. 
+% To this end, we explore the possibility of relaxing the perception frequency while maintaining accuracy with our modeling.
+To address the limitations of the algorithms discussed in Section \ref{sec:related_work}, we leverage our predictions generated by applying Algorithm \ref{alg:long time horizon} as follows.
+% \Yizhou{I think it may make more sense to keep "our predictions generated by applying"}
+We first filter the point cloud at time $t$ using our predicted data.
+If any element of the point cloud is beyond some distance from our prediction, $\hat{\textbf{X}}_t$, then we remove it.
+Let $\tilde{\textbf{S}}_t$ denote the remaining points in the point cloud.
+Next, we detect which of the vertices of the DLO are unoccluded from the RGB-D sensor by checking if their predicted depth is close to their observed depth in the sensor.
+Suppose the number of vertices that are unoccluded is $\tilde{n}$.
+
+Once this is done, we apply DBSCAN to group $\tilde{\textbf{S}}_t$ into $\tilde{n}+1$ groups. 
+Next, we associate each of the unoccluded vertices with one of the groups by finding the group to which its predicted location is smallest. 
+We then take each group and perform GMM on the group with a number of mixtures equal to the number of vertices j that were associated with that group. 
+Note, each mixture is associated with an unoccluded vertex of the DLO.
+The new predicted location of the vertex generated by DEFORM is updated by setting the new vertex location equal to the mean of its associated mixture. % \Zac{is inextensibility checked here? if so, how?}
+If a particular vertex was occluded, then its predicted location is left equal to its output from Algorithm~\ref{alg:long time horizon}.
+% \Zac{I am confused by this section. do you start with a known state, then get a sensor measurement and compare that with the model prediction, and then update the model prediction somehow using the sensor measurement? at no point is it said where DEFORM is used. what is Alg 1 being used for? leverage vs augment? why are unoccluded vertices having GMM performed? what in here enables not doing a frame by frame update? is inextensibility still enforced after the update?}
+% \Yizhou{"do you start with a known state, then get a sensor measurement and compare that with the model prediction, and then update the model prediction somehow using the sensor measurement?": yes
+% "at no point is it said where DEFORM is used. what is Alg 1 being used for?": that is the reason why I was suggesting I think it may make more sense to keep "our predictions generated by applying". Alg 1 is to predict sequential states of DLOs. If perception is aquired at a point, the correponing prediction is used as a filter. "why are unoccluded vertices having GMM performed?" to correct unoccluded vertices. "what in here enables not doing a frame by frame update?" if the occlusion is persisting for a long time, the frame to frame update is not necessary and might have adversary effect. "is inextensibility still enforced after the update?" yes!}
+% Raw observation of DLO with $\textbf{S}_t$ could be noisy and occluded. Prediction is applied to filter noise and occlusion. Naively applying GMM onto $\textbf{S}_t$ would be inapplicable. Therefore we apply prediction as filter as following.
+% \begin{equation}
+%     \Tilde{\textbf{S}}_t\in \{||\hat{\textbf{X}}_t - \textbf{S}_t||_2 \leq threshold\}
+%     \label{eq:point cloud filter}
+% \end{equation}
+% Note that we differentiate filtered point cloud with observed point cloud with "$\sim$" (e.g., $\textbf{S}_t$ represents raw point and and $\Tilde{\textbf{S}}_t$ represents filtered point cloud.)
+
+% \subsection{Leverage Perception and Prediction under Occlusion.}
+% \label{sec: AdaptiveGMM}
+
+% Applying GMM onto $\hat{\textbf{S}}_t$ with constant K under occlusion could introduce crowded vertices at observed point cloud and cause simulation inaccuracy. 
+% Therefore, adaptive selection of K for observed point cloud is required. 
+% Intuitively, point cloud under occlusion will spatially be divided into point cloud groups.
+% We separate the group with DBSCAN \cite{DBSCAN}. Next, we assign center number onto each group sepererately with following: obtain predicted state $\hat{\textbf{X}}_t$'s depth by projecting through inverse of camera projection.
+% Then, select out the non-occluded points $\Tilde{\textbf{X}}_t$ based mismatch between on $\hat{\textbf{X}}_t$'s depth and $\hat{\textbf{X}}_t$'s image location's perceived depth. 
+% We then attribute $\hat{\textbf{X}}_t$ onto point cloud group by finding the summation of its distance costs \cite[cdist]{scipy} to each group. 
+% Subsequently, each point cloud group uses number of attributed predicted points as number of cluster center. 
+% Finally, observed prediction are leveraged with GMM's keypoint estimation, and keep unobserved prediction unchanged.
+
+\subsection{Initial State Estimation under Occlusion}
+\label{sec:initial_state}
+Note that in many instances, it can be difficult to estimate the location of the vertices when the sensor turns on and the DLO is occluded.
+Unfortunately, Algorithm~\ref{alg:long time horizon} and the state estimation algorithm from the previous subsection require access to a full initial state.
+Fortunately, we can address this problem by making the following assumption:
+\begin{assum}
+When the sensor measurements begin, the DLO is static and is only subject to gravity and/or the manipulators which are holding its ends.
+% when t=1, DLO is static and is only subjected to force from gravity and grippers.
+\label{assum: static initial}
+\end{assum}
+Under the above assumption, we initialize the DLO using an initial guess that aligns with observed vertices.
+This initial guess is then forward simulated using Algorithm~\ref{alg:long time horizon} repeatedly until the DLO reaches a static state.
+This steady state is then used as the predicted state for all the vertices, including the occluded vertices. 
+% \Zac{so the DLO can start in occlusion? if so this should be highlighted more. how well does this work?} \Yizhou{Yes. It is good suggestion. I could give out some quatitative data. Let's keep it in mind.}
+% $\hat{\textbf{X}}_1$, that can be used in \eqref{eq:point cloud filter}.
+
+
+% \begin{algorithm}
+% \caption{Perception with Modeling} 
+% \label{alg:inextensibility of PBD}
+% \textbf{Initial Perception}: $\textbf{S}_1$
+% \begin{algorithmic}[1]
+% \State $\Tilde{\textbf{S}}_1\in \{||\hat{\textbf{X}}_1 - \textbf{S}_1||_2 \leq threshold\}$ \Comment{\secref{sec:initial_state}}
+% \State Obtain $\textbf{X}_1$
+% \Comment{\secref{sec:initial_state}, \secref{sec: AdaptiveGMM}}
+% \Repeat
+%     \For{$t = 1$ \textbf{to} $T-1$}
+%         \State Execute \textbf{Algorithm. \ref{alg:long time horizon}}
+%     \EndFor
+%     \State \textbf{Perception:} $\textbf{S}_T$, Obtain $\textbf{X}_T$ \Comment{\secref{section: filter} \ref{sec: AdaptiveGMM}}
+% \Until{Stop}
+% \end{algorithmic}
+% \end{algorithm}

@@ -1,0 +1,34 @@
+\subsection{Verification of Improved Inextensiblity Enforcement with PBD}
+\label{appendix:Verification proof}
+First, note that  \eqref{eq:PBD_constraint3}
+ applies only to successive vertices. 
+This simplifies the conservation of momentum equation\eqref{eq:momentum} so that it only involves successive vertices, as shown below:
+\begin{equation}
+    \label{eq:linmomentum_simplified} 
+     \textit{\textbf{M}}^i \cdot \Delta \hat{\textbf{x}}^i_{t+1} + \textit{\textbf{M}}^{i+1} \cdot \Delta \hat{\textbf{x}}^{i+1}_{t+1}= \textbf{0}
+\end{equation}
+\begin{equation}
+    \label{eq:angmomentum_simplified} 
+     \textbf{r}^i \times (\textit{\textbf{M}}^i \cdot \Delta \hat{\textbf{x}}^i_{t+1}) + \textbf{r}^{i+1} \times (\textit{\textbf{M}}^{i+1} \cdot \Delta \hat{\textbf{x}}^{i+1}_{t+1})= \textbf{0}
+\end{equation}
+The complete proposed solution, as detailed in Section \ref{sec:inextensiblity methodology}, can be expressed as:
+\begin{equation}
+    \label{eq:momentum_solution1} 
+     \Delta \hat{\textbf{x}}^i_{t+1} = \frac{\textit{\textbf{M}}^{i+1}}{(||\textit{\textbf{M}}^{i}||_2+||\textit{\textbf{M}}^{i+1}||_2)} \cdot C(\hat{\textbf{x}}^i_{t+1},\hat{\textbf{x}}^{i+1}_{t+1})\frac{\hat{\textbf{x}}^{i+1}_{t+1} - \hat{\textbf{x}}^{i}_{t+1}}{||\hat{\textbf{x}}^{i+1}_{t+1} - \hat{\textbf{x}}^{i}_{t+1}||_2}
+\end{equation}
+\begin{equation}
+    \label{eq:momentum_solution2} 
+     \Delta \hat{\textbf{x}}^i_{t+1} = \frac{\textit{\textbf{M}}^{i}}{(||\textit{\textbf{M}}^{i}||_2 + ||\textit{\textbf{M}}^{i+1}||_2)}\cdot C(\hat{\textbf{x}}^i_{t+1},\hat{\textbf{x}}^{i+1}_{t+1})\frac{-(\hat{\textbf{x}}^{i+1}_{t+1} - \hat{\textbf{x}}^{i}_{t+1})}{||\hat{\textbf{x}}^{i+1}_{t+1} - \hat{\textbf{x}}^{i}_{t+1}||_2}
+\end{equation}
+Expanding \eqref{eq:linmomentum_simplified} with \eqref{eq:momentum_solution1} and \eqref{eq:momentum_solution2}:
+\begin{align}
+    \label{eq:linear momentum expansion}
+    \begin{split}
+     & \textit{\textbf{M}}^i \cdot \Delta \hat{\textbf{x}}^i_{t+1} + \textit{\textbf{M}}^{i+1} \cdot \Delta \hat{\textbf{x}}^{i+1}_{t+1}=  
+     \frac{\textit{\textbf{M}}^{i} \cdot \textit{\textbf{M}}^{i+1}}{(||\textit{\textbf{M}}^{i}||_2+||\textit{\textbf{M}}^{i+1}||_2)} \cdot C(\hat{\textbf{x}}^i_{t+1},\hat{\textbf{x}}^{i+1}_{t+1})\frac{\hat{\textbf{x}}^{i+1}_{t+1} - \hat{\textbf{x}}^{i}_{t+1}}{||\hat{\textbf{x}}^{i+1}_{t+1} - \hat{\textbf{x}}^{i}_{t+1}||_2} \\
+     & - \frac{\textit{\textbf{M}}^{i+1} \cdot \textit{\textbf{M}}^{i}}{(||\textit{\textbf{M}}^{i}||_2 + ||\textit{\textbf{M}}^{i+1}||_2)}\cdot C(\hat{\textbf{x}}^i_{t+1},\hat{\textbf{x}}^{i+1}_{t+1})\frac{\hat{\textbf{x}}^{i+1}_{t+1} - \hat{\textbf{x}}^{i}_{t+1}}{||\hat{\textbf{x}}^{i+1}_{t+1} - \hat{\textbf{x}}^{i}_{t+1}||_2}
+     \end{split}   
+\end{align}
+Since DLOs are linear and symmetric about their center axis, their mass matrices are also symmetric \cite{massmatrices}. Consequently, $\textit{\textbf{M}}^{i+1} \cdot \textit{\textbf{M}}^{i} = \textit{\textbf{M}}^{i} \cdot \textit{\textbf{M}}^{i+1}$,  allowing us to cancel both terms in \eqref{eq:linear momentum expansion} , resulting in zero linear momentum change. 
+A key observation here is that \eqref{eq:momentum_solution1} and \eqref{eq:momentum_solution2} are collinear along the edge $i$. 
+Therefore, $\Delta \hat{\textbf{x}}^i_{t+1}$ and $\Delta \hat{\textbf{x}}^{i+1}_{t+1}$ will not change orientation of edge $i$, naturally satisfies \eqref{eq:angmomentum_simplified}.

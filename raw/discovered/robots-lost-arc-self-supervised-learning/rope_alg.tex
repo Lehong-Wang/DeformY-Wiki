@@ -1,0 +1,70 @@
+\begin{algorithm}[t!]
+\caption{\small Iterative traiNing for Dynamic manipulation (INDy)}
+\small{
+\begin{algorithmic}[1]
+\algsetup{linenosize=\small}
+
+\label{alg:whip}
+\REQUIRE Base action of task $i$ $a_{\beta, i}$, a task-trajectory function $f_{\mathcal{A}_i}$, a goal observation set $\mathcal{O}_\mathrm{goal}$, number of data points $N$, the task's time horizon $T$.
+\STATE Empty dataset $\mathcal{D} = \{\}$.
+\FOR{$t$ $\in \{1 \ldots N\}$}
+    \STATE Randomize environment (obstacle size and location)
+    \STATE Pull taut to reset to cable's state (updates $s_t$)
+    \STATE $o_t \leftarrow f_c(s_t)$ \COMMENT{record initial observation}
+    \STATE Set starting action $a_{0:T} = a_{\beta, i}$
+    %\WHILE{not successful}
+    \LOOP
+        \STATE $\tau_a \leftarrow f_{\mathcal{A}_i}(a_{0:T})$ \COMMENT{compute trajectory}
+        \STATE execute $\tau_a$ on the robot (updates $s_t$)
+        %\STATE Rollout actions $a_{0:T}$, record observation $o_T$
+        \IF{$f_c(s_t)\in\mathcal{O}_\mathrm{goal}$}
+            \STATE \textbf{break} \COMMENT{success observed}
+        \ENDIF
+        \STATE Pull taut to reset to cable's state (updates $s_t$)
+        \STATE $a_{0:T} \leftarrow a_{0:T} + \mathrm{(random\;noise)}$
+    %\ENDWHILE
+    \ENDLOOP
+    \STATE $\mathcal{D} \longleftarrow \mathcal{D} \cup \{(o_t, a_{0:T})\}$ 
+\ENDFOR
+\STATE Train policy $\pi_i(a|o)$ with $\mathcal{D}$ to minimize Eq.~\ref{eq:loss}.
+\RETURN Trained policy for task $i$, $\pi_i(a|o)$
+\end{algorithmic}
+}
+\end{algorithm}
+%% OLDER WAY BELOW
+%\begin{algorithm}[t!]
+%\caption{Self-Supervised Training Procedure}
+%\small{
+%\begin{algorithmic}[1]
+%\algsetup{linenosize=\small}
+%
+%\label{alg:whip}
+%\REQUIRE Base policy of task $i$ $\pi_{\beta, i}(a|o)$, a task-trajectory function $f_{\mathcal{A}_i}$, a goal observation set $\mathcal{O}_\mathrm{goal}$, number of data points $N$, the task's time horizon $T$.
+%\STATE \texttt{obs = []}, \texttt{acts = []}
+%\FOR{$t$ $\in \{1 \ldots N\}$}
+%    \STATE Randomize env (obstacle size and location)
+%    \STATE Pull taut to reset to cable's state (updates $s_t$)
+%    \STATE $o_t \leftarrow f_c(s_t)$ \COMMENT{record initial observation}
+%    \STATE \texttt{obs}.append$(o_t)$
+%    \STATE Set base action $a_{0:T} \sim \pi_{\beta, i}(a|o_t)$
+%    %\WHILE{not successful}
+%    \LOOP
+%        \STATE $\tau_a \leftarrow f_{\mathcal{A}_i}(a_{0:T})$ \COMMENT{compute trajectory}
+%        \STATE execute $\tau_a$ on the robot (updates $s_t$)
+%        %\STATE Rollout actions $a_{0:T}$, record observation $o_T$
+%        \IF{$f_c(s_t)\in\mathcal{O}_\mathrm{goal}$}
+%            \STATE \textbf{break} \COMMENT{success observed}
+%        \ENDIF
+%        \STATE Pull taut to reset to cable's state (updates $s_t$)
+%        \STATE $a_{0:T} \leftarrow a_{0:T} + \mathrm{(random\;noise)}$
+%    %\ENDWHILE
+%    \ENDLOOP
+%    \STATE \texttt{acts}.append($a_{0:T}$)
+%\ENDFOR
+%\STATE Form training data $\mathcal{D} = \{\mathcal{O}:\texttt{obs},\; \mathcal{A}:\texttt{acts}\}$.
+%\STATE Train policy $\pi_i(a|o)$ with $\mathcal{D}$ to minimize $\mathcal{L}_{\mathrm{MSE}} = \frac{1}{2}||\hat{a}_{0:T} - a_{0:T}||_2^2$ where $\hat{a}_{0:T}\sim \pi_i(a|o_t)$, using the reparameterization trick~\cite{vae}.
+%\RETURN Trained policy for task $i$, $\pi_i(a|o)$
+%
+%\end{algorithmic}
+%}
+%\end{algorithm}

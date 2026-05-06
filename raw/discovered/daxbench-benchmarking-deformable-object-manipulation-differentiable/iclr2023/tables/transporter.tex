@@ -1,0 +1,78 @@
+\begin{table}[ht!]
+\centering
+\fontsize{7.5}{7.5}\selectfont
+\begin{tabular}{lcccccccc}
+\toprule
+ &  & \multicolumn{4}{c}{Imitation Learning}\\
+ \cmidrule(lr){1-2}
+ \cmidrule(lr){3-6} 
+
+Task Type   
+& Task & Transporter & Transporter-RGB &ILD & Expert\\
+\cmidrule(lr){1-2}
+\cmidrule(lr){3-6} 
+\multirow{6}{*}{High-level} 
+
+& Fold-Cloth-1 
+
+& 0.19$\pm$0.04 & 0.86$\pm$0.07 &0.76$\pm$0.04 & 0.91$\pm$0.00
+\\
+
+
+& Fold-Cloth-3 
+
+& 0.40$\pm$0.05 &  0.56$\pm$0.25 & 0.82$\pm$0.05 & 0.89$\pm$0.00
+
+\\
+
+
+& Fold-T-shirt 
+
+& 0.46$\pm$0.02 & 0.83$\pm$0.05 &  0.59$\pm$0.11 & 0.85$\pm$0.00 
+
+\\
+
+
+& Unfold-Cloth-1 
+
+ &0.48$\pm$0.01 & 0.76$\pm$0.06 &0.64$\pm$0.03 & 0.87$\pm$0.00
+ 
+\\
+
+
+&Unfold-Cloth-3 
+
+ & 0.30$\pm$0.00 & 0.70$\pm$0.06 & 0.52$\pm$0.02 &0.87$\pm$0.00
+
+\\
+
+& Push-Rope
+
+&  0.70$\pm$0.00  & 0.86$\pm$0.09  &0.76$\pm$0.02 & 0.93$\pm$0.00 
+
+\\
+\cmidrule(lr){1-2}
+\cmidrule(lr){3-6} 
+\multirow{3}{*}{Low-level}
+
+&Whip-Rope 
+
+& \NA  &\NA  &0.70$\pm$0.06 & 1.00$\pm$ 0.00
+\\
+
+
+&Pour-Water 
+
+& \NA &\NA  &0.32$\pm$0.03 & 0.91$\pm$ 0.06
+
+\\
+
+& Pour-Soup  
+
+& \NA &\NA  & 0.42$\pm$0.12 & 0.85$\pm$ 0.00
+\\
+\bottomrule
+\end{tabular}
+\caption{\small \textbf{Task performance for the planning and imitation learning methods.} We report the mean and standard error for the policy/control sequences evaluated under 20 seeds.}
+\label{table:transporter}
+\end{table}

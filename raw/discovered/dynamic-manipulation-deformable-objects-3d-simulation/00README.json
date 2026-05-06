@@ -1,0 +1,20 @@
+{
+   "stamp" : true,
+   "sources" : [
+      {
+         "usage" : "toplevel",
+         "filename" : "neurips_2024.tex"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "main.bib"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "neurips_2025.bst"
+      }
+   ],
+   "process" : {
+      "compiler" : "pdflatex"
+   }
+}

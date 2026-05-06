@@ -1,0 +1,20 @@
+\begin{table}[ht]
+\caption{\textsc{Training Rewards}} \label{tab:rewards}
+\centering
+\begin{tabular}{rcll}
+\hline
+\multicolumn{1}{c}{Reward} & Expression & \multicolumn{1}{c}{Scale} & \multicolumn{1}{c}{Res. Scale} \\ \hline
+Termination                & -          & -200                                  & -                                         \\
+Torque                     &   $||\bm{\tau}||^2$        & -1e-05                                & -                                         \\
+Joint Acc.                 &    $||\ddot{\textbf{q}}||^2$        & -2.5e-07                             & -                                         \\
+Collision                  &    -        & -2                                    & -                                         \\
+Action Rate                &    $||\textbf{q}^*_k-\textbf{q}^*_{k-1}||^2$        & -0.03                                 & -                                         \\
+Torque Limit               &    $|\text{clip(}\bm{\tau}-\bm{\tau}_{\text{lim}}\text{, min=0)}|$        & -0.001                                & -0.001                                    \\
+Standing                   &    $||\textbf{q}-\textbf{q}_\text{stand}||^2$, no cmd        & 24                                    & -                                         \\
+Current Limit              &    $\text{clip(}I-I_{\text{lim}}\text{, min=0)}$        & -0.1                                  & -0.1                                      \\
+EE Pos.           &    ${1}/{(1+||\bm{p}_{EE}^*-\bm{p}_{EE}||^2)}$        & 4000                                  & 4000                                      \\
+EE Vel.           &   ${1}/{(1+|v_{EE}^*-v_{EE}|)}$         & 2000                                  & 2000                                      \\
+EE Alignment    &     ${1}/{(1+|_{EE}v_x|^2)}$       & 1000                                  & 1000                                      \\
+Action Scale               &    $||{\textbf{q}_\text{residual}}||^2$        & -                                     & -1                                        \\ \hline
+\end{tabular}
+\end{table}

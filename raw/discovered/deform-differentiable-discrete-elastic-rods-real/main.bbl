@@ -1,0 +1,319 @@
+\begin{thebibliography}{55}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Adagolodjo et~al.(2019)Adagolodjo, Goffin, De~Mathelin, and Courtecuisse]{adagolodjo2019robotic}
+Y.~Adagolodjo, L.~Goffin, M.~De~Mathelin, and H.~Courtecuisse.
+\newblock Robotic insertion of flexible needle in deformable structures using inverse finite-element simulation.
+\newblock \emph{IEEE Transactions on Robotics}, 35\penalty0 (3):\penalty0 697--708, 2019.
+
+\bibitem[Cao et~al.(2019)Cao, Li, Phan, Tiong, Liu, and Phee]{cao2019novel}
+L.~Cao, X.~Li, P.~T. Phan, A.~M.~H. Tiong, J.~Liu, and S.~J. Phee.
+\newblock A novel robotic suturing system for flexible endoscopic surgery.
+\newblock In \emph{2019 International Conference on Robotics and Automation (ICRA)}, pages 1514--1520. IEEE, 2019.
+
+\bibitem[Lv et~al.(2022)Lv, Liu, and Jia]{lv2022dynamic}
+N.~Lv, J.~Liu, and Y.~Jia.
+\newblock Dynamic modeling and control of deformable linear objects for single-arm and dual-arm robot manipulations.
+\newblock \emph{IEEE Transactions on Robotics}, 38\penalty0 (4):\penalty0 2341--2353, 2022.
+
+\bibitem[Saha and Isto(2007)]{saha2007manipulation}
+M.~Saha and P.~Isto.
+\newblock Manipulation planning for deformable linear objects.
+\newblock \emph{IEEE Transactions on Robotics}, 23\penalty0 (6):\penalty0 1141--1150, 2007.
+
+\bibitem[Ford(2015)]{GNN}
+W.~Ford.
+\newblock Graph neural networks: A review of methods and applications.
+\newblock \emph{AI Open}, 1:\penalty0 57--81, 2015.
+\newblock \doi{https://doi.org/10.1016/B978-0-12-394435-1.00020-X}.
+\newblock URL \url{https://www.sciencedirect.com/science/article/pii/B978012394435100020X}.
+
+\bibitem[Yan et~al.(2020)Yan, Zhu, Jin, and Bohg]{bi-LSTM_baseline}
+M.~Yan, Y.~Zhu, N.~Jin, and J.~Bohg.
+\newblock Self-supervised learning of state estimation for manipulating deformable linear objects, 2020.
+
+\bibitem[Yang et~al.(2021)Yang, Stork, and Stoyanov]{inlstm}
+Y.~Yang, J.~Stork, and T.~Stoyanov.
+\newblock Learning to propagate interaction effects for modeling deformable linear objects dynamics.
+\newblock pages 1950--1957, 05 2021.
+\newblock \doi{10.1109/ICRA48506.2021.9561636}.
+
+\bibitem[Tang et~al.(2017)Tang, Fan, Lin, and Tomizuka]{PINN}
+T.~Tang, Y.~Fan, H.-C. Lin, and M.~Tomizuka.
+\newblock Physics-informed neural networks: A deep learning framework for solving forward and inverse problems involving nonlinear partial differential equations.
+\newblock \emph{Journal of Computational Physics}, 378:\penalty0 2427--2433, 2017.
+\newblock \doi{10.1109/IROS.2017.8206058}.
+
+\bibitem[Bikmukhametov and Jäschke(2020)]{mlphysicsprocess}
+T.~Bikmukhametov and J.~Jäschke.
+\newblock Combining machine learning and process engineering physics towards enhanced accuracy and explainability of data-driven models.
+\newblock \emph{Computers Chemical Engineering}, 138:\penalty0 106834, 2020.
+\newblock ISSN 0098-1354.
+\newblock \doi{https://doi.org/10.1016/j.compchemeng.2020.106834}.
+\newblock URL \url{https://www.sciencedirect.com/science/article/pii/S0098135419313675}.
+
+\bibitem[Zeng et~al.(2019)Zeng, Song, Lee, Rodriguez, and Funkhouser]{physicslearn1}
+A.~Zeng, S.~Song, J.~Lee, A.~Rodriguez, and T.~Funkhouser.
+\newblock Tossingbot: Learning to throw arbitrary objects with residual physics.
+\newblock 2019.
+
+\bibitem[Bianchini et~al.(2023)Bianchini, Halm, and Posa]{physicslearn2}
+B.~Bianchini, M.~Halm, and M.~Posa.
+\newblock Simultaneous learning of contact and continuous dynamics.
+\newblock In \emph{7th Annual Conference on Robot Learning}, 2023.
+\newblock URL \url{https://openreview.net/forum?id=-3G6_D66Aua}.
+
+\bibitem[Gao et~al.(2024)Gao, Michelis, Spielberg, and Katzschmann]{physicslearn3}
+J.~Gao, M.~Y. Michelis, A.~Spielberg, and R.~K. Katzschmann.
+\newblock Sim-to-real of soft robots with learned residual physics, 2024.
+
+\bibitem[Bergou et~al.(2008)Bergou, Wardetzky, Robinson, Audoly, and Grinspun]{originalDER}
+M.~Bergou, M.~Wardetzky, S.~Robinson, B.~Audoly, and E.~Grinspun.
+\newblock Discrete elastic rods.
+\newblock In \emph{ACM SIGGRAPH 2008 Papers}, SIGGRAPH '08, New York, NY, USA, 2008. Association for Computing Machinery.
+\newblock ISBN 9781450301121.
+\newblock \doi{10.1145/1399504.1360662}.
+\newblock URL \url{https://doi.org/10.1145/1399504.1360662}.
+
+\bibitem[Bergou et~al.(2010)Bergou, Audoly, Vouga, Wardetzky, and Grinspun]{originalDER2}
+M.~Bergou, B.~Audoly, E.~Vouga, M.~Wardetzky, and E.~Grinspun.
+\newblock Discrete viscous threads.
+\newblock \emph{ACM Trans. Graph.}, 29\penalty0 (4), jul 2010.
+\newblock ISSN 0730-0301.
+\newblock \doi{10.1145/1778765.1778853}.
+\newblock URL \url{https://doi.org/10.1145/1778765.1778853}.
+
+\bibitem[Wang et~al.(2022)Wang, Zhang, Zhang, Wu, Zhu, Jin, Tang, and Tomizuka]{GNN_baseline}
+C.~Wang, Y.~Zhang, X.~Zhang, Z.~Wu, X.~Zhu, S.~Jin, T.~Tang, and M.~Tomizuka.
+\newblock Offline-online learning of deformation model for cable manipulation with graph neural networks.
+\newblock \emph{IEEE Robotics and Automation Letters}, 7\penalty0 (2):\penalty0 5544–5551, Apr. 2022.
+\newblock ISSN 2377-3774.
+\newblock \doi{10.1109/lra.2022.3158376}.
+\newblock URL \url{http://dx.doi.org/10.1109/LRA.2022.3158376}.
+
+\bibitem[Baraff and Witkin(1998)]{LargeStepSimulation}
+D.~Baraff and A.~Witkin.
+\newblock Large steps in cloth simulation.
+\newblock In \emph{Proceedings of the 25th Annual Conference on Computer Graphics and Interactive Techniques}, SIGGRAPH '98, page 43–54, New York, NY, USA, 1998. Association for Computing Machinery.
+\newblock ISBN 0897919998.
+\newblock \doi{10.1145/280814.280821}.
+\newblock URL \url{https://doi.org/10.1145/280814.280821}.
+
+\bibitem[Liang et~al.(2019)Liang, Lin, and Koltun]{diffcloth}
+J.~Liang, M.~Lin, and V.~Koltun.
+\newblock Differentiable cloth simulation for inverse problems.
+\newblock In H.~Wallach, H.~Larochelle, A.~Beygelzimer, F.~d\textquotesingle Alch\'{e}-Buc, E.~Fox, and R.~Garnett, editors, \emph{Advances in Neural Information Processing Systems}, volume~32. Curran Associates, Inc., 2019.
+\newblock URL \url{https://proceedings.neurips.cc/paper_files/paper/2019/file/28f0b864598a1291557bed248a998d4e-Paper.pdf}.
+
+\bibitem[Liu et~al.(2013)Liu, Bargteil, O'Brien, and Kavan]{Liu:2013:FSM}
+T.~Liu, A.~W. Bargteil, J.~F. O'Brien, and L.~Kavan.
+\newblock Fast simulation of mass-spring systems.
+\newblock \emph{ACM Transactions on Graphics}, 32\penalty0 (6):\penalty0 209:1--7, Nov. 2013.
+\newblock URL \url{http://cg.cis.upenn.edu/publications/Liu-FMS}.
+\newblock Proceedings of ACM SIGGRAPH Asia 2013, Hong Kong.
+
+\bibitem[Ruan et~al.(2018)Ruan, McConachie, and Berenson]{directionalrigidity}
+M.~Ruan, D.~McConachie, and D.~Berenson.
+\newblock Accounting for directional rigidity and constraints in control for manipulation of deformable objects without physical simulation.
+\newblock In \emph{2018 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)}, pages 512--519, 2018.
+\newblock \doi{10.1109/IROS.2018.8594520}.
+
+\bibitem[Berenson(2013)]{diminishingridgidity}
+D.~Berenson.
+\newblock Manipulation of deformable objects without modeling and simulating deformation.
+\newblock In \emph{2013 IEEE/RSJ International Conference on Intelligent Robots and Systems}, pages 4525--4532, 2013.
+\newblock \doi{10.1109/IROS.2013.6697007}.
+
+\bibitem[Liu et~al.(2022)Liu, Su, Lu, Li, and Yip]{xpbd}
+F.~Liu, E.~Su, J.~Lu, M.~Li, and M.~C. Yip.
+\newblock Differentiable robotic manipulation of deformable rope-like objects using compliant position-based dynamics, 2022.
+
+\bibitem[Tong et~al.(2023)Tong, Choi, Qin, Huang, Joo, and Jawed]{DERapp1}
+D.~Tong, A.~Choi, L.~Qin, W.~Huang, J.~Joo, and M.~K. Jawed.
+\newblock Sim2real neural controllers for physics-based robotic deployment of deformable linear objects, 2023.
+
+\bibitem[Lv et~al.(2022)Lv, Liu, and Jia]{DERapp2}
+N.~Lv, J.~Liu, and Y.~Jia.
+\newblock Dynamic modeling and control of deformable linear objects for single-arm and dual-arm robot manipulations.
+\newblock \emph{IEEE Transactions on Robotics}, 38\penalty0 (4):\penalty0 2341--2353, 2022.
+\newblock \doi{10.1109/TRO.2021.3139838}.
+
+\bibitem[Garc{\'\i}a et~al.(2006)Garc{\'\i}a, Mendoza, Pastor, and Rodr{\'\i}guez]{garcia2006optimized}
+M.~Garc{\'\i}a, C.~Mendoza, L.~Pastor, and A.~Rodr{\'\i}guez.
+\newblock Optimized linear fem for modeling deformable objects.
+\newblock \emph{Computer Animation and Virtual Worlds}, 17\penalty0 (3-4):\penalty0 393--402, 2006.
+
+\bibitem[Sin et~al.(2013)Sin, Schroeder, and Barbi{\v{c}}]{sin2013vega}
+F.~S. Sin, D.~Schroeder, and J.~Barbi{\v{c}}.
+\newblock Vega: non-linear fem deformable object simulator.
+\newblock In \emph{Computer Graphics Forum}, volume~32, pages 36--48. Wiley Online Library, 2013.
+
+\bibitem[Koessler et~al.(2021)Koessler, Filella, Bouzgarrou, Lequi{\`e}vre, and Ramon]{koessler2021efficient}
+A.~Koessler, N.~R. Filella, B.-C. Bouzgarrou, L.~Lequi{\`e}vre, and J.-A.~C. Ramon.
+\newblock An efficient approach to closed-loop shape control of deformable objects using finite element models.
+\newblock In \emph{2021 IEEE International Conference on Robotics and Automation (ICRA)}, pages 1637--1643. IEEE, 2021.
+
+\bibitem[Sintov et~al.(2020)Sintov, Macenski, Borum, and Bretl]{DER_manipulation1}
+A.~Sintov, S.~Macenski, A.~Borum, and T.~Bretl.
+\newblock Motion planning for dual-arm manipulation of elastic rods.
+\newblock \emph{IEEE Robotics and Automation Letters}, PP:\penalty0 1--1, 07 2020.
+\newblock \doi{10.1109/LRA.2020.3011352}.
+
+\bibitem[Bretl and McCarthy(2014)]{DER_manipulation2}
+T.~Bretl and Z.~McCarthy.
+\newblock Quasi-static manipulation of a kirchhoff elastic rod based on a geometric analysis of equilibrium configurations.
+\newblock \emph{The International Journal of Robotics Research}, 33:\penalty0 48 -- 68, 2014.
+\newblock URL \url{https://api.semanticscholar.org/CorpusID:856279}.
+
+\bibitem[Tong et~al.(2023)Tong, Choi, Qin, Huang, Joo, and Jawed]{DER_manipulation3}
+D.~Tong, A.~Choi, L.~Qin, W.~Huang, J.~Joo, and M.~K. Jawed.
+\newblock Sim2real neural controllers for physics-based robotic deployment of deformable linear objects, 2023.
+
+\bibitem[Chi et~al.(2022)Chi, Burchfiel, Cousineau, Feng, and Song]{IRP}
+C.~Chi, B.~Burchfiel, E.~Cousineau, S.~Feng, and S.~Song.
+\newblock Iterative residual policy for goal-conditioned dynamic manipulation of deformable objects.
+\newblock In \emph{Proceedings of Robotics: Science and Systems (RSS)}, 2022.
+
+\bibitem[She et~al.(2020)She, Wang, Dong, Sunil, Rodriguez, and Adelson]{gelsim}
+Y.~She, S.~Wang, S.~Dong, N.~Sunil, A.~Rodriguez, and E.~Adelson.
+\newblock Cable manipulation with a tactile-reactive gripper, 2020.
+
+\bibitem[Goldenthal et~al.(2007)Goldenthal, Harmon, Fattal, Bercovier, and Grinspun]{fast_proj}
+R.~Goldenthal, D.~Harmon, R.~Fattal, M.~Bercovier, and E.~Grinspun.
+\newblock Efficient simulation of inextensible cloth.
+\newblock \emph{ACM Trans. Graph.}, 26\penalty0 (3):\penalty0 49–es, jul 2007.
+\newblock ISSN 0730-0301.
+\newblock \doi{10.1145/1276377.1276438}.
+\newblock URL \url{https://doi.org/10.1145/1276377.1276438}.
+
+\bibitem[M\"{u}ller et~al.(2007)M\"{u}ller, Heidelberger, Hennix, and Ratcliff]{PBD}
+M.~M\"{u}ller, B.~Heidelberger, M.~Hennix, and J.~Ratcliff.
+\newblock Position based dynamics.
+\newblock \emph{J. Vis. Comun. Image Represent.}, 18\penalty0 (2):\penalty0 109–118, apr 2007.
+\newblock ISSN 1047-3203.
+\newblock \doi{10.1016/j.jvcir.2007.01.005}.
+\newblock URL \url{https://doi.org/10.1016/j.jvcir.2007.01.005}.
+
+\bibitem[Paszke et~al.(2019)Paszke, Gross, Massa, Lerer, Bradbury, Chanan, Killeen, Lin, Gimelshein, Antiga, Desmaison, Köpf, Yang, DeVito, Raison, Tejani, Chilamkurthy, Steiner, Fang, Bai, and Chintala]{pytorch}
+A.~Paszke, S.~Gross, F.~Massa, A.~Lerer, J.~Bradbury, G.~Chanan, T.~Killeen, Z.~Lin, N.~Gimelshein, L.~Antiga, A.~Desmaison, A.~Köpf, E.~Yang, Z.~DeVito, M.~Raison, A.~Tejani, S.~Chilamkurthy, B.~Steiner, L.~Fang, J.~Bai, and S.~Chintala.
+\newblock Pytorch: An imperative style, high-performance deep learning library, 2019.
+
+\bibitem[Pineda et~al.(2023)Pineda, Fan, Monge, Venkataraman, Sodhi, Chen, Ortiz, DeTone, Wang, Anderson, Dong, Amos, and Mukadam]{theseus}
+L.~Pineda, T.~Fan, M.~Monge, S.~Venkataraman, P.~Sodhi, R.~T.~Q. Chen, J.~Ortiz, D.~DeTone, A.~Wang, S.~Anderson, J.~Dong, B.~Amos, and M.~Mukadam.
+\newblock Theseus: A library for differentiable nonlinear optimization, 2023.
+
+\bibitem[He et~al.(2015)He, Zhang, Ren, and Sun]{resnet}
+K.~He, X.~Zhang, S.~Ren, and J.~Sun.
+\newblock Deep residual learning for image recognition, 2015.
+
+\bibitem[Michaux et~al.(2023)Michaux, Holmes, Zhang, Chen, Wang, Sahgal, Zhang, Dey, Kousik, and Vasudevan]{ARMOUR}
+J.~Michaux, P.~Holmes, B.~Zhang, C.~Chen, B.~Wang, S.~Sahgal, T.~Zhang, S.~Dey, S.~Kousik, and R.~Vasudevan.
+\newblock Can't touch this: Real-time, safe motion planning and control for manipulators under uncertainty.
+\newblock \emph{arXiv preprint arXiv:2301.13308}, 2023.
+
+\bibitem[Choi et~al.(2021)Choi, Tong, Jawed, and Joo]{DER_contact}
+A.~Choi, D.~Tong, M.~K. Jawed, and J.~Joo.
+\newblock {Implicit Contact Model for Discrete Elastic Rods in Knot Tying}.
+\newblock \emph{Journal of Applied Mechanics}, 88\penalty0 (5):\penalty0 051010, 03 2021.
+\newblock ISSN 0021-8936.
+\newblock \doi{10.1115/1.4050238}.
+\newblock URL \url{https://doi.org/10.1115/1.4050238}.
+
+\bibitem[Salunkhe et~al.(2023)Salunkhe, Stahre, Romero, Li, and Johansson]{wireharness}
+O.~Salunkhe, J.~Stahre, D.~Romero, D.~Li, and B.~Johansson.
+\newblock Specifying task allocation in automotive wire harness assembly stations for human-robot collaboration.
+\newblock \emph{Computers Industrial Engineering}, 184:\penalty0 109572, 2023.
+\newblock ISSN 0360-8352.
+\newblock \doi{https://doi.org/10.1016/j.cie.2023.109572}.
+\newblock URL \url{https://www.sciencedirect.com/science/article/pii/S036083522300596X}.
+
+\bibitem[Bishop(1975)]{bishopframe}
+R.~Bishop.
+\newblock There is more than one way to frame a curve.
+\newblock \emph{The American Mathematical Monthly}, 82:\penalty0 Mathematical Association of America--, 03 1975.
+\newblock \doi{10.2307/2319846}.
+
+\bibitem[Kipf and Welling(2017)]{GCN}
+T.~N. Kipf and M.~Welling.
+\newblock Semi-supervised classification with graph convolutional networks, 2017.
+
+\bibitem[Fey and Lenssen(2019)]{pytorch_geometric}
+M.~Fey and J.~E. Lenssen.
+\newblock Fast graph representation learning with pytorch geometric, 2019.
+
+\bibitem[Przemieniecki(1968)]{massmatrices}
+J.~Przemieniecki.
+\newblock \emph{Theory of Matrix Structural Analysis}.
+\newblock McGraw-Hill, 1968.
+\newblock ISBN 9780070509047.
+\newblock URL \url{https://books.google.com/books?id=4ei7AAAAIAAJ}.
+
+\bibitem[Mamedov et~al.(2024{\natexlab{a}})Mamedov, Geist, Swevers, and Trimpe]{mamedov2024pseudorigidbodynetworkslearning}
+S.~Mamedov, A.~R. Geist, J.~Swevers, and S.~Trimpe.
+\newblock Pseudo-rigid body networks: learning interpretable deformable object dynamics from partial observations, 2024{\natexlab{a}}.
+\newblock URL \url{https://arxiv.org/abs/2307.07975}.
+
+\bibitem[Mamedov et~al.(2024{\natexlab{b}})Mamedov, Geist, Viljoen, Trimpe, and Swevers]{mamedov2024learningdeformablelinearobject}
+S.~Mamedov, A.~R. Geist, R.~Viljoen, S.~Trimpe, and J.~Swevers.
+\newblock Learning deformable linear object dynamics from a single trajectory, 2024{\natexlab{b}}.
+\newblock URL \url{https://arxiv.org/abs/2407.03476}.
+
+\bibitem[Myronenko et~al.(2006)Myronenko, Song, and Carreira-Perpinan]{CPD}
+A.~Myronenko, X.~Song, and M.~Carreira-Perpinan.
+\newblock Non-rigid point set registration: Coherent point drift.
+\newblock \emph{Advances in neural information processing systems}, 19, 2006.
+
+\bibitem[Tang et~al.(2017)Tang, Fan, Lin, and Tomizuka]{CPDwPhysics}
+T.~Tang, Y.~Fan, H.-C. Lin, and M.~Tomizuka.
+\newblock State estimation for deformable objects by point registration and dynamic simulation.
+\newblock In \emph{2017 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)}, pages 2427--2433, 2017.
+\newblock \doi{10.1109/IROS.2017.8206058}.
+
+\bibitem[Ge et~al.(2014)Ge, Fan, and Ding]{GLTP}
+S.~Ge, G.~Fan, and M.~Ding.
+\newblock Non-rigid point set registration with global-local topology preservation.
+\newblock In \emph{Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition Workshops}, pages 245--251, 2014.
+
+\bibitem[Chi and Berenson(2019)]{cdcpd}
+C.~Chi and D.~Berenson.
+\newblock Occlusion-robust deformable object tracking without physics simulation.
+\newblock In \emph{2019 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)}. IEEE, Nov. 2019.
+\newblock \doi{10.1109/iros40897.2019.8967827}.
+\newblock URL \url{http://dx.doi.org/10.1109/IROS40897.2019.8967827}.
+
+\bibitem[Wang et~al.(2020)Wang, McConachie, and Berenson]{cdcpd2}
+Y.~Wang, D.~McConachie, and D.~Berenson.
+\newblock Tracking partially-occluded deformable objects while enforcing geometric constraints, 2020.
+
+\bibitem[Tang and Tomizuka(2022)]{SPR}
+T.~Tang and M.~Tomizuka.
+\newblock Track deformable objects from point clouds with structure preserved registration.
+\newblock \emph{The International Journal of Robotics Research}, 41\penalty0 (6):\penalty0 599--614, 2022.
+
+\bibitem[Tang et~al.(2017{\natexlab{a}})Tang, Fan, Lin, and Tomizuka]{Tomi1}
+T.~Tang, Y.~Fan, H.-C. Lin, and M.~Tomizuka.
+\newblock State estimation for deformable objects by point registration and dynamic simulation.
+\newblock In \emph{2017 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)}, pages 2427--2433, 2017{\natexlab{a}}.
+\newblock \doi{10.1109/IROS.2017.8206058}.
+
+\bibitem[Tang et~al.(2017{\natexlab{b}})Tang, Fan, Lin, and Tomizuka]{Tomi2}
+T.~Tang, Y.~Fan, H.-C. Lin, and M.~Tomizuka.
+\newblock State estimation for deformable objects by point registration and dynamic simulation.
+\newblock In \emph{2017 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)}, pages 2427--2433, 2017{\natexlab{b}}.
+\newblock \doi{10.1109/IROS.2017.8206058}.
+
+\bibitem[Yang et~al.(2022)Yang, Stork, and Stoyanov]{yang2022particle}
+Y.~Yang, J.~A. Stork, and T.~Stoyanov.
+\newblock Particle filters in latent space for robust deformable linear object tracking.
+\newblock \emph{IEEE Robotics and Automation Letters}, 7\penalty0 (4):\penalty0 12577--12584, 2022.
+
+\bibitem[Lv et~al.(2023)Lv, Yu, Pu, Jiang, Huang, and Li]{lv2023learning}
+K.~Lv, M.~Yu, Y.~Pu, X.~Jiang, G.~Huang, and X.~Li.
+\newblock Learning to estimate 3-d states of deformable linear objects from single-frame occluded point clouds.
+\newblock In \emph{2023 IEEE International Conference on Robotics and Automation (ICRA)}, pages 7119--7125. IEEE, 2023.
+
+\end{thebibliography}

@@ -1,0 +1,20 @@
+\begin{table}[]
+\centering
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{l|c|c|c}
+\toprule
+\rowcolor[HTML]{CBCEFB} 
+Task & \begin{tabular}[c]{@{}c@{}}Real \\ 30 Demos\end{tabular} & \begin{tabular}[c]{@{}c@{}}Zero-shot Sim \\ 1,000 Demos\end{tabular} & \begin{tabular}[c]{@{}c@{}}Sim-Real Co-Train \\ 1,000 + 30 Demos\end{tabular} \\
+\midrule
+\midrule
+Franka - Towel&76.6&70.0&76.6\\
+\rowcolor[HTML]{EFEFEF} 
+Franka - Rope&46.7&33.3&76.6\\
+YAM - Bag Loading&33.3&63.3&93.3\\
+\bottomrule
+\end{tabular}%
+}
+\caption{\textbf{Real-World Deployment Results.}
+Performance comparison across three training settings: real-only (30 demonstrations), zero-shot sim-to-real (1,000 simulation demonstrations), and sim–real co-training (1,000 simulation + 30 real demonstrations). Results show that large-scale simulation enables effective real-world transfer, while \sysName-generated data improves performance under limited real-world supervision.}
+\label{tab:table3}
+\end{table}

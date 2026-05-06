@@ -1,0 +1,132 @@
+\documentclass[letterpaper, 10 pt, conference]{ieeeconf}  
+
+\IEEEoverridecommandlockouts                              
+\overrideIEEEmargins
+\usepackage{float} 
+\usepackage{tabu}
+\usepackage{textcomp}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage[font=small,labelfont=bf]{caption}
+\usepackage{subcaption}
+\usepackage{algorithm}
+\usepackage{afterpage}
+
+\usepackage{bbm}
+\usepackage{algorithmicx}
+\let\labelindent\relax
+\usepackage{enumitem,kantlipsum}
+\usepackage{tablefootnote}
+\usepackage{booktabs}
+\usepackage{dsfont}
+\usepackage[dvipsnames, svgnames]{xcolor} 
+\usepackage{gensymb}
+\usepackage{wrapfig}
+\usepackage{capt-of}
+\usepackage{xcolor}
+
+\usepackage{algpseudocode}
+\usepackage[backend=biber,
+            hyperref=true,
+            url=false,
+            isbn=false,
+            doi=false,
+            backref=false,
+            style=ieee,
+            natbib=true,%compatibility aliases
+            citestyle=numeric-comp,
+            sorting=none,%nyt
+            block=none]{biblatex}
+\renewcommand{\bibfont}{\small}
+\newcommand{\underlinedname}{\operatorname{\text{\textbf{\underline{R}}apid \textbf{\underline{A}}daptation of \textbf{\underline{P}}art\textbf{\underline{i}}cle \textbf{\underline{D}}ynamics}}}
+\newcommand{\tog}{TOG-Net~{\cite{fang2020learning}}}
+\newcommand{\encoder}{\pi^{\phi}_{encoder}}
+\newcommand{\adaptation}{\pi^{\psi}_{adaptation}}
+\newcommand{\policy}{\pi^{\theta}_{base}}
+\newcommand{\qpolicy}{Q_{base}^{\sigma}}
+\newcommand{\rpolicy}{\mathcal{R}_{base}^{\omega}}
+\newcommand{\methodname}{\textsc{RAPiD}}
+\addbibresource{references.bib}
+\addbibresource{appendix.bib}
+
+\newsavebox{\preliminaries}
+\newcommand{\taskone}{\texttt{1D\_Inserting}}
+\newcommand{\tasktwo}{\texttt{2D\_Covering}}
+\setlength{\textfloatsep}{7pt plus 0pt minus 7pt}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\pagenumbering{roman}
+\let\ACMmaketitle=\maketitle
+\renewcommand{\maketitle}{\begingroup\let\footnote=\thanks 
+\ACMmaketitle\endgroup}
+\makeatletter
+\delimitershortfall=-1pt
+\usepackage{graphicx}
+\let\@fnsymbol\@arabic
+\makeatother
+\setlength{\abovedisplayskip}{3pt}
+\setlength{\belowdisplayskip}{3pt}
+\setlength{\abovedisplayshortskip}{0pt}
+\setlength{\belowdisplayshortskip}{0pt}
+\setlength{\jot}{0pt}
+\setlength\tabcolsep{3pt}
+\setlength\topsep{-3pt}
+\setlength\parskip{3pt}
+\captionsetup{font=small,skip=3pt}
+\newcommand{\theappendix}{\@Alph\c@section}
+\usepackage{etoolbox}
+\usepackage{cuted}
+\newcommand{\debugcounter}[1]{%
+  \typeout{DEBUG: Counter #1 = \arabic{#1}}%
+}
+\newcommand{\debugmacro}[1]{%
+  \typeout{DEBUG: Macro \string#1 definition:}\show#1%
+}
+\pretocmd{\section}{\debugcounter{section}}{}{}
+\pretocmd{\subsection}{\debugcounter{subsection}}{}{}
+\allowdisplaybreaks
+\title{\LARGE \bf Rapid Adaptation of Particle Dynamics
+for Generalized Deformable Object Mobile Manipulation}
+
+\author{Bohan Wu, Roberto Mart\'{i}n-Mart\'{i}n\textsuperscript{*}, and Li Fei-Fei\textsuperscript{*}
+\thanks{* Equal Advising. Authors are with Stanford University and the University of Texas at Austin, USA. \texttt{\{bohanwu, feifeili\}@stanford.edu, robertomm@utexas.edu}}
+}
+
+\begin{document}
+\maketitle
+\begin{strip}
+\includegraphics[width=\textwidth]{photos/pull.png}
+\captionof{figure}{\small \textbf{\methodname{}: $\underlinedname$} (\textcolor{blue}{\textit{Left}}) is a method for learning to perform real-world deformable object mobile manipulation tasks by inferring and adapting to the unknown dynamics of deformable objects in real-time. \textcolor{Orange}{\textit{Top Right:}} In simulation, \methodname{} first learns a visuomotor policy to achieve a deformable object mobile manipulation task, such as bowl-covering, by inferring the deformable object's dynamics from the robot's visual observations and actions. \textcolor{OliveGreen}{\textit{Bottom Right}}: \methodname{} then deploys the learned visuomotor policy directly to the real world to achieve the deformable object mobile manipulation task, under \textbf{unseen object dynamics, instances, categories, and lighting conditions}, using only onboard sensor signals.}
+\label{fig:pull}
+\end{strip}
+
+\begin{abstract}
+We address the challenge of learning to manipulate deformable objects with unknown dynamics. 
+In non-rigid objects, the dynamics parameters define how they react to interactions --how they stretch, bend, compress, and move-- and they are critical to determining the optimal actions to perform a manipulation task successfully.
+In other robotic domains, such as legged locomotion and in-hand rigid object manipulation, state-of-the-art approaches can handle unknown dynamics using \textit{Rapid Motor Adaptation} (RMA). Through a supervised procedure in simulation that encodes each rigid object's dynamics, such as mass and position, these approaches learn a policy that conditions actions on a vector of latent dynamic parameters inferred from sequences of state-actions.
+However, in deformable object manipulation, the object's dynamics not only include its mass and position, but also how the shape of the object changes.
+Our key insight is that the recent ground-truth particle positions of a deformable object in simulation capture changes in the object's shape, making it possible to extend RMA to deformable object manipulation.
+This key insight allows us to develop \methodname{}, a two-phase method that learns to perform real-robot deformable object mobile manipulation by: 1) learning a visuomotor policy conditioned on the object's dynamics embedding, which is encoded from the object's privileged information in simulation, and 2) learning to infer this embedding using non-privileged information instead, such as robot visual observations and actions, so that the learned policy can transfer to the real world. 
+On a 22-DOF robot, \methodname{} enables 80\%+ success rates across two real-world vision-based deformable object mobile manipulation tasks, under unseen object dynamics, categories, and instances. More details are at \url{https://sites.google.com/view/rapid-robotics}.
+\end{abstract}
+
+\begin{refsection}[references.bib]
+\input{1_intro}
+\input{2_rw}
+\input{3_method}
+\input{4_experiments}
+\input{5_conclusions}
+
+\renewcommand*{\bibfont}{\footnotesize}
+\printbibliography
+\newpage
+\end{refsection}
+
+%\input{appendix}
+
+\end{document}

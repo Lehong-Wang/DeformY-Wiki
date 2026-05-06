@@ -1,0 +1,119 @@
+
+\documentclass{article} % For LaTeX2e
+\usepackage{iclr2023_conference,times}
+\usepackage{multirow}
+\usepackage{amssymb}% http://ctan.org/pkg/amssymb
+\usepackage{pifont}% http://ctan.org/pkg/pifont
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+
+% Optional math commands from https://github.com/goodfeli/dlbook_notation.
+\input{math_commands.tex}
+\definecolor{citecolor}{RGB}{34, 139, 34}
+
+\usepackage{hyperref}
+% \usepackage[colorlinks,citecolor=citecolor]{hyperref} % default green is too bright
+
+\usepackage{url}
+
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage{array, makecell}
+\usepackage{xcolor}
+\usepackage[table]{colortbl}
+\usepackage{floatrow}
+\newfloatcommand{capbtabbox}{table}[][\FBwidth]
+\usepackage{tabulary}
+\usepackage{tabularx} 
+\usepackage{wrapfig}
+\usepackage{listings}
+
+% \usepackage{ifthen}
+% \newboolean{include-notes}
+% \setboolean{include-notes}{true}
+% \newcommand{\nb}[3]{\ifthenelse{\boolean{include-notes}}{{\colorbox{#2}{\bfseries\sffamily\scriptsize\textcolor{white}{#1}}}{\ \textcolor{#2}{\sf\small\textit{#3}}}}{}}
+\newcommand\nnfootnote[2]{%
+  \begin{NoHyper}
+\def\thefootnote{\ensuremath{#1}}\footnotetext{#2}%
+  % \addtocounter{footnote}{-1}%
+  \end{NoHyper}
+}
+
+
+\title{\algo: Benchmarking Deformable Object Manipulation with Differentiable Physics}
+
+% Authors must not appear in the submitted version. They should be hidden
+% as long as the \iclrfinalcopy macro remains commented out below.
+% Non-anonymous submissions will be rejected without review.
+
+\author{
+Siwei Chen$^{1\dagger}$, Yiqing Xu$^{1\dagger}$, Cunjun Yu$^{1\dagger}$, Linfeng Li$^{1}$, Xiao Ma$^{2}$, Zhongwen Xu$^{2}$, David Hsu$^{1}$ \\\\
+\space $^1$ National University of Singapore  \space $^2$ Sea AI Lab$^{\ddagger}$
+}
+
+% The \author macro works with any number of authors. There are two commands
+% used to separate the names and addresses of multiple authors: \And and \AND.
+%
+% Using \And between authors leaves it to \LaTeX{} to determine where to break
+% the lines. Using \AND forces a linebreak at that point. So, if \LaTeX{}
+% puts 3 of 4 authors names on the first line, and the last on the second
+% line, try using \AND instead of \And before the third author name.
+
+\newcommand{\fix}{\marginpar{FIX}}
+\newcommand{\new}{\marginpar{NEW}}
+
+\iclrfinalcopy % Uncomment for camera-ready version, but NOT for submission.
+\begin{document}
+
+
+\maketitle
+\nnfootnote{\dagger}{These authors contributed equally.}
+\nnfootnote{\ddagger}{This work is partially completed at the SEA AI Lab.}
+
+\begin{abstract}
+Deformable object manipulation (DOM) is a long-standing challenge in robotics and has attracted significant interest recently. This paper presents \algo, a differentiable simulation framework for DOM. 
+While existing work  often focuses on a specific type of deformable objects, \algo\ supports  fluid, rope, cloth \ldots; it provides a general-purpose benchmark to evaluate widely different DOM methods, including  planning, imitation learning, and reinforcement learning. 
+\algo\ combines recent advances in deformable object simulation with JAX, a high-performance computational framework.
+All DOM tasks in \algo\ are wrapped with the OpenAI Gym API for  easy integration with DOM algorithms. We hope that \algo\ provides to the research community a comprehensive, standardized benchmark and a valuable tool to support the development and evaluation of new DOM methods. 
+The code and video are available online$^*$.\nnfootnote{*}{The link of the project is \url{https://github.com/AdaCompNUS/DaXBench}.}
+\end{abstract}
+
+\input{iclr2023/sections/intro}
+\input{iclr2023/sections/related_work}
+\input{iclr2023/sections/pax}
+\input{iclr2023/sections/experiment}
+
+
+\section{Conclusion}
+We introduced \algo, a general-purpose differentiable simulation framework for various deformable object manipulation tasks.
+To our knowledge, \algo\ is the first platform that simulates liquid, rope, fabric, and elastoplastic materials while being differentiable and highly parallelizable. In addition to common DOM tasks, we also proposed several novel tasks, including WhipRope and PourSoup, to study the performance of DOM methods on long-horizon tasks with low-level controls. Our task coverage provides a comprehensive platform to compare existing DOM methods from all paradigms, and our empirical study sheds light on the benefits and limitations of differentiable-physics-based methods in DOM. We believe that \algo can assist in the algorithmic development of DOM methods, particularly those based on differentiable physics, across all paradigms.
+
+\newpage
+
+\section*{Acknowledgements}
+This research is supported by the National Research Foundation, Singapore under its AI Singapore Programme (AISG Award No: AISG2-PhD-2021-08-015T, AISG2-PhD-2022-01-036T, and AISG2-PhD-2021-08-014) and A\(^*\)STAR under the National Robotics Program (Grant No. 192 25 00054).
+
+\section*{Ethics Statement}
+
+\algo\ provides a benchmark for deformable object manipulation (DOM). 
+We believe that DaXBench and its simulator DaX have no potential negative societal impacts. In addition, our work is on benchmarking the DOM methods in simulator, so we do not collect any data or conduct experiments with human subjects. In summary, we have read the ICLR Code of Ethics and ensured that our work conforms to them.
+
+
+
+
+\section*{Reproducibility Statement}
+In this paper, imitation learning and planning experiments are averaged over 20 random rollouts and RL approaches use 100 rollouts. We have included our source code as an easy-to-install package in the supplementary material.
+
+\bibliography{iclr2023_conference}
+\bibliographystyle{iclr2023_conference}
+
+
+\newpage
+\appendix
+\input{iclr2023/appendix/implementation}
+\input{iclr2023/appendix/sim2real}
+\input{iclr2023/appendix/RL_performance}
+\input{iclr2023/tables/transporter}
+\input{iclr2023/appendix/transporter}
+\end{document}

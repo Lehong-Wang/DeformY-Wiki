@@ -1,0 +1,46 @@
+\documentclass[letterpaper, 10 pt, conference]{ieeeconf}
+\IEEEoverridecommandlockouts
+\overrideIEEEmargins
+
+\input{preamble.tex}
+
+\title{\LARGE \bf Robots of the Lost Arc:\\ Self-Supervised Learning to Dynamically Manipulate\\ Fixed-Endpoint Cables}
+\author{Harry Zhang, Jeffrey Ichnowski, Daniel Seita, Jonathan Wang, Huang Huang, and Ken Goldberg$^1$%
+\thanks{$^1$All authors are affiliated with the AUTOLab at UC Berkeley (automation.berkeley.edu).
+{\tt\small \{harryhzhang, jeffi, seita, jnwang19, hh19971229, goldberg\} @berkeley.edu}}}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+\pagestyle{empty}
+
+\begin{abstract}
+\input{abstract.tex}
+% \jeffi{I've been leaning towards github pages recently--mostly for the cooler URL like: https://berkeleyautomation.github.io/GOMP/.  Not sure if Google pages is easier though}./ \harry{Google sites is pretty easy to use, but there are some extra steps needed to make the site appear in google search...}
+\end{abstract}
+
+\input{section-1-introduction.tex}
+\input{section-2-related-work.tex}
+\input{section-3-problem-definition.tex}
+%\input{hypothesis_old_incorporate_me}
+\input{section-4-method.tex}
+\input{section-5-experiments.tex}
+\input{section-6-results.tex}
+\input{section-7-conclusion.tex}
+
+
+\section{Acknowledgments}
+
+\footnotesize
+This research was performed at the AUTOLAB at UC Berkeley in
+affiliation with the Berkeley AI Research (BAIR) Lab, the CITRIS ``People and Robots'' (CPAR) Initiative, and the Real-Time Intelligent Secure Execution (RISE) Lab. The authors were supported in part by donations from Toyota Research Institute and by equipment grants from PhotoNeo, NVidia, and Intuitive Surgical. Daniel Seita is supported by a Graduate Fellowship for STEM Diversity (GFSD). We thank our colleagues who provided helpful feedback, code, and suggestions, in particular Francesco Borrelli, Adam Lau, Priya Sundaresan, and Jennifer Grannen.
+
+% Daniel: I just noticed, if you set IEEEtran as the bibliography, references appear in the order they are cited, but IEEEtranS (with the 'S' at the end) means references appear in alphabetical order. I advocate for alphabetical order.
+\bibliographystyle{IEEEtran}
+\bibliography{IEEEabrv,references}
+
+\clearpage
+% \input{section-8-appendix.tex}
+
+\end{document}

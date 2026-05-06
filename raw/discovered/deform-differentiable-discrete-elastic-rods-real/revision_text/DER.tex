@@ -1,0 +1,89 @@
+\section{Model DLO with Discrete Elastic Rods(DER)}
+
+
+
+\begin{figure}
+    \centering
+     \includegraphics[width=0.4\textwidth]{figures/DER_with_robot.png}
+     \caption{\textbf{DER Setting with Robots: Need to be edited}}
+    \label{fig:primal-dual}
+\end{figure}
+
+\textbf{Derivation for DER:}\\
+$\textbf{e}_\text{t}^\text{i} \in \mathbb{R}^3$ which is defined as $\textbf{x}^{i+1} - \textbf{x}^{i}$. 
+$\overline{\textbf{e}}$ represents the natural configuration of wire \Ram{what does that mean? Like the edges?}.
+All barred quantities in the following represent the natural configuration (without external/internal force) of wires. 
+Notice that the natural configuration of the wire is not necessarily straight or a parabolic shape.\\ 
+\textbf{Adaptive Frame Setup}:\\
+\textbf{Bishop Frame}:  \Ram{it feels as if most of this should be rewritten using a definition environment (look at the RSS paper I shared with you)}
+$\Gamma^\text{i}_\text{B}: {\{\textbf{t}^\text{i}, \textbf{v}_1^\text{i}, \textbf{v}_2^\text{i}\}}$. 
+Define frame transport \Ram{what does frame transport mean?} using quaternion rotation $R_{\text{q}^\text{i}}(\bm{v^\text{i}})$ \Ram{this seems to be missing an equal sign of some kind? or are you saying that its defined in the equation below?}, $\text{q}^\text{i}=(\text{q}_0^\text{i}, \textbf{q}^\text{i}$), $\text{q}_0^\text{i}$ represents magnitude and $\textbf{q}^\text{i}$ represents axial vector.  
+
+To minimize twist along the frame transport, it follows: $\textbf{q}^\text{i} \cdot \textbf{t}^\text{i} = 0$ \Ram{this is probably missing a citation}.
+The equation prohibits $\Gamma_\text{B}^\text{i}$ to rotate around vector $\textbf{t}^\text{i}$, which is why it is twist-free \cite{originalDER, kirchoff}. 
+Combining the equation \Ram{which equation?} with \eqref{eq:parallel transfort1_1}'s first equation, $\text{q}_\text{i}$ can be determined as following:
+% \begin{align}
+% \text{q}_0^\text{i} &= \text{cos}(\phi^\text{i}/2) 
+% \label{eq:parallel transfort2_1}\\
+% \textbf{q}^\text{i} &= \text{sin}(\phi^\text{i}/2)|\textbf{t}^\text{i} \times \textbf{t}^{\text{i}+1}|. 
+% \label{eq:parallel transfort2_2}
+% \end{align}
+$\phi_\text{i}$ from Fig.\ref{fig:adapted-frame} can be determined from the magnitude of discrete curvature binormal $(\kappa\textbf{b})^\text{i}$, which represents changing rate of the tangent vector along the rod's length in the discrete case \Ram{what does in the discrete case mean?}.
+% \begin{equation}
+% 2\text{tan}(\frac{\phi^\text{i}}{2}) = |\kappa\textbf{b}^\text{i}| = |\frac{2\textbf{e}^{i-1} \times \textbf{e}^\text{i}}{|\overline{\textbf{e}}^{i-1}||\overline{\textbf{e}}^{i}| + \textbf{e}^{i-1}\cdot \textbf{e}^\text{i}}|
+% \label{eq:parallel transfort2}
+% \end{equation}
+\textbf{Material Frame}: $\Gamma^\text{i}_\text{M}:{\{\boldsymbol{\textbf{t}}^\text{i}, \textbf{m}_1^\text{i}, \textbf{m}^2_\text{i}}\}$.\\
+$\theta^\text{i}$ denotes the scalar that measures the rotation about the tangent of the  $\Gamma_\text{i}^\text{M}$ relative to the Bishop coordinate $\Gamma^\text{i}_\text{B}$ located at $\textbf{e}^\text{i}$. 
+\begin{equation}
+    \textbf{m}_1^\text{i}=\text{cos}\theta^\text{i}\cdot \textbf{v}_1^\text{i} + \text{sin}\theta^\text{i}\cdot \textbf{v}_2^\text{i}, \textbf{m}_2^\text{i}=-\text{sin}\theta^\text{i}\cdot \textbf{v}_1^\text{i} + \text{cos}\theta^\text{i}\cdot \textbf{v}_2^\text{i}
+\end{equation}
+\textbf{Natural Material Frame}:$\overline{\Gamma}_\text{M}:{\{\boldsymbol{\textbf{t}}, \overline{\textbf{m}}_1, \overline{\textbf{m}}_2}$ Special case while $\theta=0$ such that $\textbf{e} = \overline{\textbf{e}}$, $\overline{\textbf{m}}_1, \overline{\textbf{m}}_2=\overline{\textbf{u}}, \overline{\textbf{v}}$. \\
+\textbf{Measurement of Elastic Energy}: \\
+\textbf{stretching}: modeling stretching with energy methods will introduce unnecessary stiffness into the simulation and cause instability through integration methods. Original DER\cite{originalDER} adapts fast projection methods\cite{fast_proj} to solve following constraints \ref{inextensibility} post integration methods. 
+\begin{equation}
+    \textbf{e}_\text{i} \cdot \textbf{e}_\text{i} - \overline{\textbf{e}}_\text{i}\cdot\overline{\textbf{e}}_\text{i} = 0
+\label{inextensibility}
+\end{equation}
+However, such methods require small steps to ensure convergence and stability. 
+Instead, we adopt a constraint solver based on position-based dynamics\cite{PBD}.  
+More details will be discussed in Section\ref{sec:inextensiblity methodology}. \\
+\textbf{bending and twisting in material frame}: 
+Measurement of bending $\boldsymbol{\omega}_\text{j}^\text{i}, \text{j}\in(\text{i}-1, \text{i})$ is represented by the magnitude of projection from curve's curvature $(\kappa\textbf{b})^\text{i}$ onto material frame $\textbf{m}_1^\text{i}, \textbf{m}_2^\text{i}$. Twisting is represented based on the $\theta$ difference between consecutive material frame.
+\begin{equation}
+    \boldsymbol{\omega}_j^\text{i} = ((\kappa\textbf{b})^\text{i}\cdot \textbf{m}_2^\text{j}, -(\kappa\textbf{b})^\text{i}\cdot \textbf{m}_1^\text{j}), \, \alpha^\text{i} = \theta^\text{i} - \theta^{i-1}
+    \label{eq:bend and twist}
+\end{equation}
+With above equation, 
+\begin{equation}
+    \text{E}(\Gamma^\text{M}) = \sum^{n-1}_{i=2}\text{E}_{\text{bend}}(\Gamma_\text{M}^{i}) + \text{E}_{\text{twist}}(\Gamma_\text{M}^\text{i})
+    \label{eq: total_energy}
+\end{equation}
+\begin{equation}
+    \text{E}_{\text{bend}}(\Gamma^\text{i}_\text{M}) = \frac{1}{2\overline{l}^\text{i}}\sum^\text{i}_{\text{j}=\text{i}-1} (\boldsymbol{\omega}_j^\text{i} - \overline{\boldsymbol{\omega}}^i_\text{j})^T \cdot \overline{\text{B}}_\text{j} (\boldsymbol{\omega}^i_\text{j} - \overline{\boldsymbol{\omega}}_j^\text{i})\\
+    \label{eq:bend_energy}
+\end{equation}
+\begin{equation}
+        \text{E}_{\text{twist}}(\Gamma_\text{i}^\text{M}) = \frac{\overline{\beta}^\text{i}(\alpha^i)^2}{\overline{l}^\text{i}}
+        \label{eq:twist_energy}
+\end{equation}
+bending modulus $\overline{\textbf{B}}_\text{i} \in \mathbb{R}^{2 \times 2}$, twsting modulus $\overline{\beta}_\text{i} \in \mathbb{R}^{2 \times 2}$. $\overline{\textit{l}}^\text{i} = |\overline{\textbf{e}}^{\text{i}-1}| + |\overline{\textbf{e}}^{\text{i}}|$. \\
+\textbf{Solving $\theta$} \\
+As discussed in \cite{originalDER}, energy of twisting and bending are minimized and are not subject to changes at the end of the prediction time step t+$\Delta$t. Therefore, we can formulate the following optimization problem to obtain $\theta$.
+\begin{equation}
+    \frac{\delta \text{E}(\Gamma^\text{M})}{\delta \theta} = 0
+    \label{eq:theta_minimize}
+\end{equation}
+
+\subsection{Integration Method}
+Integration is done based on the following second-order ODE.
+\begin{equation}
+       \textit{\textbf{M}}\ddot{\textbf{X}}_{t} = -\frac{\delta \text{E}(\Gamma^\text{M})}{\delta \textbf{X}_{t}}
+       \label{eq:Integration}
+\end{equation}
+A detailed derivation of Eq.\ref{eq:Integration} can be found in \cite{originalDER}. DER\cite{originalDER} solves it with Semi-Euler method\cite{implicit-euler}, which has the same computational cost while having better tracking performance compared to Euler's method, as shown in the following, 
+\begin{equation}
+        \hat{\textbf{V}}_{t+1} = \textbf{V}_\text{t} -\Delta \text{t}\textit{\textbf{M}}^{-1}\frac{\delta \text{E}(\Gamma^\text{M})}{\delta \textbf{X}_{t}}, \, \,  \hat{\textbf{X}}_{\text{t}+1} = \textbf{X}_\text{t} + \Delta \text{t} \hat{\textbf{V}}_{t+1}
+       \label{eq:Semi-Euler}
+\end{equation}
+However, based on experiment and natural deficiency from large-time step discretization, we found that this method could not capture high dynamic performance. We enhance the integration approach by incorporating predictive compensation. This enhancement is rooted in the concept of residual learning and is achieved through the adaptation of a graph neural network. Further details will be discussed in \ref{sec:integration_NN}.

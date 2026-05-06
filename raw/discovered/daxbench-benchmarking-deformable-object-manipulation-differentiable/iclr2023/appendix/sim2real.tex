@@ -1,0 +1,6 @@
+\section{Sim-2-Real Gap}
+
+To verify that the dynamics of our simulated tasks have high fidelity and a small Sim2Real gap, we carry out a real robot experiment.
+We deploy CEM-MPC to the PushRope task on a Kinova Gen3 robot.
+CEM-MPC uses our \simulator\ simulator as the predictive model. Given a state, CEM-MPC plans the next best \textit{push} action $(x, y, z, x', y', z')$.
+The state is estimated from a point cloud image, and the Cartesian space \textit{push} action is transformed to the joint space trajectory via an inverse kinematics module. Note we are not verifying the sim2real gap caused by the inaccuracy of state estimation or kinematics; we are interested in whether the dynamics of \simulator\ can correctly guide the CEM-MPC to succeed in the task. The experiment is included in our supplementary video.

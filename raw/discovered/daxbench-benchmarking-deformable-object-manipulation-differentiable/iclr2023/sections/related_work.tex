@@ -1,0 +1,46 @@
+\section{Related Works}
+\label{sec:related_works}
+
+\subsection{Deformable Object Simulators}
+Recent advancements in Deformable Object Manipulation (DOM) have been partially attributed to the emergence of DOM simulators in recent years. 
+SoftGym~\citep{softgym} is the first DOM benchmark that models all liquid, fabric, and elastoplastic objects and introduces a wide range of standardized DOM tasks. ThreeDWorld~\citep{TDW} enables agents to physically interact with various objects in rich 3D environments, but it is non-differentiable and does not support methods based on differentiable physics.
+
+On the other hand, several differentiable DOM simulators emerge, such as ChainQueen  \citep{chainqueen}, Diff-PDE  \citep{diffPDE}, PlasticineLab  \citep{plasticine}, DiSECt  \citep{DiSec}, and DiffSim  \citep{diffsim}. However, each simulator specializes in modeling a single type of deformable object and supports only a limited range of object-specific tasks. For example, PlasticineLab \citep{plasticine} and DiSECt \citep{DiSec} model only the elasto-plastic objects, including tasks such as sculpting, rolling and cutting the deformable objects. Since the dynamics of each deformable object are vastly different, the physic engine specialized in modeling one type of deformable object cannot be easily extended to another. \algo\ bridges this gap by offering a general-purpose simulation framework that covers a wide range of deformable objects and the relevant tasks. We provide a fairground for comparing and developing all types of DOM methods, especially the differentiable ones.
+
+\subsection{Deformable object manipulation algorithms}
+These challenges make it difficult to apply existing methods for rigid object manipulation directly to DOM. Methods designed for DOM must be able to handle a large number of degrees of freedom in the state space and the complexity of the dynamics. Despite these challenges, many interesting approaches have been proposed for DOM. Depending on the algorithmic paradigms, we categorize DOM methods into three groups: planning, Imitation Learning (IL), and Reinforcement Learning (RL).  Our discussion below focuses on the general DOM methods for a standardized set of tasks. We refer to \citep{sanchez2018robotic,khalil2010dexterous} for a more detailed survey on prior methods for robot manipulation of deformable objects.
+
+\textbf{Reinforcement Learning} algorithms using differentiable physics such as SHAC \citep{SHAC} and APG \citep{Brax} are also explored. These methods use the ground-truth gradients on the dynamics to optimize the local actions directly, thereby bypassing the massive sampling for the policy gradient estimation. 
+
+\textbf{Imitation Learning} is another important learning paradigm for DOM. 
+To overcome the ``curse of history'', the existing works such as \citep{transporter, DOD_IL, VC_IL} overcome the enormous state/action space by learning the low dimensional latent space and simplifying the primitive actions to only pick-and-place. ILD \citep{ILD} is another line of IL method that utilizes the differentiable dynamics to match the entire trajectory all at once; therefore, it reduces the state coverage requirement by the prior works. 
+
+\textbf{Motion planning} for DOM has been explored in~\citep{vidro, shen2022acid, VFMPlanning, HF_planning, CE_planning, gdoom}. These methods overcome the enormous DoFs of the original state space by learning a low-dimensional latent state representation and a corresponding dynamic model for planning. The success of these planning methods critically depends on the dimensionality and quality of the learned latent space and the dynamic model, which in itself is challenging. 
+
+We believe that the development of a general-purpose simulation framework with a differentiable simulator can provide a platform for comparing existing DOM methods. Such a framework enables researchers to gain a better understanding of the progress and limitations of current DOM methods, which in turn can provide valuable insights for advancing DOM methods across all paradigms.
+
+\begin{table}[t]
+    \centering
+    \fontsize{9}{12}\selectfont
+    \begin{tabular}{c c c c c c c c}
+\hline
+\multirow{3}{*}{Engine} & \multicolumn{4}{c}{Application}  & \multirow{3}{*}{\makecell{Differen-\\tiability}} & \multicolumn{2}{c}{Parallelization}  \\[0.5ex]  \cline{2-5} \cline{7-8}
+                        & Liquid & Fabric & \makecell{Elasto-\\plastic} & Mixture &                              & \makecell{\# of simulations\\ per process} & \makecell{Multi-Device \\Training}\\[0.5ex] 
+\hline
+ PlasticineLab  & \xmark & \xmark & \cmark & \xmark  & \cmark & Single & \xmark \\ 
+ \hline
+ DiSECt & \xmark & \xmark & \cmark & \xmark  & \cmark & Single & \xmark\\
+ \hline
+ DiffSim & \xmark & \cmark & \xmark & \xmark  & \cmark & Single & \xmark\\ 
+ \hline
+SoftGym & \cmark & \cmark & \xmark & \xmark  & \xmark & Single & \xmark\\ 
+ \hline
+ \algo\ & \cmark & \cmark & \cmark & \cmark  & \cmark & Multiple & \cmark\\  
+ \hline
+    \end{tabular}
+    \caption{Comparison among the simulators for Deformable Object Manipulation.
+    }
+\label{tab:simulator_comparison}
+\end{table}
+
+

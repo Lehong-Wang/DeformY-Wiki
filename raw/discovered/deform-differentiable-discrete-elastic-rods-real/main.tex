@@ -1,0 +1,268 @@
+\documentclass{article}
+\usepackage{times}
+\usepackage{graphicx}
+\DeclareSymbolFont{matha}{OML}{txmi}{m}{it}% txfonts
+\DeclareMathSymbol{\varv}{\mathord}{matha}{118}
+% numbers option provides compact numerical references in the text. 
+% \usepackage[numbers]{natbib}
+\usepackage{multicol}
+\usepackage{color}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage[bookmarks=true]{hyperref}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage{amsthm}
+\usepackage{gensymb}
+\usepackage[font=footnotesize]{caption}
+\usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{setspace}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\include{commands}
+\usepackage{mathrsfs}
+\usepackage{marginnote}
+\usepackage[normalem]{ulem}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{lipsum}
+\usepackage{mathrsfs}
+\let\proof\relax
+\let\endproof\relax
+\usepackage{amsthm}
+\usepackage{amssymb}  % assumes amsmath package installed
+\usepackage{gensymb}
+\usepackage{bm}
+\usepackage{makecell}
+\usepackage{mathrsfs}
+\let\proof\relax
+\let\endproof\relax
+\usepackage{amsthm}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{adjustbox}
+\usepackage{amssymb}  
+\usepackage{wrapfig}
+
+\usepackage[final]{corl_2024} % Use this for the initial submission.
+%\usepackage[final]{corl_2024} % Uncomment for the camera-ready ``final'' version.
+%\usepackage[preprint]{corl_2024} % Uncomment for pre-prints (e.g., arxiv); This is like ``final'', but will remove the CORL footnote.
+
+\title{Differentiable Discrete Elastic Rods for Real-Time Modeling of Deformable Linear Objects}
+
+% option 1: DEFORM: Differentiable Discrete Elastic Rods For Real-Time Modeling of Deformable Linear Objects (DEFORM-DLO)
+
+% option 2: DEFORM: Differentiable Discrete Elastic Rods For Deformable Linear Objects in Real-Time Modeling
+
+% DEFORM: Differentiable Elastic Rods For Deformable Linear Objects in Real-Time Modeling
+
+% option 3: DEFORM: Differentiable Discrete Elastic Rods For Modeling Deformable Linear Objects in Real-Time
+
+% option 4: DEFORM: Differentiable Discrete Elastic Rods For Modeling Deformable Linear Objects in Real-Time
+
+% option 5: DEFORM: Differentiable Discrete Elastic Rods For Modeling Deformable Linear Objects with Real-Time modeling
+
+% The \author macro works with any number of authors. There are two
+% commands used to separate the names and addresses of multiple
+% authors: \And and \AND.
+%
+% Using \And between authors leaves it to LaTeX to determine where to
+% break the lines. Using \AND forces a line break at that point. So,
+% if LaTeX puts 3 of 4 authors names on the first line, and the last
+% on the second line, try using \AND instead of \And before the third
+% author name.
+
+% NOTE: authors will be visible only in the camera-ready and preprint versions (i.e., when using the option 'final' or 'preprint'). 
+% 	For the initial submission the authors will be anonymized.
+
+% \author{
+%   Yizhou Chen Yiting Zhang Zachary Brei Tiancheng Zhang Yuzhen Chen Julie Wu Ram Vasudevan \\
+%   Department of Electrical Engineering and Computer Sciences\\
+%   University of California Berkeley 
+%   United States\\
+%   \texttt{janedoe@berkeley.edu} \\
+%   % examples of more authors
+%   % \And
+%   % Coauthor \\
+%   % Affiliation \\
+%   % Address \\
+%   % \texttt{email} \\
+%   % \AND
+%   % Coauthor \\
+%   % Affiliation \\
+%   % Address \\
+%   % \texttt{email} \\
+%   % \And
+%   % Coauthor \\
+%   % Affiliation \\
+%   % Address \\
+%   % \texttt{email} \\
+%   % \And
+%   % Coauthor \\
+%   % Affiliation \\
+%   % Address \\
+%   % \texttt{email} \\
+% }
+
+\author{
+    Yizhou Chen\hspace{15pt} Yiting Zhang\hspace{15pt} Zachary Brei\hspace{15pt} Tiancheng Zhang\hspace{15pt} \\ \textbf{Yuzhen Chen}\hspace{15pt}  \textbf{Julie Wu}\hspace{15pt} \textbf{Ram Vasudevan}\\
+  Department of Robotics, University of Michigan, Ann Arbor, MI 48109, United States\\
+  \texttt{\{yizhouch, yitzhang, breizach, zhangtc, yuzhench, jwuxx, ramv\}@umich.edu}\\
+  \url{https://roahmlab.github.io/DEFORM/}
+}
+
+
+\begin{document}
+% \nolinenumbers
+\maketitle
+
+%===============================================================================
+
+\begin{abstract}
+    % The purpose of this document is to provide both the basic paper template and submission guidelines. Abstracts should be a single paragraph, between 4--6 sentences long, ideally. Gross violations will trigger corrections at the camera-ready phase.
+This paper addresses the task of modeling Deformable Linear Objects (DLOs), such as ropes and cables, during dynamic motion over long time horizons.
+This task presents significant challenges due to the complex dynamics of DLOs.
+To address these challenges, this paper proposes differentiable Discrete Elastic Rods For deformable linear Objects with Real-time Modeling (DEFORM), 
+a novel framework that combines a differentiable physics-based model with a learning framework to model DLOs accurately in real-time.
+The performance of DEFORM is evaluated in an experimental setup involving two industrial robots and a variety of sensors.
+A comprehensive series of experiments demonstrate the efficacy of DEFORM in terms of accuracy, computational speed, and generalizability when compared to state-of-the-art alternatives.
+To further demonstrate the utility of DEFORM, this paper integrates it into a perception pipeline and illustrates its superior performance when compared to the state-of-the-art methods while tracking a DLO even in the presence of occlusions. 
+Finally, this paper illustrates the superior performance of DEFORM when compared to state-of-the-art methods when it is applied to perform autonomous planning and control of DLOs.
+\end{abstract}
+% {Accurately modeling deformable linear objects (DLOs), such as ropes and cables, during dynamic motion over long time horizons is crucial for DLO tracking and manipulation. This task presents significant challenges due to the complex dynamics of DLOs.}
+% Differentiable Discrete Elastic Rods For Deformable Linear Object Manipulation \Zac{With?} Real-Time Modeling (DEFORM)
+% {To further demonstrate the utility of DEFORM, this paper integrates it into a perception pipeline for robust, accurate DLO tracking under occlusion, and illustrates its superior performance in 3-D shape matching tasks across simulation and real-world settings.}
+% Two or three meaningful keywords should be added here
+\keywords{Deformable Linear Objects Modeling, Physics-Informed Learning, Differentiable Simulation} 
+\begin{figure}[h]
+    \centering
+     % \includegraphics[width=0.5\textwidth]{figures/demo_overview.pdf}
+     % \makebox[\textwidth][c]{\includegraphics[width=0.5\textwidth]{figures/demo_overview.pdf}}
+     \includegraphics[width=0.96\textwidth]{figures/Fig1_2.png}
+     \caption{This paper introduces DEFORM, a novel framework that combines a differentiable physics-based model with a learning framework to model and predict dynamic DLO behavior accurately in real-time. The figure shows DEFORM's predicted states (yellow) and the actual states (red) for a DLO over 4.5 seconds at 100 Hz. Note that the prediction is performed recursively, without requiring access to ground truth or perception during the process. A video of related experiments can be found in the supplementary material.}
+    \label{fig:first_page} 
+    \vspace{-4pt}
+\end{figure}
+%===============================================================================
+\input{revision_text/introduction}
+
+\input{revision_text/related-work}
+
+\input{revision_text/preliminaries_text}
+
+% \input{revision_text/DER}
+
+\input{revision_text/methodology}
+% \section{Introduction}
+
+% \input{revision_text/perception}
+
+\input{revision_text/experiments}
+
+%     Submission to CoRL 2024 will be entirely electronic, via a web site (not email). Information about the submission process and \LaTeX{} templates are available on the conference web site at \url{https://corl2024.org/}. For camera ready submission, use the \texttt{final} option for the \texttt{\textbackslash usepackage} command. 
+
+%===============================================================================
+
+% \section{Citations}
+% \label{sec:citations}
+
+% 	Citations can be made using either \textbackslash citep\{\} or \textbackslash citet\{\}, depending from the appropriateness. To avoid the citation moving to the next line, it is often a good practice to replace the space before with a tilde (\~{}) character.
+% 	Example 1: ``CoRL is the best conference ever~\citep{Gauss1857}.''
+% 	Example 2: ``\citet{Lagrange1788} proved, both theoretically and numerically, that CoRL is the best conference ever.''
+	
+% %===============================================================================
+
+% \section{Experimental Results}
+% \label{sec:result}
+
+% 	Nam dui ligula, fringilla a, euismod sodales, sollicitudin vel, wisi. Morbi auctor lorem non justo.
+% 	Nam lacus libero, pretium at, lobortis vitae, ultricies et, tellus. Donec aliquet, tortor sed accumsan
+% 	bibendum, erat ligula aliquet magna, vitae ornare odio metus a mi. Morbi ac orci et nisl hendrerit
+% 	mollis. 
+
+% 	Suspendisse ut massa. Cras nec ante. Pellentesque a nulla. Cum sociis natoque penatibus
+% 	et magnis dis parturient montes, nascetur ridiculus mus. Aliquam tincidunt urna. Nulla ullamcorper
+% 	vestibulum turpis. Pellentesque cursus luctus mauris.
+	
+% 	Nulla malesuada porttitor diam. Donec felis erat, congue non, volutpat at, tincidunt tristique, libero.
+% 	Vivamus viverra fermentum felis. Donec nonummy pellentesque ante. Phasellus adipiscing semper 	elit. 
+% 	Proin fermentum massa ac quam. Sed diam turpis, molestie vitae, placerat a, molestie nec, leo.
+% 	Maecenas lacinia. Nam ipsum ligula, eleifend at, accumsan nec, suscipit a, ipsum. Morbi blandit
+% 	ligula feugiat magna. Nunc eleifend consequat lorem. Sed lacinia nulla vitae enim. Pellentesque tin-
+% 	cidunt purus vel magna. Integer non enim. Praesent euismod nunc eu purus. Donec bibendum quam
+% 	in tellus. Nullam cursus pulvinar lectus. Donec et mi. Nam vulputate metus eu enim. Vestibulum
+% 	pellentesque felis eu massa.
+% 	Quisque ullamcorper placerat ipsum. Cras nibh. Morbi vel justo vitae lacus tincidunt ultrices. 
+	
+% 	Lorem
+% 	ipsum dolor sit amet, consectetuer adipiscing elit. In hac habitasse platea dictumst. Integer tempus
+% 	convallis augue. Etiam facilisis. Nunc elementum fermentum wisi. Aenean placerat. Ut imperdiet,
+% 	enim sed gravida sollicitudin, felis odio placerat quam, ac pulvinar elit purus eget enim. Nunc vitae
+% 	tortor. Proin tempus nibh sit amet nisl. Vivamus quis tortor vitae risus porta vehicula.
+
+% %===============================================================================
+
+\section{Conclusion and Limitations}
+\label{sec:conclusion}
+
+	% Nam dui ligula, fringilla a, euismod sodales, sollicitudin vel, wisi. Morbi auctor lorem non justo.
+	% Nam lacus libero, pretium at, lobortis vitae, ultricies et, tellus. Donec aliquet, tortor sed accumsan
+	% bibendum, erat ligula aliquet magna, vitae ornare odio metus a mi. Morbi ac orci et nisl hendrerit
+	% mollis. Suspendisse ut massa. Cras nec ante. Pellentesque a nulla. Cum sociis natoque penatibus
+	% et magnis dis parturient montes, nascetur ridiculus mus. Aliquam tincidunt urna. Nulla ullamcorper
+	% vestibulum turpis. Pellentesque cursus luctus mauris.
+	% Nulla malesuada porttitor diam. Donec felis erat, congue non, volutpat at, tincidunt tristique, libero.
+	% Vivamus viverra fermentum felis. Donec nonummy pellentesque ante. Phasellus adipiscing semper
+	% elit. Proin fermentum massa ac quam. Sed diam turpis, molestie vitae, placerat a, molestie nec, leo.
+	% Maecenas lacinia. Nam ipsum ligula, eleifend at, accumsan nec, suscipit a, ipsum. Morbi blandit
+	% ligula feugiat magna. Nunc eleifend consequat lorem. Sed lacinia nulla vitae enim. Pellentesque tin-
+	% cidunt purus vel magna. Integer non enim. Praesent euismod nunc eu purus. Donec bibendum quam
+	% in tellus. Nullam cursus pulvinar lectus. Donec et mi. Nam vulputate metus eu enim. Vestibulum
+	% pellentesque felis eu massa.
+	% Quisque ullamcorper placerat ipsum. Cras nibh. Morbi vel justo vitae lacus tincidunt ultrices. Lorem
+	% ipsum dolor sit amet, consectetuer adipiscing elit. In hac habitasse platea dictumst. Integer tempus
+	% convallis augue. Etiam facilisis. Nunc elementum fermentum wisi. Aenean placerat. Ut imperdiet,
+	% enim sed gravida sollicitudin, felis odio placerat quam, ac pulvinar elit purus eget enim. Nunc vitae
+	% tortor. Proin tempus nibh sit amet nisl. Vivamus quis tortor vitae risus porta vehicula.
+This paper presents DEFORM, a method that embeds residual learning in a novel differentiable Deformable Linear Object (DLO) simulator.
+This enables accurate modeling and real-time prediction of dynamic DLO behavior over long time horizons during dynamic manipulation.
+To demonstrate DEFORM's efficacy, this paper performs a comprehensive set of experiments that evaluate accuracy, computational speed, and its usefulness for manipulation and perception tasks. 
+When compared to the state-of-the-art, DEFORM is more accurate while being sample efficient without sacrificing computational speed.
+This paper also illustrates the practicality of applying DEFORM for state estimation to track an occluded DLO during dynamic manipulation. 
+Furthermore, DEFORM is combined with a manipulation planning and control framework for 3D shape matching of a DLO in both simulations and real-world scenarios, achieving a higher task success rate compared to the closest-performing baseline.
+% and continuing to develop models with more complex deformable objects, such as wires with multiple branches.
+
+\textbf{Limitations. }We recognize several opportunities to enhance DEFORM.
+% Currently, it does not include shearing effects, which are essential for a comprehensive understanding of material deformation under lateral forces \cite{LargeStepSimulation}. 
+% Additionally, we have not yet incorporated buckling behavior, which is crucial for assessing structural stability under compressive stress \cite{deform:buckling}. 
+Currently, DEFORM could be improved by adding contact modeling to accurately predict interactions between different components under load \cite{DER_contact}. 
+Additionally, DEFORM does not model multi-branched DLOs, which are common in wire-harness assembly \cite{wireharness}.
+Furthermore, DEFORM assumes that the ends of the DLO are grasped, which could restrict manipulation dexterity.
+We look forward to addressing these aspects in our future work to improve DEFORM model’s accuracy and applicability.
+%===============================================================================
+
+\clearpage
+% The acknowledgments are automatically included only in the final and preprint versions of the paper.
+\acknowledgments{The authors would like to gratefully thank reviewers for giving useful comments. This work is supported by the Ford Motor Company and the Air Force Office of Scientific Research under the Award No:  MURI FA9550-23-1-0400.}
+
+%===============================================================================
+
+% no \bibliographystyle is required, since the corl style is automatically used.
+\bibliography{references}  % .bib
+\clearpage
+
+\appendix
+\input{appendix/appendix_DER_introdcution.tex}
+\input{appendix/methodology_appendix.tex}
+\input{appendix/experiment_appendix}
+\input{appendix/perception_appendix}
+% \input{revision_text/preliminaries_new}
+
+\end{document}

@@ -1,0 +1,163 @@
+% ---------------------------------
+% Common base packages
+% ---------------------------------
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{etoolbox} % fix space between abstract header and abstract body
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage[english]{babel} %for hyphenation rules
+% \usepackage{microtype}      % microtypography
+\usepackage[protrusion=true,expansion=true]{microtype}
+%\usepackage{lmodern}
+\usepackage{comment}
+\usepackage{cancel}
+\usepackage{csquotes}
+\usepackage{listings}
+\usepackage{nameref}
+% \usepackage{slashbox}
+\usepackage{paralist}
+\usepackage{xspace}
+%\usepackage{setspace}
+% \usepackage{listings} for text to reproduce verbatim
+\usepackage{makeidx}
+\usepackage{pdfpages}
+\usepackage{footnote}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    citecolor=black,
+    filecolor=cyan,
+    urlcolor=blue
+}
+
+\usepackage{flushend}
+\usepackage{balance}
+
+
+% ---------------------------------
+% LISTS compact itemize/enumeration (e.g. contributions)
+% ---------------------------------
+\usepackage{paralist}
+% disable labelindent for enumitem
+\let\labelindent\relax %already included in IEEE
+\usepackage{enumitem}
+\setlist[itemize]{noitemsep,leftmargin=*,topsep=0in}
+\setlist[enumerate]{noitemsep,leftmargin=*,topsep=0in}
+
+
+% ---------------------------------
+% MATH & Equations
+% ---------------------------------
+\usepackage{amsmath,amssymb} % define this before the line numbering.
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{mathtools}
+\usepackage{array} %for table entries to be in center of cell
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{breqn}          % dmath multiline
+\usepackage{textcomp}
+\usepackage{bm} %bold symbols in math mode
+\usepackage{pifont}
+\usepackage[
+  separate-uncertainty = true,
+  multi-part-units = repeat
+]{siunitx}
+
+
+% ---------------------------------
+% Figures & Floats
+% ---------------------------------
+\usepackage{graphicx}
+% \usepackage[pdftex]{graphicx}
+\usepackage{adjustbox} %add additional box operations in addition to resizebox
+\usepackage{epsfig}
+% \pdfoutput=1
+% \graphicspath{{./figures/}}
+% \DeclareGraphicsExtensions{.pdf,.jpeg,.png,.jpg}
+
+\usepackage{float}
+\usepackage[font=small]{subcaption}
+\usepackage[font=small,labelfont=bf]{caption}
+%\usepackage[justification=raggedright]{caption}	% makes captions ragged right 
+\usepackage{lscape}      %Useful for wide tables or figures.
+%\usepackage{subfig}
+%\usepackage{subfigure}		% For subfigures
+\usepackage{wrapfig}
+
+\usepackage{tikz}  %make graphs
+\usepackage{makecell}
+\usepackage{overpic}
+\pdfminorversion=4
+
+
+% ---------------------------------
+% Algorithms
+% ---------------------------------
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+
+
+% ---------------------------------
+%Table Stuff
+% ---------------------------------
+% \usepackage[table,xcdraw]{xcolor}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{booktabs}   % Publication quality tables
+% \usepackage{colortbl} %dont load with xcolor, loaded in colors
+% \usepackage{tablefootnote}
+\usepackage{array} %for table entries to be in center of cell
+
+\usepackage{longtable}
+\usepackage{threeparttable}
+
+\makesavenoteenv{tabular}
+\makesavenoteenv{table}
+
+
+% ---------------------------------
+% Citation
+% ---------------------------------
+% \makeatletter
+% \let\NAT@parse\undefined
+% \makeatother
+% \usepackage[numbers,sort&compress]{natbib}
+\usepackage{cite}
+
+% ---------------------------------
+% USER defined macros: Space Tweaks
+% ---------------------------------
+\setlength{\abovecaptionskip}{1.5mm}
+\setlength{\belowcaptionskip}{1.0mm} 
+\setlength{\textfloatsep}{1.5mm}
+\setlength{\dbltextfloatsep}{1.5mm}
+
+%\renewcommand{\baselinestretch}{.9945} %space between lines - use as last resort
+\renewcommand{\arraystretch}{1.1}
+
+% Spacing before and after section headings
+% \usepackage{titlesec}
+% \titlespacing{\section}{0pt}{0.3\baselineskip}{0.25\baselineskip}
+% \titlespacing{\subsection}{0pt}{0.2\baselineskip}{0.15\baselineskip}
+% \titlespacing{\subsubsection}{0pt}{0.05\baselineskip}{0.03\baselineskip}
+
+%% paragraph (fine tune spacing close to deadline)
+\renewcommand{\paragraph}[1]{\vspace{0.2em}\noindent\textit{#1} --}
+% \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+
+% ---------------------------------
+% USER defined macros: Comments/edits
+% ---------------------------------
+\newcommand{\todo}[2]{{\color{orange}#1:#2}} %< I changed something and I want you to see it
+\newcommand{\TODO}[2]{\sethlcolor{yellow}\hl{[#1: #2]}}%< inlined comment for max visibility
+\newcommand{\todofoot}[2]{\footnote{{\color{red}#1:#2}}}%< useful for ~deadline (no layout changes)
+
+%%
+%% Colors
+%%
+% \definecolor{Lightapricot}{rgb}{0.99,0.84,0.69}
+
+\newcommand\mybar{\kern1pt\rule[-\dp\strutbox]{.8pt}{\baselineskip}\kern1pt}

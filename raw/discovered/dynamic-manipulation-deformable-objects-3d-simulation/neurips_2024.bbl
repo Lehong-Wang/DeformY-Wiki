@@ -1,0 +1,143 @@
+\begin{thebibliography}{10}
+
+\bibitem{chi2024iterative}
+Cheng Chi, Benjamin Burchfiel, Eric Cousineau, Siyuan Feng, and Shuran Song.
+\newblock Iterative residual policy: for goal-conditioned dynamic manipulation of deformable objects.
+\newblock {\em The International Journal of Robotics Research}, 43(4):389--404, 2024.
+
+\bibitem{irp}
+Cheng Chi, Benjamin Burchfiel, Eric Cousineau, Siyuan Feng, and Shuran Song.
+\newblock Iterative residual policy: for goal-conditioned dynamic manipulation of deformable objects.
+\newblock {\em The International Journal of Robotics Research}, 43(4):389--404, 2024.
+
+\bibitem{chi2023diffusion}
+Cheng Chi, Zhenjia Xu, Siyuan Feng, Eric Cousineau, Yilun Du, Benjamin Burchfiel, Russ Tedrake, and Shuran Song.
+\newblock Diffusion policy: Visuomotor policy learning via action diffusion.
+\newblock {\em The International Journal of Robotics Research}, page 02783649241273668, 2023.
+
+\bibitem{dhariwal2021diffusion}
+Prafulla Dhariwal and Alexander Nichol.
+\newblock Diffusion models beat gans on image synthesis.
+\newblock {\em Advances in neural information processing systems}, 34:8780--8794, 2021.
+
+\bibitem{grannen2021untangling}
+Jennifer Grannen, Priya Sundaresan, Brijen Thananjeyan, Jeffrey Ichnowski, Ashwin Balakrishna, Vainavi Viswanath, Michael Laskey, Joseph Gonzalez, and Ken Goldberg.
+\newblock Untangling dense knots by learning task-relevant keypoints.
+\newblock In {\em Conference on Robot Learning}, pages 782--800. PMLR, 2021.
+
+\bibitem{hietala2022learning}
+Julius Hietala, David Blanco-Mulero, Gokhan Alcan, and Ville Kyrki.
+\newblock Learning visual feedback control for dynamic cloth folding.
+\newblock In {\em 2022 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)}, pages 1455--1462. IEEE, 2022.
+
+\bibitem{ho2020denoising}
+Jonathan Ho, Ajay Jain, and Pieter Abbeel.
+\newblock Denoising diffusion probabilistic models.
+\newblock {\em Advances in neural information processing systems}, 33:6840--6851, 2020.
+
+\bibitem{hoque2022visuospatial}
+Ryan Hoque, Daniel Seita, Ashwin Balakrishna, Aditya Ganapathi, Ajay~Kumar Tanwani, Nawid Jamali, Katsu Yamane, Soshi Iba, and Ken Goldberg.
+\newblock Visuospatial foresight for physical sequential fabric manipulation.
+\newblock {\em Autonomous Robots}, 46(1):175--199, 2022.
+
+\bibitem{huang2023self}
+Zixuan Huang, Xingyu Lin, and David Held.
+\newblock Self-supervised cloth reconstruction via action-conditioned cloth tracking.
+\newblock In {\em 2023 IEEE International Conference on Robotics and Automation (ICRA)}, pages 7111--7118. IEEE, 2023.
+
+\bibitem{jangir2020dynamic}
+Rishabh Jangir, Guillem Alenya, and Carme Torras.
+\newblock Dynamic cloth manipulation with deep reinforcement learning.
+\newblock In {\em 2020 IEEE International Conference on Robotics and Automation (ICRA)}, pages 4630--4636. IEEE, 2020.
+
+\bibitem{jin2022robotic}
+Shiyu Jin, Wenzhao Lian, Changhao Wang, Masayoshi Tomizuka, and Stefan Schaal.
+\newblock Robotic cable routing with spatial representation.
+\newblock {\em IEEE Robotics and Automation Letters}, 7(2):5687--5694, 2022.
+
+\bibitem{li2023see}
+Hao Li, Yizhi Zhang, Junzhe Zhu, Shaoxiong Wang, Michelle~A Lee, Huazhe Xu, Edward Adelson, Li~Fei-Fei, Ruohan Gao, and Jiajun Wu.
+\newblock See, hear, and feel: Smart sensory fusion for robotic manipulation.
+\newblock In {\em Conference on Robot Learning}, pages 1368--1378. PMLR, 2023.
+
+\bibitem{li2015folding}
+Yinxiao Li, Yonghao Yue, Danfei Xu, Eitan Grinspun, and Peter~K Allen.
+\newblock Folding deformable objects using predictive simulation and trajectory optimization.
+\newblock In {\em 2015 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)}, pages 6000--6006. IEEE, 2015.
+
+\bibitem{luo2024text}
+Calvin Luo, Mandy He, Zilai Zeng, and Chen Sun.
+\newblock Text-aware diffusion for policy learning.
+\newblock {\em Advances in Neural Information Processing Systems}, 37:46226--46253, 2024.
+
+\bibitem{Ma_2024_CVPR}
+Xiao Ma, Sumit Patidar, Iain Haughton, and Stephen James.
+\newblock Hierarchical diffusion policy for kinematics-aware multi-task robotic manipulation.
+\newblock In {\em Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)}, pages 18081--18090, June 2024.
+
+\bibitem{ma2024latte}
+Xin Ma, Yaohui Wang, Gengyun Jia, Xinyuan Chen, Ziwei Liu, Yuan-Fang Li, Cunjian Chen, and Yu~Qiao.
+\newblock Latte: Latent diffusion transformer for video generation.
+\newblock {\em CoRR}, 2024.
+
+\bibitem{mason1986mechanics}
+Matthew~T Mason.
+\newblock Mechanics and planning of manipulator pushing operations.
+\newblock {\em The International Journal of Robotics Research}, 5(3):53--71, 1986.
+
+\bibitem{Anup2025reduced}
+Anup~Teejo Mathew, Daniel Feliu-Talegon, Abdulaziz~Y Alkayas, Frederic Boyer, and Federico Renda.
+\newblock Reduced order modeling of hybrid soft-rigid robots using global, local, and state-dependent strain parameterization.
+\newblock {\em The International Journal of Robotics Research}, 44(1):129--154, 2025.
+
+\bibitem{nah2021manipulating}
+Moses~C Nah, Aleksei Krotov, Marta Russo, Dagmar Sternad, and Neville Hogan.
+\newblock Manipulating a whip in 3d via dynamic primitives.
+\newblock In {\em 2021 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)}, pages 2803--2808. IEEE, 2021.
+
+\bibitem{peebles2023scalable}
+William Peebles and Saining Xie.
+\newblock Scalable diffusion models with transformers.
+\newblock In {\em Proceedings of the IEEE/CVF international conference on computer vision}, pages 4195--4205, 2023.
+
+\bibitem{pooledreamfusion}
+Ben Poole, Ajay Jain, Jonathan~T Barron, and Ben Mildenhall.
+\newblock Dreamfusion: Text-to-3d using 2d diffusion.
+\newblock In {\em The Eleventh International Conference on Learning Representations}.
+
+\bibitem{rombach2022high}
+Robin Rombach, Andreas Blattmann, Dominik Lorenz, Patrick Esser, and Bj{\"o}rn Ommer.
+\newblock High-resolution image synthesis with latent diffusion models.
+\newblock In {\em Proceedings of the IEEE/CVF conference on computer vision and pattern recognition}, pages 10684--10695, 2022.
+
+\bibitem{seita2020deep}
+Daniel Seita, Aditya Ganapathi, Ryan Hoque, Minho Hwang, Edward Cen, Ajay~Kumar Tanwani, Ashwin Balakrishna, Brijen Thananjeyan, Jeffrey Ichnowski, Nawid Jamali, et~al.
+\newblock Deep imitation learning of sequential fabric smoothing from an algorithmic supervisor.
+\newblock In {\em 2020 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)}, pages 9651--9658. IEEE, 2020.
+
+\bibitem{toussaint2018differentiable}
+Marc~A Toussaint, Kelsey~Rebecca Allen, Kevin~A Smith, and Joshua~B Tenenbaum.
+\newblock Differentiable physics and stable modes for tool-use and manipulation planning.
+\newblock 2018.
+
+\bibitem{wang2025lavie}
+Yaohui Wang, Xinyuan Chen, Xin Ma, Shangchen Zhou, Ziqi Huang, Yi~Wang, Ceyuan Yang, Yinan He, Jiashuo Yu, Peiqing Yang, et~al.
+\newblock Lavie: High-quality video generation with cascaded latent diffusion models.
+\newblock {\em International Journal of Computer Vision}, 133(5):3059--3078, 2025.
+
+\bibitem{xu2022dextairity}
+Zhenjia Xu, Cheng Chi, Benjamin Burchfiel, Eric Cousineau, Siyuan Feng, and Shuran Song.
+\newblock Dextairity: Deformable manipulation can be a breeze.
+\newblock {\em arXiv preprint arXiv:2203.01197}, 2022.
+
+\bibitem{yin2021modeling}
+Hang Yin, Anastasia Varava, and Danica Kragic.
+\newblock Modeling, learning, perception, and control methods for deformable object manipulation.
+\newblock {\em Science Robotics}, 6(54):eabd8803, 2021.
+
+\bibitem{ze20243d}
+Yanjie Ze, Gu~Zhang, Kangning Zhang, Chenyuan Hu, Muhan Wang, and Huazhe Xu.
+\newblock 3d diffusion policy: Generalizable visuomotor policy learning via simple 3d representations.
+\newblock In {\em ICRA 2024 Workshop on 3D Visual Representations for Robot Manipulation}.
+
+\end{thebibliography}

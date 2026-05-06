@@ -1,0 +1,56 @@
+\documentclass[conference]{IEEEtran}
+\usepackage{times}
+\usepackage{graphicx}
+% numbers option provides compact numerical references in the text. 
+\usepackage[numbers]{natbib}
+\usepackage{multicol}
+% \usepackage[bookmarks=true]{hyperref}
+\input{format/packages}
+\input{format/marcos}
+
+\pdfinfo{
+   /Author (Homer Simpson)
+   /Title  (Robots: Our new overlords)
+   /CreationDate (D:20101201120000)
+   /Subject (Robots)
+   /Keywords (Robots;Overlords)
+}
+
+\begin{document}
+
+% paper title
+\title{ Iterative Residual Policy \\ \LARGE{for Goal-Conditioned Dynamic Manipulation of Deformable Objects}}
+%\title{ Learning Iterative Residual Policy  for Goal-Conditioned Dynamic Deformable Object Manipulation} -->  if we have two application
+
+%\title{Whiping Arbitrary Rope with Implicit Residual Policy} -->  highlight generalization
+%\ben{Ben: How about: WhipBot: Online Residual Policy Optimization for Goal-Conditioned Novel Rope Manipulation}
+
+% You will get a Paper-ID when submitting a pdf file to the conference system
+\author{Author Names Omitted for Anonymous Review. Paper-ID: [3]} 
+\author{Cheng Chi$^1$, Benjamin Burchfiel$^2$, Eric Cousineau$^2$, Siyuan Feng$^2$, Shuran Song$^1$ \\ $^1$ Columbia University \quad\quad\quad  $^2$ Toyota Research Institute
+\\ \href{https://irp.cs.columbia.edu}{https://irp.cs.columbia.edu}}
+\maketitle
+
+\begin{abstract}
+This paper tackles the task of goal-conditioned dynamic manipulation of deformable objects. This task is highly challenging due to its complex dynamics (introduced by object deformation and high-speed action) and strict task requirements (defined by a precise goal specification). To address these challenges, we present Iterative Residual Policy (IRP), a general learning framework applicable to repeatable tasks with complex dynamics. IRP learns an implicit policy via delta dynamics -- instead of modeling the entire dynamical system and inferring actions from that model, IRP learns delta dynamics that predict the effects of delta action on the previously-observed trajectory. When combined with adaptive action sampling, the system can quickly optimize its actions online to reach a specified goal. We demonstrate the effectiveness of IRP on two tasks: whipping a rope to hit a target point and swinging a cloth to reach a target pose. Despite being trained only in simulation on a fixed robot setup, IRP is able to efficiently generalize to noisy real-world dynamics, new objects with unseen physical properties, and even different robot hardware embodiments, demonstrating its excellent generalization capability relative to alternative approaches. 
+% This paper tackles the task of goal-conditioned dynamic manipulation of deformable objects. This task is highly challenging due to its complex dynamics (introduced by object deformation and high-speed action) and strict task requirements (defined by a precise goal specification). To address these challenges, we present Iterative Residual Policy (IRP), a general learning framework for this task. Instead of modeling the entire dynamical system and inferring optimal actions from that model, IRP learns the delta dynamics that predicts the effect of small action perturbations on the observed trajectory. When combined with adaptive action sampling, the system can quickly optimize its actions online to reach a specified goal. We demonstrate the effectiveness of IRP on two tasks: whipping a rope to hit a target point and swinging a cloth to reach a target pose. Despite being trained only in simulation on a fixed robot setup, IRP is able to efficiently generalize to noisy real-world dynamics, new objects with unseen physical properties, and even different robot hardware embodiments, demonstrating its excellent generalization capability relative to alternative approaches. 
+% The code for both real-world and simulation experiments will be publicly available.
+
+\end{abstract}
+
+\IEEEpeerreviewmaketitle
+
+
+\input{text/introduction_v2}
+\input{text/related_work}
+\input{text/method}
+\input{text/evaluation_v2}
+
+
+\section*{Acknowledgement} We would like to thank Zhenjia Xu, Huy Ha, Dale McConachie, Naveen Kuppuswamy for their helpful feedback and fruitful discussions. This work was supported by the Toyota Research Institute, NSF CMMI-2037101 and NSF IIS-2132519. We would like to thank Google for the UR5 robot hardware. The views and conclusions contained herein are those of the authors and should not be interpreted as necessarily representing the official policies, either expressed or implied, of the sponsors.
+%% Use plainnat to work nicely with natbib. 
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

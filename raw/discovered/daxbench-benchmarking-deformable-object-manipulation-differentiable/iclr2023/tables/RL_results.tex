@@ -1,0 +1,24 @@
+\begin{table}[t]
+\centering
+\fontsize{7.5}{7.5}\selectfont
+\begin{tabularx}{\textwidth}{c @{\extracolsep{\fill}} cccc}
+\toprule
+Task Type & Task & PPO & APG & SHAC  \\
+\midrule
+\multirow{6}{*}{High-level} & Fold Cloth 1 & \textbf{0.40$\pm$0.13} & 0.36$\pm$0.06  & 0.34$\pm$0.07 \\
+& Fold Cloth 3 & 0.21$\pm$0.11 & 0.19$\pm$0.09  & \textbf{0.22$\pm$0.22} \\
+& Fold T-shirt & \textbf{0.61$\pm$0.08} & 0.40$\pm$0.05  & 0.44$\pm$0.09  \\
+&Unfold Cloth 1 & \textbf{0.72$\pm$0.01}  &0.42$\pm$0.02  & 0.50$\pm$0.03 \\
+&Unfold Cloth 3  & \textbf{0.56$\pm$0.00} &0.39$\pm$0.02  & 0.48$\pm$0.03 \\
+& Rope Push  & \textbf{0.75$\pm$0.02} &\textbf{0.72$\pm$0.02} & \textbf{0.75$\pm$0.01} \\
+\midrule
+\multirow{3}{*}{Low-level}
+&Wipe Rope & 0.25$\pm$0.10 & \textbf{0.83$\pm$0.01} & 0.66$\pm$0.03 \\
+&Pour Water & 0.27$\pm$0.02 & \textbf{0.27$\pm$0.02} & \textbf{0.28$\pm$0.00}  \\
+& Pour Soup  &   0.27$\pm$0.08  & 0.27$\pm$0.00 & 0.32$\pm$0.13\\
+\bottomrule
+\end{tabularx}
+\caption{\small Reinforcement Learning Methods Task Results. We report the mean and standard error over 20 random seeds for each entry.}
+\label{table:RL_results}
+\end{table}
+

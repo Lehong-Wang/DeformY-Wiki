@@ -1,0 +1,71 @@
+\section{Introduction}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/contribution_1.png}
+    \caption{
+    Overview of DEFORM contributions (green). 
+    % An overview of the contributions of DEFORM 
+    a) DER models discretize DLOs into vertices, segment them into elastic rods, and model their dynamic propagation. 
+    DEFORM reformulates DER into Differentiable DER (DDER) which describes how to compute gradients from the prediction loss, enabling efficient system identification and incorporation into deep learning pipelines.
+    b) To compensate for the error from DER's numerical integration, DEFORM introduces residual learning via DNNs.
+    c) $1 \rightarrow 2$: DER enforces inextensibility, but this does not satisfy classical conservation principles.  $1 \rightarrow 3$: DEFORM enforces inextensibility with momentum conservation, which allows dynamic modeling while maintaining simulation stability. 
+    % Contributions of DEFORM: highlighted in green. a) DER discretizes DLOs into vertices, segments them into elastic rods, and models their dynamic propagation. DEFORM reformulates DER into Differentiable DER (DDER) that describes how to compute gradients from the prediction loss which enables system identification and integration into deep learning pipelines.
+    % b) To compensate for the error from DER's numerical integration, DEFORM introduces residual learning via DNNs.
+    % c) $1 \rightarrow 2$: DER enforces inextensibility, but this does not satisfy classical conservation principles.  $1 \rightarrow 3$: DEFORM enforces inextensibility with momentum conservation, which allows dynamic modeling while maintaining simulation stability. 
+    }
+    \label{fig:deform_contribution_diagram}
+    \vspace{-0.85cm}
+\end{figure}
+
+Robotic manipulation tasks such as surgical suturing or vehicle wire harness assembly \cite{adagolodjo2019robotic, cao2019novel, lv2022dynamic} are challenging problems because they require accurately and dynamically manipulating DLOs over long time horizons ($> 1s$)~\cite{saha2007manipulation}. 
+Nonlinear dynamics make manipulating DLOs challenging because computationally expensive models are required for accurate prediction.
+% This means robots need to generate motion plans in real-time and robustly execute motions over long time horizons ($> 1s$). 
+Further, practical applications such as vehicle wire harness assembly often result in DLO occlusions, meaning perception systems cannot robustly estimate the entire DLO configuration. 
+For robotic manipulators to successfully manipulate DLOs, a novel modeling method capable of quick and accurate predictions of dynamic DLO behavior, even in the presence of occlusions, is needed.
+
+% DLO modeling has been tackled using physics-based and learning-based modeling methods.
+% Physics-based suffers from ...
+% Learning-based suffers from ...
+% Combinations ...
+% However,...
+
+% To model DLOs, we propose a hybrid framework which uses a physics-based model within a learning framework.
+% A promising physics based model is DER because ...
+% However, ...
+
+% So we propose ...
+% There are two main approaches to modeling DLOs: physics-based and learning-based.
+To model DLOs, physics-based approaches can be used, but they suffer a tradeoff between costly computation and low accuracy when predicting dynamic movements. 
+State-of-the-art learning-based modeling approaches have used deep neural networks (DNNs) to model interaction propagation in DLOs \cite{GNN, bi-LSTM_baseline, inlstm}.
+Despite their success, these methods require large datasets of real-world manipulation data, which can be impractical to collect and are not robust to variations in DLO properties.
+Alternatively, using a physics-based model as a prior for DNNs is promising due to increased sampling efficiency and generalizability ~\cite{PINN, mlphysicsprocess, physicslearn1, physicslearn2, physicslearn3}. 
+However, to the best of our knowledge, this approach has not been applied to predict behavior of DLOs during dynamic motions.
+
+
+A recent promising physics-based modeling method is Discrete Elastic Rods (DER).
+This approach \emph{qualitatively} and efficiently describes the 3-D behavior of DLOs~\cite{originalDER, originalDER2}. 
+Despite its potential for physics-informed learning, applying DER theory to model DLOs in the real-world is challenging for three reasons.
+First, tuning DER model parameters to match a real-world DLO is difficult.
+Second, computing analytical gradients for DER models is challenging.
+Third, numerical errors arise from discrete numerical integration of DER models and from enforcing DLO inextensibility.
+These drawbacks affect the accuracy of the DER model, limiting the utility of embedding a DER model in a learning-based framework.
+In particular, a lack of analytical gradients prevent learning over multiple steps, which reduces the accuracy of long horizon predictions.
+% Despite its potential for physics-informed learning, applying DER theory to model DLOs in the real-world is challenging for three reasons.
+% First, computing analytical gradients for DER models is challenging, which makes performing system identification \Yizhou{and integration with DNNs} using a multi-step prediction through gradient-based optimization non-trivial \cite{multistep1, multistep2, multistep3}. \Zac{where does the sysid come from? seems out of place and randomly inserted.} \Yizhou{maybe change it to be a more clear statement: auto physical parameter tuning (e.g., mass, bending/twisting stiffness. )}
+% Second, numerical errors arise from discrete numerical integration of DER models which results in large errors during long-horizon predictions.
+% Third, enforcing the inextensibility of the DLO can create numerical instabilities during numerical simulation, which can restrict DER's fidelity \Zac{and thereby limit the usefulness of a DER model in a learning-based framework} to inform learning.
+% Alternatively, researchers have tried to combine a physics-based model prior with DNNs to improve sample efficiency and improve generalizability ~\cite{PINN, mlphysicsprocess, physicslearn1, physicslearn2, physicslearn3}. \Zac{moved this sentence to previous paragraph?} \Yizhou{\checkmark}
+% However, to the best of our knowledge, this approach has not been applied successfully to predict behavior of DLOs during dynamic motions.
+
+To address the above challenges, this paper introduces \textbf{D}ifferentiable Discrete \textbf{E}lastic Rods \textbf{F}or Deformable Linear \textbf{O}bjects with \textbf{R}eal-time \textbf{M}odeling (\textbf{DEFORM}), a novel framework that uses a differentiable physics-based learning model, with real-time inference speed, to accurately predict dynamic DLO behavior over long time horizons.
+% \Revise{The DEFORM framework, and the contributions this paper makes to the DER model, are illustrated in Figure \ref{fig:deform_contribution_diagram}.
+% To illustrate the utility of this framework, this paper shows how DEFORM can be applied to perform robust tracking of occluded DLOs in collaborative environments involving humans and robots, and DLO shape matching manipulation tasks in both simulation and the real-world.}{}
+As illustrated in Figure \ref{fig:deform_contribution_diagram}, the main contributions of DEFORM are four-fold.
+First, a novel DLO model is presented, called the Differentiable Discrete Elastic Rod (DDER) model that makes DER models differentiable with respect to any variables.
+Second, a numerical integration error compensation method that uses DNNs is developed to improve accuracy when numerically integrating DER models.
+% \Revise{2) A novel numerical integration error compensation method that uses \Revise{deep neural networks (DNNs)}{DNNs} to improve accuracy when numerically integrating DER models,}{}
+% Note, the formulation does not require a quasi-static dynamic assumption, which makes it suitable for dynamic modeling.
+Third, a novel inextensibility enforcement algorithm is presented for DER models that guarantees momentum conservation, thereby enabling accurate prediction of dynamic DLO behavior.
+Fourth, a comprehensive set of experiments are presented, which illustrate that DEFORM has superior performance in terms of accuracy, computational speed, and sampling efficiency. 
+We also demonstrate the utility of DEFORM for robust DLO tracking and precise shape-matching manipulation tasks.
+

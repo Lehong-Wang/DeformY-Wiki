@@ -1,0 +1,78 @@
+\section{Algorithmic Details}
+\label{appendix:methodology}
+\subsection{DNN Structure}
+\label{appendix:integration_NN}
+We built our DNN using a Graph Neural Network (GNN) \cite{GNN}. This is motivated in part by recent work that has illustrated how to successfully apply GNNs to model the spatial relationship between vertices in a DLO \cite{GNN_baseline}. 
+We adapt the default implementation of a graph convolution network (GCN) \cite{GCN} found in the PyTorch Geomeric library \cite{pytorch_geometric}. 
+GCNs have demonstrated their ability to reduce computational costs while effectively extracting informative latent representations from graph-structured data. 
+$\hat{\textbf{X}}_t$ and $\hat{\textbf{V}}$ are feature-wise concatenated as $(\hat{\textbf{X}}_t, \hat{\textbf{V}})\Rdim{n}{6}$ and are the input of the GCN. 
+We set the feature dimension to 32 for message passing, allowing each node to receive information from its local neighborhood. 
+We aggregate each node's neighbors' features using summation.
+The outputs of the GCN are flattened and decoded by a MLP constructed with two linear layers with a Rectified Linear Unit (ReLU) in the middle. 
+\label{appendix:DNN Structurey}
+
+\input{appendix/appendix_inextensibility_approve.tex}
+
+\subsection{Summary and Discussion of Improved Inextensiblity Enforcement with PBD}
+\label{appendix:Inextensibility Enforcement Pseudo Code}
+\begin{wrapfigure}{R}{0.5\textwidth}
+\vspace*{-0.85cm}
+    \begin{minipage}{0.5\textwidth}
+\begin{algorithm}[H]
+\caption{Enforcing Inextensibility with Momentum Preserving PBD} 
+\label{alg:inextensibility of PBD}
+\begin{algorithmic}[1]
+\Require $\pred{X}{t+1}$ and $\epsilon > 0$
+\While {any $\text{C}(\hat{\textbf{x}}^i_{t+1}, \hat{\textbf{x}}^{i+1}_{t+1}) > \epsilon$ }
+    \For{$i = 2$ \textbf{to} $n - 1$}
+        \State $\hat{\textbf{x}}_{t+1}^i = \hat{\textbf{x}}_{t+1}^i + \beta^{i}\Delta \hat{\textbf{x}}_{t+1}^i$ \Comment{\eqref{eq:inext1}}
+        % \State $\hat{\textbf{x}}_{t+1}^\text{i+1} = \hat{\textbf{x}}_{t+1}^\text{i+1} + \beta^{i+1}\Delta \hat{\textbf{x}}_{t+1}^\text{i+1}$ \Comment{\eqref{eq:inext1}}   
+    \EndFor
+\EndWhile
+% \Until{\textbf{all} $||\hat{\textbf{x}}_{t+1}^i - \hat{\textbf{x}}_{t+1}^\text{i+1}|| - ||\overline{\textbf{e}}_i||_2 < threshold$}
+\State \Return: $\hat{\textbf{X}}_{t+1}$ \Comment{Updated Vertices}
+\end{algorithmic}
+\end{algorithm}
+\end{minipage}
+\vspace*{-14pt}
+\end{wrapfigure}
+Algorithm \ref{alg:inextensibility of PBD} summarizes our proposed method to enforce inextensibility while preserving momentum. 
+Note that in practice, the while loop in Algorithm \ref{alg:inextensibility of PBD} typically converges after two iterations for $\epsilon=0.05$.
+Once we have the output from Algorithm \ref{alg:inextensibility of PBD}, we update the velocities of the vertices to reflect the new vertex locations (i.e., Line 5 of Algorithm \ref{alg:long time horizon}). 
+Further, as shown in Table 6, skipping Algorithm 2 in Algorithm 1 and relying solely on DNNs to capture the inextensibility of DLOs can lead to simulation instability. This instability arises because modeling stiff behavior, such as the inextensibility of DLOs, makes the learning process sensitive to inputs and hinders effective gradient propagation. A key issue with using neural network predictions in position-based dynamics (PBD) is that the dynamics/data lie on a low-dimensional manifold within a high-dimensional space. Over several open-loop predictions, the network's prediction errors can push the system state away from this manifold, leading to deterioration in the network's predictions. This occurs because the network has never encountered these ``off-manifold'' points during training. Algorithm 2 is designed to ensure that model inputs remain on the manifold on which the training data was collected, thereby mitigating these issues.
+
+\subsection{Training Setup}
+\label{Training Details}
+Let $\textbf{U}_{1:\text{T}-1}$ denote the set of inputs applied between times $t=1$ and $t=\text{T}-1$, and let $\textbf{X}_{1:\text{T}} =\{\textbf{X}_1, \textbf{X}_2,\ldots, \textbf{X}_\text{T}\} \in \mathbb{R}^{\text{T} \times \text{n}\times 3}$ denote the associated ground truth trajectory of the DLO from times $t=1$ to $t=\text{T}$. With known $\textbf{X}_1$, $\textbf{V}_1$ and $\textbf{U}_{1:\text{T}-1}$, Algorithm \ref{alg:long time horizon} can be applied recursively to generate predicted associated trajectory $\hat{\textbf{X}}_{2:\text{T}}$. Let $\bm{\phi}$ denote parameters of DNN. The objective of training is to solve the following optimization problem: 
+\begin{equation}
+    \label{eq:trainingcost}
+    \underset{\bm{\alpha}, \bm{\phi}}{\min} \hspace{0.5cm} \sum_{t=1}^{\text{T}-1} \|\textbf{X}_{t+1}- \hat{\textbf{X}}_{t+1}\|_2  
+\end{equation}
+By taking advantage of DEFORM's differentiability, T can be set to values greater than 2 to capture long-term behavior. 
+This multi-step training pipeline results in higher prediction accuracy than the single-step training pipeline, as shown in Table \ref{tab:additioanl ablation study}.
+
+\subsection{Discussion of Neural Network Utilization in \eqref{eq:NN-Semi-Euler1}}
+\label{appendix:NN discussion}
+This section provides an additional discussion of using neural networks in \eqref{eq:NN-Semi-Euler1} and \eqref{eq:NN-Semi-Euler3}.
+Incorporating a GNN enhances prediction accuracy by addressing inaccuracies arising from spatial and temporal discretization. 
+This network can effectively identify and adjust for these imperfections, as demonstrated in the ablation study.
+As the training involves a multi-step process, the GNN allows DEFORM to leverage gradients backpropaged from future prediction losses, which enables better informed and proactive corrections.
+GNN can implicitly capture variations (e.g., shearing) in residual energy that are not directly modeled by the traditional DER framework.
+
+However, the integration of a neural network also introduces several challenges. Primarily, it increases the computational load. 
+Moreover, the addition of a neural network, particularly in capturing and correcting impulse vectors, introduces complexity in ensuring that the network's outputs remain physically plausible and consistent with the DER's modeling output. 
+
+\subsection{Comparison of DER to other DLO dynamics formulations}
+Originally derived from computer graphics, the DER approaches uses Lagrangian mechanics to model the dynamics of a chain of point masses, employing a unique choice of coordinates that effectively captures bending and twisting dynamics. 
+This method contrasts with recent studies that apply Newtonian multi-body dynamics using Featherstone’s algorithms \cite{mamedov2024pseudorigidbodynetworkslearning} and \cite{mamedov2024learningdeformablelinearobject}. 
+For instance, \cite{mamedov2024learningdeformablelinearobject} models DLO dynamics using a chain of rigid bodies defined in minimal coordinates like angles between body elements, which simplifies the computation by making forward dynamics explicit and eliminating the need for implicit optimization or additional constraint enforcement algorithms. 
+While both Newtonian and Lagrangian dynamics conserve energy, their methods for deriving conservative forces differ, necessitating a deeper discussion on the advantages and limitations of each approach.
+
+From a Lagrangian perspective, DER’s innovative coordinate choice and post-integration constraint enforcement allow for the modeling of complex, stiff behaviors through various optimization solvers, enhancing stability and accuracy crucial for DLO simulations. 
+The accurate and stable model offers a high-fidelity prior for learning residual behavior, significantly enhancing sampling efficiency and performance as shown in the ablation study.
+However, this can introduce significant computational complexity and burden due to the need to solve implicit optimization problems and enforce constraints. 
+In contrast, Newtonian dynamics offer simpler, faster computations due to their explicit nature and minimal coordinate system, facilitating the integration of complex neural networks. 
+However, this can sometimes result in simulation instabilities, particularly when modeling stiff materials, and may struggle to capture complex deformable behaviors without extensive modifications. 
+The pros and cons of each method illustrate a clear trade-off between computational simplicity and the ability to handle complex behaviors.
+Overall, there are certainly benefits to using Newtonian multi-body dynamics that warrant further exploration. 
+% We think that this would make a good direction for future work.

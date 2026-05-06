@@ -1,0 +1,282 @@
+\begin{thebibliography}{37}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Bradbury et~al.(2018)Bradbury, Frostig, Hawkins, Johnson, Leary,
+  Maclaurin, Necula, Paszke, Vander{P}las, Wanderman-{M}ilne, and
+  Zhang]{jax2018github}
+James Bradbury, Roy Frostig, Peter Hawkins, Matthew~James Johnson, Chris Leary,
+  Dougal Maclaurin, George Necula, Adam Paszke, Jake Vander{P}las, Skye
+  Wanderman-{M}ilne, and Qiao Zhang.
+\newblock {JAX}: composable transformations of {P}ython+{N}um{P}y programs,
+  2018.
+
+\bibitem[Brockman et~al.(2016)Brockman, Cheung, Pettersson, Schneider,
+  Schulman, Tang, and Zaremba]{OpenAIGym}
+Greg Brockman, Vicki Cheung, Ludwig Pettersson, Jonas Schneider, John Schulman,
+  Jie Tang, and Wojciech Zaremba.
+\newblock Openai gym, 2016.
+
+\bibitem[Chen et~al.(2023)Chen, Ma, and Xu]{ILD}
+Siwei Chen, Xiao Ma, and Zhongwen Xu.
+\newblock Imitation learning via differentiable physics.
+\newblock In \emph{Proc. IEEE Conf. on Computer Vision \& Pattern Recognition},
+  2023.
+
+\bibitem[Chen et~al.(2016)Chen, Xu, Zhang, and Guestrin]{chen_checkpoint}
+Tianqi Chen, Bing Xu, Chiyuan Zhang, and Carlos Guestrin.
+\newblock Training deep nets with sublinear memory cost.
+\newblock \emph{arXiv preprint arXiv:1604.06174}, 2016.
+
+\bibitem[Freeman et~al.(2021)Freeman, Frey, Raichuk, Girgin, Mordatch, and
+  Bachem]{Brax}
+C.~Daniel Freeman, Erik Frey, Anton Raichuk, Sertan Girgin, Igor Mordatch, and
+  Olivier Bachem.
+\newblock Brax - {A} differentiable physics engine for large scale rigid body
+  simulation.
+\newblock In \emph{Advances in Neural Information Processing Systems}, 2021.
+
+\bibitem[Gan et~al.(2020)Gan, Schwartz, Alter, Mrowca, Schrimpf, Traer,
+  De~Freitas, Kubilius, Bhandwaldar, Haber, Sano, Kim, Wang, Lingelbach,
+  Curtis, Feigelis, Bear, Gutfreund, Cox, Torralba, DiCarlo, Tenenbaum,
+  McDermott, and Yamins]{TDW}
+Chuang Gan, Jeremy Schwartz, Seth Alter, Damian Mrowca, Martin Schrimpf, James
+  Traer, Julian De~Freitas, Jonas Kubilius, Abhishek Bhandwaldar, Nick Haber,
+  Megumi Sano, Kuno Kim, Elias Wang, Michael Lingelbach, Aidan Curtis, Kevin
+  Feigelis, Daniel~M. Bear, Dan Gutfreund, David Cox, Antonio Torralba,
+  James~J. DiCarlo, Joshua~B. Tenenbaum, Josh~H. McDermott, and Daniel L.~K.
+  Yamins.
+\newblock Threedworld: A platform for interactive multi-modal physical
+  simulation.
+\newblock In \emph{Advances in Neural Information Processing Systems}, 2020.
+
+\bibitem[Ganapathi et~al.(2021)Ganapathi, Sundaresan, Thananjeyan, Balakrishna,
+  Seita, Grannen, Hwang, Hoque, Gonzalez, Jamali, et~al.]{VC_IL}
+Aditya Ganapathi, Priya Sundaresan, Brijen Thananjeyan, Ashwin Balakrishna,
+  Daniel Seita, Jennifer Grannen, Minho Hwang, Ryan Hoque, Joseph~E Gonzalez,
+  Nawid Jamali, et~al.
+\newblock Learning dense visual correspondences in simulation to smooth and
+  fold real fabrics.
+\newblock In \emph{Proc. IEEE Int. Conf. on Robotics \& Automation}, pp.\
+  11515--11522. IEEE, 2021.
+
+\bibitem[Griewank \& Walther(2000)Griewank and Walther]{Griewank_checkpoint}
+Andreas Griewank and Andrea Walther.
+\newblock Algorithm 799: Revolve: An implementation of checkpointing for the
+  reverse or adjoint mode of computational differentiation.
+\newblock \emph{ACM Trans. Math. Softw.}, 26\penalty0 (1), mar 2000.
+
+\bibitem[Heiden et~al.(2021)Heiden, Macklin, Narang, Fox, Garg, and
+  Ramos]{DiSec}
+Eric Heiden, Miles Macklin, Yashraj Narang, Dieter Fox, Animesh Garg, and Fabio
+  Ramos.
+\newblock Disect: A differentiable simulation engine for autonomous robotic
+  cutting.
+\newblock In \emph{Proc. Robotics: Science \& Systems}, 2021.
+
+\bibitem[Holl et~al.(2020)Holl, Koltun, and Thuerey]{diffPDE}
+Philipp Holl, Vladlen Koltun, and Nils Thuerey.
+\newblock Learning to control pdes with differentiable physics.
+\newblock In \emph{Proc. Int. Conf. on Learning Representations}, 2020.
+
+\bibitem[Hu et~al.(2018)Hu, Fang, Ge, Qu, Zhu, Pradhana, and
+  Jiang]{hu2018mlsmpmcpic}
+Yuanming Hu, Yu~Fang, Ziheng Ge, Ziyin Qu, Yixin Zhu, Andre Pradhana, and
+  Chenfanfu Jiang.
+\newblock A moving least squares material point method with displacement
+  discontinuity and two-way rigid body coupling.
+\newblock \emph{ACM Transactions on Graphics (TOG)}, 37\penalty0 (4), 2018.
+
+\bibitem[Hu et~al.(2019)Hu, Liu, Spielberg, Tenenbaum, Freeman, Wu, Rus, and
+  Matusik]{chainqueen}
+Yuanming Hu, Jiancheng Liu, Andrew Spielberg, Joshua~B Tenenbaum, William~T
+  Freeman, Jiajun Wu, Daniela Rus, and Wojciech Matusik.
+\newblock Chainqueen: A real-time differentiable physical simulator for soft
+  robotics.
+\newblock In \emph{Proc. IEEE Int. Conf. on Robotics \& Automation}, pp.\
+  6265--6271. IEEE, 2019.
+
+\bibitem[Hu et~al.(2020)Hu, Anderson, Li, Sun, Carr, Ragan-Kelley, and
+  Durand]{Hu2020DiffTaichi}
+Yuanming Hu, Luke Anderson, Tzu-Mao Li, Qi~Sun, Nathan Carr, Jonathan
+  Ragan-Kelley, and Fredo Durand.
+\newblock Difftaichi: Differentiable programming for physical simulation.
+\newblock In \emph{Proc. Int. Conf. on Learning Representations}, 2020.
+
+\bibitem[Huang et~al.(2021)Huang, Hu, Du, Zhou, Su, Tenenbaum, and
+  Gan]{plasticine}
+Zhiao Huang, Yuanming Hu, Tao Du, Siyuan Zhou, Hao Su, Joshua~B. Tenenbaum, and
+  Chuang Gan.
+\newblock Plasticinelab: {A} soft-body manipulation benchmark with
+  differentiable physics.
+\newblock In \emph{Proc. Int. Conf. on Learning Representations}, 2021.
+
+\bibitem[Khalil \& Payeur(2010)Khalil and Payeur]{khalil2010dexterous}
+Fouad~F. Khalil and Pierre Payeur.
+\newblock Dexterous robotic manipulation of deformable objects with
+  multi-sensory feedback - a review.
+\newblock In Agustin Jimenez and Basil M~Al Hadithi (eds.), \emph{Robot
+  Manipulators}, chapter~28. IntechOpen, Rijeka, 2010.
+\newblock \doi{10.5772/9183}.
+\newblock URL \url{https://doi.org/10.5772/9183}.
+
+\bibitem[Le~Lidec et~al.(2021)Le~Lidec, Kalevatykh, Laptev, Schmid, and
+  Carpentier]{le2021differentiable}
+Quentin Le~Lidec, Igor Kalevatykh, Ivan Laptev, Cordelia Schmid, and Justin
+  Carpentier.
+\newblock Differentiable simulation for physical system identification.
+\newblock \emph{IEEE Robotics \& Automation Letters}, 6\penalty0 (2), 2021.
+
+\bibitem[Lin et~al.(2021)Lin, Wang, Olkin, and Held]{softgym}
+Xingyu Lin, Yufei Wang, Jake Olkin, and David Held.
+\newblock Softgym: Benchmarking deep reinforcement learning for deformable
+  object manipulation.
+\newblock In \emph{Conference on Robot Learning}, pp.\  432--448. PMLR, 2021.
+
+\bibitem[Lippi et~al.(2020)Lippi, Poklukar, Welle, Varava, Yin, Marino, and
+  Kragic]{VFMPlanning}
+Martina Lippi, Petra Poklukar, Michael~C. Welle, Anastasiia Varava, Hang Yin,
+  Alessandro Marino, and Danica Kragic.
+\newblock Latent space roadmap for visual action planning of deformable and
+  rigid object manipulation.
+\newblock In \emph{Proc. IEEE/RSJ Int. Conf. on Intelligent Robots \& Systems},
+  2020.
+
+\bibitem[Ma et~al.(2022)Ma, Hsu, and Lee]{gdoom}
+Xiao Ma, David Hsu, and Wee~Sun Lee.
+\newblock Learning latent graph dynamics for visual manipulation of deformable
+  objects.
+\newblock In \emph{Proc. IEEE Int. Conf. on Robotics \& Automation}, pp.\
+  8266--8273. IEEE, 2022.
+
+\bibitem[Maitin-Shepard et~al.(2010)Maitin-Shepard, Cusumano-Towner, Lei, and
+  Abbeel]{maitin2010cloth}
+Jeremy Maitin-Shepard, Marco Cusumano-Towner, Jinna Lei, and Pieter Abbeel.
+\newblock Cloth grasp point detection based on multiple-view geometric cues
+  with application to robotic towel folding.
+\newblock In \emph{Proc. IEEE Int. Conf. on Robotics \& Automation}. IEEE,
+  2010.
+
+\bibitem[Miller et~al.(2011)Miller, Fritz, Darrell, and
+  Abbeel]{miller2011parametrized}
+Stephen Miller, Mario Fritz, Trevor Darrell, and Pieter Abbeel.
+\newblock Parametrized shape models for clothing.
+\newblock In \emph{Proc. IEEE Int. Conf. on Robotics \& Automation}. IEEE,
+  2011.
+
+\bibitem[Miller et~al.(2012)Miller, Van Den~Berg, Fritz, Darrell, Goldberg, and
+  Abbeel]{miller2012geometric}
+Stephen Miller, Jur Van Den~Berg, Mario Fritz, Trevor Darrell, Ken Goldberg,
+  and Pieter Abbeel.
+\newblock A geometric approach to robotic laundry folding.
+\newblock \emph{Int. J. Robotics Research}, 31\penalty0 (2), 2012.
+
+\bibitem[Murthy et~al.(2021)Murthy, Macklin, Golemo, Voleti, Petrini, Weiss,
+  Considine, Parent-L{\'e}vesque, Xie, Erleben, Paull, Shkurti, Nowrouzezahrai,
+  and Fidler]{murthy2021gradsim}
+J.~Krishna Murthy, Miles Macklin, Florian Golemo, Vikram Voleti, Linda Petrini,
+  Martin Weiss, Breandan Considine, J{\'e}r{\^o}me Parent-L{\'e}vesque, Kevin
+  Xie, Kenny Erleben, Liam Paull, Florian Shkurti, Derek Nowrouzezahrai, and
+  Sanja Fidler.
+\newblock gradsim: Differentiable simulation for system identification and
+  visuomotor control.
+\newblock In \emph{Proc. Int. Conf. on Learning Representations}, 2021.
+
+\bibitem[Nair \& Finn(2019)Nair and Finn]{HF_planning}
+Suraj Nair and Chelsea Finn.
+\newblock Hierarchical foresight: Self-supervised learning of long-horizon
+  tasks via visual subgoal generation.
+\newblock \emph{arXiv preprint arXiv:1909.05829}, 2019.
+
+\bibitem[Qiao et~al.(2020)Qiao, Liang, Koltun, and Lin]{diffsim}
+Yi-Ling Qiao, Junbang Liang, Vladlen Koltun, and Ming~C. Lin.
+\newblock Scalable differentiable physics for learning and control.
+\newblock In \emph{Proc. Int. Conf. on Machine Learning}, 2020.
+
+\bibitem[Qiao et~al.(2021)Qiao, Liang, Koltun, and Lin]{checkpoint}
+Yi-Ling Qiao, Junbang Liang, Vladlen Koltun, and Ming~C. Lin.
+\newblock Efficient differentiable simulation of articulated bodies.
+\newblock In \emph{Proc. Int. Conf. on Machine Learning}, 2021.
+
+\bibitem[Richards(2005)]{Richards2005RobustCM}
+Arthur~George Richards.
+\newblock \emph{Robust constrained model predictive control}.
+\newblock PhD thesis, Massachusetts Institute of Technology, 2005.
+
+\bibitem[Sanchez et~al.(2018)Sanchez, Corrales, Bouzgarrou, and
+  Mezouar]{sanchez2018robotic}
+Jose Sanchez, Juan-Antonio Corrales, Belhassen-Chedli Bouzgarrou, and Youcef
+  Mezouar.
+\newblock Robotic manipulation and sensing of deformable objects in domestic
+  and industrial applications: a survey.
+\newblock \emph{Int. J. Robotics Research}, 37\penalty0 (7), 2018.
+
+\bibitem[Schulman et~al.(2017)Schulman, Wolski, Dhariwal, Radford, and
+  Klimov]{PPO}
+John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, and Oleg Klimov.
+\newblock Proximal policy optimization algorithms.
+\newblock \emph{arXiv preprint arXiv:1707.06347}, 2017.
+
+\bibitem[Seita et~al.(2021)Seita, Florence, Tompson, Coumans, Sindhwani,
+  Goldberg, and Zeng]{transporter}
+Daniel Seita, Pete Florence, Jonathan Tompson, Erwin Coumans, Vikas Sindhwani,
+  Ken Goldberg, and Andy Zeng.
+\newblock Learning to rearrange deformable cables, fabrics, and bags with
+  goal-conditioned transporter networks.
+\newblock In \emph{Proc. IEEE Int. Conf. on Robotics \& Automation}, pp.\
+  4568--4575. IEEE, 2021.
+
+\bibitem[Shen et~al.(2022)Shen, Jiang, Choy, J.~Guibas, Savarese, Anandkumar,
+  and Zhu]{shen2022acid}
+Bokui Shen, Zhenyu Jiang, Christopher Choy, Leonidas J.~Guibas, Silvio
+  Savarese, Anima Anandkumar, and Yuke Zhu.
+\newblock Acid: Action-conditional implicit visual dynamics for deformable
+  object manipulation.
+\newblock In \emph{Proc. Robotics: Science \& Systems}, 2022.
+
+\bibitem[Sulsky et~al.(1994)Sulsky, Chen, and Schreyer]{sulsky1994particle}
+Deborah Sulsky, Zhen Chen, and Howard~L Schreyer.
+\newblock A particle method for history-dependent materials.
+\newblock \emph{Computer methods in applied mechanics and engineering},
+  118\penalty0 (1-2), 1994.
+
+\bibitem[Sundaresan et~al.(2020)Sundaresan, Grannen, Thananjeyan, Balakrishna,
+  Laskey, Stone, Gonzalez, and Goldberg]{DOD_IL}
+Priya Sundaresan, Jennifer Grannen, Brijen Thananjeyan, Ashwin Balakrishna,
+  Michael Laskey, Kevin Stone, Joseph~E Gonzalez, and Ken Goldberg.
+\newblock Learning rope manipulation policies using dense object descriptors
+  trained on synthetic depth data.
+\newblock In \emph{Proc. IEEE Int. Conf. on Robotics \& Automation}, pp.\
+  9411--9418. IEEE, 2020.
+
+\bibitem[Wi et~al.(2022)Wi, Florence, Zeng, and Fazeli]{vidro}
+Youngsun Wi, Pete Florence, Andy Zeng, and Nima Fazeli.
+\newblock Virdo: Visio-tactile implicit representations of deformable objects.
+\newblock In \emph{Proc. IEEE Int. Conf. on Robotics \& Automation}, 2022.
+
+\bibitem[Xu et~al.(2022)Xu, Macklin, Makoviychuk, Narang, Garg, Ramos, and
+  Matusik]{SHAC}
+Jie Xu, Miles Macklin, Viktor Makoviychuk, Yashraj Narang, Animesh Garg, Fabio
+  Ramos, and Wojciech Matusik.
+\newblock Accelerated policy learning with parallel differentiable simulation.
+\newblock In \emph{Proc. Int. Conf. on Learning Representations}, 2022.
+
+\bibitem[Yan et~al.(2021)Yan, Vangipuram, Abbeel, and Pinto]{CE_planning}
+Wilson Yan, Ashwin Vangipuram, Pieter Abbeel, and Lerrel Pinto.
+\newblock Learning predictive representations for deformable objects using
+  contrastive estimation.
+\newblock In \emph{Conference on Robot Learning}, pp.\  564--574. PMLR, 2021.
+
+\bibitem[Zhu et~al.(2022)Zhu, Cherubini, Dune, Navarro-Alarcon, Alambeigi,
+  Berenson, Ficuciello, Harada, Kober, Li, et~al.]{zhu2022challenges}
+Jihong Zhu, Andrea Cherubini, Claire Dune, David Navarro-Alarcon, Farshid
+  Alambeigi, Dmitry Berenson, Fanny Ficuciello, Kensuke Harada, Jens Kober,
+  Xiang Li, et~al.
+\newblock Challenges and outlook in robotic manipulation of deformable objects.
+\newblock \emph{IEEE Robotics \& Automation Magazine}, 29\penalty0
+  (3):\penalty0 67--77, 2022.
+
+\end{thebibliography}

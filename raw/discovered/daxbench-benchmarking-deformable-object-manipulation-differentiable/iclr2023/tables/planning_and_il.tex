@@ -1,0 +1,98 @@
+\begin{table}[t]
+\centering
+\fontsize{7.5}{7.5}\selectfont
+\begin{tabular}{lccccccc}
+\toprule
+ &  & \multicolumn{3}{c}{Imitation Learning} &  \multicolumn{3}{c}{Planning}\\
+ \cmidrule(lr){1-2}
+ \cmidrule(lr){3-5} 
+\cmidrule(lr){6-8} 
+Task Type   
+& Task & Transporter & ILD & Expert
+ & CEM-MPC & Diff-MPC & Diff-CEM-MPC\\
+\cmidrule(lr){1-2}
+\cmidrule(lr){3-5} 
+\cmidrule(lr){6-8} 
+\multirow{6}{*}{High-level} 
+
+& Fold-Cloth-1 
+
+& 0.19$\pm$0.04 & 0.76$\pm$0.04 & 0.91$\pm$0.00
+
+&0.74$\pm$0.07 & 0.29$\pm$0.07 &0.80$\pm$0.04 
+\\
+
+
+& Fold-Cloth-3 
+
+& 0.40$\pm$0.05 &   0.82$\pm$0.05 & 0.89$\pm$0.00
+
+& 0.62$\pm$0.08 & 0.14$\pm$0.02 & 0.66$\pm$0.07 
+
+\\
+
+
+& Fold-T-shirt 
+
+& 0.46$\pm$0.02 &  0.59$\pm$0.11 & 0.85$\pm$0.00 
+
+& 0.58$\pm$0.04 & 0.29$\pm$0.06 & 0.66$\pm$0.01
+
+\\
+
+
+& Unfold-Cloth-1 
+
+ &0.48$\pm$0.01 & 0.64$\pm$0.03 & 0.87$\pm$0.00
+ 
+ &  0.57$\pm$0.04 & 0.30$\pm$0.05 & 0.67$\pm$0.02  
+
+
+\\
+
+
+&Unfold-Cloth-3 
+
+ & 0.30$\pm$0.00 & 0.52$\pm$0.02 &0.87$\pm$0.00
+ 
+ & 0.57$\pm$0.01 & 0.26$\pm$0.04 & 0.58$\pm$0.01 
+
+\\
+
+& Push-Rope
+
+&  0.70$\pm$0.00 & 0.76$\pm$0.02 & 0.93$\pm$0.00 
+
+& 0.71$\pm$0.01 & 0.70$\pm$0.01 &0.71$\pm$0.01  
+
+\\
+\cmidrule(lr){1-2}
+\cmidrule(lr){3-5} 
+\cmidrule(lr){6-8}
+\multirow{3}{*}{Low-level}
+
+&Whip-Rope 
+
+& \NA  &0.70$\pm$0.06 & 1.00$\pm$ 0.00
+& 0.34$\pm$0.01 & 0.37$\pm$0.00&0.33$\pm$0.01
+\\
+
+
+&Pour-Water 
+
+& \NA &0.32$\pm$0.03 & 0.91$\pm$ 0.06
+
+& 0.58$\pm$0.01 & 0.30$\pm$0.00 & 0.58$\pm$0.01
+\\
+
+& Pour-Soup  
+
+& \NA & 0.42$\pm$0.12 & 0.85$\pm$ 0.00
+
+& 0.56$\pm$0.01  & 0.44$\pm$0.00 & 0.55$\pm$0.02 
+\\
+\bottomrule
+\end{tabular}
+\caption{\small \textbf{Task performance for the planning and imitation learning methods.} We report the mean and standard error for the policy/control sequences evaluated under 20 seeds.}
+\label{table:planning_il}
+\end{table}
