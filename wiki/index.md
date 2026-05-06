@@ -13,6 +13,10 @@ papers:
     title: "TossingBot: Learning to Throw Arbitrary Objects with Residual Physics"
     tags: [robotics, manipulation, throwing, residual-physics, grasping, deep-learning, sim-to-real, self-supervised, pick-and-place]
     importance: 5
+  - slug: deform-differentiable-discrete-elastic-rods-real
+    title: "DEFORM: Differentiable Discrete Elastic Rods for Real-Time Modeling of Deformable Linear Objects"
+    tags: [DLO, deformable-linear-object, discrete-elastic-rods, differentiable-simulation, residual-learning, position-based-dynamics, sim-to-real, robot-learning, system-identification]
+    importance: 4
     domain: Robotics
 
 concepts:
@@ -40,6 +44,18 @@ concepts:
     title: "Physics-Informed Action Prior"
     tags: [robotics, hybrid-controller, model-based, residual-learning, sim-to-real, action-prior]
     maturity: active
+  - slug: differentiable-discrete-elastic-rods
+    title: "Differentiable Discrete Elastic Rods (DDER)"
+    tags: [DLO, simulation, discrete-elastic-rods, differentiable-simulation, system-identification]
+    maturity: emerging
+  - slug: neural-residual-on-physics-model
+    title: "Neural Residual on a Physics Model"
+    tags: [residual-learning, physics-informed-learning, simulation, hybrid-model, differentiable-simulation]
+    maturity: active
+  - slug: momentum-preserving-pbd-inextensibility
+    title: "Momentum-Preserving PBD Inextensibility"
+    tags: [DLO, simulation, position-based-dynamics, inextensibility, momentum-conservation, discrete-elastic-rods]
+    maturity: emerging
 
 topics:
 
@@ -56,6 +72,9 @@ people:
     name: "Andy Zeng"
     affiliation: "Google DeepMind"
     tags: [robotics, deep-learning, manipulation, vision, robot-learning, foundation-models]
+  - slug: yizhou-chen
+    title: "Yizhou Chen"
+    affiliation: "Department of Robotics, University of Michigan, Ann Arbor (ROAHM Lab)"
 
 ideas:
 
@@ -85,6 +104,11 @@ claims:
     tags: [robotics, throwing, residual-physics, manipulation, sim-to-real, hybrid-controller]
     status: supported
     confidence: 0.85
+  - slug: differentiable-der-plus-residual-realtime-dlo
+    title: "Differentiable DER plus a neural residual achieves real-time, accurate dynamic DLO modeling, perception, and shape-matching control on real robots"
+    tags: [DLO, simulation, differentiable-simulation, residual-learning, sim-to-real, real-time, perception, manipulation]
+    status: supported
+    confidence: 0.75
     domain: Robotics
 
 Summary:
