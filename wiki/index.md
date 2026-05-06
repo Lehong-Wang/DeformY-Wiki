@@ -6,16 +6,33 @@ papers:
     tags: [DLO, deformable-linear-object, cosserat-rod, simulation, sim-to-real, robot-learning, dataset, isaac-sim]
     importance: 3
     domain: Robotics
+  - slug: implicit-physics-aware-policy-dynamic-manipulation
+    title: "Implicit Physics-aware Policy for Dynamic Manipulation of Rigid Objects via Soft Body Tools"
+    tags: [robotics, deformable-linear-objects, dynamic-manipulation, soft-tool-use, system-identification, one-shot, sim-to-real, heterogeneous-system]
+    importance: 4
+    domain: Robotics
 
 concepts:
   - slug: cosserat-isaac-cosimulation
     title: "Cosserat-Isaac Co-Simulation"
     tags: [DLO, simulation, cosserat-rod, isaac-sim, sim-to-real, robot-learning]
     maturity: emerging
+  - slug: implicit-system-identification
+    title: "Implicit System Identification"
+    tags: [system-identification, implicit-encoding, sim-to-real, robot-learning, physics-aware, deformable-objects]
+    maturity: emerging
+  - slug: heterogeneous-soft-rigid-system
+    title: "Heterogeneous Soft-Rigid System"
+    tags: [deformable-linear-objects, rigid-bodies, dynamic-manipulation, heterogeneous-system, robot-learning, multi-body-coupling]
+    maturity: emerging
 
 topics:
 
 people:
+  - slug: zixing-wang
+    name: "Zixing Wang"
+    affiliation: "Purdue University, Department of Computer Science"
+    tags: [robotics, deformable-linear-objects, dynamic-manipulation, soft-tool-use, manipulation-learning]
 
 ideas:
 
@@ -25,6 +42,18 @@ claims:
   - slug: cosserat-physics-narrows-dlo-swinging-sim2real
     title: "Cosserat physics narrows the DLO swinging sim-to-real gap"
     tags: [DLO, sim-to-real, cosserat-rod, robot-learning, PPO]
+    status: weakly_supported
+    confidence: 0.55
+    domain: Robotics
+  - slug: implicit-sysid-enables-one-shot-rope
+    title: "Implicit sysID encoder + goal-conditioned action predictor enables one-shot real-deployment for rope-as-tool 3D-target transport of rigid payloads"
+    tags: [implicit-system-identification, rope-manipulation, dynamic-manipulation, one-shot, sim-to-real, heterogeneous-system, soft-tool-use]
+    status: weakly_supported
+    confidence: 0.65
+    domain: Robotics
+  - slug: heterogeneous-payload-rope-dynamics-implicit-vs
+    title: "Heterogeneous payload-on-rope dynamics are captured implicitly without per-trial residual updates, in contrast to IRP's iterative residual loop"
+    tags: [implicit-system-identification, residual-physics, iterative-residual-policy, heterogeneous-system, dynamic-manipulation, one-shot]
     status: weakly_supported
     confidence: 0.55
     domain: Robotics
