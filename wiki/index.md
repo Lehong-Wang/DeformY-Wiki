@@ -56,6 +56,9 @@ papers:
   - slug: rapid-adaptation-particle-dynamics-generalized-deformable
     title: "Rapid Adaptation of Particle Dynamics for Generalized Deformable Object Mobile Manipulation"
     tags: [deformable-object-manipulation, mobile-manipulation, RMA, sim-to-real, visuomotor-policy, particle-dynamics, teacher-student, reinforcement-learning, adaptation, omnigibson]
+  - slug: self-curriculum-model-based-reinforcement-learning
+    title: "Self-Curriculum Model-based Reinforcement Learning for Shape Control of Deformable Linear Objects"
+    tags: [DLO, deformable-linear-object, shape-control, MBRL, self-curriculum, goal-conditioned-RL, visual-servoing, sim-to-real, robot-learning]
     importance: 3
     domain: Robotics
 
@@ -168,6 +171,9 @@ concepts:
   - slug: rma-particle-dynamics-adaptation
     title: "RMA Particle-Dynamics Adaptation"
     tags: [RMA, deformable-object-manipulation, sim-to-real, teacher-student, particle-dynamics, visuomotor-policy, robot-learning]
+  - slug: self-curriculum-goal-generation
+    title: "Self-Curriculum Goal Generation via Imagined Evaluation"
+    tags: [GCRL, curriculum-learning, model-based-RL, goal-generation, DLO, robot-learning]
     maturity: emerging
 
 topics:
@@ -375,6 +381,9 @@ claims:
   - slug: rma-particle-rapid-real-world-success
     title: "RMA with privileged-particle teacher achieves >80% real-world success on deformable mobile manipulation"
     tags: [RMA, deformable-object-manipulation, mobile-manipulation, sim-to-real, teacher-student, particle-dynamics, robot-learning]
+  - slug: two-stage-mbrl-jacobian-servo-zero-shot-dlo-shape-control
+    title: "Two-stage self-curriculum MBRL + Jacobian visual servoing achieves zero-shot sim-to-real DLO shape control across varied size and material"
+    tags: [DLO, MBRL, sim-to-real, shape-control, curriculum-learning, visual-servoing, robot-learning]
     status: proposed
     confidence: 0.45
     domain: Robotics
