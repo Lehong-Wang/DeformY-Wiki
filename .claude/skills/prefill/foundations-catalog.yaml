@@ -72,3 +72,80 @@ domains:
     - slug: reward-shaping
       title: "Reward Shaping"
       summary: "通过设计辅助奖励信号引导强化学习agent学习的技术"
+  Robotics:
+    # --- Robot learning paradigms ---
+    - slug: imitation-learning
+      title: "Imitation Learning"
+      summary: "Learning a policy from expert demonstrations rather than explicit reward, including behavioral cloning, DAgger, and inverse RL."
+    - slug: behavioral-cloning
+      title: "Behavioral Cloning"
+      summary: "Supervised regression from observation to expert action; the simplest imitation-learning baseline, prone to compounding distribution shift."
+    - slug: diffusion-policy
+      title: "Diffusion Policy"
+      summary: "Visuomotor policy class that models multi-modal action distributions with conditional denoising diffusion, dominant for manipulation since 2023."
+    - slug: visuomotor-policy
+      title: "Visuomotor Policy"
+      summary: "End-to-end policy mapping raw visual observations to robot actions, learned via imitation or RL."
+    - slug: sim-to-real-transfer
+      title: "Sim-to-Real Transfer"
+      summary: "Techniques for deploying policies trained in simulation onto real robots despite the reality gap."
+    - slug: domain-randomization
+      title: "Domain Randomization"
+      summary: "Sim-to-real strategy that varies physics, textures, and lighting during training so the policy treats reality as one more variation."
+    - slug: model-based-reinforcement-learning
+      title: "Model-Based Reinforcement Learning"
+      summary: "RL paradigm that learns a forward dynamics model and plans or backprops through it for sample-efficient control."
+
+    # --- Classical control + planning foundations ---
+    - slug: model-predictive-control
+      title: "Model Predictive Control"
+      summary: "Receding-horizon optimal control: solve a finite-horizon problem each timestep using a dynamics model, apply the first action, replan."
+    - slug: forward-kinematics
+      title: "Forward Kinematics"
+      summary: "Mapping joint configuration to end-effector pose via the kinematic chain."
+    - slug: inverse-kinematics
+      title: "Inverse Kinematics"
+      summary: "Solving for joint configurations that achieve a desired end-effector pose; analytical or iterative (Jacobian-based)."
+    - slug: jacobian-based-control
+      title: "Jacobian-Based Control"
+      summary: "Velocity/force control that uses the manipulator Jacobian to map task-space objectives to joint-space commands."
+    - slug: impedance-control
+      title: "Impedance Control"
+      summary: "Control law that regulates the dynamic relationship (mass-spring-damper) between end-effector force and motion, key for contact-rich tasks."
+    - slug: visual-servoing
+      title: "Visual Servoing"
+      summary: "Closed-loop control that drives a robot using image-feature error (image-based) or estimated pose error (position-based)."
+
+    # --- Deformable / continuum modeling foundations ---
+    - slug: deformable-linear-object
+      title: "Deformable Linear Object"
+      summary: "One-dimensional deformable bodies (rope, cable, suture, hose) whose configuration is dominated by bending and twisting along a centerline."
+    - slug: cosserat-rod-theory
+      title: "Cosserat Rod Theory"
+      summary: "Continuum mechanics model for slender rods that captures bending, twisting, shear, and stretch of a directed centerline."
+    - slug: discrete-elastic-rods
+      title: "Discrete Elastic Rods"
+      summary: "Discrete differential geometry formulation of Kirchhoff/Cosserat rods, widely used in graphics and robotics for fast DLO simulation."
+    - slug: mass-spring-system
+      title: "Mass-Spring System"
+      summary: "Network of point masses connected by springs/dampers; the simplest deformable-object model, often used for ropes and cloth."
+    - slug: finite-element-method
+      title: "Finite Element Method"
+      summary: "Discretization of continuum PDEs onto a mesh; used for high-fidelity deformable-body simulation including DLOs."
+    - slug: position-based-dynamics
+      title: "Position-Based Dynamics"
+      summary: "Stable, real-time deformable-body simulation that solves geometric constraints directly on positions instead of forces."
+
+    # --- Manipulation primitives ---
+    - slug: shape-servoing
+      title: "Shape Servoing"
+      summary: "Closed-loop control that drives a deformable object's shape toward a target by estimating a deformation Jacobian online."
+    - slug: grasping
+      title: "Grasping"
+      summary: "Selection and execution of stable contact configurations for picking up objects, foundational for any manipulation pipeline."
+    - slug: contact-rich-manipulation
+      title: "Contact-Rich Manipulation"
+      summary: "Manipulation tasks dominated by making/breaking contact (insertion, wiping, knotting), where stiff control fails and force/impedance control matters."
+    - slug: tactile-sensing
+      title: "Tactile Sensing"
+      summary: "Measurement of contact forces, pressures, and shear via skin-like sensors; central for manipulating slender, occluded, or deformable objects."

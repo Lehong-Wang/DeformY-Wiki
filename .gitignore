@@ -31,3 +31,6 @@ Thumbs.db
 
 # Raw data (large files managed separately)
 raw/papers/*.pdf
+
+# Skill runtime / scratch state (per-session helpers, init/ingest manifests)
+.checkpoints/
