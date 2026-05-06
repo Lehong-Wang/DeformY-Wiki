@@ -6,16 +6,29 @@ papers:
     tags: [DLO, deformable-linear-object, cosserat-rod, simulation, sim-to-real, robot-learning, dataset, isaac-sim]
     importance: 3
     domain: Robotics
+  - slug: daxbench-benchmarking-deformable-object-manipulation-differentiable
+    title: "DaXBench: Benchmarking Deformable Object Manipulation with Differentiable Physics"
+    tags: [DLO, deformable-object-manipulation, differentiable-physics, JAX, MPM, mass-spring, benchmark, RL, imitation-learning, planning, APG, SHAC, PPO, sim-to-real]
+    importance: 4
+    domain: Robotics
 
 concepts:
   - slug: cosserat-isaac-cosimulation
     title: "Cosserat-Isaac Co-Simulation"
     tags: [DLO, simulation, cosserat-rod, isaac-sim, sim-to-real, robot-learning]
     maturity: emerging
+  - slug: differentiable-deformable-benchmark
+    title: "Differentiable Deformable-Object Benchmark"
+    tags: [DLO, DOM, deformable-object-manipulation, differentiable-physics, JAX, MPM, mass-spring, benchmark, RL, imitation-learning, planning]
+    maturity: emerging
 
 topics:
 
 people:
+  - slug: siwei-chen
+    name: "Siwei Chen"
+    affiliation: "National University of Singapore (AdaComp Lab)"
+    tags: [deformable-object-manipulation, differentiable-physics, JAX, MPM, RL, robot-learning, benchmark]
 
 ideas:
 
@@ -25,6 +38,18 @@ claims:
   - slug: cosserat-physics-narrows-dlo-swinging-sim2real
     title: "Cosserat physics narrows the DLO swinging sim-to-real gap"
     tags: [DLO, sim-to-real, cosserat-rod, robot-learning, PPO]
+    status: weakly_supported
+    confidence: 0.55
+    domain: Robotics
+  - slug: apg-dominates-shac-and-ppo-on-whiprope-low-level
+    title: "DaXBench Whip-Rope baselines: APG 0.83 dominates SHAC 0.66 and PPO 0.25 — analytic policy gradients win on dynamic deformable tasks"
+    tags: [DLO, DOM, deformable-object-manipulation, RL, differentiable-physics, APG, SHAC, PPO, benchmark, low-level-control]
+    status: supported
+    confidence: 0.7
+    domain: Robotics
+  - slug: jax-differentiable-rope-enables-batched-rl-vs-cem-mpc
+    title: "JAX-based differentiable rope simulators enable batched RL training that gradient-free baselines (CEM-MPC) cannot match on dynamic rope tasks"
+    tags: [DLO, DOM, JAX, differentiable-physics, MPM, batched-RL, CEM-MPC, APG, SHAC, benchmark]
     status: weakly_supported
     confidence: 0.55
     domain: Robotics
