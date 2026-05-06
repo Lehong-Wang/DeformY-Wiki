@@ -6,16 +6,28 @@ papers:
     tags: [DLO, deformable-linear-object, cosserat-rod, simulation, sim-to-real, robot-learning, dataset, isaac-sim]
     importance: 3
     domain: Robotics
+  - slug: self-supervised-learning-dynamic-planar-manipulation
+    title: "Self-Supervised Learning of Dynamic Planar Manipulation of Free-End Cables"
+    tags: [DLO, deformable-linear-object, free-end-cable, dynamic-manipulation, sim-to-real, real2sim2real, self-supervised, pybullet, differential-evolution, supervised-learning, autolab, UR5]
+    importance: 4
+    domain: Robotics
 
 concepts:
   - slug: cosserat-isaac-cosimulation
     title: "Cosserat-Isaac Co-Simulation"
     tags: [DLO, simulation, cosserat-rod, isaac-sim, sim-to-real, robot-learning]
     maturity: emerging
+  - slug: two-arc-planar-motion-primitive
+    title: "Two-Arc Planar Motion Primitive"
+    tags: [DLO, dynamic-manipulation, action-parameterization, free-end-cable, motion-primitive, robot-casting]
+    maturity: emerging
 
 topics:
 
 people:
+  - slug: jonathan-wang
+    title: "Jonathan Wang"
+    affiliation: "AUTOLAB, UC Berkeley (at time of paper)"
 
 ideas:
 
@@ -25,6 +37,18 @@ claims:
   - slug: cosserat-physics-narrows-dlo-swinging-sim2real
     title: "Cosserat physics narrows the DLO swinging sim-to-real gap"
     tags: [DLO, sim-to-real, cosserat-rod, robot-learning, PPO]
+    status: weakly_supported
+    confidence: 0.55
+    domain: Robotics
+  - slug: real2sim2real-free-end-cables-reaches-22
+    title: "DE-tuned PyBullet + supervised forward dynamics yields 22-34% median tip error on free-end cable casting"
+    tags: [DLO, free-end-cable, sim-to-real, real2sim2real, dynamic-manipulation, supervised-learning, robot-casting]
+    status: supported
+    confidence: 0.7
+    domain: Robotics
+  - slug: free-end-cable-target-reaching-harder
+    title: "Free-end cable dynamic target reaching is harder than fixed-end on per-cable-length error"
+    tags: [DLO, free-end-cable, fixed-end-cable, dynamic-manipulation, sim-to-real, robot-casting, error-comparison]
     status: weakly_supported
     confidence: 0.55
     domain: Robotics
