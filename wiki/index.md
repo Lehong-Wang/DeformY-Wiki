@@ -37,6 +37,9 @@ papers:
   - slug: daxbench-benchmarking-deformable-object-manipulation-differentiable
     title: "DaXBench: Benchmarking Deformable Object Manipulation with Differentiable Physics"
     tags: [DLO, deformable-object-manipulation, differentiable-physics, JAX, MPM, mass-spring, benchmark, RL, imitation-learning, planning, APG, SHAC, PPO, sim-to-real]
+  - slug: wiggle-go-system-identification-zero-shot
+    title: "Wiggle and Go! System Identification for Zero-Shot Dynamic Rope Manipulation"
+    tags: [DLO, deformable-linear-object, rope-manipulation, system-identification, zero-shot, sim-to-real, dynamic-manipulation, CMA-ES, trajectory-optimization, drake, xarm7, cmu]
     importance: 4
     domain: Robotics
 
@@ -131,6 +134,9 @@ concepts:
   - slug: differentiable-deformable-benchmark
     title: "Differentiable Deformable-Object Benchmark"
     tags: [DLO, DOM, deformable-object-manipulation, differentiable-physics, JAX, MPM, mass-spring, benchmark, RL, imitation-learning, planning]
+  - slug: task-agnostic-system-identification
+    title: "Task-Agnostic System Identification"
+    tags: [DLO, system-identification, rope-manipulation, sim-to-real, zero-shot, dynamic-manipulation, neural-network-sysid]
     maturity: emerging
 
 topics:
@@ -176,6 +182,10 @@ people:
     name: "Siwei Chen"
     affiliation: "National University of Singapore (AdaComp Lab)"
     tags: [deformable-object-manipulation, differentiable-physics, JAX, MPM, RL, robot-learning, benchmark]
+  - slug: arthur-jakobsson
+    title: "Arthur Jakobsson"
+  - slug: krishna-suresh
+    title: "Krishna Suresh"
 
 ideas:
 
@@ -279,6 +289,17 @@ claims:
     tags: [DLO, DOM, JAX, differentiable-physics, MPM, batched-RL, CEM-MPC, APG, SHAC, benchmark]
     status: weakly_supported
     confidence: 0.55
+  - slug: wiggle-sysid-enables-zero-shot-3d-rope-striking
+    title: "A task-agnostic 'wiggle' observation predicts rope physical parameters well enough to enable zero-shot real-hardware 3D-point-striking via downstream CMA-ES trajectory optimization"
+    tags: [DLO, rope-manipulation, system-identification, zero-shot, sim-to-real, dynamic-manipulation, drake, xarm7]
+    status: supported
+    confidence: 0.65
+    domain: Robotics
+  - slug: decoupled-sysid-beats-iterative-residual-on-zero-retry
+    title: "Decoupling sysID from task execution beats end-to-end iterative residual policies on the 3D rope-tip striking task at deployment time"
+    tags: [DLO, rope-manipulation, system-identification, iterative-residual-policy, dynamic-manipulation, zero-shot]
+    status: weakly_supported
+    confidence: 0.5
     domain: Robotics
 
 Summary:
