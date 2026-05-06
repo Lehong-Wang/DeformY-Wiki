@@ -47,6 +47,10 @@ papers:
     title: "Self-Supervised Learning of Dynamic Planar Manipulation of Free-End Cables"
     tags: [DLO, deformable-linear-object, free-end-cable, dynamic-manipulation, sim-to-real, real2sim2real, self-supervised, pybullet, differential-evolution, supervised-learning, autolab, UR5]
     importance: 4
+  - slug: softmimicgen-data-generation-system-scalable-robot
+    title: "SoftMimicGen: A Data Generation System for Scalable Robot Learning in Deformable Object Manipulation"
+    tags: [deformable, data-generation, imitation-learning, mimicgen, non-rigid-registration, isaac-lab, sim-to-real, dynamic-manipulation, whipping, threading, folding, humanoid, surgical, bimanual]
+    importance: 3
     domain: Robotics
 
 concepts:
@@ -149,6 +153,9 @@ concepts:
   - slug: two-arc-planar-motion-primitive
     title: "Two-Arc Planar Motion Primitive"
     tags: [DLO, dynamic-manipulation, action-parameterization, free-end-cable, motion-primitive, robot-casting]
+  - slug: automated-demo-generation-deformable
+    title: "Automated Demonstration Generation for Deformable Manipulation"
+    tags: [deformable, data-generation, imitation-learning, mimicgen, non-rigid-registration, trajectory-transfer, robot-learning]
     maturity: emerging
 
 topics:
@@ -205,6 +212,10 @@ people:
   - slug: jonathan-wang
     title: "Jonathan Wang"
     affiliation: "AUTOLAB, UC Berkeley (at time of paper)"
+  - slug: masoud-moghani
+    name: "Masoud Moghani"
+    affiliation: "NVIDIA / University of Toronto"
+    tags: [robotics, deformable-manipulation, imitation-learning, data-generation, surgical-robotics]
 
 ideas:
 
@@ -337,6 +348,11 @@ claims:
     tags: [DLO, free-end-cable, fixed-end-cable, dynamic-manipulation, sim-to-real, robot-casting, error-comparison]
     status: weakly_supported
     confidence: 0.55
+  - slug: mimicgen-style-pipeline-scales-to-dynamic-deformables
+    title: "MimicGen-style automated data generation pipelines scale to dynamic deformable manipulation across diverse embodiments"
+    tags: [data-generation, deformable, imitation-learning, mimicgen, whipping, threading, folding, robot-learning, sim-to-real]
+    status: proposed
+    confidence: 0.45
     domain: Robotics
 
 Summary:
