@@ -6,16 +6,29 @@ papers:
     tags: [DLO, deformable-linear-object, cosserat-rod, simulation, sim-to-real, robot-learning, dataset, isaac-sim]
     importance: 3
     domain: Robotics
+  - slug: softmimicgen-data-generation-system-scalable-robot
+    title: "SoftMimicGen: A Data Generation System for Scalable Robot Learning in Deformable Object Manipulation"
+    tags: [deformable, data-generation, imitation-learning, mimicgen, non-rigid-registration, isaac-lab, sim-to-real, dynamic-manipulation, whipping, threading, folding, humanoid, surgical, bimanual]
+    importance: 3
+    domain: Robotics
 
 concepts:
   - slug: cosserat-isaac-cosimulation
     title: "Cosserat-Isaac Co-Simulation"
     tags: [DLO, simulation, cosserat-rod, isaac-sim, sim-to-real, robot-learning]
     maturity: emerging
+  - slug: automated-demo-generation-deformable
+    title: "Automated Demonstration Generation for Deformable Manipulation"
+    tags: [deformable, data-generation, imitation-learning, mimicgen, non-rigid-registration, trajectory-transfer, robot-learning]
+    maturity: emerging
 
 topics:
 
 people:
+  - slug: masoud-moghani
+    name: "Masoud Moghani"
+    affiliation: "NVIDIA / University of Toronto"
+    tags: [robotics, deformable-manipulation, imitation-learning, data-generation, surgical-robotics]
 
 ideas:
 
@@ -27,6 +40,12 @@ claims:
     tags: [DLO, sim-to-real, cosserat-rod, robot-learning, PPO]
     status: weakly_supported
     confidence: 0.55
+    domain: Robotics
+  - slug: mimicgen-style-pipeline-scales-to-dynamic-deformables
+    title: "MimicGen-style automated data generation pipelines scale to dynamic deformable manipulation across diverse embodiments"
+    tags: [data-generation, deformable, imitation-learning, mimicgen, whipping, threading, folding, robot-learning, sim-to-real]
+    status: proposed
+    confidence: 0.45
     domain: Robotics
 
 Summary:
