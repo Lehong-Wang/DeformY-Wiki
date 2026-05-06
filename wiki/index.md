@@ -19,6 +19,9 @@ papers:
   - slug: accurate-simulation-parameter-identification-dlos-using
     title: "Accurate Simulation and Parameter Identification of Deformable Linear Objects using Discrete Elastic Rods in Generalized Coordinates"
     tags: [DLO, deformable-linear-object, discrete-elastic-rods, mujoco, simulation, parameter-identification, bending-stiffness, twisting-stiffness]
+  - slug: planar-robot-casting-real2sim2real-self-supervised
+    title: "Real2Sim2Real: Self-Supervised Learning of Physical Single-Step Dynamic Actions for Planar Robot Casting"
+    tags: [DLO, deformable-linear-object, robot-casting, sim-to-real, real2sim2real, self-supervised, isaac-gym, pybullet, differential-evolution, autolab]
     importance: 4
     domain: Robotics
 
@@ -61,6 +64,13 @@ concepts:
   - slug: der-mujoco-generalized-coordinate-coupling
     title: "DER-MuJoCo Generalized-Coordinate Coupling"
     tags: [DLO, simulation, discrete-elastic-rods, mujoco, generalized-coordinates, force-lever]
+  - slug: real2sim2real-pipeline
+    title: "Real2Sim2Real Pipeline"
+    tags: [DLO, sim-to-real, system-identification, self-supervised, robot-learning]
+    maturity: emerging
+  - slug: differential-evolution-sim-tuning
+    title: "Differential Evolution Simulator Tuning"
+    tags: [sim-to-real, system-identification, optimization, simulator-tuning, DLO]
     maturity: emerging
 
 topics:
@@ -84,6 +94,9 @@ people:
   - slug: qi-jing-chen
     name: "Qi Jing Chen"
     affiliation: "Nanyang Technological University"
+  - slug: vincent-lim
+    title: "Vincent Lim"
+    affiliation: "AUTOLAB, UC Berkeley (at time of paper)"
 
 ideas:
 
@@ -124,6 +137,11 @@ claims:
     tags: [DLO, simulation, discrete-elastic-rods, mujoco, accuracy, sim-to-real]
     status: weakly_supported
     confidence: 0.7
+  - slug: real2sim2real-prc-tip-error-8-14-percent
+    title: "Real2Sim2Real reaches 8–14% median tip-error on planar robot casting"
+    tags: [DLO, sim-to-real, real2sim2real, robot-casting, free-end-cable, supervised-learning]
+    status: supported
+    confidence: 0.8
     domain: Robotics
 
 Summary:
