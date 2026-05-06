@@ -22,3 +22,4 @@
 ## [2026-05-06] ingest | added papers/self-curriculum-model-based-reinforcement-learning | concepts/self-curriculum-goal-generation, claims/two-stage-mbrl-jacobian-servo-zero-shot-dlo-shape-control, +8 edges (derived_from x6 to foundations, introduces_concept, supports)
 ## [2026-05-06] fan-in | merged 17 ingest worktrees + bibliography | added 25 cites edges via S2 sweep + 5 cross-paper semantic edges + 3 missing people pages (ichnowski, goldberg, atkeson)
 ## [2026-05-06] summary | added Summary/dlo-dynamic-tip-targeting + claim no-paper-has-real-3d-arbitrary-target-learned-policy-whipping (gap thesis)
+## [2026-05-06] review | reviewer + codex pass | tightened gap-thesis claim per codex (IPA fails 2 axes; Flying-Knot-ILC fails 2 axes); fixed 2 empty venue fields; ETH-WB-Throw similar_method_to TossingBot edge added by reviewer

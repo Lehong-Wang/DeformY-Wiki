@@ -2,7 +2,7 @@
 title: "SoftMimicGen: A Data Generation System for Scalable Robot Learning in Deformable Object Manipulation"
 slug: "softmimicgen-data-generation-system-scalable-robot"
 arxiv: "2603.25725"
-venue: ""
+venue: "arXiv preprint"
 year: 2026
 tags: [deformable, data-generation, imitation-learning, mimicgen, non-rigid-registration, isaac-lab, sim-to-real, dynamic-manipulation, whipping, threading, folding, humanoid, surgical, bimanual]
 importance: 3

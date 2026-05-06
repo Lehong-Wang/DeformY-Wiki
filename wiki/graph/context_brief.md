@@ -29,19 +29,18 @@ _Auto-generated open questions. Do not edit._
 - [5] Iterative Residual Policy: For Goal-Conditioned Dynamic Manipulation of Deformable Objects (Robotics)
 - [4] Dynamic Manipulation of Deformable Objects in 3D: Simulation, Benchmark and Learning Strategy (Robotics)
 - [4] Real2Sim2Real: Self-Supervised Learning of Physical Single-Step Dynamic Actions for Planar Robot Casting (Robotics)
-- [4] Self-Supervised Learning of Dynamic Planar Manipulation of Free-End Cables (Robotics)
 - [4] Learning Accurate Whole-body Throwing with High-frequency Residual Policy and Pullback Tube Acceleration (Robotics)
+- [4] Self-Supervised Learning of Dynamic Planar Manipulation of Free-End Cables (Robotics)
 - [3] SoftMimicGen: A Data Generation System for Scalable Robot Learning in Deformable Object Manipulation (Robotics)
 - [4] DaXBench: Benchmarking Deformable Object Manipulation with Differentiable Physics (Robotics)
+- [5] TossingBot: Learning to Throw Arbitrary Objects with Residual Physics (Robotics)
 - [4] Wiggle and Go! System Identification for Zero-Shot Dynamic Rope Manipulation (Robotics)
 - [4] Learning Deformable Object Manipulation Using Task-Level Iterative Learning Control (Robotics)
-- [5] TossingBot: Learning to Throw Arbitrary Objects with Residual Physics (Robotics)
 - [4] Accurate Simulation and Parameter Identification of Deformable Linear Objects using Discrete Elastic Rods in Generalized Coordinates (Robotics)
 - [3] Rapid Adaptation of Particle Dynamics for Generalized Deformable Object Mobile Manipulation (Robotics)
 - [4] Robots of the Lost Arc: Self-Supervised Learning to Dynamically Manipulate Fixed-Endpoint Cables (Robotics)
 - [3] Self-Curriculum Model-based Reinforcement Learning for Shape Control of Deformable Linear Objects (Robotics)
-## Recent Relationships (181 total)
-  papers/ropedreamer-kinematic-recurrent-state-space-model --derived_from--> foundations/forward-kinematics
+## Recent Relationships (182 total)
   papers/ropedreamer-kinematic-recurrent-state-space-model --derived_from--> foundations/model-based-reinforcement-learning
   papers/ropedreamer-kinematic-recurrent-state-space-model --introduces_concept--> concepts/quaternionic-rssm-dlo
   papers/ropedreamer-kinematic-recurrent-state-space-model --supports--> claims/quaternionic-kinematic-rssm-reduces-dlo-rollout-error
@@ -49,4 +48,5 @@ _Auto-generated open questions. Do not edit._
   papers/rapid-adaptation-particle-dynamics-generalized-deformable --supports--> claims/rma-particle-rapid-real-world-success
   papers/rapid-adaptation-particle-dynamics-generalized-deformable --derived_from--> foundations/deformable-linear-object
   papers/rapid-adaptation-particle-dynamics-generalized-deformable --derived_from--> foundations/sim-to-real-transfer
-  papers/rapid-adapta
+  papers/rapid-adaptation-particle-dynamics-generalized-deformable --derived_from--> foundations/visuomotor-policy
+  papers/rapid

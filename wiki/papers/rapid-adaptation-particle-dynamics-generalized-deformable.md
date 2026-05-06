@@ -2,7 +2,7 @@
 title: "Rapid Adaptation of Particle Dynamics for Generalized Deformable Object Mobile Manipulation"
 slug: "rapid-adaptation-particle-dynamics-generalized-deformable"
 arxiv: "2603.18246"
-venue: ""
+venue: "arXiv preprint"
 year: 2026
 tags: [deformable-object-manipulation, mobile-manipulation, RMA, sim-to-real, visuomotor-policy, particle-dynamics, teacher-student, reinforcement-learning, adaptation, omnigibson]
 importance: 3
