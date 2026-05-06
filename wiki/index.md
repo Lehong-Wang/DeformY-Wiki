@@ -16,6 +16,9 @@ papers:
   - slug: deform-differentiable-discrete-elastic-rods-real
     title: "DEFORM: Differentiable Discrete Elastic Rods for Real-Time Modeling of Deformable Linear Objects"
     tags: [DLO, deformable-linear-object, discrete-elastic-rods, differentiable-simulation, residual-learning, position-based-dynamics, sim-to-real, robot-learning, system-identification]
+  - slug: accurate-simulation-parameter-identification-dlos-using
+    title: "Accurate Simulation and Parameter Identification of Deformable Linear Objects using Discrete Elastic Rods in Generalized Coordinates"
+    tags: [DLO, deformable-linear-object, discrete-elastic-rods, mujoco, simulation, parameter-identification, bending-stiffness, twisting-stiffness]
     importance: 4
     domain: Robotics
 
@@ -55,6 +58,9 @@ concepts:
   - slug: momentum-preserving-pbd-inextensibility
     title: "Momentum-Preserving PBD Inextensibility"
     tags: [DLO, simulation, position-based-dynamics, inextensibility, momentum-conservation, discrete-elastic-rods]
+  - slug: der-mujoco-generalized-coordinate-coupling
+    title: "DER-MuJoCo Generalized-Coordinate Coupling"
+    tags: [DLO, simulation, discrete-elastic-rods, mujoco, generalized-coordinates, force-lever]
     maturity: emerging
 
 topics:
@@ -75,6 +81,9 @@ people:
   - slug: yizhou-chen
     title: "Yizhou Chen"
     affiliation: "Department of Robotics, University of Michigan, Ann Arbor (ROAHM Lab)"
+  - slug: qi-jing-chen
+    name: "Qi Jing Chen"
+    affiliation: "Nanyang Technological University"
 
 ideas:
 
@@ -109,6 +118,12 @@ claims:
     tags: [DLO, simulation, differentiable-simulation, residual-learning, sim-to-real, real-time, perception, manipulation]
     status: supported
     confidence: 0.75
+    domain: Robotics
+  - slug: der-mujoco-improves-static-dlo-accuracy-over-native-cable
+    title: "Integrating DER bending+twisting energies into MuJoCo's generalized-coordinate solver yields more accurate static / quasi-dynamic DLO simulation than MuJoCo's native cable plugin"
+    tags: [DLO, simulation, discrete-elastic-rods, mujoco, accuracy, sim-to-real]
+    status: weakly_supported
+    confidence: 0.7
     domain: Robotics
 
 Summary:
