@@ -2,7 +2,7 @@
 
 _Auto-generated compressed context. Do not edit._
 
-## Claims (26 total)
+## Claims (27 total)
 - [weakly_supported] Free-end cable dynamic target reaching is harder than fixed-end on per-cable-length error (conf: 0.55)
 - [supported] DaXBench Whip-Rope baselines: APG 0.83 dominates SHAC 0.66 and PPO 0.25 — analytic policy gradients win on dynamic deformable tasks (conf: 0.7)
 - [weakly_supported] Cosserat physics narrows the DLO swinging sim-to-real gap (conf: 0.55)

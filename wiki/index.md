@@ -383,6 +383,12 @@ claims:
     status: proposed
     confidence: 0.45
     domain: Robotics
+  - slug: no-paper-has-real-3d-arbitrary-target-learned-policy-whipping
+    title: "As of May 2026, no published paper combines all four of {real-robot hardware, arbitrary 3D target, learned runtime policy, free-space dynamic whipping} for rope-tip targeting"
+    tags: [DLO, dynamic-manipulation, rope-tip-targeting, gap-analysis, research-direction]
+    status: weakly_supported
+    confidence: 0.7
+    domain: Robotics
   - slug: physics-informed-tta-improves-diffusion-policy-on-dynamic-dlo
     title: "Physics-informed test-time adaptation during diffusion sampling materially improves over plain diffusion policy on dynamic DLO tasks"
     tags: [diffusion-policy, test-time-adaptation, physics-prior, DLO, sim-only, robot-learning]
@@ -445,6 +451,8 @@ claims:
     domain: Robotics
 
 Summary:
+  - slug: dlo-dynamic-tip-targeting
+    title: "Goal-Conditioned Dynamic Rope/DLO Tip Targeting"
 
 foundations:
   - slug: backpropagation
