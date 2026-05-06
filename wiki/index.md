@@ -6,16 +6,37 @@ papers:
     tags: [DLO, deformable-linear-object, cosserat-rod, simulation, sim-to-real, robot-learning, dataset, isaac-sim]
     importance: 3
     domain: Robotics
+  - slug: tossingbot-learning-throw-arbitrary-objects-residual
+    title: "TossingBot: Learning to Throw Arbitrary Objects with Residual Physics"
+    tags: [robotics, manipulation, throwing, residual-physics, grasping, deep-learning, sim-to-real, self-supervised, pick-and-place]
+    importance: 5
+    domain: Robotics
 
 concepts:
   - slug: cosserat-isaac-cosimulation
     title: "Cosserat-Isaac Co-Simulation"
     tags: [DLO, simulation, cosserat-rod, isaac-sim, sim-to-real, robot-learning]
     maturity: emerging
+  - slug: residual-physics
+    title: "Residual Physics"
+    tags: [robotics, hybrid-controller, residual-learning, sim-to-real, action-space, manipulation, throwing]
+    maturity: active
+  - slug: throwing-motion-primitive
+    title: "Throwing Motion Primitive"
+    tags: [robotics, motion-primitive, throwing, dynamic-manipulation, manipulation, end-effector-trajectory]
+    maturity: active
+  - slug: physics-informed-action-prior
+    title: "Physics-Informed Action Prior"
+    tags: [robotics, hybrid-controller, model-based, residual-learning, sim-to-real, action-prior]
+    maturity: active
 
 topics:
 
 people:
+  - slug: andy-zeng
+    name: "Andy Zeng"
+    affiliation: "Google DeepMind"
+    tags: [robotics, deep-learning, manipulation, vision, robot-learning, foundation-models]
 
 ideas:
 
@@ -27,6 +48,12 @@ claims:
     tags: [DLO, sim-to-real, cosserat-rod, robot-learning, PPO]
     status: weakly_supported
     confidence: 0.55
+    domain: Robotics
+  - slug: residual-physics-improves-throw-accuracy
+    title: "Learning a residual on top of an analytic ballistic prior yields high-accuracy goal-conditioned throwing of arbitrary objects"
+    tags: [robotics, throwing, residual-physics, manipulation, sim-to-real, hybrid-controller]
+    status: supported
+    confidence: 0.85
     domain: Robotics
 
 Summary:
