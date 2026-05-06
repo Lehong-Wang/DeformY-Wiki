@@ -122,3 +122,9 @@ The 6-step recovery from rope-knotting is a striking demonstration that the form
 
 - [[irp-zero-shot-sim2real-rope-whipping]]
 - [[delta-dynamics-generalizes-better-than-sysid]]
+
+**Cited works in this wiki**
+
+- [[planar-robot-casting-real2sim2real-self-supervised]] — Berkeley AUTOLAB planar cable casting; cited as an adjacent goal-conditioned dynamic-cable baseline
+- [[robots-lost-arc-self-supervised-learning]] — Berkeley AUTOLAB 3D apex-point arcing; cited as the dynamic-cable companion paper from the same year (ICRA 2022)
+- [[tossingbot-learning-throw-arbitrary-objects-residual]] — Princeton/Google residual-physics throwing; cited as the rigid-object analog for goal-conditioned dynamic manipulation

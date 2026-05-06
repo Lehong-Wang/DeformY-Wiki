@@ -81,6 +81,9 @@ This is the first paper to scale a MimicGen-style automated trajectory-transfer 
 **Claims supported**
 - [[mimicgen-style-pipeline-scales-to-dynamic-deformables]]
 
+**Authors / inspirations**
+- [[masoud-moghani]] — first author and corresponding author.
+
 **Important referenced work** (not yet ingested — candidates for follow-up `/ingest`)
 - MimicGen (Mandlekar et al., 2023) — the rigid-body parent system whose SE(3)-transfer assumption SoftMimicGen relaxes.
 - DexMimicGen (Jiang et al., 2024) — bimanual extension of MimicGen.

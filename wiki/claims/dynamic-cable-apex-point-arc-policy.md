@@ -1,21 +1,27 @@
 ---
-title: "A learned 3D apex point that parameterizes a minimum-jerk QP trajectory is sufficient to learn target-conditioned dynamic cable behaviors (vaulting / knocking / weaving) on real hardware across multiple cables"
-slug: "dynamic-cable-apex-point-arc-policy"
+title: A learned 3D apex point that parameterizes a minimum-jerk QP trajectory is sufficient to learn target-conditioned dynamic cable behaviors (vaulting / knocking / weaving) on real hardware across multiple cables
+slug: dynamic-cable-apex-point-arc-policy
 status: supported
 confidence: 0.7
-tags: [DLO, dynamic-manipulation, apex-point, self-supervised, real-robot, behavior-cloning]
-domain: "Robotics"
-source_papers: [robots-lost-arc-self-supervised-learning]
+tags:
+- DLO
+- dynamic-manipulation
+- apex-point
+- self-supervised
+- real-robot
+- behavior-cloning
+domain: Robotics
+source_papers:
+- '[[robots-lost-arc-self-supervised-learning]]'
 evidence:
-  - source: robots-lost-arc-self-supervised-learning
-    type: supports
-    strength: strong
-    detail: "ICRA 2022 INDy framework: a CNN regresses a 3D apex (3 UR5 joint angles) on overhead RGB; a jerk-minimizing QP fills in the remaining trajectory. Three tasks on a fixed-endpoint cable trained with ~180 real trials per task. Vaulting 81.7 vs 51.7 / 66.7%, knocking 65.0 vs 36.7 / 56.7%, weaving 60.0 vs 15.0 / 15.0% (learned vs fixed-apex / human-task-specific-apex baselines, 60-trial / 3-tier eval). Cross-cable transfer to four other cables of similar length without retraining (40-80% across tasks/cables)."
-conditions: "Holds when (i) the cable is fixed-endpoint with one end attached to a wall, (ii) cable length is matched between training and deployment within roughly +/- 1m of the 5.5m training cable (the policy collapses on a 6.2m cable to 10-20% across tasks), (iii) the start configuration can be reproducibly reset by a taut-pull, (iv) obstacles stay within the trained spatial range (Tier-3 vaulting failures are dominated by horizontal-shift OOD), (v) tasks are well-summarized by a single midpoint waypoint."
+- source: robots-lost-arc-self-supervised-learning
+  type: supports
+  strength: strong
+  detail: 'ICRA 2022 INDy framework: a CNN regresses a 3D apex (3 UR5 joint angles) on overhead RGB; a jerk-minimizing QP fills in the remaining trajectory. Three tasks on a fixed-endpoint cable trained with ~180 real trials per task. Vaulting 81.7 vs 51.7 / 66.7%, knocking 65.0 vs 36.7 / 56.7%, weaving 60.0 vs 15.0 / 15.0% (learned vs fixed-apex / human-task-specific-apex baselines, 60-trial / 3-tier eval). Cross-cable transfer to four other cables of similar length without retraining (40-80% across tasks/cables).'
+conditions: Holds when (i) the cable is fixed-endpoint with one end attached to a wall, (ii) cable length is matched between training and deployment within roughly +/- 1m of the 5.5m training cable (the policy collapses on a 6.2m cable to 10-20% across tasks), (iii) the start configuration can be reproducibly reset by a taut-pull, (iv) obstacles stay within the trained spatial range (Tier-3 vaulting failures are dominated by horizontal-shift OOD), (v) tasks are well-summarized by a single midpoint waypoint.
 date_proposed: 2026-05-06
 date_updated: 2026-05-06
 ---
-
 ## Statement
 
 A learned 3D apex point that parameterizes a minimum-jerk QP trajectory is sufficient to learn target-conditioned dynamic cable behaviors — vaulting over an obstacle, knocking an object off a pedestal, and weaving between obstacles — on real hardware across cables of different thickness and mass.

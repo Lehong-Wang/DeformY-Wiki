@@ -1,14 +1,27 @@
 ---
-title: "Optimization-Based Inverse Model (Norm-Optimal ILC)"
-aliases: ["norm-optimal ILC", "QP-based inverse model", "QP inverse model", "optimization-based ILC inverse"]
-tags: [iterative-learning-control, ILC, control, optimization, quadratic-program, robot-learning, inverse-model]
+title: Optimization-Based Inverse Model (Norm-Optimal ILC)
+aliases:
+- norm-optimal ILC
+- QP-based inverse model
+- QP inverse model
+- optimization-based ILC inverse
+tags:
+- iterative-learning-control
+- ILC
+- control
+- optimization
+- quadratic-program
+- robot-learning
+- inverse-model
 maturity: active
-key_papers: [learning-deformable-object-manipulation-using-task]
-first_introduced: "2009"
-date_updated: "2026-05-06"
-related_concepts: [task-level-iterative-learning-control, critical-point-objective]
+key_papers:
+- '[[learning-deformable-object-manipulation-using-task]]'
+first_introduced: '2009'
+date_updated: '2026-05-06'
+related_concepts:
+- '[[task-level-iterative-learning-control]]'
+- '[[critical-point-objective]]'
 ---
-
 ## Definition
 
 An **optimization-based inverse model** in ILC formulates the per-trial command update $\Delta \mathbf{u}(t)$ as the solution to a constrained quadratic program (QP). The QP minimizes a weighted task-error term plus a control-effort term, subject to linearized system-dynamics constraints and linearized actuator/state limits. This replaces the textbook closed-form pseudo-inverse $\Delta \mathbf{u} = \mathbf{M}^{\dagger} \tilde{\mathbf{x}}$ with a constrained optimization that explicitly handles input/state constraints (joint position, velocity, acceleration, torque) and lets the user specify *non-uniform* time-weighting of error.

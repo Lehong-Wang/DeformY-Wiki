@@ -1,14 +1,24 @@
 ---
-title: "Task-Level Iterative Learning Control"
-aliases: ["Task-Level ILC", "task-level ILC for manipulation"]
-tags: [iterative-learning-control, ILC, control, deformable-object-manipulation, robot-learning, real-world-learning]
+title: Task-Level Iterative Learning Control
+aliases:
+- Task-Level ILC
+- task-level ILC for manipulation
+tags:
+- iterative-learning-control
+- ILC
+- control
+- deformable-object-manipulation
+- robot-learning
+- real-world-learning
 maturity: emerging
-key_papers: [learning-deformable-object-manipulation-using-task]
-first_introduced: "2026"
-date_updated: "2026-05-06"
-related_concepts: [critical-point-objective, optimization-based-inverse-model]
+key_papers:
+- '[[learning-deformable-object-manipulation-using-task]]'
+first_introduced: '2026'
+date_updated: '2026-05-06'
+related_concepts:
+- '[[critical-point-objective]]'
+- '[[optimization-based-inverse-model]]'
 ---
-
 ## Definition
 
 **Task-Level Iterative Learning Control (Task-Level ILC)** is a variant of model-based Iterative Learning Control in which the iterative command-update loop minimizes error in the *manipulated object's* state — typically a small set of high-level task variables — rather than the robot's own joint or end-effector trajectory. The robot executes a feedforward command $\mathbf{u}_k(t)$ on hardware, the trial produces a measured task state trajectory $\mathbf{x}_k(t)$, and an inverse model maps the task-space error $\tilde{\mathbf{x}}_k(t) = \mathbf{x}_k - \mathbf{x}^{\text{ref}}$ into a command update $\Delta \mathbf{u}_k(t)$ via $\mathcal{M}^{-1}$. The next-trial command is $\mathbf{u}_{k+1}(t) = \mathbf{u}_k(t) - \Delta \mathbf{u}_k(t)$. Convergence does not require an accurate forward model — only a forward model whose linearization gives the *correct gradient direction* for $\partial \mathcal{M}/\partial \mathbf{u}$ in the relevant region of command space.

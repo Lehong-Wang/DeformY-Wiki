@@ -146,8 +146,11 @@ Two transfer caveats worth flagging early. (i) The pullback tube relies on a tra
 - [[hf-residual-tube-stack-enables-accurate-whole-body-throwing]]
 - [[legged-base-contributes-major-angular-impulse-in-throwing]]
 
+**Cross-paper relations**
+
+- [[tossingbot-learning-throw-arbitrary-objects-residual]] — `similar_method_to` + `cites`: residual physics for fixed-base throwing; this paper is the natural successor (TossingBot used a scalar residual on a learned ballistic prior; this paper generalizes to a continuous high-frequency residual + closed-loop tube QP).
+
 **Important referenced work** (not yet ingested — candidates for follow-up `/ingest`)
-- TossingBot (Zeng et al., 2020) — residual physics for fixed-base throwing; this paper is the natural successor (TossingBot used a scalar residual on a learned ballistic prior; this paper generalizes to a continuous high-frequency residual + closed-loop tube QP).
 - Tube Acceleration (Liu and Billard, 2024) — the open-loop predecessor of pullback tube acceleration.
 - IRP (Iterative Residual Policy, Chi et al.) — same design family in the dynamic deformable manipulation regime.
 - Werner et al. 2024 — RL throwing on a 12-ton excavator (large-scale dynamic throwing).

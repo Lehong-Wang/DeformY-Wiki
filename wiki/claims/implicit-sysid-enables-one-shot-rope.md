@@ -1,23 +1,28 @@
 ---
-title: "Implicit sysID encoder + goal-conditioned action predictor enables one-shot real-deployment for rope-as-tool 3D-target transport of rigid payloads"
-slug: "implicit-sysid-enables-one-shot-rope"
+title: Implicit sysID encoder + goal-conditioned action predictor enables one-shot real-deployment for rope-as-tool 3D-target transport of rigid payloads
+slug: implicit-sysid-enables-one-shot-rope
 status: weakly_supported
 confidence: 0.65
-tags: [implicit-system-identification, rope-manipulation, dynamic-manipulation, one-shot, sim-to-real, heterogeneous-system, soft-tool-use]
-domain: "Robotics"
-source_papers: [implicit-physics-aware-policy-dynamic-manipulation]
+tags:
+- implicit-system-identification
+- rope-manipulation
+- dynamic-manipulation
+- one-shot
+- sim-to-real
+- heterogeneous-system
+- soft-tool-use
+domain: Robotics
+source_papers:
+- '[[implicit-physics-aware-policy-dynamic-manipulation]]'
 evidence:
-  - source: implicit-physics-aware-policy-dynamic-manipulation
-    type: supports
-    strength: moderate
-    detail: "ICRA 2025. IPA's two-stage architecture (predefined SysID probe → ResNet that consumes (probe, response, depth, segmentation, aux) → cruising-velocity regression) reaches 72.5% SR on 50 simulated O2T cases (vs. 4.4% RND, 20.0% iterative SQ-RND, 16.7% IPA w/o SysID) and 62.5% SR on 8 real cases without any real-world training, while iterative residual baselines and explicit-physics methods do not transfer one-shot to varying friction. Sim-to-real Vel-Diff degrades only from 0.163 to 0.151 — i.e. the implicit-physics encoding survives the friction shift induced by adding a baking tray to the real setup."
-conditions: |
-  Single-paper preprint result with limited real-world evaluation (n=8). 
-  The claim is established only for a single moving primitive (base-joint rotation with trapezoidal velocity profile), a single payload class (boxes), a single rope class, and a fixed predefined SysID probe action. Generalisation to other moving primitives, multi-stage casts, learned probes, or non-box payloads is not demonstrated. SR figures bake in the 0.5 m position-tolerance success threshold, which is task-specific.
+- source: implicit-physics-aware-policy-dynamic-manipulation
+  type: supports
+  strength: moderate
+  detail: ICRA 2025. IPA's two-stage architecture (predefined SysID probe → ResNet that consumes (probe, response, depth, segmentation, aux) → cruising-velocity regression) reaches 72.5% SR on 50 simulated O2T cases (vs. 4.4% RND, 20.0% iterative SQ-RND, 16.7% IPA w/o SysID) and 62.5% SR on 8 real cases without any real-world training, while iterative residual baselines and explicit-physics methods do not transfer one-shot to varying friction. Sim-to-real Vel-Diff degrades only from 0.163 to 0.151 — i.e. the implicit-physics encoding survives the friction shift induced by adding a baking tray to the real setup.
+conditions: "Single-paper preprint result with limited real-world evaluation (n=8). \nThe claim is established only for a single moving primitive (base-joint rotation with trapezoidal velocity profile), a single payload class (boxes), a single rope class, and a fixed predefined SysID probe action. Generalisation to other moving primitives, multi-stage casts, learned probes, or non-box payloads is not demonstrated. SR figures bake in the 0.5 m position-tolerance success threshold, which is task-specific.\n"
 date_proposed: 2026-05-06
 date_updated: 2026-05-06
 ---
-
 ## Statement
 
 A two-stage learned policy that (i) executes a fixed predefined high-acceleration probing action on a heterogeneous rope+payload system, encodes the resulting trajectory map as an implicit physics representation, and (ii) consumes that representation alongside a depth + segmentation observation and a goal location to regress a single cruising velocity, can — when trained only in domain-randomised simulation — transport a rigid payload to a distant occluded 3D target on the *first* real-world attempt with success rate substantially above iterative-feedback and explicit-physics baselines.

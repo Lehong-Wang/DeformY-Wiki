@@ -104,7 +104,7 @@ Worth flagging: this paper is the **CMU answer** to the Berkeley-AUTOLAB lineage
 **Important referenced work** (not yet confirmed-ingested in this worktree — sibling papers being ingested in parallel)
 - IRP (Iterative Residual Policy, Chi et al., 2022) — direct anti-thesis: end-to-end iterative residual on dynamic rope manipulation; this paper's central comparison and motivation. The two should be read against each other.
 - TossingBot (Zeng et al., 2019) — earlier residual-physics + dynamics paradigm for rigid-object throwing; pattern ancestor.
-- DEFORM (DER-MuJoCo, 2024) — differentiable discrete-elastic-rod simulator; an alternative simulator backbone to Drake's ball-joint chain.
+- [[deform-differentiable-discrete-elastic-rods-real]] — `cites`: differentiable discrete-elastic-rod simulator; an alternative simulator backbone to Drake's ball-joint chain.
 - DER-MuJoCo / discrete-elastic-rod methods — alternative to ball-joint chains for higher-fidelity rope simulation.
 - Real2Sim2Real (Lim et al., 2022, [[planar-robot-casting-real2sim2real-self-supervised]]) — the direct ancestor: same ball-joint parameterization, same simulator-tuning-from-real-trajectories ethos, but DE-based optimization rather than NN prediction, and 2D planar casting rather than 3D striking.
 - DIDP (3D dynamic-rope sim-only benchmark, [[dynamic-manipulation-deformable-objects-3d-simulation]]) — Wiggle-and-Go is the *real-hardware* analog of DIDP's sim-only 3D point-striking benchmark.

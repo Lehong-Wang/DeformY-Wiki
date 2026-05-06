@@ -1,14 +1,24 @@
 ---
-title: "Heterogeneous Soft-Rigid System"
-aliases: ["heterogeneous system", "soft-rigid coupled system", "rope-payload heterogeneous system", "DLO-rigid heterogeneous manipulation"]
-tags: [deformable-linear-objects, rigid-bodies, dynamic-manipulation, heterogeneous-system, robot-learning, multi-body-coupling]
+title: Heterogeneous Soft-Rigid System
+aliases:
+- heterogeneous system
+- soft-rigid coupled system
+- rope-payload heterogeneous system
+- DLO-rigid heterogeneous manipulation
+tags:
+- deformable-linear-objects
+- rigid-bodies
+- dynamic-manipulation
+- heterogeneous-system
+- robot-learning
+- multi-body-coupling
 maturity: emerging
-key_papers: [implicit-physics-aware-policy-dynamic-manipulation]
-first_introduced: ""
+key_papers:
+- '[[implicit-physics-aware-policy-dynamic-manipulation]]'
+first_introduced: ''
 date_updated: 2026-05-06
 related_concepts: []
 ---
-
 ## Definition
 
 A **heterogeneous soft-rigid system** is a coupled mechanical system in which one or more deformable bodies (typically a deformable linear object — a rope, cable, or chain) are kinematically and dynamically connected to one or more rigid bodies (a payload, an anchor, a hook, a tool head). The robot interacts only with one end of the system; the rest of the system propagates that input through both deformable and rigid degrees of freedom.

@@ -103,12 +103,16 @@ This is the **direct intellectual ancestor** of the swinging-rope sim-to-real st
 
 **Claims supported**
 - [[real2sim2real-prc-tip-error-8-14-percent]]
+- [[free-end-cable-target-reaching-harder]] — `supports`: this paper's per-cable error rates (8–14%) are the comparison baseline that establishes the free-end task is 2–3× harder.
+
+**Cross-paper relations**
+
+- [[robots-lost-arc-self-supervised-learning]] — `same_problem_as`: sister Berkeley AUTOLAB papers from ICRA 2022; both self-supervised learning of dynamic cable manipulation on UR5 (Lost-Arc fixed-endpoint, R2S2R free-tip planar).
+- [[self-supervised-learning-dynamic-planar-manipulation]] — direct successor from the same group; extends this pipeline to free-end cables.
+- [[tossingbot-learning-throw-arbitrary-objects-residual]] — `cites`: same pattern of self-supervised + residual physics, but for rigid-object tossing.
+- [[iterative-residual-policy-goal-conditioned-dynamic]] — direct successor benchmark for goal-conditioned dynamic manipulation of deformable objects.
 
 **Important referenced work** (not yet ingested — candidates for follow-up `/ingest`)
-- IRP — Iterative Residual Policy (Chi et al., 2022). Direct successor benchmark for goal-conditioned dynamic manipulation of deformable objects.
-- TossingBot (Zeng et al., 2019) — same pattern of self-supervised + residual physics, but for rigid-object tossing.
-- Robots of the Lost Arc (Zhang et al., 2021) — closely related self-supervised dynamic manipulation of *fixed-end* cables.
-- Self-Supervised Learning of Dynamic Planar Manipulation of Free-End Cables (Wang et al., 2024) — direct successor from the same group; extends this pipeline to longer cables.
 - ReForm (Laezza et al., 2021) — the ICRA 2021 DLO learning sandbox; uses commercial closed-source physics, contrasted here.
 - Sim-to-Real Reinforcement Learning for Deformable Object Manipulation (Matas, James, Davison 2018).
 - Auto-Tuned Sim-to-Real Transfer (Du et al., 2021) — alternative SPM-based simulator auto-tuning.

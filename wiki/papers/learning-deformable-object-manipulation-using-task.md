@@ -86,4 +86,5 @@ The principal weakness is the manually-annotated critical point. In flying-knot 
 - [[iterative-residual-policy-goal-conditioned-dynamic]] — conceptual ancestor; IRP learns the residual via deep nets on simulated data; this work replaces it with a one-shot QP and skips simulation
 - [[planar-robot-casting-real2sim2real-self-supervised]] — alternative path: fit a simulator from physical rollouts, then plan
 - [[robots-lost-arc-self-supervised-learning]] — dynamic rope manipulation via large-scale self-supervised data; baseline contrast
+- [[self-supervised-learning-dynamic-planar-manipulation]] — Berkeley AUTOLAB free-end-cable casting; cited as a representative self-supervised cable-dynamics baseline
 - [[krishna-suresh]]

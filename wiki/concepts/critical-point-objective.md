@@ -1,14 +1,26 @@
 ---
-title: "Critical-Point Objective"
-aliases: ["critical point objective", "single-point trajectory cost", "event-focused ILC objective"]
-tags: [iterative-learning-control, ILC, control, deformable-object-manipulation, trajectory-cost, behavior-cloning, robot-learning]
+title: Critical-Point Objective
+aliases:
+- critical point objective
+- single-point trajectory cost
+- event-focused ILC objective
+tags:
+- iterative-learning-control
+- ILC
+- control
+- deformable-object-manipulation
+- trajectory-cost
+- behavior-cloning
+- robot-learning
 maturity: emerging
-key_papers: [learning-deformable-object-manipulation-using-task]
-first_introduced: "2026"
-date_updated: "2026-05-06"
-related_concepts: [task-level-iterative-learning-control, optimization-based-inverse-model]
+key_papers:
+- '[[learning-deformable-object-manipulation-using-task]]'
+first_introduced: '2026'
+date_updated: '2026-05-06'
+related_concepts:
+- '[[task-level-iterative-learning-control]]'
+- '[[optimization-based-inverse-model]]'
 ---
-
 ## Definition
 
 The **critical-point objective** is a trajectory-cost design choice in which task-tracking error is weighted only at a manually- or automatically-identified key moment $t_c$ in the task, rather than weighted equally (or by a smooth weighting kernel) along the entire trajectory. Concretely, given a task-state trajectory $\mathbf{x}(t)$, a reference $\mathbf{x}^{\text{ref}}(t)$, and a critical instant $t_c \in [0, T]$:

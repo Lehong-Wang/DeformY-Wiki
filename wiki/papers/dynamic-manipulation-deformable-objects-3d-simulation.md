@@ -90,8 +90,12 @@ DIDP is the first paper that puts a leaderboard-style number on **3D goal-condit
 - [[didp-3d-rope-tip-targeting-success-rates]]
 - [[physics-informed-tta-improves-diffusion-policy-on-dynamic-dlo]]
 
-**Important referenced work** (sibling papers in the wiki worktrees, evidence-text only — bibliographic edges deferred to `/init` fan-in)
-- IRP (Chi et al. 2024) — 2D ILC-style residual policy; DIDP positions itself as the 3D extension that drops Jacobian assumptions and the 2D image-sequence representation.
+**Cross-paper relations**
+
+- [[iterative-residual-policy-goal-conditioned-dynamic]] — `compares_against`: DIDP positions itself as the 3D extension that drops the 2D-image-sequence representation and the Jacobian assumptions of IRP-style residual policy.
+- [[wiggle-go-system-identification-zero-shot]] — `same_problem_as`: both target arbitrary 3D rope-tip points (DIDP in 20-DoF reduced-order Cosserat sim, Wiggle-and-Go on real xArm 7); the two stake out the sim-only-learned vs real-hardware-sysID-then-trajopt ends of the same problem.
+
+**Important referenced work** (evidence-text only — full citations live in `graph/citations.jsonl` after fan-in)
 - Diffusion Policy (Chi et al. 2023) — the policy class DIDP builds on.
 - SoRoSim / GVS (Mathew et al. 2025) — the reduced-order rod simulator DIDP wraps.
 - Mason 1986 — dynamic-manipulation framing (whipping/throwing/catching).

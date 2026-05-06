@@ -86,8 +86,11 @@ The contribution that matters for the DeformY arc is the **clean architectural b
 **Key authors**
 - [[qi-jing-chen]]
 
-**Important referenced work** (sibling papers, may resolve at fan-in)
+**Cited works in this wiki**
+
+- [[iterative-residual-policy-goal-conditioned-dynamic]] — example of DLO learning workflow that benefits from accurate DER simulation
+- [[robots-lost-arc-self-supervised-learning]] — example of self-supervised DLO learning that the parameter pipeline could warm-start
+
+**Important referenced work** (not in wiki)
 - Bergou et al. (2008), "Discrete Elastic Rods" — origin of the DER formulation
-- Iterative Residual Policy (Chi et al., arXiv:2203.00663) — example of DLO learning workflow that benefits from accurate sim
-- Robots of the Lost Arc (Zhang et al., 2021) — example of self-supervised DLO learning that the parameter pipeline could warm-start
 - MuJoCo (Todorov et al., 2012) — host simulator

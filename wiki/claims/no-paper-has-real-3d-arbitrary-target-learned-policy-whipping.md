@@ -1,35 +1,39 @@
 ---
-title: "As of May 2026, no published paper combines all four of {real-robot hardware, arbitrary 3D target, learned runtime policy, free-space dynamic whipping} for rope-tip targeting"
-slug: "no-paper-has-real-3d-arbitrary-target-learned-policy-whipping"
+title: As of May 2026, no published paper combines all four of {real-robot hardware, arbitrary 3D target, learned runtime policy, free-space dynamic whipping} for rope-tip targeting
+slug: no-paper-has-real-3d-arbitrary-target-learned-policy-whipping
 status: weakly_supported
 confidence: 0.7
-tags: [DLO, dynamic-manipulation, rope-tip-targeting, gap-analysis, research-direction]
-domain: "Robotics"
-date_updated: "2026-05-06"
+tags:
+- DLO
+- dynamic-manipulation
+- rope-tip-targeting
+- gap-analysis
+- research-direction
+domain: Robotics
+date_updated: '2026-05-06'
 source_papers:
-  - iterative-residual-policy-goal-conditioned-dynamic
-  - dynamic-manipulation-deformable-objects-3d-simulation
-  - wiggle-go-system-identification-zero-shot
-  - implicit-physics-aware-policy-dynamic-manipulation
-  - learning-deformable-object-manipulation-using-task
+- '[[iterative-residual-policy-goal-conditioned-dynamic]]'
+- '[[dynamic-manipulation-deformable-objects-3d-simulation]]'
+- '[[wiggle-go-system-identification-zero-shot]]'
+- '[[implicit-physics-aware-policy-dynamic-manipulation]]'
+- '[[learning-deformable-object-manipulation-using-task]]'
 evidence:
-  - source: iterative-residual-policy-goal-conditioned-dynamic
-    type: contradicts_partially
-    note: "IRP achieves real-robot + learned runtime policy + dynamic whipping, but its verified target space is 2D Y–Z plane, not arbitrary 3D."
-  - source: dynamic-manipulation-deformable-objects-3d-simulation
-    type: contradicts_partially
-    note: "DIDP achieves arbitrary 3D + learned runtime policy + dynamic whipping, but is sim-only — no real-hardware validation."
-  - source: wiggle-go-system-identification-zero-shot
-    type: contradicts_partially
-    note: "Wiggle&Go achieves real-robot + arbitrary 3D + dynamic whipping, but uses sysID + CMA-ES trajectory optimization in Drake at task time rather than a learned runtime policy."
-  - source: implicit-physics-aware-policy-dynamic-manipulation
-    type: contradicts_partially
-    note: "IPA achieves real-robot + learned runtime policy with rope-as-tool, but the goal is rigid-payload landing, not free-tip targeting."
-  - source: learning-deformable-object-manipulation-using-task
-    type: contradicts_partially
-    note: "Task-Level ILC achieves real-robot + dynamic, but the target is a topological state (flying knot), not arbitrary 3D point; and ILC is iterative across trials per goal."
+- source: iterative-residual-policy-goal-conditioned-dynamic
+  type: contradicts_partially
+  note: IRP achieves real-robot + learned runtime policy + dynamic whipping, but its verified target space is 2D Y–Z plane, not arbitrary 3D.
+- source: dynamic-manipulation-deformable-objects-3d-simulation
+  type: contradicts_partially
+  note: DIDP achieves arbitrary 3D + learned runtime policy + dynamic whipping, but is sim-only — no real-hardware validation.
+- source: wiggle-go-system-identification-zero-shot
+  type: contradicts_partially
+  note: Wiggle&Go achieves real-robot + arbitrary 3D + dynamic whipping, but uses sysID + CMA-ES trajectory optimization in Drake at task time rather than a learned runtime policy.
+- source: implicit-physics-aware-policy-dynamic-manipulation
+  type: contradicts_partially
+  note: IPA achieves real-robot + learned runtime policy with rope-as-tool, but the goal is rigid-payload landing, not free-tip targeting.
+- source: learning-deformable-object-manipulation-using-task
+  type: contradicts_partially
+  note: Task-Level ILC achieves real-robot + dynamic, but the target is a topological state (flying knot), not arbitrary 3D point; and ILC is iterative across trials per goal.
 ---
-
 ## Statement
 
 As of 2026-05-06, the published literature does not yet contain a single paper that simultaneously delivers all four properties for rope-tip targeting:

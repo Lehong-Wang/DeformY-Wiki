@@ -1,21 +1,29 @@
 ---
-title: "Task-Level ILC from one human demo plus a 5-parameter rope model achieves 100% success in fewer than 10 real-hardware trials of the flying knot across 7 rope and cable types"
-slug: "task-level-ilc-real-hardware-flying-knot-100pct-under-10-trials"
+title: Task-Level ILC from one human demo plus a 5-parameter rope model achieves 100% success in fewer than 10 real-hardware trials of the flying knot across 7 rope and cable types
+slug: task-level-ilc-real-hardware-flying-knot-100pct-under-10-trials
 status: supported
 confidence: 0.75
-tags: [ILC, iterative-learning-control, deformable-manipulation, rope, real-world-learning, sample-efficiency, xArm-7, flying-knot]
-domain: "Robotics"
-source_papers: [learning-deformable-object-manipulation-using-task]
+tags:
+- ILC
+- iterative-learning-control
+- deformable-manipulation
+- rope
+- real-world-learning
+- sample-efficiency
+- xArm-7
+- flying-knot
+domain: Robotics
+source_papers:
+- '[[learning-deformable-object-manipulation-using-task]]'
 evidence:
-  - source: learning-deformable-object-manipulation-using-task
-    type: supports
-    strength: strong
-    detail: "Suresh & Atkeson 2026 evaluate Task-Level ILC with a critical-point objective on xArm 7 across 7 rope types (chain, latex tubing, braided, twisted), 7-25mm thickness, 0.013-0.5 kg/m density. Every rope reaches a successful flying knot within 10 trials. A 40-trial robustness test on the converged command per rope shows 0 failures (100% success)."
-conditions: "Tying a one-handed Overhand-style flying knot on a 1.1m rope with a fixed end weight, on xArm 7 with 250Hz command and 200Hz Vicon rope tracking. Single human demonstration with manually-annotated rope-self-collision frame as the critical point. Approximate 11-link point-mass-with-bending rope model (5 free parameters). Drake/Clarabel QP inverse model with linearized joint position, velocity, acceleration, and torque constraints. The 100% figure is for repeated execution of the converged command, not for re-running learning end-to-end."
+- source: learning-deformable-object-manipulation-using-task
+  type: supports
+  strength: strong
+  detail: Suresh & Atkeson 2026 evaluate Task-Level ILC with a critical-point objective on xArm 7 across 7 rope types (chain, latex tubing, braided, twisted), 7-25mm thickness, 0.013-0.5 kg/m density. Every rope reaches a successful flying knot within 10 trials. A 40-trial robustness test on the converged command per rope shows 0 failures (100% success).
+conditions: Tying a one-handed Overhand-style flying knot on a 1.1m rope with a fixed end weight, on xArm 7 with 250Hz command and 200Hz Vicon rope tracking. Single human demonstration with manually-annotated rope-self-collision frame as the critical point. Approximate 11-link point-mass-with-bending rope model (5 free parameters). Drake/Clarabel QP inverse model with linearized joint position, velocity, acceleration, and torque constraints. The 100% figure is for repeated execution of the converged command, not for re-running learning end-to-end.
 date_proposed: 2026-05-06
 date_updated: 2026-05-06
 ---
-
 ## Statement
 
 Given (i) a single human demonstration of a flying knot, (ii) a rope model that has only 5 hand-tuned parameters and is qualitatively wrong about post-collision behavior, and (iii) an optimization-based inverse model with a critical-point objective, Task-Level Iterative Learning Control on real xArm 7 hardware converges to a successful flying-knot command within fewer than 10 real trials for every one of the 7 rope and cable types tested, and the converged command then succeeds on 40/40 repeated trials.

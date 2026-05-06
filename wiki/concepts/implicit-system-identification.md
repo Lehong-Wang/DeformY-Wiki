@@ -1,14 +1,25 @@
 ---
-title: "Implicit System Identification"
-aliases: ["implicit physics identification", "implicit sysID", "implicit physics encoding", "physics-aware encoder", "implicit dynamics inference"]
-tags: [system-identification, implicit-encoding, sim-to-real, robot-learning, physics-aware, deformable-objects]
+title: Implicit System Identification
+aliases:
+- implicit physics identification
+- implicit sysID
+- implicit physics encoding
+- physics-aware encoder
+- implicit dynamics inference
+tags:
+- system-identification
+- implicit-encoding
+- sim-to-real
+- robot-learning
+- physics-aware
+- deformable-objects
 maturity: emerging
-key_papers: [implicit-physics-aware-policy-dynamic-manipulation]
-first_introduced: ""
+key_papers:
+- '[[implicit-physics-aware-policy-dynamic-manipulation]]'
+first_introduced: ''
 date_updated: 2026-05-06
 related_concepts: []
 ---
-
 ## Definition
 
 **Implicit system identification** is the family of techniques in which a robot recovers task-relevant physical properties of an unknown environment **without explicitly estimating named physics parameters** (mass, friction, stiffness, damping). Instead, the robot executes a short, predefined or task-conditioned probing interaction; records the system's response as a representation $\bar{\tau}$ (a trajectory, a sensor stream, a pixel map); and lets a learned encoder consume that response directly as input to a downstream policy or dynamics predictor. The latent physics is "encoded" inside the network weights rather than written out as a parameter vector.
