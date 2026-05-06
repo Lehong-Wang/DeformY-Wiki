@@ -28,6 +28,9 @@ papers:
   - slug: learning-accurate-whole-body-throwing-high
     title: "Learning Accurate Whole-body Throwing with High-frequency Residual Policy and Pullback Tube Acceleration"
     tags: [throwing, whole-body-control, legged-manipulator, residual-policy, MPC, reinforcement-learning, sim-to-real, ANYmal, dynamic-manipulation, robust-control]
+  - slug: implicit-physics-aware-policy-dynamic-manipulation
+    title: "Implicit Physics-aware Policy for Dynamic Manipulation of Rigid Objects via Soft Body Tools"
+    tags: [robotics, deformable-linear-objects, dynamic-manipulation, soft-tool-use, system-identification, one-shot, sim-to-real, heterogeneous-system]
     importance: 4
     domain: Robotics
 
@@ -99,6 +102,13 @@ concepts:
   - slug: whole-body-prehensile-throwing
     title: "Whole-body Prehensile Throwing"
     tags: [throwing, whole-body-control, legged-manipulator, loco-manipulation, dynamic-manipulation]
+  - slug: implicit-system-identification
+    title: "Implicit System Identification"
+    tags: [system-identification, implicit-encoding, sim-to-real, robot-learning, physics-aware, deformable-objects]
+    maturity: emerging
+  - slug: heterogeneous-soft-rigid-system
+    title: "Heterogeneous Soft-Rigid System"
+    tags: [deformable-linear-objects, rigid-bodies, dynamic-manipulation, heterogeneous-system, robot-learning, multi-body-coupling]
     maturity: emerging
 
 topics:
@@ -132,6 +142,10 @@ people:
     name: "Yuntao Ma"
     affiliation: "Robotic Systems Lab, ETH Zürich"
     tags: [legged-robotics, whole-body-control, residual-policy, sim-to-real, loco-manipulation]
+  - slug: zixing-wang
+    name: "Zixing Wang"
+    affiliation: "Purdue University, Department of Computer Science"
+    tags: [robotics, deformable-linear-objects, dynamic-manipulation, soft-tool-use, manipulation-learning]
 
 ideas:
 
@@ -200,6 +214,17 @@ claims:
     tags: [throwing, whole-body, base-motion, legged-manipulator, angular-impulse, loco-manipulation]
     status: supported
     confidence: 0.7
+  - slug: implicit-sysid-enables-one-shot-rope
+    title: "Implicit sysID encoder + goal-conditioned action predictor enables one-shot real-deployment for rope-as-tool 3D-target transport of rigid payloads"
+    tags: [implicit-system-identification, rope-manipulation, dynamic-manipulation, one-shot, sim-to-real, heterogeneous-system, soft-tool-use]
+    status: weakly_supported
+    confidence: 0.65
+    domain: Robotics
+  - slug: heterogeneous-payload-rope-dynamics-implicit-vs
+    title: "Heterogeneous payload-on-rope dynamics are captured implicitly without per-trial residual updates, in contrast to IRP's iterative residual loop"
+    tags: [implicit-system-identification, residual-physics, iterative-residual-policy, heterogeneous-system, dynamic-manipulation, one-shot]
+    status: weakly_supported
+    confidence: 0.55
     domain: Robotics
 
 Summary:
