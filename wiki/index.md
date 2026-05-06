@@ -40,6 +40,9 @@ papers:
   - slug: wiggle-go-system-identification-zero-shot
     title: "Wiggle and Go! System Identification for Zero-Shot Dynamic Rope Manipulation"
     tags: [DLO, deformable-linear-object, rope-manipulation, system-identification, zero-shot, sim-to-real, dynamic-manipulation, CMA-ES, trajectory-optimization, drake, xarm7, cmu]
+  - slug: robots-lost-arc-self-supervised-learning
+    title: "Robots of the Lost Arc: Self-Supervised Learning to Dynamically Manipulate Fixed-Endpoint Cables"
+    tags: [DLO, dynamic-manipulation, self-supervised, behavior-cloning, apex-point, minimum-jerk, UR5, fixed-endpoint-cable]
     importance: 4
     domain: Robotics
 
@@ -137,6 +140,9 @@ concepts:
   - slug: task-agnostic-system-identification
     title: "Task-Agnostic System Identification"
     tags: [DLO, system-identification, rope-manipulation, sim-to-real, zero-shot, dynamic-manipulation, neural-network-sysid]
+  - slug: apex-point-trajectory-parameterization
+    title: "Apex-Point Trajectory Parameterization"
+    tags: [DLO, dynamic-manipulation, action-representation, trajectory-optimization, low-dimensional-action]
     maturity: emerging
 
 topics:
@@ -186,6 +192,10 @@ people:
     title: "Arthur Jakobsson"
   - slug: krishna-suresh
     title: "Krishna Suresh"
+  - slug: harry-zhang
+    name: "Harry Zhang"
+    affiliation: "AUTOLab, UC Berkeley"
+    tags: [robotics, deformable-object-manipulation, dynamic-manipulation, self-supervised-learning]
 
 ideas:
 
@@ -300,6 +310,12 @@ claims:
     tags: [DLO, rope-manipulation, system-identification, iterative-residual-policy, dynamic-manipulation, zero-shot]
     status: weakly_supported
     confidence: 0.5
+    domain: Robotics
+  - slug: dynamic-cable-apex-point-arc-policy
+    title: "A learned 3D apex point that parameterizes a minimum-jerk QP trajectory is sufficient to learn target-conditioned dynamic cable behaviors (vaulting / knocking / weaving) on real hardware across multiple cables"
+    tags: [DLO, dynamic-manipulation, apex-point, self-supervised, real-robot, behavior-cloning]
+    status: supported
+    confidence: 0.7
     domain: Robotics
 
 Summary:
