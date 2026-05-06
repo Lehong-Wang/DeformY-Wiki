@@ -34,6 +34,9 @@ papers:
   - slug: learning-deformable-object-manipulation-using-task
     title: "Learning Deformable Object Manipulation Using Task-Level Iterative Learning Control"
     tags: [DLO, rope, dynamic-manipulation, iterative-learning-control, ILC, real-world-learning, flying-knot, knot-tying, xArm-7, model-based, single-demo, transfer, robot-learning]
+  - slug: daxbench-benchmarking-deformable-object-manipulation-differentiable
+    title: "DaXBench: Benchmarking Deformable Object Manipulation with Differentiable Physics"
+    tags: [DLO, deformable-object-manipulation, differentiable-physics, JAX, MPM, mass-spring, benchmark, RL, imitation-learning, planning, APG, SHAC, PPO, sim-to-real]
     importance: 4
     domain: Robotics
 
@@ -125,6 +128,10 @@ concepts:
     title: "Optimization-Based Inverse Model (Norm-Optimal ILC)"
     tags: [iterative-learning-control, ILC, control, optimization, quadratic-program, robot-learning, inverse-model]
     maturity: active
+  - slug: differentiable-deformable-benchmark
+    title: "Differentiable Deformable-Object Benchmark"
+    tags: [DLO, DOM, deformable-object-manipulation, differentiable-physics, JAX, MPM, mass-spring, benchmark, RL, imitation-learning, planning]
+    maturity: emerging
 
 topics:
 
@@ -165,6 +172,10 @@ people:
     name: "Krishna Suresh"
     affiliation: "Carnegie Mellon University"
     tags: [robot-learning, iterative-learning-control, ILC, deformable-object-manipulation, rope-manipulation]
+  - slug: siwei-chen
+    name: "Siwei Chen"
+    affiliation: "National University of Singapore (AdaComp Lab)"
+    tags: [deformable-object-manipulation, differentiable-physics, JAX, MPM, RL, robot-learning, benchmark]
 
 ideas:
 
@@ -256,6 +267,18 @@ claims:
     tags: [ILC, iterative-learning-control, deformable-manipulation, rope, transfer-learning, real-world-learning, sample-efficiency]
     status: weakly_supported
     confidence: 0.65
+    domain: Robotics
+  - slug: apg-dominates-shac-and-ppo-on-whiprope-low-level
+    title: "DaXBench Whip-Rope baselines: APG 0.83 dominates SHAC 0.66 and PPO 0.25 — analytic policy gradients win on dynamic deformable tasks"
+    tags: [DLO, DOM, deformable-object-manipulation, RL, differentiable-physics, APG, SHAC, PPO, benchmark, low-level-control]
+    status: supported
+    confidence: 0.7
+    domain: Robotics
+  - slug: jax-differentiable-rope-enables-batched-rl-vs-cem-mpc
+    title: "JAX-based differentiable rope simulators enable batched RL training that gradient-free baselines (CEM-MPC) cannot match on dynamic rope tasks"
+    tags: [DLO, DOM, JAX, differentiable-physics, MPM, batched-RL, CEM-MPC, APG, SHAC, benchmark]
+    status: weakly_supported
+    confidence: 0.55
     domain: Robotics
 
 Summary:
