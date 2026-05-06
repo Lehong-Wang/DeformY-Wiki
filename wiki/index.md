@@ -6,16 +6,37 @@ papers:
     tags: [DLO, deformable-linear-object, cosserat-rod, simulation, sim-to-real, robot-learning, dataset, isaac-sim]
     importance: 3
     domain: Robotics
+  - slug: learning-deformable-object-manipulation-using-task
+    title: "Learning Deformable Object Manipulation Using Task-Level Iterative Learning Control"
+    tags: [DLO, rope, dynamic-manipulation, iterative-learning-control, ILC, real-world-learning, flying-knot, knot-tying, xArm-7, model-based, single-demo, transfer, robot-learning]
+    importance: 4
+    domain: Robotics
 
 concepts:
   - slug: cosserat-isaac-cosimulation
     title: "Cosserat-Isaac Co-Simulation"
     tags: [DLO, simulation, cosserat-rod, isaac-sim, sim-to-real, robot-learning]
     maturity: emerging
+  - slug: task-level-iterative-learning-control
+    title: "Task-Level Iterative Learning Control"
+    tags: [iterative-learning-control, ILC, control, deformable-object-manipulation, robot-learning, real-world-learning]
+    maturity: emerging
+  - slug: critical-point-objective
+    title: "Critical-Point Objective"
+    tags: [iterative-learning-control, ILC, control, deformable-object-manipulation, trajectory-cost, behavior-cloning, robot-learning]
+    maturity: emerging
+  - slug: optimization-based-inverse-model
+    title: "Optimization-Based Inverse Model (Norm-Optimal ILC)"
+    tags: [iterative-learning-control, ILC, control, optimization, quadratic-program, robot-learning, inverse-model]
+    maturity: active
 
 topics:
 
 people:
+  - slug: krishna-suresh
+    name: "Krishna Suresh"
+    affiliation: "Carnegie Mellon University"
+    tags: [robot-learning, iterative-learning-control, ILC, deformable-object-manipulation, rope-manipulation]
 
 ideas:
 
@@ -27,6 +48,18 @@ claims:
     tags: [DLO, sim-to-real, cosserat-rod, robot-learning, PPO]
     status: weakly_supported
     confidence: 0.55
+    domain: Robotics
+  - slug: task-level-ilc-real-hardware-flying-knot-100pct-under-10-trials
+    title: "Task-Level ILC from one human demo plus a 5-parameter rope model achieves 100% success in fewer than 10 real-hardware trials of the flying knot across 7 rope and cable types"
+    tags: [ILC, iterative-learning-control, deformable-manipulation, rope, real-world-learning, sample-efficiency, xArm-7, flying-knot]
+    status: supported
+    confidence: 0.75
+    domain: Robotics
+  - slug: task-level-ilc-cross-rope-transfer-2-to-5-trials
+    title: "Cross-rope command transfer with Task-Level ILC requires only 2-5 additional real trials for most rope-pair source/targets"
+    tags: [ILC, iterative-learning-control, deformable-manipulation, rope, transfer-learning, real-world-learning, sample-efficiency]
+    status: weakly_supported
+    confidence: 0.65
     domain: Robotics
 
 Summary:
