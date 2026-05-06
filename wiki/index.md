@@ -53,6 +53,9 @@ papers:
   - slug: ropedreamer-kinematic-recurrent-state-space-model
     title: "RopeDreamer: A Kinematic Recurrent State Space Model for Dynamics of Flexible Deformable Linear Objects"
     tags: [DLO, deformable-linear-object, dynamics-prediction, world-model, RSSM, quaternion, kinematic-chain, latent-dynamics, robot-learning, knot-topology]
+  - slug: rapid-adaptation-particle-dynamics-generalized-deformable
+    title: "Rapid Adaptation of Particle Dynamics for Generalized Deformable Object Mobile Manipulation"
+    tags: [deformable-object-manipulation, mobile-manipulation, RMA, sim-to-real, visuomotor-policy, particle-dynamics, teacher-student, reinforcement-learning, adaptation, omnigibson]
     importance: 3
     domain: Robotics
 
@@ -162,6 +165,9 @@ concepts:
   - slug: quaternionic-rssm-dlo
     title: "Quaternionic Kinematic RSSM for DLOs"
     tags: [DLO, world-model, RSSM, latent-dynamics, quaternion, kinematic-chain, dual-decoder]
+  - slug: rma-particle-dynamics-adaptation
+    title: "RMA Particle-Dynamics Adaptation"
+    tags: [RMA, deformable-object-manipulation, sim-to-real, teacher-student, particle-dynamics, visuomotor-policy, robot-learning]
     maturity: emerging
 
 topics:
@@ -366,6 +372,9 @@ claims:
   - slug: quaternionic-kinematic-rssm-reduces-dlo-rollout-error
     title: "Quaternionic kinematic RSSM with dual-decoder reconstruction+prediction reduces 50-step rollout error 40.5% over baseline RSSM/GNN on DLO dynamics"
     tags: [DLO, world-model, RSSM, quaternion, latent-dynamics, rollout-error, topology, robot-learning]
+  - slug: rma-particle-rapid-real-world-success
+    title: "RMA with privileged-particle teacher achieves >80% real-world success on deformable mobile manipulation"
+    tags: [RMA, deformable-object-manipulation, mobile-manipulation, sim-to-real, teacher-student, particle-dynamics, robot-learning]
     status: proposed
     confidence: 0.45
     domain: Robotics
