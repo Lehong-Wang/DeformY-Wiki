@@ -43,6 +43,9 @@ papers:
   - slug: robots-lost-arc-self-supervised-learning
     title: "Robots of the Lost Arc: Self-Supervised Learning to Dynamically Manipulate Fixed-Endpoint Cables"
     tags: [DLO, dynamic-manipulation, self-supervised, behavior-cloning, apex-point, minimum-jerk, UR5, fixed-endpoint-cable]
+  - slug: self-supervised-learning-dynamic-planar-manipulation
+    title: "Self-Supervised Learning of Dynamic Planar Manipulation of Free-End Cables"
+    tags: [DLO, deformable-linear-object, free-end-cable, dynamic-manipulation, sim-to-real, real2sim2real, self-supervised, pybullet, differential-evolution, supervised-learning, autolab, UR5]
     importance: 4
     domain: Robotics
 
@@ -143,6 +146,9 @@ concepts:
   - slug: apex-point-trajectory-parameterization
     title: "Apex-Point Trajectory Parameterization"
     tags: [DLO, dynamic-manipulation, action-representation, trajectory-optimization, low-dimensional-action]
+  - slug: two-arc-planar-motion-primitive
+    title: "Two-Arc Planar Motion Primitive"
+    tags: [DLO, dynamic-manipulation, action-parameterization, free-end-cable, motion-primitive, robot-casting]
     maturity: emerging
 
 topics:
@@ -196,6 +202,9 @@ people:
     name: "Harry Zhang"
     affiliation: "AUTOLab, UC Berkeley"
     tags: [robotics, deformable-object-manipulation, dynamic-manipulation, self-supervised-learning]
+  - slug: jonathan-wang
+    title: "Jonathan Wang"
+    affiliation: "AUTOLAB, UC Berkeley (at time of paper)"
 
 ideas:
 
@@ -316,6 +325,18 @@ claims:
     tags: [DLO, dynamic-manipulation, apex-point, self-supervised, real-robot, behavior-cloning]
     status: supported
     confidence: 0.7
+    domain: Robotics
+  - slug: real2sim2real-free-end-cables-reaches-22
+    title: "DE-tuned PyBullet + supervised forward dynamics yields 22-34% median tip error on free-end cable casting"
+    tags: [DLO, free-end-cable, sim-to-real, real2sim2real, dynamic-manipulation, supervised-learning, robot-casting]
+    status: supported
+    confidence: 0.7
+    domain: Robotics
+  - slug: free-end-cable-target-reaching-harder
+    title: "Free-end cable dynamic target reaching is harder than fixed-end on per-cable-length error"
+    tags: [DLO, free-end-cable, fixed-end-cable, dynamic-manipulation, sim-to-real, robot-casting, error-comparison]
+    status: weakly_supported
+    confidence: 0.55
     domain: Robotics
 
 Summary:
