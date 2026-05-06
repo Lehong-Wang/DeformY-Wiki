@@ -9,6 +9,9 @@ papers:
   - slug: iterative-residual-policy-goal-conditioned-dynamic
     title: "Iterative Residual Policy: For Goal-Conditioned Dynamic Manipulation of Deformable Objects"
     tags: [DLO, deformable-linear-object, dynamic-manipulation, sim-to-real, residual-learning, iterative-control, rope-whipping, cloth-placement, robot-learning, mujoco]
+  - slug: tossingbot-learning-throw-arbitrary-objects-residual
+    title: "TossingBot: Learning to Throw Arbitrary Objects with Residual Physics"
+    tags: [robotics, manipulation, throwing, residual-physics, grasping, deep-learning, sim-to-real, self-supervised, pick-and-place]
     importance: 5
     domain: Robotics
 
@@ -25,6 +28,18 @@ concepts:
     title: "Delta Dynamics Network"
     tags: [DLO, dynamic-manipulation, residual-learning, learned-dynamics, sim-to-real, robot-learning]
     maturity: emerging
+  - slug: residual-physics
+    title: "Residual Physics"
+    tags: [robotics, hybrid-controller, residual-learning, sim-to-real, action-space, manipulation, throwing]
+    maturity: active
+  - slug: throwing-motion-primitive
+    title: "Throwing Motion Primitive"
+    tags: [robotics, motion-primitive, throwing, dynamic-manipulation, manipulation, end-effector-trajectory]
+    maturity: active
+  - slug: physics-informed-action-prior
+    title: "Physics-Informed Action Prior"
+    tags: [robotics, hybrid-controller, model-based, residual-learning, sim-to-real, action-prior]
+    maturity: active
 
 topics:
 
@@ -37,6 +52,10 @@ people:
     name: "Shuran Song"
     affiliation: "Stanford University (current); Columbia University (at time of publication)"
     tags: [robot-learning, manipulation, deformable-objects, perception-for-action, dynamic-manipulation]
+  - slug: andy-zeng
+    name: "Andy Zeng"
+    affiliation: "Google DeepMind"
+    tags: [robotics, deep-learning, manipulation, vision, robot-learning, foundation-models]
 
 ideas:
 
@@ -60,6 +79,12 @@ claims:
     tags: [DLO, sim-to-real, residual-learning, system-identification, delta-dynamics, robot-learning]
     status: weakly_supported
     confidence: 0.7
+    domain: Robotics
+  - slug: residual-physics-improves-throw-accuracy
+    title: "Learning a residual on top of an analytic ballistic prior yields high-accuracy goal-conditioned throwing of arbitrary objects"
+    tags: [robotics, throwing, residual-physics, manipulation, sim-to-real, hybrid-controller]
+    status: supported
+    confidence: 0.85
     domain: Robotics
 
 Summary:
