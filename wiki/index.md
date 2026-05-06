@@ -6,16 +6,29 @@ papers:
     tags: [DLO, deformable-linear-object, cosserat-rod, simulation, sim-to-real, robot-learning, dataset, isaac-sim]
     importance: 3
     domain: Robotics
+  - slug: robots-lost-arc-self-supervised-learning
+    title: "Robots of the Lost Arc: Self-Supervised Learning to Dynamically Manipulate Fixed-Endpoint Cables"
+    tags: [DLO, dynamic-manipulation, self-supervised, behavior-cloning, apex-point, minimum-jerk, UR5, fixed-endpoint-cable]
+    importance: 4
+    domain: Robotics
 
 concepts:
   - slug: cosserat-isaac-cosimulation
     title: "Cosserat-Isaac Co-Simulation"
     tags: [DLO, simulation, cosserat-rod, isaac-sim, sim-to-real, robot-learning]
     maturity: emerging
+  - slug: apex-point-trajectory-parameterization
+    title: "Apex-Point Trajectory Parameterization"
+    tags: [DLO, dynamic-manipulation, action-representation, trajectory-optimization, low-dimensional-action]
+    maturity: emerging
 
 topics:
 
 people:
+  - slug: harry-zhang
+    name: "Harry Zhang"
+    affiliation: "AUTOLab, UC Berkeley"
+    tags: [robotics, deformable-object-manipulation, dynamic-manipulation, self-supervised-learning]
 
 ideas:
 
@@ -27,6 +40,12 @@ claims:
     tags: [DLO, sim-to-real, cosserat-rod, robot-learning, PPO]
     status: weakly_supported
     confidence: 0.55
+    domain: Robotics
+  - slug: dynamic-cable-apex-point-arc-policy
+    title: "A learned 3D apex point that parameterizes a minimum-jerk QP trajectory is sufficient to learn target-conditioned dynamic cable behaviors (vaulting / knocking / weaving) on real hardware across multiple cables"
+    tags: [DLO, dynamic-manipulation, apex-point, self-supervised, real-robot, behavior-cloning]
+    status: supported
+    confidence: 0.7
     domain: Robotics
 
 Summary:
