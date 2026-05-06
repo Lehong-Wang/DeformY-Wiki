@@ -6,11 +6,20 @@ papers:
     tags: [DLO, deformable-linear-object, cosserat-rod, simulation, sim-to-real, robot-learning, dataset, isaac-sim]
     importance: 3
     domain: Robotics
+  - slug: rapid-adaptation-particle-dynamics-generalized-deformable
+    title: "Rapid Adaptation of Particle Dynamics for Generalized Deformable Object Mobile Manipulation"
+    tags: [deformable-object-manipulation, mobile-manipulation, RMA, sim-to-real, visuomotor-policy, particle-dynamics, teacher-student, reinforcement-learning, adaptation, omnigibson]
+    importance: 3
+    domain: Robotics
 
 concepts:
   - slug: cosserat-isaac-cosimulation
     title: "Cosserat-Isaac Co-Simulation"
     tags: [DLO, simulation, cosserat-rod, isaac-sim, sim-to-real, robot-learning]
+    maturity: emerging
+  - slug: rma-particle-dynamics-adaptation
+    title: "RMA Particle-Dynamics Adaptation"
+    tags: [RMA, deformable-object-manipulation, sim-to-real, teacher-student, particle-dynamics, visuomotor-policy, robot-learning]
     maturity: emerging
 
 topics:
@@ -27,6 +36,12 @@ claims:
     tags: [DLO, sim-to-real, cosserat-rod, robot-learning, PPO]
     status: weakly_supported
     confidence: 0.55
+    domain: Robotics
+  - slug: rma-particle-rapid-real-world-success
+    title: "RMA with privileged-particle teacher achieves >80% real-world success on deformable mobile manipulation"
+    tags: [RMA, deformable-object-manipulation, mobile-manipulation, sim-to-real, teacher-student, particle-dynamics, robot-learning]
+    status: proposed
+    confidence: 0.45
     domain: Robotics
 
 Summary:
