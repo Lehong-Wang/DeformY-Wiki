@@ -29,8 +29,36 @@ Thumbs.db
 # Virtual environment
 .venv/
 
-# Raw data (large files managed separately)
+# Raw data (large binaries managed separately)
 raw/papers/*.pdf
 
-# Skill runtime / scratch state (per-session helpers, init/ingest manifests)
+# ---------------------------------------------------------------------------
+# NOTE — fork divergence from upstream (AutoSci/OmegaWiki):
+# Upstream's .gitignore treats wiki/{papers,concepts,...}/ and raw/* as
+# LOCAL-ONLY (tracks only .gitkeep scaffolds). THIS fork intentionally
+# version-controls its knowledge base, so those ignore blocks are deliberately
+# NOT included. We push the KB to our own origin (not to upstream).
+# Only large raw PDFs (above) are excluded.
+# ---------------------------------------------------------------------------
+
+# Skill runtime / scratch state (regenerated each invocation)
 .checkpoints/
+wiki/.checkpoints/
+.daily-arxiv/
+
+# /exp-run generated experiment code
+experiments/code/
+
+# /visualize generated artifacts (regenerated from config + wiki/graph/)
+wiki/.obsidian/
+wiki/canvases/
+wiki/graph-view.html
+
+# Local IDE / editor / agent state
+.obsidian/
+.claude/worktrees/
+.claude/scheduled_tasks.lock
+
+# Obsidian "untitled canvas" debris (locale-aware: en + zh)
+**/Untitled*.canvas
+**/未命名*.canvas

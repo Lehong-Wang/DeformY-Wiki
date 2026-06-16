@@ -65,11 +65,15 @@ from pathlib import Path
 # Constants
 # ---------------------------------------------------------------------------
 
-# Schema constants are re-exported from _schemas so this module and lint.py
-# share a single source of truth — see tools/_schemas.py.
-from _schemas import (  # noqa: E402
+# Schema API lives in runtime/loader.py — single source for both this file and
+# tools/lint.py.  The 3-line bridge below makes runtime/ importable from tools/.
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from runtime.loader import (  # noqa: E402
     CITATION_SOURCES,
+    CONVENTIONS,
     EDGE_CONFIDENCE_VALUES,
+    EDGES,
+    ENTITIES,
     ENTITY_DIRS,
     SYMMETRIC_EDGE_TYPES,
     VALID_EDGE_TYPES,
@@ -79,6 +83,8 @@ from _schemas import (  # noqa: E402
     edge_is_symmetric,
     edge_legacy_replacement_message,
     edge_requires_confidence,
+    validate_edge_attributes,
+    validate_lifecycle_transition,
 )
 
 DERIVED_DIR = "graph"
@@ -131,7 +137,7 @@ def init_wiki(wiki_root: str) -> None:
     """Initialize wiki directory structure with all entity dirs and graph/.
 
     Creates:
-      - 9 entity directories (papers, concepts, topics, people, ideas, experiments, claims, Summary, foundations)
+      - one directory per entity kind in runtime.loader.ENTITY_DIRS
       - graph/ with empty edges.jsonl, citations.jsonl, context_brief.md, open_questions.md
       - outputs/
       - index.md, log.md (if they don't exist)
@@ -209,51 +215,41 @@ def _validate_node_refs(root: Path, *node_ids: str) -> list[str]:
     return warnings
 
 
-def _semantic_edge_warnings(edge_type: str, from_id: str, to_id: str,
-                            confidence: str = "",
-                            evidence: str = "") -> list[str]:
-    warnings: list[str] = []
+def _edge_topology_issues(edge_type: str, from_id: str, to_id: str,
+                          legacy_check: bool = False) -> list[str]:
+    """Endpoint / self-edge / legacy checks (the parts that aren't attribute-level)."""
+    issues: list[str] = []
     from_kind = _node_kind(from_id)
     to_kind = _node_kind(to_id)
 
+    if legacy_check and edge_is_legacy_for_endpoint(edge_type, from_kind, to_kind):
+        issues.append(edge_legacy_replacement_message(edge_type, from_kind, to_kind))
     if not edge_endpoint_matches(edge_type, from_kind, to_kind):
         expected_from = edge_expected_endpoint(edge_type, "from")
         expected_to = edge_expected_endpoint(edge_type, "to")
-        warnings.append(f"{edge_type} should connect {expected_from}/* -> {expected_to}/*")
+        issues.append(f"{edge_type} should connect {expected_from}/* -> {expected_to}/*")
     if (edge_expected_endpoint(edge_type, "from") == "papers"
             and edge_expected_endpoint(edge_type, "to") == "papers"
             and from_id == to_id):
-        warnings.append(f"{edge_type} should not connect a paper to itself")
-    if edge_requires_confidence(edge_type) and not confidence:
-        warnings.append(f"{edge_type} should include confidence=high|medium|low")
-    if edge_requires_confidence(edge_type) and not evidence.strip():
-        warnings.append(f"{edge_type} should include evidence text")
-    return warnings
+        issues.append(f"{edge_type} should not connect a paper to itself")
+    return issues
+
+
+def _semantic_edge_warnings(edge_type: str, from_id: str, to_id: str,
+                            confidence: str = "",
+                            evidence: str = "") -> list[str]:
+    return (_edge_topology_issues(edge_type, from_id, to_id, legacy_check=False)
+            + validate_edge_attributes(edge_type,
+                                       {"confidence": confidence, "evidence": evidence}))
 
 
 def _semantic_edge_errors(edge_type: str, from_id: str, to_id: str,
                           confidence: str = "",
                           evidence: str = "") -> list[str]:
     """Hard validation for new writes. Legacy graph rows remain lint-readable."""
-    errors: list[str] = []
-    from_kind = _node_kind(from_id)
-    to_kind = _node_kind(to_id)
-
-    if edge_is_legacy_for_endpoint(edge_type, from_kind, to_kind):
-        errors.append(edge_legacy_replacement_message(edge_type, from_kind, to_kind))
-    if not edge_endpoint_matches(edge_type, from_kind, to_kind):
-        expected_from = edge_expected_endpoint(edge_type, "from")
-        expected_to = edge_expected_endpoint(edge_type, "to")
-        errors.append(f"{edge_type} must connect {expected_from}/* -> {expected_to}/*")
-    if (edge_expected_endpoint(edge_type, "from") == "papers"
-            and edge_expected_endpoint(edge_type, "to") == "papers"
-            and from_id == to_id):
-        errors.append(f"{edge_type} must not connect a paper to itself")
-    if edge_requires_confidence(edge_type) and not confidence:
-        errors.append(f"{edge_type} requires --confidence high|medium|low")
-    if edge_requires_confidence(edge_type) and not evidence.strip():
-        errors.append(f"{edge_type} requires --evidence text")
-    return errors
+    return (_edge_topology_issues(edge_type, from_id, to_id, legacy_check=True)
+            + validate_edge_attributes(edge_type,
+                                       {"confidence": confidence, "evidence": evidence}))
 
 
 def _canonical_edge_ids(from_id: str, to_id: str, edge_type: str,
@@ -432,6 +428,269 @@ def add_citation(wiki_root: str, from_id: str, to_id: str,
     print(json.dumps(result2))
 
 
+def _build_arxiv_index(wiki_root: Path) -> dict[str, str]:
+    """Map arXiv ID (and S2 ID) → paper slug, for citation resolution.
+
+    Reads each wiki/papers/*.md frontmatter once. Both 'arxiv' and 's2_id'
+    fields are indexed so references arriving with either identifier match.
+    """
+    index: dict[str, str] = {}
+    papers_dir = wiki_root / "papers"
+    if not papers_dir.is_dir():
+        return index
+    for md in papers_dir.glob("*.md"):
+        slug = md.stem
+        fm = _parse_frontmatter(md)
+        for key in ("arxiv", "s2_id"):
+            v = fm.get(key)
+            if isinstance(v, str) and v.strip():
+                index[v.strip()] = slug
+    return index
+
+
+def add_citations_batch(wiki_root: str, citer_id: str) -> None:
+    """Read a JSON array of S2 reference objects from stdin and append all
+    matching `cites` rows to graph/citations.jsonl in one pass.
+
+    Input: a JSON array (as emitted by `tools/fetch_s2.py references <arxiv>`)
+    of paper objects, each with optional `externalIds.ArXiv` and `paperId`.
+
+    Output: a single JSON status line with counts (received, matched, added,
+    skipped_existing, unmatched).
+    """
+    if _node_kind(citer_id) != "papers":
+        print(json.dumps({"status": "error",
+                          "message": f"--citer must be papers/<slug>, got {citer_id}"}))
+        sys.exit(1)
+
+    root = Path(wiki_root)
+    citations_path = root / DERIVED_DIR / "citations.jsonl"
+    citations_path.parent.mkdir(parents=True, exist_ok=True)
+
+    try:
+        refs = json.load(sys.stdin)
+    except json.JSONDecodeError as exc:
+        print(json.dumps({"status": "error",
+                          "message": f"stdin is not valid JSON: {exc}"}))
+        sys.exit(1)
+    if not isinstance(refs, list):
+        print(json.dumps({"status": "error",
+                          "message": "stdin must be a JSON array of reference objects"}))
+        sys.exit(1)
+
+    arxiv_index = _build_arxiv_index(root)
+
+    existing: set[tuple[str, str]] = set()
+    if citations_path.exists():
+        for line in citations_path.read_text(encoding="utf-8").splitlines():
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                c = json.loads(line)
+                existing.add((c.get("from", ""), c.get("to", "")))
+            except json.JSONDecodeError:
+                continue
+
+    today = _today()
+    matched = 0
+    added = 0
+    skipped_existing = 0
+    unmatched_samples: list[str] = []
+    new_rows: list[str] = []
+
+    for ref in refs:
+        if not isinstance(ref, dict):
+            continue
+        ext_ids = ref.get("externalIds") or {}
+        arxiv = ext_ids.get("ArXiv") or ext_ids.get("arxiv")
+        s2id = ref.get("paperId")
+        target_slug = None
+        if arxiv and arxiv in arxiv_index:
+            target_slug = arxiv_index[arxiv]
+        elif s2id and s2id in arxiv_index:
+            target_slug = arxiv_index[s2id]
+        if not target_slug:
+            if len(unmatched_samples) < 5:
+                title = (ref.get("title") or "")[:80]
+                unmatched_samples.append(title or "(no title)")
+            continue
+        matched += 1
+        to_id = f"papers/{target_slug}"
+        if to_id == citer_id:
+            continue  # don't cite yourself
+        key = (citer_id, to_id)
+        if key in existing:
+            skipped_existing += 1
+            continue
+        existing.add(key)
+        row = {
+            "from": citer_id,
+            "to": to_id,
+            "type": "cites",
+            "source": "semantic_scholar",
+            "date": today,
+        }
+        new_rows.append(json.dumps(row, ensure_ascii=False))
+        added += 1
+
+    if new_rows:
+        with open(citations_path, "a", encoding="utf-8") as f:
+            f.write("\n".join(new_rows) + "\n")
+
+    print(json.dumps({
+        "status": "ok",
+        "citer": citer_id,
+        "received": len(refs),
+        "matched": matched,
+        "added": added,
+        "skipped_existing": skipped_existing,
+        "unmatched": len(refs) - matched,
+        "unmatched_samples": unmatched_samples,
+    }, ensure_ascii=False))
+
+
+def _clean_link_slug(s) -> str | None:
+    """Normalize a frontmatter link value to a bare slug.
+
+    Wiki convention writes `key_papers: [[slug]]`, which the lightweight parser
+    returns as one-element list `["[slug]"]` (or `[[slug]]` for `parent_topic:
+    [[slug]]` parsed as scalar). Strip leading/trailing `[` and `]`, plus
+    optional surrounding quotes."""
+    if not isinstance(s, str):
+        return None
+    v = s.strip()
+    while v.startswith("[") and v.endswith("]"):
+        v = v[1:-1].strip()
+    if (v.startswith('"') and v.endswith('"')) or (v.startswith("'") and v.endswith("'")):
+        v = v[1:-1]
+    return v.strip() or None
+
+
+def _resolve_target_kind(target_spec, target_slug: str, root: Path) -> str | None:
+    """Given a field's `to` spec (str or list of kinds) and a slug, find which
+    entity directory actually contains <slug>.md. Returns None if missing."""
+    candidates = [target_spec] if isinstance(target_spec, str) else list(target_spec or [])
+    for kind in candidates:
+        spec = ENTITIES.get(kind)
+        if not spec:
+            continue
+        entity_dir_name = spec["dir"].rstrip("/").split("/")[-1]
+        if (root / entity_dir_name / f"{target_slug}.md").is_file():
+            return kind
+    # Fall back to first candidate even if file is missing (for orphan edges
+    # that point at a not-yet-created entity — still useful for visualization).
+    return candidates[0] if candidates else None
+
+
+def project_frontmatter_edges(wiki_root: str | Path) -> list[dict]:
+    """Walk all entity .md files and project link/list_link/list_object
+    frontmatter fields into synthetic graph edges.
+
+    Each projected edge carries:
+      from:   "<kind>/<slug>"
+      to:     "<target_kind>/<target_slug>"
+      type:   "fm_<field>"     (fm_ prefix avoids collision with edges.yaml)
+      source: "frontmatter"
+      field:  "<kind>.<field>"
+
+    Skipped:
+      - foundations (terminal entities)
+      - `papers.cited_by` (already a derived cache of cites)
+      - empty or missing field values
+
+    Pattern follows rebuild_index(): glob entity dirs, parse_frontmatter
+    each file. No I/O beyond reads. Idempotent.
+    """
+    edges: list[dict] = []
+    root = Path(wiki_root)
+
+    for kind in ENTITY_DIRS:
+        spec = ENTITIES.get(kind)
+        if not spec or spec.get("terminal"):
+            continue
+        entity_dir_name = spec["dir"].rstrip("/").split("/")[-1]
+        entity_dir = root / entity_dir_name
+        if not entity_dir.is_dir():
+            continue
+
+        link_fields: list[tuple[str, dict]] = []
+        for fname, fspec in spec.get("fields", {}).items():
+            ftype = fspec.get("type")
+            if ftype not in ("link", "list_link", "list_object"):
+                continue
+            if kind == "papers" and fname == "cited_by":
+                continue  # cited_by is the derived reverse cache of cites
+            link_fields.append((fname, fspec))
+
+        if not link_fields:
+            continue
+
+        for md_path in sorted(entity_dir.glob("*.md")):
+            slug = md_path.stem
+            try:
+                fm = _parse_frontmatter(md_path)
+            except Exception:
+                continue
+
+            for fname, fspec in link_fields:
+                target_spec = fspec.get("to")
+                ftype = fspec["type"]
+                raw_val = fm.get(fname)
+
+                if ftype == "link":
+                    if not raw_val or not isinstance(raw_val, str):
+                        continue
+                    targets = [raw_val]
+                else:
+                    if not raw_val:
+                        continue
+                    if not isinstance(raw_val, list):
+                        continue
+                    targets = raw_val
+
+                for target in targets:
+                    # list_link → str slug; list_object → dict with 'slug'
+                    if isinstance(target, dict):
+                        target_slug = _clean_link_slug(target.get("slug"))
+                    else:
+                        target_slug = _clean_link_slug(target)
+                    if not target_slug:
+                        continue
+
+                    target_kind = _resolve_target_kind(target_spec, target_slug, root)
+                    if not target_kind:
+                        continue
+
+                    edges.append({
+                        "from": f"{kind}/{slug}",
+                        "to":   f"{target_kind}/{target_slug}",
+                        # fm_<kind>_<field> disambiguates fields that share a
+                        # name across entities (e.g. concepts.key_papers vs
+                        # topics.key_papers). Always derived from `kind` so
+                        # adding a new entity that uses the same field name
+                        # never collides with existing data.
+                        "type": f"fm_{kind}_{fname}",
+                        "source": "frontmatter",
+                        "field": f"{kind}.{fname}",
+                    })
+
+    return edges
+
+
+def rebuild_projected_edges(wiki_root: str) -> None:
+    """Write projected frontmatter edges to graph/projected_edges.jsonl
+    (overwrite). Useful for canvas / Obsidian generators that read on-disk
+    artifacts; serve.py reads them dynamically and does not need this file."""
+    root = Path(wiki_root)
+    out_path = root / DERIVED_DIR / "projected_edges.jsonl"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    edges = project_frontmatter_edges(root)
+    lines = [json.dumps(e, ensure_ascii=False) for e in edges]
+    out_path.write_text("\n".join(lines) + ("\n" if lines else ""), encoding="utf-8")
+    print(json.dumps({"status": "ok", "path": str(out_path), "count": len(edges)}))
+
+
 def load_edges(wiki_root: str) -> list[dict]:
     """Load all edges from edges.jsonl."""
     edges_path = Path(wiki_root) / DERIVED_DIR / "edges.jsonl"
@@ -573,36 +832,18 @@ def rebuild_open_questions(wiki_root: str) -> None:
     """Scan wiki pages for open questions / research gaps and write open_questions.md.
 
     Sources:
-      - papers/: ## Open questions section
-      - topics/: ## Research gaps and ## Open problems sections
-      - concepts/: ## Open problems section
-      - claims/: status == 'proposed' or 'weakly_supported'
+      - papers/:   ## Open questions
+      - topics/:   ## Open problems  (including its ### Known gaps and ### Methodological gaps subsections)
+      - concepts/: ## Open problems
     """
     _refuse_in_linked_worktree("rebuild-open-questions")
     root = Path(wiki_root)
     gaps: list[str] = []
 
-    # From papers: open questions
-    _collect_section_items(root / "papers", "Open questions", gaps, "paper")
+    _collect_section_items(root / "papers",   "Open questions", gaps, "paper")
+    _collect_section_items(root / "topics",   "Open problems",  gaps, "topic")
+    _collect_section_items(root / "concepts", "Open problems",  gaps, "concept")
 
-    # From topics: research gaps + open problems
-    _collect_section_items(root / "topics", "Research gaps", gaps, "topic")
-    _collect_section_items(root / "topics", "Open problems", gaps, "topic")
-
-    # From concepts: open problems
-    _collect_section_items(root / "concepts", "Open problems", gaps, "concept")
-
-    # From claims: under-supported claims
-    claims_dir = root / "claims"
-    if claims_dir.exists():
-        for f in sorted(claims_dir.glob("*.md")):
-            fm = _parse_frontmatter(f)
-            status = fm.get("status", "")
-            if status in ("proposed", "weakly_supported"):
-                title = fm.get("title", f.stem)
-                gaps.append(f"- [claim/{f.stem}] {title} (status: {status})")
-
-    # Write
     content = "# Gap Map\n\n_Auto-generated open questions. Do not edit._\n\n"
     if gaps:
         content += "\n".join(gaps) + "\n"
@@ -616,22 +857,28 @@ def rebuild_open_questions(wiki_root: str) -> None:
 
 def _collect_section_items(directory: Path, section_name: str,
                            out: list[str], source_type: str) -> None:
-    """Extract bullet items from a named markdown section across all files in a dir."""
+    """Extract bullet items from a named markdown section across all files in a dir.
+
+    The section is the H2 ``## {section_name}`` block. The block ends at the
+    next H2 heading (``## ``) or end of file. H3+ subsections (``### ...``)
+    inside the block are NOT treated as a break — their headings are skipped
+    and their bullet items are collected — so topic ``## Open problems``
+    pages with ``### Known gaps`` and ``### Methodological gaps`` are folded
+    in as one stream of gaps.
+    """
     if not directory.exists():
         return
     for f in sorted(directory.glob("*.md")):
         content = f.read_text(encoding="utf-8")
-        lines = content.split("\n")
         in_section = False
-        for line in lines:
-            # Detect section header (## Open questions, ## Research gaps, etc.)
+        for line in content.split("\n"):
             if re.match(rf"^##\s+{re.escape(section_name)}\s*$", line, re.IGNORECASE):
                 in_section = True
                 continue
-            # Stop at next section header
             if in_section and re.match(r"^##\s+", line):
-                break
-            # Collect bullet items
+                break  # next H2 ends the block
+            if in_section and re.match(r"^#{3,}\s+", line):
+                continue  # H3+ heading inside the block: skip header, keep collecting
             if in_section and line.strip().startswith("-"):
                 item = line.strip().lstrip("- ").strip()
                 if item:
@@ -707,17 +954,17 @@ def find_entities(wiki_root: str, entity_type: str,
 
 
 # ---------------------------------------------------------------------------
-# Semantic dedup: find-similar-concept / find-similar-claim
+# Semantic dedup: find-similar-concept
 # ---------------------------------------------------------------------------
 #
-# These two queries answer the question: "before I create a new concept/claim
-# with this title, does the wiki already have one that means the same thing?"
+# This query answers the question: "before I create a new concept with this
+# title, does the wiki already have one that means the same thing?"
 #
-# They are deterministic (no LLM) and use only token-level matching, but they
-# are tuned for high recall — the LLM caller does the final semantic judgment
+# It is deterministic (no LLM) and uses only token-level matching, but it is
+# tuned for high recall — the LLM caller does the final semantic judgment
 # from a small ranked list. Designed to be invoked from /ingest BEFORE any
-# concept or claim is created, to prevent the "subagent A and subagent B both
-# create textual-gradient-descent under different slugs" failure mode.
+# concept is created, to prevent the "subagent A and subagent B both create
+# textual-gradient-descent under different slugs" failure mode.
 #
 # find-similar-concept ALSO scans wiki/foundations/ so that /ingest cannot
 # accidentally create a concept that duplicates an existing foundation page
@@ -731,8 +978,8 @@ def find_entities(wiki_root: str, entity_type: str,
 #   0.40-0.84  Jaccard similarity of content tokens, scaled
 #   < 0.40  not returned
 #
-# Both functions return a JSON list sorted descending by score so the LLM can
-# scan the top-k. Empty list means "safe to create a new entity".
+# Returns a JSON list sorted descending by score so the LLM can scan the
+# top-k. Empty list means "safe to create a new entity".
 
 
 def _normalize_text(text: str) -> str:
@@ -755,41 +1002,6 @@ def _content_tokens(text: str) -> set[str]:
         if len(w) >= 3 and w not in STOP_WORDS:
             tokens.add(w)
     return tokens
-
-
-_CLAIM_CANONICAL_MAP = {
-    "outperform": "beat", "outperforms": "beat", "outperformed": "beat",
-    "outperforming": "beat", "beats": "beat", "beaten": "beat",
-    "exceed": "beat", "exceeds": "beat", "exceeded": "beat",
-    "surpass": "beat", "surpasses": "beat", "surpassed": "beat",
-    "improve": "beat", "improves": "beat", "improved": "beat",
-    "improvement": "beat", "improvements": "beat",
-    "better": "beat", "best": "beat",
-    "achieve": "beat", "achieves": "beat", "achieved": "beat",
-    "produce": "produce", "produces": "produce", "produced": "produce",
-    "producing": "produce", "production": "produce",
-    "generate": "produce", "generates": "produce", "generated": "produce",
-    "generating": "produce", "generation": "produce",
-    "optimize": "produce", "optimizes": "produce", "optimized": "produce",
-    "optimizing": "produce", "optimization": "produce",
-    "discover": "produce", "discovers": "produce", "discovered": "produce",
-    "create": "produce", "creates": "produce", "created": "produce",
-    "human": "human", "humans": "human",
-    "manual": "human", "manually": "human",
-    "expert": "human", "experts": "human", "expertly": "human",
-    "handwritten": "human", "handcrafted": "human",
-    "prompts": "prompt", "instructions": "instruction",
-    "models": "model", "papers": "paper", "methods": "method",
-    "results": "result", "tasks": "task", "datasets": "dataset",
-    "benchmarks": "benchmark", "experiments": "experiment",
-    "claims": "claim", "concepts": "concept",
-    "llms": "llm", "lms": "llm",
-}
-
-
-def _claim_tokens(text: str) -> set[str]:
-    """Tokenize a claim title with synonym canonicalization (claims only)."""
-    return {_CLAIM_CANONICAL_MAP.get(t, t) for t in _content_tokens(text)}
 
 
 def _phrase_match_score(a: str, b: str) -> float:
@@ -906,190 +1118,9 @@ def find_similar_concept(wiki_root: str, candidate_title: str,
     print(json.dumps(matches, ensure_ascii=False, indent=2))
 
 
-def find_similar_claim(wiki_root: str, candidate_title: str,
-                       candidate_tags: list[str] | None = None) -> None:
-    """Find existing claims that semantically overlap with the candidate.
-
-    Claims are full propositions; uses canonicalized token Jaccard with a
-    tag-overlap tiebreaker. Claims live only in wiki/claims/ (not foundations).
-
-    Output: JSON list of {slug, title, tags, status, confidence, score, match_reason}.
-    """
-    root = Path(wiki_root)
-    claims_dir = root / "claims"
-    if not claims_dir.exists():
-        print(json.dumps([]))
-        return
-
-    candidate_tags_set = {t.strip().lower() for t in (candidate_tags or []) if t.strip()}
-    cand_tokens = _claim_tokens(candidate_title)
-    cand_norm = _normalize_text(candidate_title)
-
-    matches: list[dict] = []
-    for f in sorted(claims_dir.glob("*.md")):
-        fm = _parse_frontmatter(f)
-        if not fm:
-            continue
-        existing_title = fm.get("title", "") or ""
-        if not existing_title:
-            continue
-
-        ex_tokens = _claim_tokens(existing_title)
-        ex_tags = fm.get("tags", []) or []
-        ex_tags_set = {str(t).strip().lower() for t in ex_tags if str(t).strip()}
-        shared_tags = candidate_tags_set & ex_tags_set if candidate_tags_set else set()
-
-        score = 0.0
-        reason = ""
-        if cand_norm == _normalize_text(existing_title):
-            score = 1.0
-            reason = "exact title match"
-        elif cand_tokens and ex_tokens:
-            ex_norm = _normalize_text(existing_title)
-            if len(cand_norm) < len(ex_norm):
-                shorter, longer = cand_norm, ex_norm
-            else:
-                shorter, longer = ex_norm, cand_norm
-            if shorter in longer and len(shorter.split()) >= 3:
-                score = 0.80
-                reason = f"phrase containment: '{shorter}' ⊂ '{longer}'"
-            else:
-                inter = len(cand_tokens & ex_tokens)
-                union = len(cand_tokens | ex_tokens)
-                j = inter / union if union else 0.0
-                jaccard_floor = 0.30 if shared_tags else 0.45
-                if j >= 0.7:
-                    score = j
-                    reason = f"canonicalized token Jaccard {j:.2f}"
-                elif j >= jaccard_floor:
-                    score = 0.40 + (j - jaccard_floor) * 0.6
-                    reason = f"canonicalized token Jaccard {j:.2f}"
-
-        if score < 0.40:
-            continue
-
-        if shared_tags:
-            tag_boost = min(0.05 + 0.02 * len(shared_tags), 0.10)
-            if score < 1.0:
-                score = min(score + tag_boost, 0.95)
-            reason += f"; tags shared: {sorted(shared_tags)}"
-
-        matches.append({
-            "slug": f.stem,
-            "title": existing_title,
-            "tags": [str(t) for t in ex_tags],
-            "status": fm.get("status", ""),
-            "confidence": fm.get("confidence", ""),
-            "source_papers": fm.get("source_papers", []) or [],
-            "score": round(score, 3),
-            "match_reason": reason,
-        })
-
-    matches.sort(key=lambda m: -m["score"])
-    print(json.dumps(matches, ensure_ascii=False, indent=2))
-
-
 # ---------------------------------------------------------------------------
 # Named queries: cross-entity knowledge state
 # ---------------------------------------------------------------------------
-
-def query_weak_claims(wiki_root: str, threshold: float = 0.5) -> None:
-    """Find claims with low confidence or weak status."""
-    root = Path(wiki_root)
-    claims_dir = root / "claims"
-    if not claims_dir.exists():
-        print(json.dumps([]))
-        return
-
-    results: list[dict] = []
-    for f in sorted(claims_dir.glob("*.md")):
-        fm = _parse_frontmatter(f)
-        if not fm:
-            continue
-        status = fm.get("status", "")
-        confidence = fm.get("confidence", 1.0)
-        try:
-            conf_f = float(confidence)
-        except (ValueError, TypeError):
-            conf_f = 1.0
-
-        evidence = fm.get("evidence", [])
-        ev_count = len(evidence) if isinstance(evidence, list) else 0
-
-        if conf_f < threshold or status in ("proposed", "weakly_supported"):
-            results.append({
-                "slug": f.stem,
-                "title": fm.get("title", f.stem),
-                "status": status,
-                "confidence": conf_f,
-                "evidence_count": ev_count,
-            })
-
-    # Sort by confidence ascending (weakest first)
-    results.sort(key=lambda x: x["confidence"])
-    print(json.dumps(results, ensure_ascii=False, indent=2))
-
-
-def query_evidence_for(wiki_root: str, claim_slug: str) -> None:
-    """Trace all evidence connected to a claim (papers, experiments, edges)."""
-    root = Path(wiki_root)
-    claim_path = root / "claims" / f"{claim_slug}.md"
-
-    if not claim_path.exists():
-        print(json.dumps({"status": "error",
-                          "message": f"Claim not found: {claim_slug}"}))
-        sys.exit(1)
-
-    fm = _parse_frontmatter(claim_path)
-    edges = load_edges(wiki_root)
-
-    # Evidence from frontmatter
-    evidence = fm.get("evidence", [])
-    source_papers = fm.get("source_papers", [])
-
-    # Evidence from edges
-    edges_in = [e for e in edges if e.get("to") == f"claims/{claim_slug}"]
-    edges_out = [e for e in edges if e.get("from") == f"claims/{claim_slug}"]
-
-    supporting = [e for e in edges_in if e.get("type") in ("supports", "tested_by")]
-    contradicting = [e for e in edges_in if e.get("type") in ("contradicts", "invalidates")]
-
-    # Find linked experiments
-    experiments: list[dict] = []
-    exp_dir = root / "experiments"
-    if exp_dir.exists():
-        for f in sorted(exp_dir.glob("*.md")):
-            exp_fm = _parse_frontmatter(f)
-            if exp_fm.get("target_claim") == claim_slug:
-                experiments.append({
-                    "slug": f.stem,
-                    "status": exp_fm.get("status", ""),
-                    "outcome": exp_fm.get("outcome", ""),
-                    "key_result": exp_fm.get("key_result", ""),
-                })
-
-    # Determine net evidence strength
-    strong_count = sum(1 for e in (evidence if isinstance(evidence, list) else [])
-                       if isinstance(e, dict) and e.get("strength") == "strong")
-    total_count = len(evidence) if isinstance(evidence, list) else 0
-    if strong_count >= 2:
-        net = "strong"
-    elif total_count > 0:
-        net = "moderate"
-    else:
-        net = "weak"
-
-    print(json.dumps({
-        "claim": {"slug": claim_slug, **fm},
-        "source_papers": source_papers,
-        "evidence": evidence,
-        "supporting": supporting,
-        "contradicting": contradicting,
-        "experiments": experiments,
-        "edges_out": edges_out,
-        "net_strength": net,
-    }, ensure_ascii=False, indent=2))
-
 
 def query_ready_to_test(wiki_root: str) -> None:
     """Find ideas in proposed status with no linked experiments."""
@@ -1112,7 +1143,8 @@ def query_ready_to_test(wiki_root: str) -> None:
                 "title": fm.get("title", f.stem),
                 "priority": fm.get("priority", 3),
                 "origin_gaps": fm.get("origin_gaps", []),
-                "domain": fm.get("domain", ""),
+                "target_venue": fm.get("target_venue", ""),
+                "novelty_score": fm.get("novelty_score", ""),
             })
 
     # Sort by priority descending
@@ -1210,7 +1242,7 @@ def neighbors(wiki_root: str, node_id: str, depth: int = 1,
 # ---------------------------------------------------------------------------
 
 CONTEXT_BUDGETS = {
-    #                Claims  Gaps  Failed  Papers  Experiments  Edges  Stale
+    #                Methods Gaps  Failed  Papers  Experiments  Edges  Stale
     "ideation":     (1500,  2000, 2000,   1000,   500,         500,   500),
     "experiment":   (2500,  500,  500,    1000,   2500,        500,   0),
     "writing":      (2000,  500,  200,    2500,   500,         800,   0),
@@ -1238,28 +1270,27 @@ def compile_context(wiki_root: str, purpose: str,
     """
     root = Path(wiki_root)
     budgets = CONTEXT_BUDGETS.get(purpose, CONTEXT_BUDGETS["general"])
-    b_claims, b_gaps, b_failed, b_papers, b_experiments, b_edges, b_stale = budgets
+    b_methods, b_gaps, b_failed, b_papers, b_experiments, b_edges, b_stale = budgets
 
     edge_counts = _entity_edge_counts(wiki_root)
     sections: list[str] = []
 
-    # 1. Claims summary
-    if b_claims > 0:
-        claims_dir = root / "claims"
-        if claims_dir.exists():
+    # 1. Methods summary — most-connected reusable methods first.
+    if b_methods > 0:
+        methods_dir = root / "methods"
+        if methods_dir.exists():
             items: list[tuple[int, str]] = []
-            for f in sorted(claims_dir.glob("*.md")):
+            for f in sorted(methods_dir.glob("*.md")):
                 fm = _parse_frontmatter(f)
-                title = fm.get("title", f.stem)
-                status = fm.get("status", "unknown")
-                confidence = fm.get("confidence", "?")
-                connectivity = edge_counts.get(f"claims/{f.stem}", 0)
+                title = fm.get("name", fm.get("title", f.stem))
+                mtype = fm.get("type", "other")
+                connectivity = edge_counts.get(f"methods/{f.stem}", 0)
                 items.append((connectivity,
-                              f"- [{status}] {title} (conf: {confidence})"))
+                              f"- [{mtype}] {title}"))
             if items:
                 items.sort(key=lambda x: x[0], reverse=True)
-                text = "\n".join(line for _, line in items)[:b_claims]
-                sections.append(f"## Claims ({len(items)} total)\n{text}\n")
+                text = "\n".join(line for _, line in items)[:b_methods]
+                sections.append(f"## Methods ({len(items)} total)\n{text}\n")
 
     # 2. Gap map snapshot
     if b_gaps > 0:
@@ -1300,11 +1331,11 @@ def compile_context(wiki_root: str, purpose: str,
                 fm = _parse_frontmatter(f)
                 title = fm.get("title", f.stem)
                 importance = fm.get("importance", "?")
-                domain = fm.get("domain", "")
+                tldr = fm.get("tldr", "")
                 connectivity = edge_counts.get(f"papers/{f.stem}", 0)
                 line = f"- [{importance}] {title}"
-                if domain:
-                    line += f" ({domain})"
+                if tldr:
+                    line += f" — {tldr}"
                 items2.append((connectivity, line))
             if items2:
                 items2.sort(key=lambda x: x[0], reverse=True)
@@ -1321,7 +1352,7 @@ def compile_context(wiki_root: str, purpose: str,
                 title = fm.get("title", f.stem)
                 status = fm.get("status", "")
                 outcome = fm.get("outcome", "")
-                target = fm.get("target_claim", "")
+                target = fm.get("linked_idea", "")
                 line = f"- [{status}] {title}"
                 if target:
                     line += f" → {target}"
@@ -1418,9 +1449,7 @@ def get_stats(wiki_root: str, as_json: bool = False) -> dict:
         "ideas_validated": count_by_field("ideas", "status", "validated"),
         "ideas_failed": count_by_field("ideas", "status", "failed"),
         "experiments": count_md("experiments"),
-        "claims": count_md("claims"),
-        "claims_supported": count_by_field("claims", "status", "supported"),
-        "claims_challenged": count_by_field("claims", "status", "challenged"),
+        "methods": count_md("methods"),
         "summaries": count_md("Summary"),
         "edges": len(load_edges(wiki_root)),
         "citations": len(load_citations(wiki_root)),
@@ -1437,8 +1466,7 @@ def get_stats(wiki_root: str, as_json: bool = False) -> dict:
         print(f"  Ideas:       {stats['ideas']} "
               f"({stats['ideas_validated']} validated, {stats['ideas_failed']} failed)")
         print(f"  Experiments: {stats['experiments']}")
-        print(f"  Claims:      {stats['claims']} "
-              f"({stats['claims_supported']} supported, {stats['claims_challenged']} challenged)")
+        print(f"  Methods:     {stats['methods']}")
         print(f"  Summaries:   {stats['summaries']}")
         print(f"  Edges:       {stats['edges']}")
         print(f"  Citations:   {stats['citations']}")
@@ -1450,8 +1478,8 @@ def get_stats(wiki_root: str, as_json: bool = False) -> dict:
 # Maturity assessment
 # ---------------------------------------------------------------------------
 
-MATURITY_WARM = {"papers": 5, "claims": 10}
-MATURITY_HOT = {"papers": 20, "claims": 40}
+MATURITY_WARM = {"papers": 5, "ideas": 5}
+MATURITY_HOT = {"papers": 20, "ideas": 15}
 
 
 def get_maturity(wiki_root: str, as_json: bool = False) -> dict:
@@ -1484,11 +1512,12 @@ def get_maturity(wiki_root: str, as_json: bool = False) -> dict:
         for e in edges
     )
 
-    # Total entities across all dirs
+    # Total entities counted toward maturity. Terminal kinds (foundations) are
+    # excluded by their `terminal: true` flag; 'Summary' maps to the 'summaries'
+    # stats key for grammatical consistency in the output.
     total_entities = sum(
-        stats.get(k, 0) for k in
-        ("papers", "concepts", "topics", "people",
-         "ideas", "experiments", "claims", "summaries")
+        stats.get("summaries" if k == "Summary" else k, 0)
+        for k, e in ENTITIES.items() if not e.get("terminal")
     )
 
     # Graph density: edges / max(1, N*(N-1))
@@ -1496,23 +1525,24 @@ def get_maturity(wiki_root: str, as_json: bool = False) -> dict:
     max_possible = max(1, total_entities * (total_entities - 1))
     graph_density = round(min(1.0, n_edges / max_possible), 4)
 
-    # Coverage score: weighted sum, capped at 1.0
+    # Coverage score: weighted sum, capped at 1.0. Ideas are the validation
+    # axis — each validated idea is one unit of supported research.
     coverage_score = round(min(1.0, (
         stats["papers"] / 20 * 0.3
-        + stats["claims"] / 40 * 0.3
+        + stats["ideas"] / 15 * 0.3
         + exp_completed / 5 * 0.2
         + n_edges / 50 * 0.2
     )), 4)
 
     # Determine level
     papers = stats["papers"]
-    claims = stats["claims"]
+    ideas = stats["ideas"]
     if (papers >= MATURITY_HOT["papers"]
-            and claims >= MATURITY_HOT["claims"]
+            and ideas >= MATURITY_HOT["ideas"]
             and has_experiment_evidence):
         level = "hot"
     elif (papers >= MATURITY_WARM["papers"]
-          and claims >= MATURITY_WARM["claims"]):
+          and ideas >= MATURITY_WARM["ideas"]):
         level = "warm"
     else:
         level = "cold"
@@ -1520,7 +1550,7 @@ def get_maturity(wiki_root: str, as_json: bool = False) -> dict:
     result = {
         "level": level,
         "papers": papers,
-        "claims": claims,
+        "ideas": ideas,
         "experiments_completed": exp_completed,
         "ideas_total": stats["ideas"],
         "ideas_failed": stats["ideas_failed"],
@@ -1537,17 +1567,17 @@ def get_maturity(wiki_root: str, as_json: bool = False) -> dict:
         if level == "cold":
             print(f"  Papers: {papers}/{MATURITY_WARM['papers']}"
                   f" (need {MATURITY_WARM['papers']} for warm)")
-            print(f"  Claims: {claims}/{MATURITY_WARM['claims']}"
-                  f" (need {MATURITY_WARM['claims']} for warm)")
+            print(f"  Ideas:  {ideas}/{MATURITY_WARM['ideas']}"
+                  f" (need {MATURITY_WARM['ideas']} for warm)")
         elif level == "warm":
             print(f"  Papers: {papers}/{MATURITY_HOT['papers']}"
                   f" (need {MATURITY_HOT['papers']} for hot)")
-            print(f"  Claims: {claims}/{MATURITY_HOT['claims']}"
-                  f" (need {MATURITY_HOT['claims']} for hot)")
+            print(f"  Ideas:  {ideas}/{MATURITY_HOT['ideas']}"
+                  f" (need {MATURITY_HOT['ideas']} for hot)")
             if not has_experiment_evidence:
                 print("  Experiment evidence: missing (needed for hot)")
         else:
-            print(f"  Papers: {papers} | Claims: {claims}"
+            print(f"  Papers: {papers} | Ideas: {ideas}"
                   f" | Experiments completed: {exp_completed}")
         print(f"  Coverage: {int(coverage_score * 100)}%")
 
@@ -1558,22 +1588,12 @@ def get_maturity(wiki_root: str, as_json: bool = False) -> dict:
 # Lifecycle: transition
 # ---------------------------------------------------------------------------
 
+# Lifecycle transitions are declared in runtime/schema/entities.yaml — derived
+# here so adding a new lifecycle requires only a YAML edit.
 TRANSITIONS: dict[str, dict[str, list[str]]] = {
-    "ideas": {
-        "proposed": ["in_progress"],
-        "in_progress": ["tested"],
-        "tested": ["validated", "failed"],
-    },
-    "experiments": {
-        "planned": ["running"],
-        "running": ["completed", "abandoned"],
-    },
-    "claims": {
-        "proposed": ["weakly_supported", "challenged"],
-        "weakly_supported": ["supported", "challenged", "deprecated"],
-        "supported": ["challenged", "deprecated"],
-        "challenged": ["weakly_supported", "supported", "deprecated"],
-    },
+    kind: e['lifecycle']['transitions']
+    for kind, e in ENTITIES.items()
+    if 'lifecycle' in e
 }
 
 # Fields auto-set on transition
@@ -1636,16 +1656,6 @@ def transition(path: str, new_status: str, reason: str = "") -> None:
             print(json.dumps({"status": "error",
                               "message": "key_result must be non-empty "
                                          "to transition to completed"}))
-            sys.exit(1)
-
-    if entity_type == "claims" and new_status == "supported":
-        evidence = fm.get("evidence", [])
-        has_strong = any(isinstance(e, dict) and e.get("strength") == "strong"
-                         for e in (evidence if isinstance(evidence, list) else []))
-        if not has_strong:
-            print(json.dumps({"status": "error",
-                              "message": "Must have at least one 'strong' evidence "
-                                         "to transition to supported"}))
             sys.exit(1)
 
     # Apply transition
@@ -1841,12 +1851,18 @@ def rebuild_index(wiki_root: str) -> None:
                 line_parts.append(f"    status: {fm['status']}")
             if "importance" in fm:
                 line_parts.append(f"    importance: {fm['importance']}")
-            if "confidence" in fm:
-                line_parts.append(f"    confidence: {fm['confidence']}")
-            if "domain" in fm:
-                line_parts.append(f"    domain: {fm['domain']}")
-            if "target_claim" in fm:
-                line_parts.append(f"    target_claim: {fm['target_claim']}")
+            if "novelty_score" in fm and fm["novelty_score"] not in ("", None):
+                line_parts.append(f"    novelty_score: {fm['novelty_score']}")
+            if "target_venue" in fm and fm["target_venue"]:
+                line_parts.append(f'    target_venue: "{fm["target_venue"]}"')
+            if "linked_idea" in fm:
+                line_parts.append(f"    linked_idea: {fm['linked_idea']}")
+            if "type" in fm and isinstance(fm["type"], str):
+                line_parts.append(f"    type: {fm['type']}")
+            if "type" in fm and isinstance(fm["type"], dict):
+                kind = fm["type"].get("kind")
+                if kind:
+                    line_parts.append(f"    kind: {kind}")
             if "priority" in fm:
                 line_parts.append(f"    priority: {fm['priority']}")
             if "affiliation" in fm:
@@ -1882,7 +1898,7 @@ def topic_backfill(wiki_root: str) -> None:
     is what finally repairs them after Phase B merges complete.
 
     Matching rule (matches /ingest Part B):
-      - paper.tags ∩ topic.tags must be non-empty (or paper.domain in topic.tags)
+      - paper.tags ∩ topic.tags must be non-empty
       - importance >= 4 → append `- [[paper-slug]]` to ## Seminal works
       - importance < 4  → append `- [[paper-slug]]` to ## SOTA tracker
       - existing entries are detected and skipped (idempotent)
@@ -1925,9 +1941,8 @@ def topic_backfill(wiki_root: str) -> None:
         fm = _parse_frontmatter(p)
         slug = p.stem
         tags = _as_str_set(fm.get("tags"))
-        domain = str(fm.get("domain", "")).strip().lower()
-        if domain:
-            tags.add(domain)
+        # papers.domain was removed in the schema refactor; topic matching is
+        # now driven solely by paper.tags ∩ topic.tags.
         try:
             importance = int(str(fm.get("importance", "3")).strip())
         except (TypeError, ValueError):
@@ -2410,11 +2425,14 @@ def set_meta(path: str, field: str, value: str, append: bool = False) -> None:
         print(json.dumps({"status": "error", "message": str(e)}))
         sys.exit(1)
 
-    # Atomic write via temp file + rename
+    # Atomic write via temp file + replace.
+    # Path.rename() raises FileExistsError on Windows when the target
+    # exists (which is always, for set-meta). Path.replace() is atomic
+    # on POSIX and overwrites on Windows — works on both.
     tmp = p.with_suffix(".tmp")
     try:
         tmp.write_text(new_content, encoding="utf-8")
-        tmp.rename(p)
+        tmp.replace(p)
     finally:
         if tmp.exists():
             tmp.unlink()
@@ -2594,6 +2612,15 @@ def main():
     p.add_argument("--source", default="semantic_scholar",
                    choices=sorted(CITATION_SOURCES))
 
+    # add-citations-batch
+    p = sub.add_parser("add-citations-batch",
+                       help="Batch append cites rows from stdin (JSON array of "
+                            "S2 reference objects); matches by arxiv/s2_id and "
+                            "skips duplicates")
+    p.add_argument("wiki_root")
+    p.add_argument("--citer", dest="citer_id", required=True,
+                   help="papers/<slug> of the citing paper")
+
     # rebuild-context-brief
     p = sub.add_parser("rebuild-context-brief", help="Regenerate context_brief.md")
     p.add_argument("wiki_root")
@@ -2601,6 +2628,13 @@ def main():
 
     # rebuild-open-questions
     p = sub.add_parser("rebuild-open-questions", help="Regenerate open_questions.md")
+    p.add_argument("wiki_root")
+
+    # rebuild-projected-edges
+    p = sub.add_parser("rebuild-projected-edges",
+                       help="Project frontmatter link/list_link/list_object "
+                            "fields into graph/projected_edges.jsonl "
+                            "(idempotent, overwrite)")
     p.add_argument("wiki_root")
 
     # stats
@@ -2645,21 +2679,12 @@ def main():
     p.add_argument("--aliases", default="",
                    help="Comma-separated list of candidate aliases / alternative names")
 
-    # find-similar-claim
-    p = sub.add_parser("find-similar-claim",
-                       help="Detect existing claims that semantically overlap with a candidate (call this BEFORE creating a new claim page)")
-    p.add_argument("wiki_root")
-    p.add_argument("title", help="Candidate claim title (the proposition itself)")
-    p.add_argument("--tags", default="",
-                   help="Comma-separated list of candidate tags (used as tiebreaker)")
-
     # query
     p = sub.add_parser("query", help="Cross-entity knowledge queries")
     p.add_argument("wiki_root")
     p.add_argument("subquery",
-                   choices=["weak-claims", "evidence-for", "ready-to-test", "orphans"])
-    p.add_argument("slug", nargs="?", help="Entity slug (for evidence-for)")
-    p.add_argument("--threshold", type=float, default=0.5)
+                   choices=["ready-to-test", "orphans"])
+    p.add_argument("slug", nargs="?", help="Reserved for future per-entity queries")
 
     # neighbors
     p = sub.add_parser("neighbors", help="Graph neighborhood traversal")
@@ -2754,10 +2779,14 @@ def main():
                  args.symmetric)
     elif args.command == "add-citation":
         add_citation(args.wiki_root, args.from_id, args.to_id, args.source)
+    elif args.command == "add-citations-batch":
+        add_citations_batch(args.wiki_root, args.citer_id)
     elif args.command == "rebuild-context-brief":
         rebuild_context_brief(args.wiki_root, args.max_chars)
     elif args.command == "rebuild-open-questions":
         rebuild_open_questions(args.wiki_root)
+    elif args.command == "rebuild-projected-edges":
+        rebuild_projected_edges(args.wiki_root)
     elif args.command == "stats":
         get_stats(args.wiki_root, as_json=args.json)
     elif args.command == "maturity":
@@ -2785,19 +2814,8 @@ def main():
     elif args.command == "find-similar-concept":
         aliases = [a.strip() for a in args.aliases.split(",") if a.strip()]
         find_similar_concept(args.wiki_root, args.title, aliases)
-    elif args.command == "find-similar-claim":
-        tags = [t.strip() for t in args.tags.split(",") if t.strip()]
-        find_similar_claim(args.wiki_root, args.title, tags)
     elif args.command == "query":
-        if args.subquery == "weak-claims":
-            query_weak_claims(args.wiki_root, args.threshold)
-        elif args.subquery == "evidence-for":
-            if not args.slug:
-                print(json.dumps({"status": "error",
-                                  "message": "evidence-for requires a claim slug"}))
-                sys.exit(1)
-            query_evidence_for(args.wiki_root, args.slug)
-        elif args.subquery == "ready-to-test":
+        if args.subquery == "ready-to-test":
             query_ready_to_test(args.wiki_root)
         elif args.subquery == "orphans":
             query_orphans(args.wiki_root)

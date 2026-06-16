@@ -1,6 +1,6 @@
 ---
-description: 把一篇论文 ingest 进 wiki —— 建立 papers + concepts + people + claims 页面，并完成所有双向交叉引用与 graph edge。当用户说 "ingest"、"加入这篇论文"、丢 `.pdf` / `.tex` / arXiv URL 或要求把论文折叠进知识库时触发。
-argument-hint: <local-path-or-arXiv-URL> [--discover]
+description: 把一篇论文 ingest 进 wiki —— 建立 papers + concepts + methods + people 页面，并完成所有双向交叉引用与 graph edge。当用户说 "ingest"、"加入这篇论文"、丢 `.pdf` / `.tex` / arXiv URL 或要求把论文折叠进知识库时触发。
+argument-hint: <local-path-or-arXiv-URL> [--discover] [--visualize]
 ---
 
 # /ingest
@@ -10,21 +10,22 @@ argument-hint: <local-path-or-arXiv-URL> [--discover]
 按需打开下列本地参考文件：
 
 - `references/pdf-preprocessing.md` —— 直接 PDF 输入时的 arXiv-ID 恢复、tex 抓取、prepare-paper 交接流程
-- `references/dedup-policy.md` —— concept / claim 的合并与新建决策规则，以及 `/ingest` 形状检查与 `/check` 语义审计的边界
+- `references/dedup-policy.md` —— concept / method 的合并与新建决策规则，以及 `/ingest` 形状检查与 `/check` 语义审计的边界
 - `references/cross-references.md` —— 正向/反向链接矩阵与 paper-to-paper edge 类型选择
 - `references/init-mode.md` —— `/init` 的 manifest 交接与并行安全约束
 - `references/error-handling.md` —— 来源解析、API 与 slug 冲突的 fallback
 
-在撰写任何 wiki 页面 frontmatter 或正文章节前，先打开 `docs/runtime-page-templates.zh.md`；需要 `index.md`、`log.md` 或 `graph/` 格式时，打开 `docs/runtime-support-files.zh.md`。
+写 wiki 页面 frontmatter 字段去 `runtime/schema/entities.yaml`,正文章节顺序去 `runtime/templates/{kind}.md.tmpl`;`index.md`、`log.md`、`graph/` 形状去 `runtime/schema/conventions.yaml` 与 `runtime/schema/edges.yaml`。
 
 ## Inputs
 
 - `source`：四种之一 —— arXiv URL（例如 `https://arxiv.org/abs/2106.09685`）、本地 `.tex`、本地 `.pdf`、或 `/init` 通过 `.checkpoints/init-sources.json` 交接的 `canonical_ingest_path`（见 `references/init-mode.md`）
 - `--discover`（可选，默认 **关闭**）：在最终 report 之后调用 `/discover --anchor <this-paper's-arxiv-id>`，把 shortlist 作为 "接下来可能想 ingest 的相关论文" 附在 report 里。从不自动 ingest 推荐结果。INIT MODE 下自动跳过。视为用户可见参数：不得仅根据仓库状态擅自开启。
+- `--visualize`（可选，默认 **关闭**）：在 Step 7 rebuild 之后通过 `tools/visualize.py generate-canvas` 重新生成 Canvas 可视化产物。INIT MODE 下自动跳过 —— 由上层 `/init` 在 fan-in 时统一处理可视化。视为用户可见参数：不得仅根据仓库状态擅自开启。（交互式网页 Graph 视图位于 SPA 的 `app/modules/graph.js`，由 `tools/serve.py` 服务，直接读取 `wiki/graph/`，不需要每次 ingest 单独重生成。）
 
 ## Outputs
 
-- 一篇完整链接的论文页面及其关联实体（concepts、claims、people）
+- 一篇完整链接的论文页面及其关联实体（concepts、methods、people）
 - 通过 `tools/research_wiki.py` 追加的 graph edges 与 citations
 - 终端汇总报告（新增页面数、建议后续 ingest 的论文）
 
@@ -35,7 +36,7 @@ argument-hint: <local-path-or-arXiv-URL> [--discover]
 - `wiki/index.md`，用于获取所有已存在 slug 与 tag
 - `wiki/papers/*.md`，用于识别已 ingest 过的论文
 - `wiki/concepts/*.md`、`wiki/foundations/*.md`，用于 dedup 匹配
-- `wiki/claims/*.md`，用于 dedup 匹配
+- `wiki/methods/*.md`，用于针对已有可复用 method 的 dedup 匹配
 - `wiki/people/*.md`，用于识别已有作者
 - `wiki/topics/*.md`，用于将论文归入已有 topic
 - `wiki/graph/open_questions.md`，用于识别论文是否填补了已知 gap
@@ -44,8 +45,8 @@ argument-hint: <local-path-or-arXiv-URL> [--discover]
 
 - `wiki/papers/{slug}.md` —— CREATE
 - `wiki/concepts/{slug}.md` —— CREATE（新建）或 EDIT（追加 `key_papers`、aliases、variants）
-- `wiki/claims/{slug}.md` —— CREATE（新建）或 EDIT（追加 `evidence` 条目）
-- `wiki/people/{slug}.md` —— CREATE（仅当 importance ≥ 4）或 EDIT（追加 `Key papers`）
+- `wiki/methods/{slug}.md` —— CREATE（仅当 method 为命名、可复用、可被多篇论文引用时新建）或 EDIT（追加 `source_papers`）
+- `wiki/people/{slug}.md` —— CREATE（仅当 importance ≥ 4）或 EDIT（追加到 `## Recent work`）
 - `wiki/topics/{slug}.md` —— 只允许 EDIT，`/ingest` 不得 CREATE 新 topic
 - `wiki/graph/edges.jsonl` —— 通过工具 APPEND
 - `wiki/graph/citations.jsonl` —— 通过工具 APPEND
@@ -53,13 +54,13 @@ argument-hint: <local-path-or-arXiv-URL> [--discover]
 - `wiki/graph/open_questions.md` —— REBUILD（INIT MODE 下跳过）
 - `wiki/index.md` —— APPEND
 - `wiki/log.md` —— 通过工具 APPEND
+- `wiki/canvases/*.canvas` —— CREATE/OVERWRITE（仅当 `--visualize` 开启且非 INIT MODE）
 
 ### 会新增的 Graph edges
 
 - `paper → concept`：`introduces_concept` / `uses_concept` / `extends_concept` / `critiques_concept`，并写 `confidence`
 - `paper → foundation`：`derived_from`（foundation 是终端节点，无反向链接）
-- `paper → claim`：`supports` / `contradicts`
-- `paper → paper`：`same_problem_as` / `similar_method_to` / `complementary_to` / `builds_on` / `compares_against` / `improves_on` / `challenges` / `surveys`，并写 `confidence`
+- `paper → paper`：`same_problem_as` / `similar_method_to` / `builds_on` / `challenges`，并写 `confidence`
 - bibliographic `paper → paper`：`graph/citations.jsonl` 中的 `cites`
 
 `tools/research_wiki.py add-edge` 会拒绝缺少 confidence/evidence 的
@@ -129,26 +130,41 @@ raw 持久化规则：已经在 `raw/discovered/`、`raw/tmp/`、`raw/papers/` �
 
 ### Step 3: 写 paper 页面
 
-打开 `docs/runtime-page-templates.zh.md` 中的 paper 模板。填写全部必需 frontmatter 字段；`cited_by` 本步骤留空，Step 5 再回填。
+打开 `runtime/schema/entities.yaml`(papers 段)看字段集,`runtime/templates/papers.md.tmpl` 看正文章节顺序。填写全部必需 frontmatter 字段;`cited_by` 本步骤留空,Step 5 再回填。
+
+新 schema 要求新 ingest 必须填写、但目前 lint 不强制的三个 frontmatter 字段（已有页面不会因此失效，但新 ingest 必须填）：
+
+- `tldr` —— 一句话概括论文，适合做搜索/预览行。**不**是多段摘要；只一句。
+- `contribution_type` —— 贡献类型列表，从封闭集合 `[method, theory, benchmark, analysis, application, system, position, survey]` 中选。一篇论文可能多选（例如 method + benchmark）。不得自创取值。
+- `datasets` —— 论文使用或引入的数据集 / benchmark 名称列表（例如 `MMLU`、`BFCL`、`AppWorld`）。论文不引入任何具体数据集时填 `[]`，不得伪造。
 
 写入前对即将输出的 frontmatter 做一次**形状检查** —— 仅限以下范围：
 
 - 每个必需字段都存在且非空
-- `importance` ∈ {1,2,3,4,5}；claim 的 `status` 在合法集合内；concept 的 `maturity` 在合法集合内；claim 的 `confidence` ∈ [0,1]
+- `importance` ∈ {1,2,3,4,5}；concept 的 `maturity` 在合法集合内；method 的 `type` 在合法集合内
+- `contribution_type` 各项都在上述枚举内
 - YAML 可解析
 
 形状检查刻意保持狭窄：反向链接对称性、dangling node、跨实体一致性是 `/check` 的工作，不是本 skill 的。
 
-正文章节：Problem、Key idea、Method、Results、Limitations、Open questions、My take、Related。
+正文章节按以下顺序：`Problem & Context`、`Key idea`、`Method`、`Experiment & Results`、`Limitations`、`Open questions`、`My take`、`Related`。
 
-### Step 4: concept / claim / people
+章节语义：
+
+- **Problem & Context** —— 论文要攻破的问题 **以及** 论文出现之前该领域的状态。两件事合一节。
+- **Experiment & Results** —— 实验设置、主要 metric 与结果合一节。不要止步于"打败 baseline"；引用具体数字与对应条件。
+
+### Step 4: concept / method / people
 
 按 `references/dedup-policy.md` 执行。简要步骤：
 
-1. 每个 concept / claim 候选都先调用对应的 `find-similar-*` 工具。
-2. 默认合并到 top 结果。只有在工具返回无可用候选、且论文 importance 确实证明新建合理时，才新建页面。
-3. 每写一条正向链接，同一 turn 内写入其反向链接。义务矩阵见 `references/cross-references.md`。
-4. 仅当 importance ≥ 4 才允许新建 `wiki/people/{slug}.md`；否则只允许向已有作者页面追加。
+1. 每个 concept 候选先调用 `find-similar-concept`。
+2. 每个 method 候选（命名的、可复用的、可能被其他论文引用的技术）查 `wiki/methods/`，按 name + tags 匹配是否已有条目。**没有** `find-similar-method` 工具 —— 直接扫目录，按 `runtime/schema/entities.yaml` 中 `methods.name` 字段做手工 title/alias 比对。
+3. 默认合并到 top 结果。只有在没有可接受候选且论文 importance 确实证明新建合理时才新建页面。论文页面上的 `## Method` 正文章节**始终**填写（这是这篇论文自身的方法叙述）；只有当技术可命名、可复用、且很可能被其他论文引用时，才另开 `wiki/methods/{slug}.md`。
+4. 每写一条正向链接，同一 turn 内写入其反向链接。义务矩阵见 `references/cross-references.md`。
+5. 仅当 importance ≥ 4 才允许新建 `wiki/people/{slug}.md`；否则只能向已有作者页面的 `## Recent work` 追加 `[[paper-slug]]`。people 实体使用 `research_areas`（list_str）与 `type.kind` 枚举（`researcher` / `team` / `organization`）；只有 byline 本身就指向该 team 或 organization 时才把 `type.kind` 设为 `team` 或 `organization`（不要从研究者的所属机构推断）。
+6. 新建 `wiki/concepts/{slug}.md` 时，若该 concept 明显归属某个已有 topic（例如所有"self-improving coding agents"子题），设置 `parent_topic: <topic-slug>`（裸 slug，**不要** `[[wikilink]]` 包装 —— `parent_topic` 是 `link` 类型，不是 `list_link`）。topic 页的反向 `## Concepts` body 区在同一 turn 内追加。
+7. 新建或更新 `wiki/methods/{slug}.md` 时，对该方法实现的任何 concept（通常是同篇论文引入的 concept）写入 `realizes_concepts: [[c1], [c2], ...]`。每个 concept 页的反向 `## Realized by` body 区在同一 turn 内追加。
 
 ### Step 5: paper-to-paper edge 与 `cited_by`
 
@@ -166,12 +182,12 @@ INIT MODE 下整步跳过 —— 由上层 `/init` 在 fan-in 时统一处理。
 
 ### Step 6: topic 与 index
 
-1. 将论文的 domain 与 tags 对 `wiki/topics/*.md` 做匹配。对每个命中 topic：
-   - importance ≥ 4 → 追加到 `## Seminal works`
-   - importance < 4 → 按年份追加到 `## SOTA tracker` 或 `## Recent work`
-   - 若论文直接回应了 topic 中列出的 open problem，在对应行上标注
+1. 将论文的 tags 对 `wiki/topics/*.md` 做匹配。对每个命中 topic：
+   - importance ≥ 4 → 追加到 `## Seminal works`，**同时**把 `[[paper-slug]]` 追加到 topic frontmatter 的 `key_papers` 列表
+   - importance < 4 → 按年份追加到 `## SOTA tracker` 或 `## Recent work`（不更新 frontmatter）
+   - 若论文直接回应了 topic 中列出的 open problem（`## Open problems` / `### Known gaps` / `### Methodological gaps` 下），在对应行上标注
 2. `/ingest` 不得新建 topic 页面 —— topic 创建属于 `/init` 与 `/edit`。
-3. 在 `wiki/index.md` 对应分类下追加新增或编辑过的条目。格式见 `docs/runtime-support-files.zh.md`。
+3. 在 `wiki/index.md` 对应分类下追加新增或编辑过的条目。格式:每个 entity kind 是顶层 YAML 键(对应 `runtime/schema/entities.yaml`),其下挂 `- slug: <slug>`。
 
 ### Step 7: 日志与 rebuild
 
@@ -186,12 +202,25 @@ INIT MODE 下整步跳过 —— 由上层 `/init` 在 fan-in 时统一处理。
 "$PYTHON_BIN" tools/research_wiki.py rebuild-open-questions wiki/
 ```
 
+### Step 7.5: 可选的可视化（仅当 `--visualize` 开启）
+
+只有用户显式传 `--visualize` 时才执行本步。INIT MODE 下也一律跳过 —— `/init` 父流程在 fan-in 时统一重生成 Canvas，单个子代理不应重复执行从而引入并发写。
+
+开启后，重新生成 Canvas（best-effort；visualize 失败不应让 `/ingest` 失败）：
+
+```bash
+"$PYTHON_BIN" tools/visualize.py generate-canvas wiki/ \
+  || echo "WARN: visualize generate-canvas failed; run /visualize manually" >&2
+```
+
+`--obsidian` 不在这里重新生成 —— `wiki/.obsidian/graph.json` 是项目级静态配置，只有在 `config/visualize.json` 调色板变化时才需要重写；那种情况下手动跑 `/visualize --obsidian`。
+
 ### Step 8: 汇报
 
 输出一个紧凑 summary：新建的页面、编辑的页面、新增的 graph edge、发现的 contradiction（如有）、尚未 ingest 的高引用 references（后续 `/ingest` 建议）。末尾一行：
 
 ```
-Wiki: +1 paper, +{N} claims, +{M} concepts, +{K} edges
+Wiki: +1 paper, +{N} methods, +{M} concepts, +{K} edges
 ```
 
 ### Step 9: 可选的 discovery（仅当 `--discover` 显式开启）
@@ -220,12 +249,14 @@ Wiki: +1 paper, +{N} claims, +{M} concepts, +{K} edges
 - 在 INIT MODE 下，不要向已有页面（由 sibling worktree 或 scaffold 创建的）写入反向链接。只通过 `tools/research_wiki.py add-edge` 记录关系；上层 `/init` 在 fan-in 时统一回填反向链接。
 - 来源优先级：`.tex` > `.pdf` > vision API fallback。只要有可用 `.tex`，就不从 PDF ingest。
 - ingest 对新实体保守：
-  - importance < 4：每篇论文最多 **1** 个新 concept、**1** 个新 claim
-  - importance ≥ 4：每篇论文最多 **3** 个新 concept、**2** 个新 claim
-  - 超出上限的候选，必须合并到最接近的 `find-similar-*` 结果，或整体跳过交给 `/check` 标记。规则与理由：`references/dedup-policy.md`。
+  - importance < 4：每篇论文最多 **1** 个新 concept、**1** 个新 method
+  - importance ≥ 4：每篇论文最多 **3** 个新 concept、**2** 个新 method
+  - 超出上限的候选，必须合并到最接近的已有条目，或整体跳过交给 `/check` 标记。规则与理由：`references/dedup-policy.md`。
+- `methods/` 页面只有当技术**命名了**、**可复用**、且**可能被未来论文引用**时才合理新建。论文页面自身的 `## Method` 正文章节捕捉了这篇论文的方法叙述；除非该方法值得被复用，不要把它复制成一个 method 实体。
 - `/ingest` 只对自己写出的内容做形状检查（必需字段、枚举取值、YAML 可解析），到此为止。反向链接对称性、dangling node、完整语义审计属于 `/check`，不要在本 skill 内重复实现。
 - 必须假设有其他 `/ingest` 在并行 worktree 中同时运行 —— 批量 ingest 已在路线图上。所有对共享文件（`graph/edges.jsonl`、`graph/citations.jsonl`、`index.md`、`log.md`）的写入必须经过 `tools/research_wiki.py` 或采用 append-only 语义。详见 `references/init-mode.md`。
 - INIT MODE 下跳过 `fetch_s2.py citations`、`fetch_s2.py references`，以及 `rebuild-*` 命令 —— 由上层 `/init` 在 fan-in 后统一运行。
+- INIT MODE 下也跳过 Step 7.5 的可视化重生成（无论 `--visualize` 是否开启）；由上层 `/init` 在 fan-in 时统一调用 visualize，避免 sibling worktree 间的并发写。
 
 ## Error Handling
 
@@ -237,7 +268,6 @@ Wiki: +1 paper, +{N} claims, +{M} concepts, +{K} edges
 
 - `"$PYTHON_BIN" tools/research_wiki.py slug "<title>"`
 - `"$PYTHON_BIN" tools/research_wiki.py find-similar-concept wiki/ "<title>" --aliases "<a,b,c>"`
-- `"$PYTHON_BIN" tools/research_wiki.py find-similar-claim wiki/ "<title>" --tags "<a,b,c>"`
 - `"$PYTHON_BIN" tools/research_wiki.py add-edge wiki/ --from <id> --to <id> --type <type> --evidence "<text>" [--confidence high|medium|low]`
   - paper-paper 与 paper-concept semantic edge 必须带 `--confidence high|medium|low`。
 - `"$PYTHON_BIN" tools/research_wiki.py add-citation wiki/ --from papers/<citing> --to papers/<cited> --source semantic_scholar`
@@ -249,6 +279,7 @@ Wiki: +1 paper, +{N} claims, +{M} concepts, +{K} edges
 - `"$PYTHON_BIN" tools/fetch_s2.py paper|citations|references <arxiv-id>`
 - `"$PYTHON_BIN" tools/fetch_deepxiv.py brief|head|social <arxiv-id>`
 - `"$PYTHON_BIN" tools/discover.py from-anchors --id <arxiv-id> --wiki-root wiki --limit 10 --output-checkpoint .checkpoints/ --markdown` —— 仅当 `--discover` 开启
+- `"$PYTHON_BIN" tools/visualize.py generate-canvas wiki/` —— 仅当 `--visualize` 开启且非 INIT MODE
 
 ### Shared References
 
@@ -259,6 +290,7 @@ Wiki: +1 paper, +{N} claims, +{M} concepts, +{K} edges
 - `/init` —— 通过 INIT MODE 并行调用 `/ingest` 子代理
 - `/check` —— 在 `/ingest` 完成后审计 wiki，负责所有 `/ingest` 故意不做的语义检查
 - `/discover` —— 可选后续，当 `--discover` 开启时运行；产出用户可能想接着 ingest 的相关论文 shortlist
+- `/visualize` —— Step 7.5（`--visualize` 开启且非 INIT MODE 时）通过直接调用 `tools/visualize.py` 重新生成 Canvas + HTML（best-effort）
 
 ### External APIs
 

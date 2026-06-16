@@ -284,6 +284,8 @@ people:
 
 ideas:
 
+methods:
+
 experiments:
 
 claims:

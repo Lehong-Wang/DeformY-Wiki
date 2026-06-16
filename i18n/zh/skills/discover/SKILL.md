@@ -1,15 +1,15 @@
 ---
 description: 基于 anchor 论文、topic 关键词或当前 wiki 状态，产出一份排好序的候选论文 shortlist，供用户或上游 skill 决定是否进一步 `/ingest`。当用户问 "接下来该读什么"、"找和这篇相似的论文"、"推荐相关工作"、"这个方向周围有什么" 时触发；`/ingest --discover` 也会内部调用本 skill。本身不 ingest，只提出候选。
-argument-hint: "(--anchor <id> [--anchor <id>] [--negative <id>] | --topic <str> | --from-wiki) [--limit N]"
+argument-hint: "(--anchor <id> [--anchor <id>] [--negative <id>] | --topic <str> | --from-wiki | --venue <slug> --year <int>) [--limit N]"
 ---
 
 # /discover
 
-> 从三种 seed 模式之一产出一份排好序的候选论文 shortlist，附带每条候选的 rationale，呈现给用户或调用方 skill。`/discover` 绝不自动 ingest —— 它只负责提出候选，实际动作由 `/ingest` 负责。
+> 从四种 seed 模式之一产出一份排好序的候选论文 shortlist，附带每条候选的 rationale，呈现给用户或调用方 skill。`/discover` 绝不自动 ingest —— 它只负责提出候选，实际动作由 `/ingest` 负责。
 
 按需打开下列本地参考文件：
 
-- `references/seed-modes.md` —— 如何把用户的措辞映射到 anchor / topic / wiki 模式，以及三者的选择规则
+- `references/seed-modes.md` —— 如何把用户的措辞映射到 anchor / topic / wiki / venue 模式，以及四者的选择规则
 - `references/ranking-signals.md` —— `tools/discover.py` 的打分依据，以及为什么 discovery 不共享 `/init` 的 survey 偏好
 - `references/wiki-dedup.md` —— 候选如何被过滤掉已 ingest 的论文，以及 dedup 边界
 
@@ -19,17 +19,18 @@ argument-hint: "(--anchor <id> [--anchor <id>] [--negative <id>] | --topic <str>
 - `--negative <id>`（可重复，可选）：希望推开的论文 ID。只在配合 `--anchor` 时有意义。
 - `--topic "<str>"`：topic / query 字符串。驱动 **topic 模式** —— 相对 `/init` planner 更轻量的替代。
 - `--from-wiki`：自动从 wiki 最近修改过的论文页派生 seed。驱动 **wiki 模式**。
+- `--venue <slug>` + `--year <int>`：会议/venue 缩写与年份（如 `neurips` `2024`）。驱动 **venue 模式** —— 从该 venue/year 的论文列表中按与现有 wiki 的相关性排序。
 - `--limit N`（可选，默认 10）：shortlist 最大长度。
 
-`--anchor`、`--topic`、`--from-wiki` 三者必须恰好选一。
+`--anchor`、`--topic`、`--from-wiki`、`--venue` 四者必须恰好选一。
 
 ## Outputs
 
 - `.checkpoints/discover-{seed-slug}-{YYYY-MM-DD}.json` —— 完整 shortlist payload，机器可读；seed slug 基于首个 anchor 或 topic 派生
 - 给用户的 markdown 摘要，包含每条候选的 rationale
-- `wiki/log.md` —— 通过 `tools/research_wiki.py log` 追加一行
+- `wiki/log.md` —— 仅 anchor/topic/wiki 运行通过 `tools/research_wiki.py log` 追加一行
 
-`/discover` 除了 `log.md` 外不向 `wiki/` 写入任何内容，也不触碰 `raw/`。是否把候选拉进 wiki 是调用方的决定（之后的 `/ingest`）。
+`/discover` 除了 `log.md` 外不向 `wiki/` 写入任何内容，也不触碰 `raw/`。`from-venue` 更严格：它完全不写 `wiki/`，包括 `wiki/log.md`。是否把候选拉进 wiki 是调用方的决定（之后的 `/ingest`）。
 
 ## Wiki Interaction
 
@@ -37,10 +38,12 @@ argument-hint: "(--anchor <id> [--anchor <id>] [--negative <id>] | --topic <str>
 
 - `wiki/papers/*.md` —— frontmatter 中的 `arxiv`（或旧版 `arxiv_id`），用于与已 ingest 的论文做 dedup
 - `wiki/papers/*.md` 修改时间 —— 用于 `--from-wiki` 模式下 anchor 选取
+- `wiki/papers/*.md`、`wiki/concepts/*.md`、`wiki/topics/*.md` —— 标题与正文，用于 venue 模式的相关性打分
 
 ### Writes
 
-- `wiki/log.md` —— 通过 `tools/research_wiki.py log` APPEND
+- anchor/topic/wiki 运行：`wiki/log.md` —— 通过 `tools/research_wiki.py log` APPEND
+- venue 运行：无
 
 ### Graph edges created
 
@@ -63,11 +66,12 @@ export PYTHON_BIN
 
 ### Step 1: 选定 seed 模式
 
-把用户请求映射到 `from-anchors`、`from-topic` 或 `from-wiki` 之一。决策规则见 `references/seed-modes.md`，简版：
+把用户请求映射到 `from-anchors`、`from-topic`、`from-wiki` 或 `from-venue` 之一。决策规则见 `references/seed-modes.md`，简版：
 
 - 用户指明了一或多篇具体论文，或者这是 `/ingest --discover` 的后续 → **anchors**
 - 用户给的是 topic / 方向 / 关键词 → **topic**
 - 用户问开放式 "接下来读什么"，没有 anchor 也没有 topic → **wiki**
+- 用户要求某个具体会议和年份的论文 → **venue**
 
 如果用户同时提到 "不要这些"，在 anchor 模式下通过 `--negative` 传入。
 
@@ -81,6 +85,8 @@ export PYTHON_BIN
   --output-checkpoint .checkpoints/ \
   --markdown
 ```
+
+venue 模式下必须传 `--wiki-root`，以便工具根据现有内容计算相关性。若 wiki 过于稀疏，工具会明确报错而不是返回未个性化的列表。
 
 或 topic / wiki 模式：
 
@@ -117,6 +123,8 @@ topic 模式下若 S2 不可用，工具会继续用可用的通道产出；检�
 "$PYTHON_BIN" tools/research_wiki.py log wiki "discover | mode=<anchors|topic|wiki> | seed=<short-desc> | shortlist=<N>"
 ```
 
+`from-venue` 跳过这一步；venue discovery 不能写 `wiki/` 或 `raw/`。
+
 ## Internal Callers
 
 `/discover` 既供用户手动调用，也供其他 skill 作为子例程调用。
@@ -132,7 +140,7 @@ topic 模式下若 S2 不可用，工具会继续用可用的通道产出；检�
 ## Constraints
 
 - **不自动 ingest**：`/discover` 产出 shortlist 就结束。即便被 `/ingest --discover` 调用，调用方也只是呈现结果，最终 ingest 由用户决定。
-- **除 `log.md` 外不写 `wiki/`**：paper 页、concept、claim、graph edge 全都属于 `/ingest`。
+- **不向 `wiki/` 写内容**：paper 页、concept、method、graph edge 全都属于 `/ingest`。anchor/topic/wiki 运行可以追加 `wiki/log.md`；`from-venue` 完全不能写 `wiki/`。
 - **不写 `raw/`**：`/discover` 不下载论文。用户选定某个候选后，再手动 `/ingest <arxiv-url>`。
 - **始终对 wiki 做 dedup**：必须传 `--wiki-root wiki`，否则已 ingest 论文会污染 shortlist，这是最常见的低质量失败模式。
 - **ranking 是 discovery 专属**：不要复用或复制 `tools/init_discovery.py` 的打分函数。两者目标不同 —— `/init` 要宽覆盖与基础面；`/discover` 要相关的 *next reads*。见 `references/ranking-signals.md`。
@@ -146,6 +154,7 @@ topic 模式下若 S2 不可用，工具会继续用可用的通道产出；检�
 - **S2 不可用但 DeepXiv 可用（topic 模式）**：仅用 DeepXiv 继续；在 report 中注明 degraded。
 - **S2 对某个 anchor 返回零推荐**：保留其他 anchor 的结果继续；若所有 anchor 都返回零，视为整体失败。
 - **`--from-wiki` 找不到可用 anchor**（`wiki/papers/` 为空或全部缺少 `arxiv_id`）：告诉用户 wiki 过于稀疏，建议改用 topic 模式（或跑 `/init`）。
+- **`from-venue` wiki 过于稀疏**（从 wiki 提取到的有效词太少）：明确报错，建议先 ingest 一些论文或改用 topic 模式。venue 模式依赖现有 wiki 内容计算相关性，没有内容时排名将失去意义。
 - **anchor ID 非法或未知**：S2 会返回 404；在 report 中暴露该坏 ID，并用剩余 anchor 继续。
 
 ## Dependencies
@@ -155,6 +164,7 @@ topic 模式下若 S2 不可用，工具会继续用可用的通道产出；检�
 - `"$PYTHON_BIN" tools/discover.py from-anchors --id <id> [--id <id>...] [--negative <id>...] --wiki-root wiki --limit <N> --output-checkpoint .checkpoints/ --markdown`
 - `"$PYTHON_BIN" tools/discover.py from-topic "<query>" --wiki-root wiki --limit <N> --output-checkpoint .checkpoints/ --markdown`
 - `"$PYTHON_BIN" tools/discover.py from-wiki --wiki-root wiki --limit <N> --output-checkpoint .checkpoints/ --markdown`
+- `"$PYTHON_BIN" tools/discover.py from-venue --venue <slug> --year <int> --wiki-root wiki --limit <N> --output-checkpoint .checkpoints/ --markdown`
 - `"$PYTHON_BIN" tools/research_wiki.py log wiki "<message>"`
 
 ### Skills
@@ -166,3 +176,4 @@ topic 模式下若 S2 不可用，工具会继续用可用的通道产出；检�
 
 - Semantic Scholar —— recommendations (`/recommendations/v1/papers/forpaper/{id}`, `POST /recommendations/v1/papers/`)、search、paper detail（通过 `tools/fetch_s2.py`）
 - DeepXiv —— topic 模式下的 search 辅助通道（通过 `tools/fetch_deepxiv.py`，可选，失败时优雅降级）
+- Paper Copilot —— 公开 GitHub raw JSON（`papercopilot/paperlists`），用于 venue/year 论文列表。不使用 live-site 抓取，也不把数据集 vendor 进仓库。Venue normalization 应保留来源中已有的 title、abstract、TLDR、keywords / primary area / topic、track、status、citations、ratings、reviews 与论文 URL 等相关性字段。
