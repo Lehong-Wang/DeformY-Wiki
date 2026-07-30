@@ -90,6 +90,9 @@ This is the **direct intellectual ancestor** of the swinging-rope sim-to-real st
 
 ## Related
 
+- [[compact-action-parameterization]]
+- [[sim-to-real-and-rapid-adaptation]]
+- [[dynamic-dlo-tip-targeting]]
 **Foundations used**
 - [[deformable-linear-object]] — object class
 - [[sim-to-real-transfer]] — empirical claim space

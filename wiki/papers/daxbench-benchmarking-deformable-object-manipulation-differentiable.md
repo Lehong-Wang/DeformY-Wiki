@@ -83,6 +83,8 @@ DaXBench is the most influential broad-coverage differentiable DOM benchmark in 
 
 ## Related
 
+- [[dynamic-deformable-object-simulation]]
+- [[model-based-planning-for-manipulation]]
 **Foundations used**
 - [[deformable-linear-object]] — rope is one of the four object classes
 - [[mass-spring-system]] — used to model cloth dynamics in DaX

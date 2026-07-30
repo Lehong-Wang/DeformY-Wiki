@@ -121,6 +121,8 @@ The ablation that matters most for downstream work is the residual-learning row 
 
 ## Related
 
+- [[dynamic-deformable-object-simulation]]
+- [[sim-to-real-and-rapid-adaptation]]
 **Foundations used**
 - [[discrete-elastic-rods]] — methodological core, extended into DDER
 - [[cosserat-rod-theory]] — continuum theory underlying DER

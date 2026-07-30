@@ -1,0 +1,23 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Related work}{}% 2
+\BOOKMARK [1][-]{section.3}{Model-based reinforcement learning}{}% 3
+\BOOKMARK [1][-]{section.4}{Uncertainty-aware neural network dynamics models}{}% 4
+\BOOKMARK [1][-]{section.5}{Planning and control with learned dynamics}{}% 5
+\BOOKMARK [2][-]{subsection.5.1}{Our state propagation method: trajectory sampling \(TS\)}{section.5}% 6
+\BOOKMARK [2][-]{subsection.5.2}{Baseline state propagation methods for comparison}{section.5}% 7
+\BOOKMARK [1][-]{section.6}{Algorithm summary}{}% 8
+\BOOKMARK [1][-]{section.7}{Experimental results}{}% 9
+\BOOKMARK [2][-]{subsection.7.1}{Comparisons to prior reinforcement learning algorithms}{section.7}% 10
+\BOOKMARK [2][-]{subsection.7.2}{Analyzing dynamics modeling and uncertainty propagation}{section.7}% 11
+\BOOKMARK [1][-]{section.8}{Discussion \046 conclusion}{}% 12
+\BOOKMARK [1][-]{appendix.A}{Appendix}{}% 13
+\BOOKMARK [2][-]{subsection.A.1}{Well behaved probabilistic networks}{appendix.A}% 14
+\BOOKMARK [2][-]{subsection.A.2}{Fitting PE model to toy function}{appendix.A}% 15
+\BOOKMARK [2][-]{subsection.A.3}{One-step predictions of learned models}{appendix.A}% 16
+\BOOKMARK [2][-]{subsection.A.4}{Uncertainty propagation methods}{appendix.A}% 17
+\BOOKMARK [2][-]{subsection.A.5}{Forward Dynamics Model}{appendix.A}% 18
+\BOOKMARK [2][-]{subsection.A.6}{Experimental setting}{appendix.A}% 19
+\BOOKMARK [2][-]{subsection.A.7}{Additional considerations}{appendix.A}% 20
+\BOOKMARK [2][-]{subsection.A.8}{MPC action selection}{appendix.A}% 21
+\BOOKMARK [2][-]{subsection.A.9}{Stochastic systems:}{appendix.A}% 22
+\BOOKMARK [2][-]{subsection.A.10}{Linear model comparison:}{appendix.A}% 23

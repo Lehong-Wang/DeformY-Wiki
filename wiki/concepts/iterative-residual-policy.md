@@ -7,6 +7,7 @@ key_papers: ["[[iterative-residual-policy-goal-conditioned-dynamic]]"]
 first_introduced: "2022"
 date_updated: 2026-05-06
 related_concepts: ["[[delta-dynamics-network]]"]
+parent_topic: "[[dynamic-dlo-tip-targeting]]"
 ---
 
 ## Definition

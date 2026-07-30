@@ -9,6 +9,8 @@ date_updated: "2026-05-06"
 
 ## Research areas
 
+- [[compact-action-parameterization]]
+- [[dynamic-dlo-tip-targeting]]
 - Deformable-object and cable manipulation; founder of the Berkeley AUTOLAB
 - Self-supervised learning pipelines for robot manipulation
 - Cable untangling, knot tying, planar and 3D dynamic casting
@@ -22,6 +24,7 @@ date_updated: "2026-05-06"
 
 ## Recent work
 
+- [[robots-lost-arc-self-supervised-learning]]
 (Goldberg is senior author across the Berkeley AUTOLAB cable-casting line in this wiki; his lab continues to ship at ICRA / IROS / RSS / CoRL on this topic.)
 
 ## Collaborators

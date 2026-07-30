@@ -3,10 +3,11 @@ title: "Differential Evolution Simulator Tuning"
 aliases: ["DE sim-tuning", "DE-based system identification", "differential-evolution simulator parameter tuning", "DE for Real2Sim"]
 tags: [sim-to-real, system-identification, optimization, simulator-tuning, DLO]
 maturity: emerging
-key_papers: ["[[planar-robot-casting-real2sim2real-self-supervised]]"]
+key_papers: ["[[planar-robot-casting-real2sim2real-self-supervised]]", "self-supervised-learning-dynamic-planar-manipulation"]
 first_introduced: "2022"
 date_updated: 2026-05-06
 related_concepts: ["[[real2sim2real-pipeline]]"]
+parent_topic: "[[sim-to-real-and-rapid-adaptation]]"
 ---
 
 ## Definition

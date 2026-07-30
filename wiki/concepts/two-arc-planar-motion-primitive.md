@@ -6,7 +6,10 @@ maturity: emerging
 key_papers: ["[[self-supervised-learning-dynamic-planar-manipulation]]"]
 first_introduced: "2024"
 date_updated: 2026-05-06
-related_concepts: ["[[real2sim2real-pipeline]]"]
+related_concepts:
+- "[[real2sim2real-pipeline]]"
+- "[[motion-manifold-primitives]]"
+parent_topic: "[[compact-action-parameterization]]"
 ---
 
 ## Definition

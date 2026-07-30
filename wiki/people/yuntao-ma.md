@@ -9,6 +9,7 @@ date_updated: 2026-05-06
 
 ## Research areas
 
+- [[dynamic-throwing-and-hitting]]
 Whole-body loco-manipulation on legged mobile manipulators (ANYmal + DynaArm), reinforcement learning for dynamic manipulation, residual-policy stacks combining learning with model-based control, and dynamic skills such as throwing and badminton. Affiliated with ETH RSL (Marco Hutter's group).
 
 ## Key papers

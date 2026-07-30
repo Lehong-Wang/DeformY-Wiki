@@ -2,19 +2,12 @@
 title: "Goal-Conditioned Dynamic Rope/DLO Tip Targeting"
 scope: "Robot-arm dynamic manipulation of ropes and other deformable linear objects toward arbitrary tip-position targets, with learned policies; the simulators and methodological analogs that make it work; the gap that defines the open research direction."
 key_topics:
-  - rope-tip-targeting
-  - iterative-residual-policy
-  - residual-physics
-  - dynamics-informed-diffusion-policy
-  - differentiable-discrete-elastic-rods
-  - real2sim2real-pipeline
-  - cosserat-rod-theory
-  - sim-to-real-transfer
-  - apex-point-trajectory-parameterization
-  - task-level-iterative-learning-control
-  - high-frequency-residual-policy
-  - implicit-system-identification
-  - task-agnostic-system-identification
+  - dynamic-dlo-tip-targeting
+  - model-based-planning-for-manipulation
+  - sim-to-real-and-rapid-adaptation
+  - dynamic-deformable-object-simulation
+  - dynamic-throwing-and-hitting
+  - compact-action-parameterization
 paper_count: 18
 date_updated: 2026-05-06
 sources:

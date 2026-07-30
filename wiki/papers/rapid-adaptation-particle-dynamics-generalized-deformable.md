@@ -110,6 +110,7 @@ For ΩmegaWiki, the paper's lasting contribution is the [[rma-particle-dynamics-
 
 ## Related
 
+- [[sim-to-real-and-rapid-adaptation]]
 **Foundations used**
 - [[deformable-linear-object]] — the 1D object class on `1D_Inserting`
 - [[sim-to-real-transfer]] — the empirical regime of all results
@@ -117,6 +118,9 @@ For ΩmegaWiki, the paper's lasting contribution is the [[rma-particle-dynamics-
 - [[visuomotor-policy]] — the deployed policy form
 - [[behavioral-cloning]] — Phase II distillation is regression onto a privileged teacher (BC-shaped, even though L1 + RL-finetune)
 - [[grasping]] — task subroutine inside both `1D_Inserting` and `2D_Covering`
+
+**Builds on**
+- [[rma-rapid-motor-adaptation-legged-robots]] — RMA (Kumar et al. 2021); RAPiD directly revises RMA's two-phase context-encoder recipe and adds a particle-position shape encoder for deformable objects (`builds_on`)
 
 **Concepts introduced**
 - [[rma-particle-dynamics-adaptation]] — RMA-style two-phase teacher-student adaptation specialized for deformable objects via privileged-particle-position encoders

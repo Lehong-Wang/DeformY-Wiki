@@ -7,6 +7,7 @@ key_papers: ["[[daxbench-benchmarking-deformable-object-manipulation-differentia
 first_introduced: "2023"
 date_updated: 2026-05-06
 related_concepts: []
+parent_topic: "[[dynamic-deformable-object-simulation]]"
 ---
 
 ## Definition

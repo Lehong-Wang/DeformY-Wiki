@@ -1,0 +1,161 @@
+\section{Isometric Motion Manifold Primitives++}
+\label{sec:immp}
+In this section, we begin with the limitations of the existing MMP framework that relies on discrete-time trajectory representations and propose Motion Manifold Primitives++ (MMP++), applying the MMP framework to the continuous-time parametric curve representations. Then we adopt the isometric regularization technique~\cite{yonghyeon2022regularized} with our proposed CuveGeom Riemannian metrics, and propose Isometric Motion Manifold Primitives++ (IMMP++).  
+
+Throughout, we will consider an $n$-dimensional Riemannian configuration manifold ${\cal Q}$ with its coordinates $q \in Q \subset \mathbb{R}^{n}$ and the metric $G(q) = \{g_{ij}(q)\}$. 
+
+\subsection{Discrete-Time MMPs and Their Limitations} 
+Motion Manifold Primitives (MMP) framework learns a continuous manifold of trajectories, providing a mapping that maps a lower-dimensional latent value to the discrete-time trajectory of a fixed length~\cite{noseworthy2020task,lee2023equivariant}. 
+A trajectory data is considered as a sequence of configurations denoted by $(q_1, \ldots, q_T)$ with a fixed length $T$ and treated as an element of the high-dimensional trajectory space $Q^T:=Q\times \cdots \times Q$. 
+
+Assuming the given demonstration trajectory dataset ${\cal D}_{\rm traj} = \{(q^{i}_1,\ldots, q^{i}_T)\}_{i=1}^{N}$ lies on some lower-dimensional manifold, an autoencoder framework is adopted to learn this manifold and its coordinates. An autoencoder consists of an encoder $g:Q^T \to {\cal Z}$ and a decoder $f: {\cal Z} \to Q^T$, where ${\cal Z} = \mathbb{R}^{m}$ is a latent coordinate space. 
+These two mappings are optimized to minimize the following trajectory reconstruction loss: denoting the reconstructed trajectory by $(\hat{q}^i_1, \ldots, \hat{q}^i_T) = f(g(q^{i}_1,\ldots, q^{i}_T))$, 
+\begin{equation}
+\label{eq:recon_loss_discrete}
+    \frac{1}{N}\frac{1}{T} \sum_{i=1}^{N} \sum_{t=1}^T d^2_Q(q^i_t, \hat{q}^i_t),
+\end{equation}
+where $d_Q(\cdot,\cdot)$ is some distance metric in $Q$.  
+
+Minimizing~(\ref{eq:recon_loss_discrete}) makes ${\cal D}_{\rm traj}$ approximately lie on the image of the decoder function $f$. 
+As discussed in section~\ref{sec:iande}, if $f$ is injective, the Jacobian of $f$ is $m$ everywhere, and $f$ is diffeomorphic to its image, then the image of the decoder can be considered as an $m$-dimensional manifold embedded in $Q^T$. 
+Then, the mappings $g, f$ with ${\cal Z}$ take the role of the coordinate chart.
+Consequently, an autoencoder can be interpreted as learning the motion manifold and its coordinates, simultaneously. 
+
+In practice, $g$ and $f$ are approximated using deep neural networks with smooth activation functions. By setting $m$ sufficiently low, much lower than $\text{dim}(Q^T)=nT$, empirical results imply that $f$ converges to satisfy the above conditions without enforcing them. However, choosing a large $m$ may drop the rank of the Jacobian of $f$~\cite{lee2023geometric}.
+
+However, the nature of discrete-time trajectory representation leads to multiple limitations, as listed below.
+First, because the reconstructed trajectories may not be smooth, additional smoothness regularization must be added to the reconstruction loss (\ref{eq:recon_loss_discrete}), requiring weight tuning. 
+Second, temporal modulation is not possible, meaning we cannot modulate the speed of the trajectory. More importantly, generating a configuration at an arbitrary specified time is not possible, which makes one of our key applications -- online iterative replanning introduced later in Algorithm \ref{alg:OIR} -- inapplicable where the time variable needs to be continuously modified. 
+Lastly, given some constraints on curves (e.g., via-points), generated trajectories cannot be enforced to satisfy these constraints. We may introduce an additional regularization term to the loss (\ref{eq:recon_loss_discrete}); however, this not only requires additional weight tuning but also does not guarantee the satisfaction of the constraints. Furthermore, smooth modulation of the trajectory is not allowed, such as by changing via-points, which limits the model's adaptability. For example, if we modulate a configuration at the first time step \(q_1\), since there is no continuity between adjacent points, the other points \(q_t\) for \(t > 1\) will remain unchanged.
+
+
+\subsection{Motion Manifold Primitives++}
+This section proposes MMP++, an extension of the MMP framework to the continuous-time parametric curve models.
+We use a phase variable $\tau \in [0,1]$, and our main subject of interest is a parametric curve model
+\begin{equation}
+    q: [0,1] \times {\cal W} \to Q \:\:\: \text{s.t.} \:\:\: q(\tau, w) \in Q.
+\end{equation}
+Then, given any monotonically increasing function with time $\tau(t)$, a timed-trajectory $q(\tau(t);w)$ can be constructed with a desired velocity profile $\frac{d}{dt}q(\tau(t); w) = \dot{\tau_t}\frac{\partial}{\partial\tau}q(\tau;w)$. This is called a temporal modulation.
+
+Specifically, we focus on a particular class of curve models, an affine curve model, that is expressed as follows:
+\begin{equation}
+\label{eq:affinemodel}
+    q(\tau; w) = \psi(\tau) + w \phi(\tau),
+\end{equation}
+where $\psi(\tau) \in \mathbb{R}^{n}$, $\phi(\tau) \in \mathbb{R}^{B}$, and $w \in \mathbb{R}^{n \times B}$. This class includes models from ProMP~\cite{paraschos2013probabilistic} and VMP~\cite{zhou2019learning}. In VMP, $\psi(\tau)$ is referred to as an elementary trajectory, and $w\phi(\tau)$ is termed a shape modulation. 
+
+We assume that we are provided with multiple demonstration trajectories for a given task, each of which is a sequence of time-configuration pairs $((t_1, q_1), \ldots, (t_L, q_L))$. 
+In the pre-processing step, we fit each demonstration trajectory to the affine curve model~(\ref{eq:affinemodel}) and find $w$.
+Specifically, we set $\tau_{\text{linear}}(t) = \frac{t}{t_L}$ and consider $\Delta_{i}:=q_{i} - \psi(\tau_{\text{linear}}(t_i))$. Then, we want to find $w$ that best fits the trajectory, i.e., $\min_{w} \sum_{i=1}^{L}\|\Delta_i - w\phi(\tau_{\text{linear}}(t_i)) \|$. Assuming $L > B$, there is a closed-form solution:
+\begin{equation}
+    w^* = \Delta \Phi^T (\Phi \Phi^T)^{-1},
+\end{equation}
+where the data matrix $\Delta=(\Delta_1, \ldots, \Delta_L) \in \mathbb{R}^{n \times L}$ and basis matrix $\Phi=(\phi(\tau_{\text{linear}}(t_1)), \ldots, \phi(\tau_{\text{linear}}(t_L)))\in \mathbb{R}^{B \times L}$.
+
+%In the subsequent sections, we assume that we are given curve parameters fitted to the demonstration trajectories, denoted by $\{w_1, \ldots, w_N\}$ where $w_i \in \mathbb{R}^{n \times B}$ is a curve parameter fitted to an $i$-th trajectory. 
+Suppose we are given curve parameters fitted to the demonstration trajectories, denoted by $\{w_1, \ldots, w_N\}$ where $w_i \in \mathbb{R}^{n \times B}$ is a curve parameter fitted to an $i$-th trajectory. 
+Adopting~\cite{noseworthy2020task, lee2023equivariant}, we use an autoencoder framework to learn the manifold and its coordinates. An autoencoder consists of an encoder $g:{\cal W} \to {\cal Z}$ and a decoder $f: {\cal Z} \to {\cal W}$, where ${\cal W} = \mathbb{R}^{n\times B}$ is the curve parameter space and ${\cal Z} = \mathbb{R}^{m}$ is a latent coordinate space. 
+These two mappings are optimized to minimize the following standard autoencoder reconstruction loss:
+\begin{equation}
+\label{eq:recon_loss}
+    \frac{1}{N} \sum_{i=1}^{N} \|w_i - f(g(w_i))\|_F^2,
+\end{equation}
+where $\|\cdot\|_F$ is the Frobenius norm.
+
+Minimizing~(\ref{eq:recon_loss}) makes $\{w_i\}_{i=1}^{N}$ approximately lie on the image of the decoder function $f$. 
+As a result, $f$ maps the latent coordinate space ${\cal Z}$ to a manifold in the curve parameter space ${\cal W}$, 
+and then the parametric curve model $q(\tau; \cdot)$ maps this manifold to a manifold of continuous-time trajectories, i.e., the motion manifold, in the trajectory space. as visualized in Fig.~\ref{fig:intro2}.
+
+% As discussed in section~\ref{sec:iande}, if $f$ is injective, the Jacobian of $f$ is $m$ everywhere, and $f$ is diffeomorphic to its image, then the image of the decoder can be considered as an $m$-dimensional manifold embedded in ${\cal W}$. 
+% Then, the mappings $g, f$ with ${\cal Z}$ take the role of the coordinate chart.
+% Consequently, an autoencoder can be interpreted as learning the motion manifold and its coordinates, simultaneously. 
+
+% In practice, we approximate $g$ and $f$ using deep neural networks with smooth activation functions. By setting $m$ sufficiently low, much lower than $\text{dim}({\cal W})=nB$, empirical results imply that $f$ converges to satisfy the above conditions without enforcing them. However, choosing a large $m$ may drop the rank of the Jacobian of $f$~\cite{lee2023geometric}.
+
+Once $f, g$ are fitted, we train a latent space distribution using the encoded data $\{g(w_i)\}_{i=1}^{N}$. To capture the multi-modality of the distribution, we use a Gaussian Mixture Model (GMM), yet any other distribution fitting methods can be used.
+We call this framework {\it Motion Manifold Primitives++ (MMP++)}, where `++' is added to distinguish it from vanilla MMP that uses discrete-time trajectory representations. 
+
+One might question why, instead of adopting a two-step approach to learn the autoencoder and latent density separately, we don't utilize the Variational Autoencoder (VAE) framework directly~\cite{kingma2013auto}. While using a VAE is a feasible approach, we have found that separating manifold learning from density learning proves more effective. This is because, in some instances, the KL divergence in VAEs -- which penalizes differences between prior and posterior distributions in the latent space -- can adversely affect the quality of reconstructions.  
+
+Another question that may arise is why we don't fit a density model directly in the curve parameter space \({\cal W}\). The primary reason is the high-dimensionality of the curve parameter space. For example, if the configuration space dimension is 7 and the number of basis functions \(B = 30\), then the dimensionality of \({\cal W}\) is 210. Learning a density directly in this high-dimensional space is often challenging and, as shown in our later experiments, performs worse than our methods that learn densities in much lower-dimensional latent spaces. More importantly, the high dimensionality of the curve parameter space makes it unsuitable for fast adaptation, such as the online iterative replanning introduced later in Algorithm 1. This is because the high dimensionality of \({\cal W}\) (i) requires a lot of data points for accurate density estimation\footnote{Any consistent estimator for $p$-times differentiable $d$-dimensional density functions converges at a rate of at most $n^{-\frac{p}{2p+d}}$ where \(n\) is the number of samples~\cite{stone1980optimal}. Therefore, when \(d\) is large, the rate is very slow.}, which is not the case in our situation, and (ii) makes the optimization insufficiently fast.
+
+\subsection{Isometric Regularization} 
+The MMP++ often produces a geometrically distorted latent coordinate space ${\cal Z}$. 
+Adopting~\cite{yonghyeon2022regularized}, we would like to minimize the distortion between ${\cal Z}$ and $f({\cal Z}) \subset {\cal W}$ by adding the relaxed distortion measure~(\ref{eq:rdmff}) of the decoder mapping $f:{\cal Z} \to {\cal W}$ to the reconstruction loss function. 
+
+We consider the latent space ${\cal Z}$ as a Riemannian manifold assigned with the identity metric $I \in \mathbb{R}^{m \times m}$, i.e., an $m$-dimensional Euclidean space. To apply the isometric regularization~\cite{yonghyeon2022regularized}, we should be able to interpret the output space ${\cal W}$ as a local coordinate space for the embedded manifold ${\cal X}_{\cal W} = \{\psi(\tau) + w\phi(\tau) \in {\cal X} \: | \: w \in {\cal W}\}$ (see section~\ref{sec:rgpc}). 
+The space ${\cal X}_{\cal W}$ is an $nB$-dimensional smooth manifold, if $\phi_1(\tau), \ldots, \phi_B(\tau)$ are linearly independent:
+\begin{prop}
+    Suppose $\phi_1(\tau), \ldots, \phi_B(\tau)$ are linearly independent, i.e., if $a_1 \phi_1(\tau) + a_2 \phi_2(\tau) + \cdots + a_d \phi_d(\tau) = 0$ for all $\tau\in [0,1]$, then $(a_1, \ldots, a_d) = 0$. Then, the affine curve model (\ref{eq:affinemodel}) satisfies the injective immersion condition in Proposition~\ref{prop:manifold}.
+\end{prop}
+\begin{proof}
+    Suppose $\psi(\tau) + w_1 \phi(\tau) = \psi(\tau) + w_2\phi(\tau)$ for all $\tau$, which implies that $(w_1 - w_2)\phi(\tau)=\sum_{j=1}^{B} (w_1-w_2)^{ij} \phi_j(\tau)=0$ for all $\tau$ and $i$. By the linearity, $w_1 = w_2$; the injectivity is proved. Now, suppose $\sum_{i,j} \frac{\partial q(\tau;w)}{\partial w^{ij}} v^{ij}=0$, which implies that $\sum_{j} v^{ij} \phi_j(\tau)=0$ for all $\tau$ and $i$. Similarly, by the linearity, $v=0$; thus the mapping $w \mapsto w \phi(\tau)$ is an immersion.  
+\end{proof}
+
+In existing movement primitives~\cite{paraschos2013probabilistic, zhou2019learning}, one of the standard methods for constructing $\phi(\tau)$ involves normalizing scalar-valued functions $b_i(\tau), i=1,\ldots,B$: $\phi_i(\tau) = b_i(\tau)/\sum_{j=1}^{B} b_j(\tau)$. With this construction, if $\{b_i\}$ is linearly independent and $\sum_j b_j(\tau) > 0$ for all $\tau$, then $\{\phi_i\}$ is linearly independent as well. We can construct such $\{b_i\}$ with the following proposition:
+\begin{prop} (Corollary of Proposition 4.3. in \cite{paulsen2016introduction})
+\label{prop:prop3}
+Let $K : \mathbb{R} \times \mathbb{R} \to \mathbb{R}$ be a positive function and $\{c_1,c_2, \ldots, c_B\}$ be a finite set of mutually distinct points. Define $b_i(\tau) = K(\tau, c_i)$.
+Then $\{b_i\}$ is linearly independent if and only if the matrix $(K(c_i, c_j ))_{i,j=1,...,B}$ is positive definite.
+\end{prop}
+
+Consider the most standard choice of $b_i(\tau)$ for stroke-based movements, the Gaussian basis functions $b_i^G(\tau):=\exp(-\frac{(\tau - c_i)^2}{2h})$ where $h$ defines the width of basis and $c_i$ the center for the $i$-th basis. According to Proposition~\ref{prop:prop3}, if $\{c_1,c_2, \ldots, c_B\}$ is mutually distinct, then $\{b_i^G\}$ is linearly independent, because Gaussian kernel is positive definite.
+
+For a smooth manifold ${\cal X}_{\cal W}$, we can now define a Riemannian metric expressed in coordinates $w\in{\cal W}$ using equation (\ref{eq:rm}). 
+Since our parameter $w \in \mathbb{R}^{n \times B}$ is a matrix and has two indices $\{w^{ij}\}$, the Riemannian metric has four indices $h_{ijkl}(w)$ such that 
+\begin{equation}
+    ds^2 = \sum_{i,k=1}^{n} \sum_{j,l=1}^{B} h_{ijkl} (w) dw^{ij} dw^{kl}
+\end{equation}
+for $dw \in \mathbb{R}^{n \times B}$. Accordingly, we define a CurveGeom Riemannian metric in ${\cal W}$ as follows:
+\begin{definition}
+A {\bf CurveGeom Riemannian metric} for ${\cal X}_{\cal W}$ expressed in ${\cal W}$
+is 
+\label{eq:cgrm}
+    \begin{equation}
+        h_{ijkl}(w) = \int_{0}^1 \frac{\partial q(\tau; w)^T}{\partial w^{ij}} G(q(\tau;w)) \frac{\partial q(\tau; w)}{\partial w^{kl}} \ d \tau
+    \end{equation}
+    for $i,k=1,\ldots,n$ and $j,l=1,\ldots,B$.
+\end{definition}
+
+Given an affine curve model, the metric further simplifies to the following expression:
+\begin{prop}
+    Suppose $q(\tau; w) = \psi(\tau) + w\phi(\tau)$, then the CurveGeom Riemannian metric is 
+    \begin{equation}
+    \label{eq:hijkl}
+        h_{ijkl}(w) = \int_{0}^{1} \phi_{j}(\tau) g_{ik}(q(\tau; w)) \phi_{l}(\tau) \: d\tau,
+    \end{equation}
+    for $i,k=1,\ldots,n$ and $j,l=1,\ldots,B$.  
+\end{prop}
+\begin{proof}
+    Let us denote by $q = (q^1, \ldots, q^n)$. Then, $\frac{\partial q^a(\tau; w)}{\partial w^{ij}} = \frac{\partial }{\partial w^{ij}} (\sum_{ab}w^{ab}\phi_{b}) = \sum_{b}\delta_i^a \delta_j^b \phi_b = \delta_i^a \phi_j$. Therefore, the metric is $h_{ijkl} = \int \sum_{a,b} g_{ab} \delta_i^a \phi_j  \delta_k^b \phi_l \ d\tau = \int g_{ik} \phi_j \phi_l \ d\tau$.
+\end{proof}
+
+Now, we can compute the relaxed distortion measure of the decoder mapping $f:{\cal Z} \to {\cal W}$ using equation (\ref{eq:rdmff}). 
+Since the metric for ${\cal Z}$ is the identity, we only need to compute $J^T H J$. 
+Unlike the case in equation (\ref{eq:rdmff}), the Jacobian of our decoder $f=(f^{ij})_{i=1,\ldots,n,j=1,\ldots,B}$ is not a matrix, but has three indices $\frac{\partial f^{ij}}{\partial z^a}$ where $a=1,\ldots,m$. Therefore, instead of $J^T H J$, we can write it as follows:
+\begin{equation}
+    \bar{h}_{ab}(z) = \sum_{i,k=1}^{n} \sum_{j,l=1}^{B} \big(\frac{\partial f^{ij}}{\partial z}(z)\big)^T h_{ijkl}(f(z)) \frac{\partial f^{kl}}{\partial z}(z),  
+\end{equation}
+where $\frac{\partial f^{ij}}{\partial z} (z)\in \mathbb{R}^{1 \times m}$. We let $\{\bar{h}_{ab}(z)\}$ be an index notation of an $m \times m$ matrix $\bar{H}(z)$.
+If $\bar{H}(z) = cI$ for some positive scalar $c$ for all $z$, then $f$ is a scaled isometry. 
+
+We consider a latent space probability measure $P$ and finally define the relaxed distortion measure as 
+\begin{equation}
+    {\cal R}(f; P):=\frac{\mathbb{E}_{z \sim P} [{\rm Tr} \big(\bar{H}(z)^2\big)]}{\mathbb{E}_{z\sim P}[{\rm Tr}\big(\bar{H}(z)\big)]^2}.
+\end{equation}
+Following~\cite{yonghyeon2022regularized}, sampling from $P$ is done by $\delta z_i + (1-\delta) z_j$ where $\delta$ is uniformly sampled form $[-\eta, 1+\eta]$ (we set $\eta=0.2$ throughout) and $z_i = g(w_i)$ and $z_j = g(w_j)$ with $w_i,w_j \sim \{w_i\}_{i=1}^{N}$. The final loss function is 
+\begin{equation}
+     \frac{1}{L} \sum_{i=1}^{L} \|w_i - f(g(w_i))\|^2 + \alpha {\cal R}(f; P),
+\end{equation}
+where $\alpha$ is a regularization coefficient. 
+Together with the density model fitted in the latent coordinate space, we call this framework {\it Isometric Motion Manifold Primitives++ (IMMP++)}. 
+
+As a special case, if ${\cal Q}$ is Euclidean space, i.e., $g_{ij}(w)$ is equal to the Kronecker delta $\delta_{ij}$, then the metric formula and isometric regularization term can be further simplified. Plugging it into equation~(\ref{eq:hijkl}), the metric is simplified to 
+\begin{equation}
+    h_{ijkl} = \delta_{ik}\int_{0}^{1} \phi_j(\tau) \phi_l(\tau) \ d\tau.
+\end{equation}
+We note that it does not depend on $w$; therefore, we do not need to compute it in every iteration of the gradient descent during autoencoder training. This greatly reduces the computational cost in isometric regularization. Specifically, the matrix $\bar{H}(z)$ becomes
+\begin{equation}
+    \bar{h}_{ab}(z) = \sum_{i=1}^{n} \big(\frac{\partial f^{i}}{\partial z}(z)\big)^T \Phi \frac{\partial f^{i}}{\partial z}(z),  
+\end{equation}
+where $f^{i}=(f^{i1}, \ldots, f^{iB}) \in \mathbb{R}^{B}$, $\frac{\partial f^{i}}{\partial z}(z) \in \mathbb{R}^{B \times m}$, and $\Phi=(\int_{0}^{1}\phi_j(\tau) \phi_l(\tau) \ d\tau)_{j,l=1,\ldots,B} \in \mathbb{R}^{B \times B}$ is constant.

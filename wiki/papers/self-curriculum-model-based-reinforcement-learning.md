@@ -116,6 +116,7 @@ The two-stage decomposition is also valuable as a *recipe* beyond DLOs: any defo
 
 ## Related
 
+- [[model-based-planning-for-manipulation]]
 **Foundations used**
 
 - [[deformable-linear-object]] — object class

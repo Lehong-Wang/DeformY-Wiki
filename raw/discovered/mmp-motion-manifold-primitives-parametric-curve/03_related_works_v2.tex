@@ -1,0 +1,32 @@
+\section{Related Works}
+\label{sec:rw}
+
+\subsection{Movement Primitives}
+Movement Primitives are mathematical models that encode and generate motions or trajectories. Conventional methods for movement primitives can be roughly divided into two categories: (i) dynamical system-based approaches, such as Dynamic Movement Primitives~\cite{ijspeert2013dynamical, schaal2007dynamics, pervez2017novel, fanger2016gaussian, umlauft2017bayesian, pervez2017learning} and Stable Dynamical Systems~\cite{khansari2011learning, neumann2013neural, neumann2015learning, blocher2017learning, sindhwani2018learning, kolter2019learning}; and (ii) parametric or non-parametric probabilistic modeling of trajectories~\cite{paraschos2013probabilistic, zhou2019learning, huang2019kernelized}. Each of these models possesses its own characteristics. Dynamical system-based methods typically ensure the stability of the resulting closed-loop systems. Approaches based on stable autonomous dynamical systems provide temporal and spatial robustness to perturbations. Parametric curve models offer adaptability in terms of temporal modulation and changes in constraints (e.g., goal points). 
+
+A primary challenge in most of these methods is the limited adaptability to diverse situations (e.g., when unforeseen obstacles or new constraints emerge), which is mainly due to their design for encoding and producing a single trajectory for a given task~\cite{lee2023equivariant}.  
+This becomes problematic when this trajectory becomes infeasible by unforeseen environmental changes, such as the sudden appearance of an obstacle. 
+While dynamical system-based approaches can incorporate mechanisms like obstacle avoidance potential functions~\cite{park2008movement, hoffmann2009biologically, khansari2012dynamical, ginesi2019dynamic}, these adaptations may inadvertently breach other task-related constraints. Therefore, for motion primitives to be truly adaptable, a strategy that can encode various trajectories for the same task is critical. 
+Our work adopts the motion manifold primitives framework~\cite{noseworthy2020task, lee2023equivariant} to encode and generate diverse trajectories or even a continuous manifold of trajectories, producing highly adaptable primitives, simultaneously inheriting advantages of the parametric curve models utilized in~\cite{paraschos2013probabilistic, zhou2019learning}.
+
+\subsection{Manifold-based Movement Primitives}
+Recently, manifold-based representations of basic motion skills have shown promising results in encoding diverse motions and producing adaptable primitives. These approaches can be categorized into two types. The first approach attempts to learn a sub-manifold in the configuration space ${\cal Q}$, a manifold of configurations, where the latent value $z$ maps to a configuration in ${\cal Q}$~\cite{beik2021learning}. To generate a trajectory, this approach computes a geodesic connecting two points in ${\cal M}$. 
+
+The second type learns a low-dimensional manifold of trajectories, referred to as a motion manifold, where each point in the latent space $z$ corresponds to a trajectory $q(t) \in {\cal Q}$~\cite{noseworthy2020task,lee2023equivariant}.
+Our method extends the latter approach. 
+While existing methods map the latent point $z$ to a discrete-time trajectory representation $(q_1,\ldots, q_T)$, we use parametric curve models $q(t, w)$, in which the latent point $z$ is mapped to the curve parameter $w$. 
+As a result, our extended version can also be interpreted as learning a sub-manifold in ${\cal Q}$, similar to the first type approach, since $(t,z)$ is now mapped to a point $q(t, w(z))$ in ${\cal Q}$.
+
+Motion manifold primitives can produce diverse trajectories, and their ability to adapt to unseen obstacles by finding a latent value that generates a collision-free trajectory has been verified~\cite{lee2023equivariant}. However, due to the discrete nature of trajectory representation, they have limited adaptability to a dynamically changing environment. In our extended version, trajectories are parameterized by time, enabling online adaptation to dynamic environments. 
+
+
+\subsection{Manifold Learning and Latent Space Distortion} 
+An autoencoder framework and its variants have received a lot of attention as effective methods to learn the manifold and its coordinate chart simultaneously, including but not limited to~\cite{lee2021neighborhood, kingma2013auto, creswell2017adversarial, rifai2011contractive, yonghyeon2022regularized, lee2023explicit, nazari2023geometric, yoon2021autoencoding,janggeometrically,lee2022statistical}. Of particular relevance to our paper, a geometric perspective on autoencoders has been eloquently presented in~\cite{lee2023geometric}.  
+In our paper, a significant aspect of concern is the presence of the geometric distortion within the latent space of the autoencoder, as highlighted in~\cite{shao2018riemannian, arvanitidis2017latent, yonghyeon2022regularized, lee2023geometric, nazari2023geometric}. 
+% Just as maps representing the Earth can vary greatly, the latent space of an autoencoder that parametrizes the same manifold can also exhibit diversity; an arbitrary map can have a significant degree of geometric distortion.
+A recent regularization method~\cite{yonghyeon2022regularized} has developed a method to find the one that minimizes the geometric distortion, i.e., preserves the geometry of the data manifold and the latent coordinate space.
+While Euclidean metric is assumed in~\cite{yonghyeon2022regularized}, in this work, we propose to use a pullback Riemannian metric for the curve parameter space that reflects the geometry of the curve space. 
+% However, in our problem setting, a naive application of \cite{yonghyeon2022regularized} with the Euclidean metric assumption on the curve parameter space $\Theta$ does not produce desirable results because Euclidean metric does not capture the geometry of the actual curve spaces. 
+% The key difference in our method compared to \cite{yonghyeon2022regularized} is the development of a suitable Riemannian metric for the parametric curve space $\Theta$. 
+% In a related context, an approach to defining a Riemannian metric for point cloud data space has been formulated in~\cite{lee2022statistical}. 
+

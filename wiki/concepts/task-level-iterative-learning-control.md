@@ -18,6 +18,7 @@ date_updated: '2026-05-06'
 related_concepts:
 - '[[critical-point-objective]]'
 - '[[optimization-based-inverse-model]]'
+parent_topic: "[[dynamic-dlo-tip-targeting]]"
 ---
 ## Definition
 

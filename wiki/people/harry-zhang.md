@@ -9,6 +9,7 @@ date_updated: 2026-05-06
 
 ## Research areas
 
+- [[compact-action-parameterization]]
 Dynamic and self-supervised manipulation of deformable linear objects (cables, ropes, cords). Apex-point and low-dimensional action representations for high-speed arm motions. Real-robot self-supervised data collection on the UR5 platform.
 
 ## Key papers
@@ -17,6 +18,7 @@ Dynamic and self-supervised manipulation of deformable linear objects (cables, r
 
 ## Recent work
 
+- [[robots-lost-arc-self-supervised-learning]]
 (populated by future `/ingest` calls — Harry Zhang's free-end successor work and follow-up planar-cable manipulation papers from the same Berkeley AUTOLab line are likely future entries here.)
 
 ## Collaborators

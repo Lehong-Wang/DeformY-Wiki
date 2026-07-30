@@ -77,6 +77,7 @@ The principal weakness is the manually-annotated critical point. In flying-knot 
 
 ## Related
 
+- [[dynamic-dlo-tip-targeting]]
 - [[task-level-ilc-cross-rope-transfer-2-to-5-trials]]
 - [[task-level-ilc-real-hardware-flying-knot-100pct-under-10-trials]]
 - [[task-level-iterative-learning-control]] — the method introduced here; the paper's principal new concept

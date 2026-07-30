@@ -3,10 +3,11 @@ title: "Real2Sim2Real Pipeline"
 aliases: ["R2S2R", "real-to-sim-to-real", "real2sim then sim+real training", "real-sim-real loop", "self-supervised sim-tuning + mixed-data training"]
 tags: [DLO, sim-to-real, system-identification, self-supervised, robot-learning]
 maturity: emerging
-key_papers: ["[[planar-robot-casting-real2sim2real-self-supervised]]"]
+key_papers: ["[[planar-robot-casting-real2sim2real-self-supervised]]", "self-supervised-learning-dynamic-planar-manipulation"]
 first_introduced: "2022"
 date_updated: 2026-05-06
 related_concepts: ["[[differential-evolution-sim-tuning]]"]
+parent_topic: "[[sim-to-real-and-rapid-adaptation]]"
 ---
 
 ## Definition

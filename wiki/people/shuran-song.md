@@ -9,6 +9,8 @@ date_updated: 2026-05-06
 
 ## Research areas
 
+- [[dynamic-throwing-and-hitting]]
+- [[dynamic-dlo-tip-targeting]]
 - Robot learning and manipulation
 - Visual perception for robot action (3D scene understanding, descriptors, NeRF-based representations)
 - Deformable-object manipulation (ropes, fabrics, garments)

@@ -3,10 +3,11 @@ title: "RMA Particle-Dynamics Adaptation"
 aliases: ["privileged-particle dynamics encoder", "RMA for deformable objects", "particle-position teacher-student adaptation", "shape-and-dynamics adaptation modules", "RAPiD adaptation"]
 tags: [RMA, deformable-object-manipulation, sim-to-real, teacher-student, particle-dynamics, visuomotor-policy, robot-learning]
 maturity: emerging
-key_papers: ["[[rapid-adaptation-particle-dynamics-generalized-deformable]]"]
+key_papers: ["[[rapid-adaptation-particle-dynamics-generalized-deformable]]", "[[rma-rapid-motor-adaptation-legged-robots]]"]
 first_introduced: "2026"
-date_updated: 2026-05-06
-related_concepts: []
+date_updated: 2026-06-16
+related_concepts: ["[[online-meta-learned-dynamics-adaptation]]", "[[amortized-context-encoder-adaptation]]"]
+parent_topic: "[[sim-to-real-and-rapid-adaptation]]"
 ---
 
 ## Definition
@@ -76,6 +77,7 @@ Skip when: the task is purely quasi-static and a calibrated rigid-body or single
 ## Key papers
 
 - [[rapid-adaptation-particle-dynamics-generalized-deformable]] — introduces the concept; demonstrates 80%+ real-world success on two TIAGo deformable-mobile-manipulation tasks across 20+20 unseen object categories.
+- [[rma-rapid-motor-adaptation-legged-robots]] — the parent RMA method this concept specializes; supplies the two-phase privileged-teacher / history-regressing-student recipe (see [[amortized-context-encoder-adaptation]]).
 
 ## My understanding
 

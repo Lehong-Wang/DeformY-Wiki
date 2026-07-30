@@ -1,0 +1,34 @@
+%
+ \begin{wrapfigure}{r}{0.62\textwidth}
+ \vspace{-25pt}
+ \begin{minipage}{\linewidth}
+      \begin{algorithm}[H]
+\small
+\begin{algorithmic}[1]
+\floatname{algorithm}{Procedure}
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+ \STATE{Initialize data $\D$ with a random controller for one trial.}
+ \FOR {Trial $k = 1$ to $K$}
+ \STATE{Train a \textit{PE} dynamics model \smash{$\approximator{\MDPTransition}$ given $\D$}.} 
+ \FOR {Time $t = 0$ to TaskHorizon}
+ \FOR {Actions sampled \smash{$\MDPAction_{t:t+\horizon}\!\sim\!\text{CEM}(\cdot)$}, 1 to NSamples}
+ \STATE{Propagate state particles \smash{$\MDPState_{\traj}^{p}$} using \textit{TS} and \smash{$\approximator{\MDPTransition}|\{\D,\MDPAction_{t:t+\horizon}\}$}.}
+ \STATE{Evaluate actions as \smash{$\sum_{\tau=t}^{t+\horizon}{\tfrac{1}{P}\sum_{p=1}^{P}{\MDPreward(\MDPState_{\tau}^{p}, \MDPAction_{\traj})}}$}}
+ \STATE{Update \smash{$\text{CEM}(\cdot)$} distribution.}
+ \ENDFOR
+ \STATE{Execute first action \smash{$\MDPAction^*_{t}$} (only) from optimal actions \smash{$\MDPAction^*_{t:t+\horizon}$}.}
+ \STATE{Record outcome: \smash{$\D \leftarrow \D \cup \{\MDPState_{t}, \MDPAction^*_{t}, \MDPState_{t+1}\}$}.}
+ \ENDFOR
+ \ENDFOR
+\end{algorithmic}
+\caption{Our model-based MPC algorithm `\textit{PETS}':}
+\label{alg:ourmethod}
+\end{algorithm}
+\end{minipage}
+\end{wrapfigure}
+%
+Here we summarize our MBRL method \textit{PETS} in \alg{alg:ourmethod}.
+We use the PE model to capture heteroskedastic aleatoric uncertainty and heteroskedastic epistemic uncertainty, 
+which the TS planning method was able to best use.
+To guide the random shooting method of our MPC algorithm, we found that the CEM method learned faster (as discussed in \app{app:cem}).

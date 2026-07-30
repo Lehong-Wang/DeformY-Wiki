@@ -9,6 +9,7 @@ date_updated: 2026-05-06
 
 ## Research areas
 
+- [[dynamic-deformable-object-simulation]]
 - Deformable Object Manipulation (DOM): rope, cloth, liquid, elastoplastic.
 - Differentiable physics for robot learning (JAX, analytic policy gradients, differentiable MPC).
 - Benchmarking: building shared evaluation platforms for DOM algorithms across paradigms (planning, RL, IL).

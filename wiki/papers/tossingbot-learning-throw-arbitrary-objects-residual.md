@@ -74,6 +74,7 @@ Sibling work to keep in mind for downstream methodological positioning: IRP (Ite
 
 ## Related
 
+- [[dynamic-throwing-and-hitting]]
 **Foundations used**
 - [[grasping]] — pixel-wise grasp affordance prediction is the perception–action interface
 - [[behavioral-cloning]] / [[imitation-learning]] — TossingBot is *not* this; the contrast clarifies why self-supervised trial-and-error matters here

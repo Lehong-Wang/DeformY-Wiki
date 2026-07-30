@@ -1,0 +1,109 @@
+\documentclass{article}
+
+\usepackage[final]{nips_2018}
+
+
+\input{preamble}
+\usepackage{diagbox}
+\usepackage{tabularx}
+\usepackage{siunitx}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{url}            % simple URL typesetting
+\usepackage{hyperref}       % hyperlinks
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{enumitem}
+% \usepackage[ruled]{algorithm2e}
+
+\usepackage{wrapfig}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% \renewcommand{\baselinestretch}{0.98}
+\newcommand{\secspacepre}{\vspace{0pt}}
+\newcommand{\secspacepost}{\vspace{0pt}}
+\newcommand{\subsecspacepre}{\vspace{0pt}}
+\newcommand{\subsecspacepost}{\vspace{0pt}}
+\newcommand{\parspacepre}{\vspace{0pt}}
+
+\title{Deep Reinforcement Learning in a Handful of Trials\\ using Probabilistic Dynamics Models}
+
+
+\author{
+  Kurtland Chua \hspace{10mm} Roberto Calandra \hspace{10mm} Rowan McAllister \hspace{10mm} Sergey Levine \\
+  Berkeley Artificial Intelligence Research \\
+  University of California, Berkeley \\
+  \texttt{\{kchua, roberto.calandra, rmcallister, svlevine\}@berkeley.edu}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+	\input{0_abstract}
+\end{abstract}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Introduction}
+\input{1_introduction}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Related work}
+\label{sec:related}
+\input{2_related}
+    
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Model-based reinforcement learning}
+\label{sec:background}
+\input{3_background}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Uncertainty-aware neural network dynamics models}
+\label{sec:dynamics-models}
+\input{4_approach}
+
+\section{Planning and control with learned dynamics}
+\label{sec:approach:propagation}
+\input{4_approach2}
+    
+\section{Algorithm summary}
+\label{sec:approach3}
+\input{4_approach3}
+    
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Experimental results}
+\label{sec:results}
+\input{5_results}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Discussion \& conclusion}
+\input{6_discussion}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+{
+\bibliographystyle{abbrvnat}
+\bibliography{paper-learnProbabilisticDynamics}
+}
+
+\clearpage
+\appendix
+\renewcommand\thefigure{\thesection.\arabic{figure}}
+\renewcommand\thetable{\thesection.\arabic{table}} 
+\section{Appendix}
+	\input{7_appendix.tex}
+
+\end{document}

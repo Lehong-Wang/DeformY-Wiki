@@ -9,6 +9,7 @@ date_updated: "2026-05-06"
 
 ## Research areas
 
+- [[dynamic-dlo-tip-targeting]]
 - Deformable-object manipulation (cables, ropes, cloth) with robot learning
 - Sim-to-real transfer for dynamic manipulation tasks
 - Optimization-based and learning-based motion planning
@@ -23,6 +24,8 @@ date_updated: "2026-05-06"
 
 ## Recent work
 
+- [[robots-lost-arc-self-supervised-learning]]
+- [[wiggle-go-system-identification-zero-shot]]
 (Spans the Berkeley AUTOLAB → CMU transition; key papers in our wiki bracket 2022–2026.)
 
 ## Collaborators

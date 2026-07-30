@@ -7,6 +7,7 @@ key_papers: ["[[ropedreamer-kinematic-recurrent-state-space-model]]"]
 first_introduced: "2026"
 date_updated: 2026-05-06
 related_concepts: []
+parent_topic: "[[model-based-planning-for-manipulation]]"
 ---
 
 ## Definition

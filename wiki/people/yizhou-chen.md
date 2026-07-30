@@ -9,6 +9,7 @@ date_updated: 2026-05-06
 
 ## Research areas
 
+- [[dynamic-deformable-object-simulation]]
 - Deformable linear object (DLO) modeling and manipulation
 - Differentiable physics for robotics — combining classical rod models with deep learning
 - Real-time perception and closed-loop control of dynamic DLOs

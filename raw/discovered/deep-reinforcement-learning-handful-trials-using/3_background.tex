@@ -1,0 +1,11 @@
+We now detail the MBRL framework and the notation used.
+Adhering to the Markov decision process formulation~\citep{Bellman1957}, we denote the state $\MDPState \in \R^\MDPdimState$ and the actions $\MDPAction \in \R^\MDPdimAction$ of the system, the reward function $\MDPreward(\MDPState,\MDPAction)$, and we consider the dynamic systems governed by the transition function $\MDPTransition_{\parameters}: \R^{\MDPdimState + \MDPdimAction} \mapsto \R^\MDPdimState$ such that given the current state $\MDPState_\MDPTime$ and current input $\MDPAction_\MDPTime$, the next state $\MDPState_{\MDPTime + 1}$ is given by $\MDPState_{\MDPTime + 1} = \MDPTransition\left(\MDPState_\MDPTime, \MDPAction_{\MDPTime}\right)$.
+%
+For probabilistic dynamics, we represent the conditional distribution of the next state given the current state and action as some parameterized distribution family: $\MDPTransition_{\parameters}(\MDPState_{\MDPTime + 1} | \MDPState_{\MDPTime}, \MDPAction_{\MDPTime}) = \prob(\MDPState_{\MDPTime + 1} | \MDPState_{\MDPTime}, \MDPAction_{\MDPTime};\parameters)$, overloading notation.
+%
+Learning forward dynamics is thus the task of fitting an approximation~$\dynamicsModel$ of the true transition function~$\MDPTransition$, given the measurements $\dataset = \{(\MDPState_n, \MDPAction_n), \MDPState_{n+1}\}_{n=1}^{N}$ from the real system.
+
+Once a dynamics model~$\dynamicsModel$ is learned, we use $\dynamicsModel$ to predict the distribution over state-trajectories resulting from applying a sequence of actions.
+By computing the expected reward over state-trajectories, we can evaluate multiple candidate action sequences, and select the optimal action sequence to use.
+In \sec{sec:dynamics-models} we discuss multiple methods for modeling the dynamics, and in \sec{sec:approach:propagation} we detail how to compute the distribution over state-trajectories given a candidate action sequence.
+

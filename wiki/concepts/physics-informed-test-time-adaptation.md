@@ -6,7 +6,8 @@ maturity: emerging
 key_papers: ["[[dynamic-manipulation-deformable-objects-3d-simulation]]"]
 first_introduced: "2025"
 date_updated: 2026-05-06
-related_concepts: ["[[dynamics-informed-diffusion-policy]]", "[[reduced-order-gvs-model]]"]
+related_concepts: ["[[dynamics-informed-diffusion-policy]]", "[[reduced-order-gvs-model]]", "[[planning-as-diffusion]]"]
+parent_topic: "[[model-based-planning-for-manipulation]]"
 ---
 
 ## Definition

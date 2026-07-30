@@ -64,6 +64,8 @@ The key conceptual contribution is [[apex-point-trajectory-parameterization]] as
 
 ## Related
 
+- [[compact-action-parameterization]]
+- [[dynamic-dlo-tip-targeting]]
 - [[apex-point-trajectory-parameterization]] — concept introduced by this paper
 - [[dynamic-cable-apex-point-arc-policy]] — claim supported by this paper
 - [[harry-zhang]] — first author

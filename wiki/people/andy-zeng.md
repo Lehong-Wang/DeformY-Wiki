@@ -9,6 +9,7 @@ date_updated: 2026-05-06
 
 ## Research areas
 
+- [[dynamic-throwing-and-hitting]]
 - Visuomotor manipulation policies (grasping, pushing, throwing, packing).
 - Hybrid analytical–learned controllers and Residual Physics.
 - Self-supervised robot learning at scale.
@@ -20,6 +21,7 @@ date_updated: 2026-05-06
 
 ## Recent work
 
+- [[tossingbot-learning-throw-arbitrary-objects-residual]]
 (LLM analysis; not from this ingest's S2 fetch)
 
 - Visual Pushing and Grasping (VPG) and Form2Fit on dense pixel-wise affordance prediction for manipulation.

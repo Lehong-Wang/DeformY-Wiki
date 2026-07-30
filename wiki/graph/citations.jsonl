@@ -24,3 +24,10 @@
 {"from": "papers/self-supervised-learning-dynamic-planar-manipulation", "to": "papers/planar-robot-casting-real2sim2real-self-supervised", "type": "cites", "source": "semantic_scholar", "date": "2026-05-06"}
 {"from": "papers/self-supervised-learning-dynamic-planar-manipulation", "to": "papers/robots-lost-arc-self-supervised-learning", "type": "cites", "source": "semantic_scholar", "date": "2026-05-06"}
 {"from": "papers/self-supervised-learning-dynamic-planar-manipulation", "to": "papers/tossingbot-learning-throw-arbitrary-objects-residual", "type": "cites", "source": "semantic_scholar", "date": "2026-05-06"}
+{"from": "papers/self-curriculum-model-based-reinforcement-learning", "to": "papers/deep-reinforcement-learning-handful-trials-using", "type": "cites", "source": "semantic_scholar", "date": "2026-06-16"}
+{"from": "papers/learning-adapt-dynamic-real-world-environments", "to": "papers/deep-reinforcement-learning-handful-trials-using", "type": "cites", "source": "semantic_scholar", "date": "2026-06-16"}
+{"from": "papers/rapid-adaptation-particle-dynamics-generalized-deformable", "to": "papers/deep-reinforcement-learning-handful-trials-using", "type": "cites", "source": "semantic_scholar", "date": "2026-06-16"}
+{"from": "papers/rma-rapid-motor-adaptation-legged-robots", "to": "papers/learning-adapt-dynamic-real-world-environments", "type": "cites", "source": "semantic_scholar", "date": "2026-06-16"}
+{"from": "papers/rapid-adaptation-particle-dynamics-generalized-deformable", "to": "papers/rma-rapid-motor-adaptation-legged-robots", "type": "cites", "source": "semantic_scholar", "date": "2026-06-16"}
+{"from": "papers/wiggle-go-system-identification-zero-shot", "to": "papers/rma-rapid-motor-adaptation-legged-robots", "type": "cites", "source": "semantic_scholar", "date": "2026-06-16"}
+{"from": "papers/planning-diffusion-flexible-behavior-synthesis", "to": "papers/deep-reinforcement-learning-handful-trials-using", "type": "cites", "source": "semantic_scholar", "date": "2026-06-16"}

@@ -7,6 +7,7 @@ key_papers: ["[[learning-accurate-whole-body-throwing-high]]"]
 first_introduced: "2024"
 date_updated: 2026-05-06
 related_concepts: []
+parent_topic: "[[dynamic-throwing-and-hitting]]"
 ---
 
 ## Definition

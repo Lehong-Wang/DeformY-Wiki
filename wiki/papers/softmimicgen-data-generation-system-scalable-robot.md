@@ -65,6 +65,7 @@ This is the first paper to scale a MimicGen-style automated trajectory-transfer 
 
 ## Related
 
+- [[dynamic-deformable-object-simulation]]
 **Foundations used**
 - [[behavioral-cloning]] — policies are trained via maximum-likelihood BC on the generated dataset.
 - [[imitation-learning]] — the broader paradigm being scaled.

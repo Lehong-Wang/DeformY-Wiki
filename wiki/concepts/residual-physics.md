@@ -7,6 +7,7 @@ key_papers: ["[[tossingbot-learning-throw-arbitrary-objects-residual]]"]
 first_introduced: "2019"
 date_updated: 2026-05-06
 related_concepts: []
+parent_topic: "[[dynamic-throwing-and-hitting]]"
 ---
 
 ## Definition

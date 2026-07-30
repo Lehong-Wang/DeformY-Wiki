@@ -1,0 +1,14 @@
+
+Model choice in MBRL is delicate: we desire effective learning in both low-data regimes (at the beginning) and high-data regimes (in the later stages of the learning process). 
+For this reason, Bayesian nonparametric models, such as Gaussian processes (GPs), are often the model of choice in MBRL, especially in low-dimensional problems where data efficiency is critical~\citep{Kocijan2004,Ko2007,Nguyen-Tuong2008,Grancharova2008,Deisenroth2014,Kamthe2018}. 
+However, such models introduce additional assumptions on the system, such as the smoothness assumption inherent in GPs with squared-exponential kernels~\citep{Rasmussen2003}.
+Parametric function approximators have also been used extensively in MBRL~\citep{Hernandaz1990,Miller1990,Lin1992,Draeger1995}, but were largely supplanted by Bayesian models in recent years.
+Methods based on local models, such as guided policy search algorithms~\citep{Levine2016,Finn2015,Chebotar2017}, can efficiently train NN policies, but use time-varying linear models, which only locally model the system dynamics.
+Recent improvements in parametric function approximators, such as NNs, suggest that such methods are worth revisiting~\citep{Baranes2013,Fu2016,Punjani2015,Lenz2015,Agrawal2016,Gal2016,Depeweg2016,Williams2017,Nagabandi2017}.
+Unlike Gaussian processes, NNs have constant-time inference and tractable training in the large data regime, and have the potential to represent more complex functions, including non-smooth dynamics that are often present in robotics~\citep{Fu2016,Mordatch2016,Nagabandi2017}.
+However, most works that use NNs focus on deterministic models, consequently suffering from overfitting in the early stages of learning.
+For this reason, our approach is able to achieve even higher data-efficiency than prior deterministic MBRL methods such as~\cite{Nagabandi2017}.
+
+Constructing good Bayesian NN models remains an open problem~\citep{MacKay1992,neal1995bayesian,Osband2016a,Guo2017}, although recent promising work exists on incorporating dropout~\citep{gal2017concrete}, ensembles~\citep{Osband2016,Lakshminarayanan2017}, and $\alpha$-divergence~\citep{hernandez2016black}.
+Such probabilistic NNs have previously been used for control, including using dropout~\cite{Gal2016,Higuera2018} and $\alpha$-divergence~\cite{Depeweg2016}.
+In contrast to these prior methods, our experiments focus on more complex tasks with challenging dynamics -- including contact discontinuities -- and we compare directly to prior model-based and model-free methods on standard benchmark problems, where our method exhibits asymptotic performance that is comparable to model-free approaches.

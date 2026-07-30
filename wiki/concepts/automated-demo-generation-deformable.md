@@ -7,6 +7,7 @@ key_papers: ["[[softmimicgen-data-generation-system-scalable-robot]]"]
 first_introduced: "2026"
 date_updated: 2026-05-06
 related_concepts: []
+parent_topic: "[[dynamic-deformable-object-simulation]]"
 ---
 
 ## Definition

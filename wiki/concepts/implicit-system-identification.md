@@ -16,9 +16,11 @@ tags:
 maturity: emerging
 key_papers:
 - '[[implicit-physics-aware-policy-dynamic-manipulation]]'
+- '[[rma-rapid-motor-adaptation-legged-robots]]'
 first_introduced: ''
-date_updated: 2026-05-06
-related_concepts: []
+date_updated: 2026-06-16
+related_concepts: ['[[online-meta-learned-dynamics-adaptation]]', '[[amortized-context-encoder-adaptation]]']
+parent_topic: "[[sim-to-real-and-rapid-adaptation]]"
 ---
 ## Definition
 
@@ -92,6 +94,7 @@ over a domain-randomised dataset $\mathcal{M}$ of successful $(\phi, o, g, a^*)$
 ## Key papers
 
 - [[implicit-physics-aware-policy-dynamic-manipulation]] — fixed-probe implicit sysID for one-shot heterogeneous DLO+rigid casting; ICRA 2025.
+- [[rma-rapid-motor-adaptation-legged-robots]] — RMA; the in-context implicit-sysID variant for legged locomotion: regresses a latent "extrinsics" from a 0.5s proprioceptive history rather than naming physics parameters (see [[amortized-context-encoder-adaptation]]).
 
 ## My understanding
 

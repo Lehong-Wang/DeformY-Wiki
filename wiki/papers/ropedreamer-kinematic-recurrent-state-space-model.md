@@ -100,6 +100,7 @@ Caveats: this is a single preprint with no real-robot data, single-seed reportin
 
 ## Related
 
+- [[model-based-planning-for-manipulation]]
 **Foundations used**
 - [[deformable-linear-object]] — object class
 - [[forward-kinematics]] — used to recover Cartesian positions from quaternions + base position with fixed link length

@@ -7,6 +7,7 @@ key_papers: ["[[wiggle-go-system-identification-zero-shot]]"]
 first_introduced: "2026 (Wiggle and Go!, Jakobsson et al., arXiv preprint)"
 date_updated: 2026-05-06
 related_concepts: ["[[differential-evolution-sim-tuning]]"]
+parent_topic: "[[sim-to-real-and-rapid-adaptation]]"
 ---
 
 ## Definition

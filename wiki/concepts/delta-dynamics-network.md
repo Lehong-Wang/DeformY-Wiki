@@ -6,7 +6,8 @@ maturity: emerging
 key_papers: ["[[iterative-residual-policy-goal-conditioned-dynamic]]"]
 first_introduced: "2022"
 date_updated: 2026-05-06
-related_concepts: ["[[iterative-residual-policy]]"]
+related_concepts: ["[[iterative-residual-policy]]", "[[online-meta-learned-dynamics-adaptation]]"]
+parent_topic: "[[dynamic-dlo-tip-targeting]]"
 ---
 
 ## Definition

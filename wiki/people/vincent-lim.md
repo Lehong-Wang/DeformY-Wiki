@@ -20,6 +20,7 @@ date_updated: 2026-05-06
 
 ## Recent work
 
+- [[self-supervised-learning-dynamic-planar-manipulation]]
 (no further wiki-ingested papers attributed to Vincent Lim at this time)
 
 ## Collaborators

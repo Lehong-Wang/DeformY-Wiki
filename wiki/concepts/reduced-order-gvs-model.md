@@ -7,6 +7,7 @@ key_papers: ["[[dynamic-manipulation-deformable-objects-3d-simulation]]"]
 first_introduced: "2025"
 date_updated: 2026-05-06
 related_concepts: ["[[dynamics-informed-diffusion-policy]]", "[[physics-informed-test-time-adaptation]]"]
+parent_topic: "[[dynamic-deformable-object-simulation]]"
 ---
 
 ## Definition

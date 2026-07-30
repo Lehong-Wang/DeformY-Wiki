@@ -16,7 +16,9 @@ key_papers:
 - '[[robots-lost-arc-self-supervised-learning]]'
 first_introduced: '2021'
 date_updated: 2026-05-06
-related_concepts: []
+related_concepts:
+- '[[motion-manifold-primitives]]'
+parent_topic: "[[compact-action-parameterization]]"
 ---
 ## Definition
 

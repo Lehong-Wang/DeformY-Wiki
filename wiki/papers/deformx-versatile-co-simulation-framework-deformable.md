@@ -72,6 +72,7 @@ This paper provides the **simulator side** of the DeformX → DeformY arc. Its r
 
 ## Related
 
+- [[dynamic-deformable-object-simulation]]
 **Foundations used**
 - [[cosserat-rod-theory]] — core continuum model
 - [[discrete-elastic-rods]] — discretization style for the rod engine

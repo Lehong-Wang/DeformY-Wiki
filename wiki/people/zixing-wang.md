@@ -20,6 +20,7 @@ date_updated: 2026-05-06
 
 ## Recent work
 
+- [[implicit-physics-aware-policy-dynamic-manipulation]]
 - IPA policy for heterogeneous DLO+rigid one-shot transport (ICRA 2025).
 - Earlier related Purdue line on DeRi-Bot / DeRi-IGP (deformable-rigid bundling and grasp-pull moving primitives), referenced as background in IPA.
 

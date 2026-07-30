@@ -103,6 +103,7 @@ The result is a single-paper preprint with n=8 real cases, so confidence on the 
 
 ## Related
 
+- [[dynamic-dlo-tip-targeting]]
 - [[iterative-residual-policy-goal-conditioned-dynamic]] — the closest baseline in framing; IPA is explicitly designed as an anti-IRP one-shot alternative for heterogeneous systems.
 - [[tossingbot-learning-throw-arbitrary-objects-residual]] — residual-physics one-shot throwing of *rigid* objects; same one-shot ambition, different physics regime.
 - [[planar-robot-casting-real2sim2real-self-supervised]] — planar casting with similar moving primitive but no heterogeneous-system handling and re-training required for new physics.

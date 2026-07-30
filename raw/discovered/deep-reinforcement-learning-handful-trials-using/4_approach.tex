@@ -1,0 +1,83 @@
+\begin{wraptable}{r}{0.48\linewidth}
+  \vspace{-10pt}
+  \centering
+  \caption{Model uncertainties captured.}
+  \resizebox{\linewidth}{!}{% 
+  \label{tab:modeluncertainty}
+  \begin{tabular}{l c c}
+  \multirow{2}{*}{\textbf{Model}} & \textbf{Aleatoric} & \textbf{Epistemic}\\
+  & \textbf{uncertainty}& \textbf{uncertainty}\\
+  \hline \textit{Baseline Models} & & \\
+  Deterministic NN (D)           & No & No\\
+  Probabilistic NN (P)           & Yes & No \\
+  Deterministic ensemble NN (DE) & No & Yes \\
+  Gaussian process baseline (GP) & Homoscedastic & Yes \\
+  \hline \textit{Our Model} & & \\
+  Probabilistic ensemble NN (PE) & \textbf{Yes} & \textbf{Yes}
+  \end{tabular}%
+  }
+%   \vspace{-13pt}
+  \label{table:modelclasses}
+\end{wraptable}
+%
+This section describes several ways to model the task's true (but unknown) dynamic function, including our method: an ensemble of bootstrapped probabilistic neural networks.
+Whilst uncertainty-aware dynamics models have been explored in a number of prior works \citep{Gal2016,Depeweg2016}, the particular details of the implementation and design decisions in regard incorporation of uncertainty have not been rigorously analyzed empirically.
+As a result, prior work has generally found that expressive parametric models, such as deep neural networks, generally do not produce model-based RL algorithms that are competitive with their model-free counterparts in terms of asymptotic performance \citep{Nagabandi2017}, and often even found that simpler time-varying linear models can outperform expressive neural network models \citep{Levine2016,gu2016continuous}. 
+
+Any MBRL algorithm must select a class of model to predict the dynamics.
+This choice is often crucial for an MBRL algorithm, as even small bias can significantly influence the quality of the corresponding controller~\citep{Atkeson1997,Abbeel2006}.
+A major challenge is building a model that performs well in low and high data regimes: in the early stages of training, data is scarce, and highly expressive function approximators are liable to overfit;
+In the later stages of training, data is plentiful, but for systems with complex dynamics, simple function approximators might underfit. 
+While Bayesian models such as GPs perform well in low-data regimes, they do not scale favorably with dimensionality and often use kernels ill-suited for discontinuous dynamics~\citep{Calandra2016a}, which is typical of robots interacting through contacts.
+
+In this paper, we study how expressive NNs can be incorporated into MBRL. 
+To account for uncertainty, we study NNs that model two types of uncertainty. 
+The first type, aleatoric uncertainty, arises from \textit{inherent stochasticities} of a system, \eg{} observation noise and process noise.
+Aleatoric uncertainty can be captured by outputting the parameters of a parameterized distribution, while still training the network discriminatively. 
+The second type -- epistemic uncertainty -- corresponds to \textit{subjective uncertainty} about the dynamics function, due to a lack of sufficient data to uniquely determine the underlying system exactly.
+In the limit of infinite data, epistemic uncertainty should vanish, but for datasets of finite size, subjective uncertainty remains when predicting transitions. 
+It is precisely the subjective epistemic uncertainty which Bayesian modeling excels at, which helps mitigate overfitting.
+Below, we describe how we use combinations of `probabilistic networks' to capture aleatoric uncertainty and `ensembles' to capture epistemic uncertainty. 
+Each combination is summarized in \tab{table:modelclasses}.
+		
+
+\paragraph{Probabilistic neural networks (P)}
+\label{sec:probabilistic}
+We define a \textit{probabilistic} NN as a network whose output neurons simply parameterize a probability distribution function, capturing aleatoric uncertainty, and should not be confused with Bayesian inference. We use the negative log prediction probability as our loss function $\text{loss}_{\text{P}}(\parameters) = -\sum_{n=1}^{N} \log \dynamicsModel_{\parameters}(\MDPState_{n+\!1} | \MDPState_n,\MDPAction_n)$.
+For example, we might define our predictive model to output a Gaussian distribution with diagonal covariances parameterized by $\parameters$ and conditioned on $\MDPState_n$ and $\MDPAction_n$, i.e.: \smash{$\dynamicsModel = \prob(\MDPState_{\MDPTime + 1} | \MDPState_{\MDPTime}, \MDPAction_{\MDPTime}) = \gauss{\vec{\mean}_{\theta}(\MDPState_{\MDPTime}, \MDPAction_{\MDPTime})}{\varMat_{\theta}(\MDPState_{\MDPTime}, \MDPAction_{\MDPTime})}$}.
+Then the loss becomes 
+%
+\vspace{-5pt}
+\begin{align}
+\text{loss}_{\text{Gauss}}(\parameters) \!=\!\! \sum_{n=1}^{N} \left[\mean_{\parameters}(\MDPState_n,\!\MDPAction_n)\!-\! \MDPState_{n+\!1}\right]^\top\!\!\varMat^{-1}_{\parameters}(\MDPState_n,\!\MDPAction_n)\!\left[\mean_{\parameters}(\MDPState_n,\!\MDPAction_n)\!-\!\MDPState_{n+\!1}\right] \!+\! \log\det{\varMat_{\parameters}(\MDPState_n,\!\MDPAction_n)}.
+% \vspace{-10pt}
+\end{align}
+%
+Such network outputs, which in our particular case parameterizes a Gaussian distribution, models aleatoric uncertainty, otherwise known as heteroscedastic noise (meaning the output distribution is a function of the input). However, it does not model epistemic uncertainty, which cannot be captured with purely discriminative training.
+Choosing a Gaussian distribution is a common choice for continuous-valued states, and reasonable if we assume that any stochasticity in the system is unimodal. 
+However, in general, any tractable distribution class can be used. 
+To provide for an expressive dynamics model, we can represent the parameters of this distribution (e.g., the mean and covariance of a Gaussian) as nonlinear, parametric functions of the current state and action, which can be arbitrarily complex but deterministic. 
+This makes it feasible to incorporate NNs into a probabilistic dynamics model even for high-dimensional and continuous states and actions.
+Finally, an under-appreciated detail of probabilistic networks is that their variance has \textit{arbitrary} values for out-of-distribution inputs, which can disrupt planning.
+We discuss how to mitigate this issue in \app{sec:variance-bounding}.
+%
+    
+\paragraph{Deterministic neural networks (D)} 
+\label{sec:deterministic}
+For comparison, we define a deterministic NN as a special-case probabilistic network that outputs delta distributions centered around point predictions denoted as \smash{$\dynamicsModel_{\parameters}(\MDPState_{\MDPTime}, \MDPAction_{\MDPTime})$}:
+\smash{$\dynamicsModel_{\parameters}(\MDPState_{\MDPTime + 1} | \MDPState_{\MDPTime}, \MDPAction_{\MDPTime}) = \prob(\MDPState_{\MDPTime + 1} | \MDPState_{\MDPTime}, \MDPAction_{\MDPTime}) = \delta(\MDPState_{\MDPTime + 1} - \dynamicsModel_{\parameters}(\MDPState_{\MDPTime}, \MDPAction_{\MDPTime}))$}, trained using the MSE loss:
+\smash{$ \text{loss}_{D}(\parameters) = \sum_{n=1}^{N}{\lVert \MDPState_{n+1} - \dynamicsModel_{\parameters}(\MDPState_n, \MDPAction_n) \rVert}$}.
+%
+Although MSE can be interpreted as $\text{loss}_{\text{P}}(\parameters)$ with a Gaussian model of fixed unit variance, in practice this variance cannot be used for uncertainty-aware propagation, since it does not correspond to any notion of uncertainty (e.g., a deterministic model with infinite data would be adding variance to particles for no good reason).
+
+\paragraph{Ensembles (DE and PE)}
+A principled means to capture epistemic uncertainty is with Bayesian inference. 
+Whilst accurate Bayesian NN inference is possible with sufficient compute~\citep{neal1995bayesian}, approximate inference methods \citep{Blundell2015, gal2017concrete, hernandez2015probabilistic} have enjoyed recent popularity given their simpler implementation and faster training times.
+Ensembles of bootstrapped models are even simpler still: given a base model, no additional (hyper-)parameters need be tuned, whilst still providing reasonable uncertainty estimates~\citep{efron1994introduction, Osband2016a,kurutach2018model}.
+We consider ensembles of $\Bootstrap$-many bootstrap models, using \smash{$\parameters_\bootstrap$} to refer to the parameters of our \smash{$\bootstrap^{\text{th}}$} model \smash{$\dynamicsModel_{\parameters_\bootstrap}$}.
+Ensembles can be composed of deterministic models (DE) or probabilistic models (PE) -- as done by \citet{Lakshminarayanan2017} -- both of which define predictive probability distributions: 
+\smash{$\dynamicsModel_{\parameters} = \tfrac{1}{\Bootstrap}\sum_{\bootstrap=1}^\Bootstrap \dynamicsModel_{\parameters_\bootstrap}$}.
+A visual example is provided in \app{app:pe-model-toy}.
+Each of our bootstrap models have their unique dataset $\D_{\bootstrap}$, generated by sampling (with replacement) $N$ times the dynamics dataset recorded so far $\D$, where $N$ is the size of $\D$. We found $\Bootstrap=5$ sufficient for all our experiments.
+To validate the number of layers and neurons of our models, we can visualize one-step predictions (e.g. \app{app:one-step-prediction}).
+        

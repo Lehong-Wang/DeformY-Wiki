@@ -1,0 +1,380 @@
+\begin{thebibliography}{60}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Al{-}Shedivat et~al.(2017)Al{-}Shedivat, Bansal, Burda, Sutskever,
+  Mordatch, and Abbeel]{al2017cont}
+M.~Al{-}Shedivat, T.~Bansal, Y.~Burda, I.~Sutskever, I.~Mordatch, and
+  P.~Abbeel.
+\newblock Continuous adaptation via meta-learning in nonstationary and
+  competitive environments.
+\newblock \emph{CoRR}, abs/1710.03641, 2017.
+
+\bibitem[Andrychowicz et~al.(2016)Andrychowicz, Denil, Colmenarejo, Hoffman,
+  Pfau, Schaul, and de~Freitas]{andrychowicz2016learntolearn}
+M.~Andrychowicz, M.~Denil, S.~G. Colmenarejo, M.~W. Hoffman, D.~Pfau,
+  T.~Schaul, and N.~de~Freitas.
+\newblock Learning to learn by gradient descent by gradient descent.
+\newblock \emph{CoRR}, abs/1606.04474, 2016.
+
+\bibitem[{\AA}str{\"o}m and Wittenmark(2013)]{aastrom2013adaptive}
+K.~J. {\AA}str{\"o}m and B.~Wittenmark.
+\newblock \emph{Adaptive control}.
+\newblock Courier Corporation, 2013.
+
+\bibitem[Aswani et~al.(2012)Aswani, Bouffard, and Tomlin]{aswani2012extensions}
+A.~Aswani, P.~Bouffard, and C.~Tomlin.
+\newblock Extensions of learning-based model predictive control for real-time
+  application to a quadrotor helicopter.
+\newblock In \emph{American Control Conference (ACC), 2012}. IEEE, 2012.
+
+\bibitem[Baker et~al.(2016)Baker, Gupta, Naik, and Raskar]{baker2016designing}
+B.~Baker, O.~Gupta, N.~Naik, and R.~Raskar.
+\newblock Designing neural network architectures using reinforcement learning.
+\newblock \emph{arXiv preprint arXiv:1611.02167}, 2016.
+
+\bibitem[Bengio et~al.(1990)Bengio, Bengio, and Cloutier]{bengio1990learning}
+Y.~Bengio, S.~Bengio, and J.~Cloutier.
+\newblock \emph{Learning a synaptic learning rule}.
+\newblock Universit{\'e} de Montr{\'e}al, D{\'e}partement d'informatique et de
+  recherche op{\'e}rationnelle, 1990.
+
+\bibitem[Braun et~al.(2009)Braun, Aertsen, Wolpert, and
+  Mehring]{braun2009learning}
+D.~A. Braun, A.~Aertsen, D.~M. Wolpert, and C.~Mehring.
+\newblock Learning optimal adaptation strategies in unpredictable motor tasks.
+\newblock \emph{Journal of Neuroscience}, 2009.
+
+\bibitem[Chua et~al.(2018)Chua, Calandra, McAllister, and Levine]{chua2018deep}
+K.~Chua, R.~Calandra, R.~McAllister, and S.~Levine.
+\newblock Deep reinforcement learning in a handful of trials using
+  probabilistic dynamics models.
+\newblock \emph{arXiv preprint arXiv:1805.12114}, 2018.
+
+\bibitem[Deisenroth and Rasmussen(2011)]{deisenroth2011pilco}
+M.~Deisenroth and C.~E. Rasmussen.
+\newblock Pilco: A model-based and data-efficient approach to policy search.
+\newblock In \emph{International Conference on machine learning (ICML)}, pages
+  465--472, 2011.
+
+\bibitem[Deisenroth et~al.(2013)Deisenroth, Neumann, Peters,
+  et~al.]{deisenroth2013survey}
+M.~P. Deisenroth, G.~Neumann, J.~Peters, et~al.
+\newblock A survey on policy search for robotics.
+\newblock \emph{Foundations and Trends{\textregistered} in Robotics},
+  2\penalty0 (1--2):\penalty0 1--142, 2013.
+
+\bibitem[Doerr et~al.(2017)Doerr, Nguyen{-}Tuong, Marco, Schaal, and
+  Trimpe]{doerr2017mbpid}
+A.~Doerr, D.~Nguyen{-}Tuong, A.~Marco, S.~Schaal, and S.~Trimpe.
+\newblock Model-based policy search for automatic tuning of multivariate {PID}
+  controllers.
+\newblock \emph{CoRR}, abs/1703.02899, 2017.
+\newblock URL \url{http://arxiv.org/abs/1703.02899}.
+
+\bibitem[Duan et~al.(2016)Duan, Schulman, Chen, Bartlett, Sutskever, and
+  Abbeel]{duan2016rl2}
+Y.~Duan, J.~Schulman, X.~Chen, P.~L. Bartlett, I.~Sutskever, and P.~Abbeel.
+\newblock Rl{\textdollar}{\^{}}2{\textdollar}: Fast reinforcement learning via
+  slow reinforcement learning.
+\newblock \emph{CoRR}, abs/1611.02779, 2016.
+
+\bibitem[Finn and Levine(2017)]{finn2017metauniv}
+C.~Finn and S.~Levine.
+\newblock Meta-learning and universality: Deep representations and gradient
+  descent can approximate any learning algorithm.
+\newblock \emph{CoRR}, abs/1710.11622, 2017.
+
+\bibitem[Finn et~al.(2017)Finn, Abbeel, and Levine]{finn2017maml}
+C.~Finn, P.~Abbeel, and S.~Levine.
+\newblock Model-agnostic meta-learning for fast adaptation of deep networks.
+\newblock \emph{CoRR}, abs/1703.03400, 2017.
+
+\bibitem[Fortunato et~al.(2017)Fortunato, Blundell, and
+  Vinyals]{fortunato2017bayesian}
+M.~Fortunato, C.~Blundell, and O.~Vinyals.
+\newblock Bayesian recurrent neural networks.
+\newblock \emph{arXiv preprint arXiv:1704.02798}, 2017.
+
+\bibitem[Fu et~al.(2015)Fu, Levine, and Abbeel]{fu2015onlineadapt}
+J.~Fu, S.~Levine, and P.~Abbeel.
+\newblock One-shot learning of manipulation skills with online dynamics
+  adaptation and neural network priors.
+\newblock \emph{CoRR}, abs/1509.06841, 2015.
+
+\bibitem[Gu et~al.(2016)Gu, Lillicrap, Sutskever, and Levine]{gu2016continuous}
+S.~Gu, T.~Lillicrap, I.~Sutskever, and S.~Levine.
+\newblock Continuous deep q-learning with model-based acceleration.
+\newblock In \emph{International Conference on Machine Learning}, pages
+  2829--2838, 2016.
+
+\bibitem[Kelouwani et~al.(2012)Kelouwani, Adegnon, Agbossou, and
+  Dube]{kelouwani2012online}
+S.~Kelouwani, K.~Adegnon, K.~Agbossou, and Y.~Dube.
+\newblock Online system identification and adaptive control for pem fuel cell
+  maximum efficiency tracking.
+\newblock \emph{IEEE Transactions on Energy Conversion}, 27\penalty0
+  (3):\penalty0 580--592, 2012.
+
+\bibitem[Ko and Fox(2009)]{ko2009gp}
+J.~Ko and D.~Fox.
+\newblock Gp-bayesfilters: Bayesian filtering using gaussian process prediction
+  and observation models.
+\newblock \emph{Autonomous Robots}, 27\penalty0 (1):\penalty0 75--90, 2009.
+
+\bibitem[Krause et~al.(2016)Krause, Lu, Murray, and
+  Renals]{krause2016multiplicative}
+B.~Krause, L.~Lu, I.~Murray, and S.~Renals.
+\newblock Multiplicative lstm for sequence modelling.
+\newblock \emph{arXiv preprint arXiv:1609.07959}, 2016.
+
+\bibitem[Krause et~al.(2017)Krause, Kahembwe, Murray, and
+  Renals]{krause2017dynamiceval}
+B.~Krause, E.~Kahembwe, I.~Murray, and S.~Renals.
+\newblock Dynamic evaluation of neural sequence models.
+\newblock \emph{CoRR}, abs/1709.07432, 2017.
+
+\bibitem[Kurutach et~al.(2018)Kurutach, Clavera, Duan, Tamar, and
+  Abbeel]{thanard}
+T.~Kurutach, I.~Clavera, Y.~Duan, A.~Tamar, and P.~Abbeel.
+\newblock Model-ensemble trust-region policy optimization.
+\newblock \emph{arXiv preprint arXiv:1802.10592}, 2018.
+
+\bibitem[Lake et~al.(2015)Lake, Salakhutdinov, and Tenenbaum]{lake2015human}
+B.~M. Lake, R.~Salakhutdinov, and J.~B. Tenenbaum.
+\newblock Human-level concept learning through probabilistic program induction.
+\newblock \emph{Science}, 2015.
+
+\bibitem[Lenz et~al.(2015)Lenz, Knepper, and Saxena]{lenz2015deepmpc}
+I.~Lenz, R.~A. Knepper, and A.~Saxena.
+\newblock Deepmpc: Learning deep latent features for model predictive control.
+\newblock In \emph{Robotics: Science and Systems}, 2015.
+
+\bibitem[Levine and Koltun(2013)]{levine2013guided}
+S.~Levine and V.~Koltun.
+\newblock Guided policy search.
+\newblock In \emph{International Conference on Machine Learning}, pages 1--9,
+  2013.
+
+\bibitem[Levine et~al.(2016)Levine, Finn, Darrell, and Abbeel]{levine2016end}
+S.~Levine, C.~Finn, T.~Darrell, and P.~Abbeel.
+\newblock End-to-end training of deep visuomotor policies.
+\newblock \emph{Journal of Machine Learning Research (JMLR)}, 2016.
+
+\bibitem[Li and Malik(2016)]{li2016learning}
+K.~Li and J.~Malik.
+\newblock Learning to optimize.
+\newblock \emph{arXiv preprint arXiv:1606.01885}, 2016.
+
+\bibitem[Lillicrap et~al.(2015)Lillicrap, Hunt, Pritzel, Heess, Erez, Tassa,
+  Silver, and Wierstra]{lillicrap2015ddpg}
+T.~P. Lillicrap, J.~J. Hunt, A.~Pritzel, N.~Heess, T.~Erez, Y.~Tassa,
+  D.~Silver, and D.~Wierstra.
+\newblock Continuous control with deep reinforcement learning.
+\newblock \emph{CoRR}, abs/1509.02971, 2015.
+
+\bibitem[Manganiello et~al.(2014)Manganiello, Ricco, Petrone, Monmasson, and
+  Spagnuolo]{manganiello2014optimization}
+P.~Manganiello, M.~Ricco, G.~Petrone, E.~Monmasson, and G.~Spagnuolo.
+\newblock Optimization of perturbative pv mppt methods through online system
+  identification.
+\newblock \emph{IEEE Trans. Industrial Electronics}, 61\penalty0 (12):\penalty0
+  6812--6821, 2014.
+
+\bibitem[Meier and Schaal(2016)]{franzi2016drift}
+F.~Meier and S.~Schaal.
+\newblock Drifting gaussian processes with varying neighborhood sizes for
+  online model learning.
+\newblock In \emph{Proceedings of the IEEE International Conference on Robotics
+  and Automation (ICRA) 2016}. IEEE, May 2016.
+
+\bibitem[Meier et~al.(2016)Meier, Kappler, Ratliff, and
+  Schaal]{franzi2016robustonline}
+F.~Meier, D.~Kappler, N.~Ratliff, and S.~Schaal.
+\newblock Towards robust online inverse dynamics learning.
+\newblock In \emph{Proceedings of the IEEE/RSJ Conference on Intelligent Robots
+  and Systems}. IEEE, 2016.
+
+\bibitem[Mishra et~al.(2017)Mishra, Rohaninejad, Chen, and
+  Abbeel]{mishra2017simple}
+N.~Mishra, M.~Rohaninejad, X.~Chen, and P.~Abbeel.
+\newblock A simple neural attentive meta-learner.
+\newblock In \emph{NIPS 2017 Workshop on Meta-Learning}, 2017.
+
+\bibitem[Mnih et~al.(2015)Mnih, Kavukcuoglu, Silver, Rusu, Veness, Bellemare,
+  Graves, Riedmiller, Fidjeland, Ostrovski, et~al.]{mnih2015human}
+V.~Mnih, K.~Kavukcuoglu, D.~Silver, A.~A. Rusu, J.~Veness, M.~G. Bellemare,
+  A.~Graves, M.~Riedmiller, A.~K. Fidjeland, G.~Ostrovski, et~al.
+\newblock Human-level control through deep reinforcement learning.
+\newblock \emph{Nature}, 2015.
+
+\bibitem[Munkhdalai and Yu(2017)]{munkhdalai2017meta}
+T.~Munkhdalai and H.~Yu.
+\newblock Meta networks.
+\newblock \emph{arXiv preprint arXiv:1703.00837}, 2017.
+
+\bibitem[Munkhdalai et~al.(2017)Munkhdalai, Yuan, Mehri, Wang, and
+  Trischler]{munkhdalai2017learning}
+T.~Munkhdalai, X.~Yuan, S.~Mehri, T.~Wang, and A.~Trischler.
+\newblock Learning rapid-temporal adaptations.
+\newblock \emph{arXiv preprint arXiv:1712.09926}, 2017.
+
+\bibitem[Nagabandi et~al.(2017{\natexlab{a}})Nagabandi, Kahn, Fearing, and
+  Levine]{nagabandi2017neural}
+A.~Nagabandi, G.~Kahn, R.~S. Fearing, and S.~Levine.
+\newblock Neural network dynamics for model-based deep reinforcement learning
+  with model-free fine-tuning.
+\newblock \emph{CoRR}, abs/1708.02596, 2017{\natexlab{a}}.
+
+\bibitem[Nagabandi et~al.(2017{\natexlab{b}})Nagabandi, Yang, Asmar, Pandya,
+  Kahn, Levine, and Fearing]{nagabandi2017roach}
+A.~Nagabandi, G.~Yang, T.~Asmar, R.~Pandya, G.~Kahn, S.~Levine, and R.~S.
+  Fearing.
+\newblock Learning image-conditioned dynamics models for control of
+  under-actuated legged millirobots.
+\newblock \emph{arXiv preprint arXiv:1711.05253}, 2017{\natexlab{b}}.
+
+\bibitem[Naik and Mammone(1992)]{naik1992meta}
+D.~K. Naik and R.~Mammone.
+\newblock Meta-neural networks that learn by learning.
+\newblock In \emph{Neural Networks, 1992. IJCNN., International Joint
+  Conference on}, volume~1, pages 437--442. IEEE, 1992.
+
+\bibitem[Pastor et~al.(2011)Pastor, Righetti, Kalakrishnan, and
+  Schaal]{pastor2011online}
+P.~Pastor, L.~Righetti, M.~Kalakrishnan, and S.~Schaal.
+\newblock Online movement adaptation based on previous sensor experiences.
+\newblock In \emph{IEEE International Conference on Intelligent Robots and
+  Systems (IROS)}, pages 365--371, 9 2011.
+
+\bibitem[Peters and Schaal(2008)]{peters2008reinforcement}
+J.~Peters and S.~Schaal.
+\newblock Reinforcement learning of motor skills with policy gradients.
+\newblock \emph{Neural networks}, 2008.
+
+\bibitem[Rai et~al.(2017)Rai, Sutanto, Schaal, and Meier]{rai2017feedback}
+A.~Rai, G.~Sutanto, S.~Schaal, and F.~Meier.
+\newblock Learning feedback terms for reactive planning and control.
+\newblock In \emph{Proceedings 2017 IEEE International Conference on Robotics
+  and Automation (ICRA)}, Piscataway, NJ, USA, May 2017. IEEE.
+
+\bibitem[Ravi and Larochelle(2018)]{ravi2016optimization}
+S.~Ravi and H.~Larochelle.
+\newblock Optimization as a model for few-shot learning.
+\newblock \emph{International Conference on Learning Representations (ICLR)},
+  2018.
+
+\bibitem[Rei(2015)]{rei2015onlinerepre}
+M.~Rei.
+\newblock Online representation learning in recurrent neural language models.
+\newblock \emph{CoRR}, abs/1508.03854, 2015.
+
+\bibitem[S{\ae}mundsson et~al.(2018)S{\ae}mundsson, Hofmann, and
+  Deisenroth]{saemundsson2018meta}
+S.~S{\ae}mundsson, K.~Hofmann, and M.~P. Deisenroth.
+\newblock Meta reinforcement learning with latent variable gaussian processes.
+\newblock \emph{arXiv preprint arXiv:1803.07551}, 2018.
+
+\bibitem[Santoro et~al.(2016)Santoro, Bartunov, Botvinick, Wierstra, and
+  Lillicrap]{santoro2016one}
+A.~Santoro, S.~Bartunov, M.~Botvinick, D.~Wierstra, and T.~Lillicrap.
+\newblock One-shot learning with memory-augmented neural networks.
+\newblock \emph{arXiv preprint arXiv:1605.06065}, 2016.
+
+\bibitem[Sastry and Isidori(1989)]{sastry1989adaptive}
+S.~S. Sastry and A.~Isidori.
+\newblock Adaptive control of linearizable systems.
+\newblock \emph{IEEE Transactions on Automatic Control}, 1989.
+
+\bibitem[Schmidhuber(1992)]{schmidhuber1992learning}
+J.~Schmidhuber.
+\newblock Learning to control fast-weight memories: An alternative to dynamic
+  recurrent networks.
+\newblock \emph{Neural Computation}, 1992.
+
+\bibitem[Schmidhuber and Huber(1991)]{schmidhuber1991learning}
+J.~Schmidhuber and R.~Huber.
+\newblock Learning to generate artificial fovea trajectories for target
+  detection.
+\newblock \emph{International Journal of Neural Systems}, 1991.
+
+\bibitem[Schulman et~al.(2015)Schulman, Levine, Moritz, Jordan, and
+  Abbeel]{schulman2015trust}
+J.~Schulman, S.~Levine, P.~Moritz, M.~I. Jordan, and P.~Abbeel.
+\newblock Trust region policy optimization.
+\newblock \emph{CoRR, abs/1502.05477}, 2015.
+
+\bibitem[Silver et~al.(2017)Silver, Schrittwieser, Simonyan, Antonoglou, Huang,
+  Guez, Hubert, Baker, Lai, Bolton, et~al.]{silver2017mastering}
+D.~Silver, J.~Schrittwieser, K.~Simonyan, I.~Antonoglou, A.~Huang, A.~Guez,
+  T.~Hubert, L.~Baker, M.~Lai, A.~Bolton, et~al.
+\newblock Mastering the game of go without human knowledge.
+\newblock \emph{Nature}, 2017.
+
+\bibitem[Sung et~al.(2017)Sung, Zhang, Xiang, Hospedales, and
+  Yang]{sung2017learning}
+F.~Sung, L.~Zhang, T.~Xiang, T.~Hospedales, and Y.~Yang.
+\newblock Learning to learn: Meta-critic networks for sample efficient
+  learning.
+\newblock \emph{arXiv preprint arXiv:1706.09529}, 2017.
+
+\bibitem[Tanaskovic et~al.(2013)Tanaskovic, Fagiano, Smith, Goulart, and
+  Morari]{tanaskovic2013adaptive}
+M.~Tanaskovic, L.~Fagiano, R.~Smith, P.~Goulart, and M.~Morari.
+\newblock Adaptive model predictive control for constrained linear systems.
+\newblock In \emph{Control Conference (ECC), 2013 European}. IEEE, 2013.
+
+\bibitem[Thrun and Pratt(1998)]{thrun1998learning}
+S.~Thrun and L.~Pratt.
+\newblock Learning to learn: Introduction and overview.
+\newblock In \emph{Learning to learn}. Springer, 1998.
+
+\bibitem[Todorov et~al.(2012)Todorov, Erez, and Tassa]{todorov2012mujoco}
+E.~Todorov, T.~Erez, and Y.~Tassa.
+\newblock Mujoco: A physics engine for model-based control.
+\newblock In \emph{IROS}, pages 5026--5033. IEEE, 2012.
+
+\bibitem[Underwood and Husain(2010)]{underwood2010online}
+S.~J. Underwood and I.~Husain.
+\newblock Online parameter estimation and adaptive control of permanent-magnet
+  synchronous machines.
+\newblock \emph{IEEE Transactions on Industrial Electronics}, 57\penalty0
+  (7):\penalty0 2435--2443, 2010.
+
+\bibitem[Wang et~al.(2016)Wang, Kurth-Nelson, Tirumala, Soyer, Leibo, Munos,
+  Blundell, Kumaran, and Botvinick]{wang2016learning}
+J.~X. Wang, Z.~Kurth-Nelson, D.~Tirumala, H.~Soyer, J.~Z. Leibo, R.~Munos,
+  C.~Blundell, D.~Kumaran, and M.~Botvinick.
+\newblock Learning to reinforcement learn.
+\newblock \emph{arXiv preprint arXiv:1611.05763}, 2016.
+
+\bibitem[Weinstein and Botvinick(2017)]{weinstein2017motorcontrol}
+A.~Weinstein and M.~Botvinick.
+\newblock Structure learning in motor control: {A} deep reinforcement learning
+  model.
+\newblock \emph{CoRR}, abs/1706.06827, 2017.
+
+\bibitem[Williams et~al.(2015)Williams, Aldrich, and Theodorou]{williams15mppi}
+G.~Williams, A.~Aldrich, and E.~Theodorou.
+\newblock Model predictive path integral control using covariance variable
+  importance sampling.
+\newblock \emph{CoRR}, abs/1509.01149, 2015.
+
+\bibitem[Williams et~al.(2017)Williams, Wagener, Goldfain, Drews, Rehg, Boots,
+  and Theodorou]{williams2017information}
+G.~Williams, N.~Wagener, B.~Goldfain, P.~Drews, J.~M. Rehg, B.~Boots, and E.~A.
+  Theodorou.
+\newblock Information theoretic mpc for model-based reinforcement learning.
+\newblock In \emph{International Conference on Robotics and Automation (ICRA)},
+  2017.
+
+\bibitem[Younger et~al.(2001)Younger, Hochreiter, and Conwell]{younger2001meta}
+A.~S. Younger, S.~Hochreiter, and P.~R. Conwell.
+\newblock Meta-learning with backpropagation.
+\newblock In \emph{International Joint Conference on Neural Networks}. IEEE,
+  2001.
+
+\end{thebibliography}

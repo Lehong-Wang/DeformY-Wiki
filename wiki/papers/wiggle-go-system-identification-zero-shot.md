@@ -88,6 +88,8 @@ Worth flagging: this paper is the **CMU answer** to the Berkeley-AUTOLAB lineage
 
 ## Related
 
+- [[sim-to-real-and-rapid-adaptation]]
+- [[dynamic-dlo-tip-targeting]]
 **Foundations used**
 - [[deformable-linear-object]] — object class
 - [[sim-to-real-transfer]] — empirical claim space (zero-shot from sim-trained $\Phi$ + sim-optimized trajectory)

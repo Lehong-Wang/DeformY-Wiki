@@ -7,6 +7,7 @@ key_papers: ["[[deform-differentiable-discrete-elastic-rods-real]]"]
 first_introduced: "2019"
 date_updated: 2026-05-06
 related_concepts: []
+parent_topic: "[[dynamic-deformable-object-simulation]]"
 ---
 
 ## Definition

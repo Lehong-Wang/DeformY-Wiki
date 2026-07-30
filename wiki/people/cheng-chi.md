@@ -9,6 +9,7 @@ date_updated: 2026-05-06
 
 ## Research areas
 
+- [[dynamic-dlo-tip-targeting]]
 - Goal-conditioned manipulation of deformable objects (ropes, cloths)
 - Dynamic manipulation and momentum-exploiting motion primitives
 - Sim-to-real transfer via online adaptation rather than randomization

@@ -1,0 +1,241 @@
+This section describes different ways uncertainty can be incorporated into planning using probabilistic dynamics models.
+%This section summarizes the different ways to perform planning using a dynamics model.
+%%SL.05.15: again, hopefully it doesn't just summarize it, but actually describes it... % OK -RM.
+Once a model~\smash{$\dynamicsModel_{\parameters}$} is learned, we can use it for control by predicting the future outcomes of candidate policies or actions and then selecting the particular candidate that is predicted to result in the highest reward.
+%%SL.05.15: maybe forward reference the algorithm pseudocode?  % done -RM.
+%%SL.05.15: also, probably need to cite nagabandi here somewhere and explain briefly how we're different... % done -RM.
+MBRL planning in discrete time over long time horizons is generally performed by using the dynamics model to recursively predict how an estimated Markov state will evolve from one time step to the next, e.g.: $\MDPState_{\MDPTime + 2} \sim \prob(\MDPState_{\MDPTime + 2} | \MDPState_{\MDPTime + 1}, \MDPAction_{\MDPTime + 1})$ where $\MDPState_{\MDPTime + 1} \sim \prob(\MDPState_{\MDPTime + 1} | \MDPState_{\MDPTime}, \MDPAction_{\MDPTime})$.
+%
+When planning, we might consider each action $\MDPAction_{\MDPTime}$ to be a function of state, forming a policy $\pi: \MDPState_\MDPTime \rightarrow \MDPAction_\MDPTime$, a function to optimize.
+Alternatively, we can plan and optimize for a sequence of actions, a process called model predictive control (MPC)~\citep{Camacho2013}.
+We use MPC in our own experiments for several reasons, % \todo{Q: Sergey, does this justification look OK?}
+including implementation simplicity, lower computational burden (no gradients), and
+no requirement to specify the task-horizon in advance, whilst achieving the same data-efficiency as \citet{Gal2016} who used a Bayesian NN with a policy to learn the cart-pole task in 2000 time steps.
+Our full algorithm is summarized in \sec{sec:approach3}.
+
+Given the state of the system~$\MDPState_\MDPTime$ at time~$\MDPTime$, the prediction horizon~$\horizon$ of the MPC controller, and an action sequence $\MDPAction_{\MDPTime:\MDPTime+\horizon} \doteq \{\MDPAction_\MDPTime, \dots, \MDPAction_{\MDPTime + \horizon}\}$; the \textit{probabilistic} dynamics model~\smash{$\dynamicsModel$} induces a distribution over the resulting trajectories $\MDPState_{\MDPTime:\MDPTime + \horizon}$. 
+At each time step~$\MDPTime$, the MPC controller applies the first action~$\MDPAction_{\MDPTime}$ of the sequence of optimized actions $\argmax_{\MDPAction_{\MDPTime:\MDPTime + \horizon}}{\sum_{\traj=\MDPTime}^{\MDPTime+\horizon}   \E_{\dynamicsModel} \left[ \MDPreward(\MDPState_{\traj}, \MDPAction_{\traj}) \right] }$.
+%
+A common technique to compute the optimal action sequence is a random sampling shooting method, due to its parallelizability and ease of implementation. 
+\cite{Nagabandi2017} use deterministic NN models and MPC with random shooting to achieve data efficient control in higher dimensional tasks than what is feasible for GPs to model. 
+Our work improves upon \cite{Nagabandi2017}'s data efficiency in two ways: 
+First, we capture uncertainty in modeling and planning, to prevent overfitting in the low-data regime.
+Second, we use CEM~\citep{botev2013} instead of random-shooting, which samples actions from a distribution closer to previous action samples that yielded high reward.
+%%SL.05.15: kind of funny phrasing -- it proved efficient in experiments, which happen to appear in \app{app:cem} % re-phrased -RM.
+%to sample a set number of action sequences from some distribution $\prob(\MDPAction_\MDPTime, \dots, \MDPAction_{\MDPTime + \horizon})$, and replace the optimal sequence above with the sampled action sequence which minimizes the expected cost.
+
+	% Once we choose the model class for our MBRL method, we must also choose how this model is actually used to make decisions. 
+	% As discussed previously, 
+%%SL.05.08: I don't think we actually discussed this previously. Also, I wonder if we should present things more generally -- whether we use MPC or not, we need some way to perform propagation -- prediction. Whether we do policy learning or MPC probably deserves its own discussion somewhere else in the paper. Finally, I would recommend not overusing "MPC" -- many in the ML community won't really know what this means. 
+%%RM.05.12: re Sergey: I've discussed policy and MPC above to soften the focus on MPC, and also describe MPC a bit more to RL folk unfamiliar with MPC, but I'm unsure how to best postpone discussing specifics this far into the paper, especially since we only include MPC experiments.
+%we will use MPC with random action sampling to plan under the model, 
+Computing the expected trajectory reward using recursive state prediction in closed-form is generally intractable. 
+Multiple approaches to approximate uncertainty propagation can be found in the literature~\citep{Girard2002,Quinonero-Candela2003}.
+%so we consider a Monte Carlo approximation. We represent state uncertainty with a set of `particles' which we propagate forward in time with recursive prediction.
+	These approaches can be categorized by how they represent the state distribution: deterministic, particle, and parametric methods. 
+	Deterministic methods use the mean prediction and ignore the uncertainty, particle methods propagate a set of Monte Carlo samples, and parametric methods include Gaussian or Gaussian mixture models, etc.
+	Although parametric distributions have been successfully used in MBRL~\citep{Deisenroth2014}, experimental results~\citep{Kupcsik2013} suggest that particle approaches can be competitive both computationally and in terms of accuracy, without making strong assumptions about the distribution used.
+%%SL.05.08: This would be a good place to remind the reader that prior work has not rigorously compared the design decisions involved in choosing the particular propagation method. % OK Done, RM.
+Hence, we use particle-based propagation, specifically suited to our PE dynamics model which distinguishes two types of uncertainty, detailed in \sec{sec:propagation-ts}.
+Unfortunately, little prior work has empirically compared the design decisions involved in choosing the particular propagation method. 
+Thus, we compare against several baselines in \sec{sec:propagation-baselines}.
+Visual examples are provided in \app{app:propagation}.
+%%SL.05.08: We should rephrase this section a bit to present our method, while also mentioning alternatives where convenient and referencing the baselines and comparisons section for discussion of alternative approaches that we compare to in our evaluation. Make it clear that you are proposing a method, not just summarizing a bunch of prior work. % OK revising, RM.
+%For the latter, we also consider three different sampling techniques. 
+%	We discuss all four approaches below. 
+
+\subsecspacepre
+\subsection{Our state propagation method: trajectory sampling (TS)}
+\label{sec:propagation-ts}
+\subsecspacepost
+
+Our method to predict plausible state trajectories begins by creating $P$ particles from the current state, $\MDPState_{t=0}^{p} = \MDPState_0 \,\forall\, p$. 
+Each particle is then propagated by:
+\smash{$\MDPState_{t+1}^{p} \sim \dynamicsModel_{\parameters_{\bootstrap(p,t)}}(\MDPState_{t}^{p}, \MDPAction_{t})$},
+according to a particular bootstrap $\bootstrap(p,t) \ in \{1, \dots, \Bootstrap\}$,
+where $\Bootstrap$ is the number of bootstrap models in the ensemble.
+% 
+A particle's bootstrap index can potentially change as a function of time~$t$. 
+We consider two TS variants:
+\begin{itemize}[leftmargin=15pt]
+ \item \textbf{TS1} refers to particles uniformly re-sampling a bootstrap per time step.
+If we were to consider an ensemble as a Bayesian model, the particles would be effectively continually re-sampling from the approximate \textit{marginal posterior} of plausible dynamics.
+We consider TS1's bootstrap re-sampling to place a soft restriction on trajectory multimodality: 
+particles separation cannot be attributed to the \textit{compounding} effects of differing bootstraps using TS1.
+%
+ \item \textbf{TS$\infty$} refers to particle bootstraps never changing during a trial.
+An ensemble is a collection of plausible models, which together represent the \textit{subjective} uncertainty in function space of the true dynamics function $\MDPTransition$, which we assume is time invariant. 
+TS$\infty$ captures such time invariance since each particle's bootstrap index is made consistent over time.
+An advantage of using TS$\infty$ is that aleatoric and epistemic uncertainties are separable \citep{depeweg2018decomposition}. 
+Specifically, aleatoric state variance is the average variance of particles of same bootstrap, whilst epistemic state variance is the variance of the average of particles of same bootstrap indexes.
+Epistemic is the `learnable' type of uncertainty, useful for directed exploration \citep{thrun1992efficient}.
+Without a way to distinguish epistemic uncertainty from aleatoric, an exploration algorithm (\eg{} Bayesian optimization) might mistakingly choose actions with high predicted reward-variance `hoping to learn something' when in fact such variance is caused by persistent and irreducible system stochasticity offering zero exploration value.
+%\todo{reviewer unsure how distinguishing these uncertainties helps in control.}
+\end{itemize}
+%
+Both TS variants can capture multi-modal distributions and can be used with any probabilistic model. We found $P=20$ and $B=5$ sufficient in all our experiments.
+
+\subsecspacepre
+\subsection{Baseline state propagation methods for comparison}
+\label{sec:propagation-baselines}
+\subsecspacepost
+%%SL.05.15: if you end up *really* crunched for space, you can contract this section significantly and reference appendices
+
+    To validate our state propagation method, in the experiments of \sec{sec:results:ablation} we compare against four alternative state propagation methods, which we now discuss. 
+    
+\vspace{-5pt}
+
+	\paragraph{Expectation (E)}
+To judge the importance of our TS method using multiple particles to represent a distribution we compare against the aforementioned deterministic propagation technique. 
+The simplest way to plan is iteratively propagating the expected prediction at each time step (ignoring uncertainty) $ \MDPState_{t+1} = \mathbb{E}[\dynamicsModel_{\parameters}(\MDPState_{t}, \MDPAction_{t})]$.
+          % \gauss{\vec{\mu}\left(\MDPState_{t}^{p}, \MDPAction_{t}\right)}{\varMat\left(\MDPState_{t}^{p}, \MDPAction_{t}\right)}.
+		% We do so by iteratively computing the next state $\MDPState_{t+1} = \vec{\mean}(\MDPState_{t}, \MDPAction_{t})$.
+		%Since this method only considers the expectation, it is applicable to all neural network models under consideration in this work.
+		An advantage of this approach over TS is reduced computation and simple implementation: only a single particle is propagated.
+		The main disadvantage of choosing E over TS is that small model biases can compound quickly over time, with no way to tell the quality of the state estimate.
+	%     \subsubsection{Approximate Methods}
+	    
+	%     	Approximate methods for uncertainty propagation attempt to incorporate uncertainty as predicted by the model to determine a distribution over trajectories to be used for planning.
+	%         However, since modeling the full distribution over resulting trajectories is often difficult to compute, these methods impose restrictions on the output distribution, sacrificing accuracy for the sake of tractability.
+	%         These methods include moment-matching, which is used in certain probabilistic approaches to MBRL~\citep{Deisenroth2014}.
+	%         In this paper, we do not evaluate approximate uncertainty propagation techniques, although as discussed in \citep{Kupcsik2013}, they can be often replaced by sampling methods, which we discuss in the next paragraph.
+
+%         This propagation is agnostic to having deterministic or probabilistic ensemble models -- in the first case each particle is propagated according to $\E\left[\cdot\right]$, in the second case we can employ DS to propagate the state.
+        
+%         In this paper, we employ a shooting method to approximate the distribution over trajectories that would result from some fixed action sequence.
+%         To use this method, we apply the action sequence under consideration to a fixed number of independent particles.
+%         Trajectory prediction for each particle then proceeds as in the deterministic case, with the added step of sampling from the predicted output distribution for use as the input state in the next time step.
+%         Since this method requires a model which can predict output distributions, this method is only compatible with any probabilistic model or a deterministic ensemble model.
+
+\vspace{-5pt}
+
+   \paragraph{Moment matching (MM)}
+   % In some cases the moments of output distributions are analytically computable, 
+%%SL.05.08: this seems like a red herring -- they're not analytically computable for your method, so why even say this? % OK, removing+revising that part -RM
+Whilst TS's particles can represent multimodal distributions, forcing a unimodal distribution via moment matching (MM) can (in some cases) benefit MBRL data efficiency~\citep{Gal2016}. 
+Although unclear why, \cite{Gal2016} (who use Gaussian MM) hypothesize this effect may be caused by smoothing of the loss surface and implicitly penalizing multi-modal distributions (which often only occur with uncontrolled systems). 
+To test this hypothesis we use Gaussian MM as a baseline and assume independence between bootstraps and particles for simplicity
+%\kurtland{please correct/verify below equation.}
+$\MDPState_{t+1}^{p} \overset{iid}{\sim} \gauss{\mathbb{E}_{p,\bootstrap}\left[\MDPState_{t+1}^{p,\bootstrap} \right]}{\mathbb{V}_{p,\bootstrap}\left[\MDPState_{t+1}^{p,\bootstrap} \right]}$, where $\MDPState_{t+1}^{p,\bootstrap} \sim \dynamicsModel_{\parameters_\bootstrap}(\MDPState_{t}^{p}, \MDPAction_{t})$.
+% \gauss{\frac{1}{E P} \sum_{e=1}^E\sum_{p=1}^P \vec{\mu}_{\parameters_{e}}\!\!\left(\MDPState_{t}^{p}, \MDPAction_{t}\right)}{\frac{1}{E P}\sum_{e=1}^E\sum_{p=1}^P \varMat_{\parameters_{e}}\!\!\left(\MDPState_{t}^{p}, \MDPAction_{t}\right)}.
+%
+Future work might consider other distributions too, such as the Laplace distribution.
+
+\vspace{-5pt}
+	\paragraph{Distribution sampling (DS)}
+    The previous MM approach made a strong unimodal assumption about state distributions: the state distribution at each time step was re-cast to Gaussian.
+        A softer restriction on multimodality -- between MM and TS -- is to moment match w.r.t.\ the bootstraps only (noting the particles are otherwise independent if $B=1$).
+        % is to propagate multiple independent particles sampled from MM~\citep{Kupcsik2013}. 
+%     An alternative approach is to approximate the make use of particles \citep{Kupcsik2013}.
+%\todo{Rephrased,is the sentence below still correct?}
+    This means that we effectively smooth the loss function \wrt{} epistemic uncertainty only (the uncertainty relevant to learning), whilst the aleatoric uncertainty remains free to be multimodal. 
+    We call this method distribution sampling (DS):
+%%SL.05.08: instead of presenting as a laundry list, build up to the method that actually works best and relegate the rest to baselines/comparisons section % OK I'll make a local subsection on baselines here, which we can decide on moving to the experiments/baselines subsection or not later -RM.
+% 		A second approach to propagate uncertainty, in presence of probabilistic dynamics model, is to propagate multiple independent samples, corresponding to a set of particles initialized to the current state at the first time step.
+%		To mitigate model bias, we can propagate uncertainty via multiple independent samples \citep{Kupcsik2013}, taking 
+% 		At each time step, for each particle, we compute the predicted distribution at the next time step, and subsequently sample the next state of the particle from this distribution~\citep{Kupcsik2013}.
+        % We again initialize particles as $\MDPState_{t=0}^{p} = \MDPState_0 \,\forall\, p$, but instead propagate using:
+$\MDPState_{t+1}^{p} \sim \gauss{\mathbb{E}_\bootstrap\left[\MDPState_{t+1}^{p,\bootstrap}\right]}{\mathbb{V}_\bootstrap\left[\MDPState_{t+1}^{p,\bootstrap}\right]}$, with $\MDPState_{t+1}^{p,\bootstrap} \sim \dynamicsModel_{\parameters_\bootstrap}(\MDPState_{t}^{p}, \MDPAction_{t})$.
+          % \gauss{\vec{\mu}\left(\MDPState_{t}^{p}, \MDPAction_{t}\right)}{\varMat\left(\MDPState_{t}^{p}, \MDPAction_{t}\right)}.
+
+		% One advantage of DS is that the trajectory of each particle can be computed independently and therefore can be easily parallelized. % this is true of other models too -RM.
+		
+% \vspace{-5pt}
+%     \paragraph{Random sampling (RS)} % Merges RS with TS
+%     %To judge the importance of particles having consistent ensemble indexes in our TS method, we propose the `random sampling' scheme (RS) that breaks this rule.
+%     To judge the importance of TS's particles having consistent ensemble indexes over time, we propose the `random sampling' scheme (RS) that breaks this rule.
+%     One potential advantage of RS is an even-softer restriction on multimodality than MM and DS, not by casting to a particulate distribution, but by letting particles re-sample from the approximate \textit{marginal posterior} of plausible dynamics functions at each time step. Since particles re-sample bootstraps, they are less likely to separate due to the compounding effects of their differing bootstraps.
+%     RS implementation is identical to TS except ensemble indexes are sampled per particle and per time step $\bootstrap(p,t)$ uniformly \smash{$ \MDPState_{t+1}^{p} \sim \dynamicsModel_{\parameters_{\bootstrap(p,t)}}(\MDPState_{t}^{p}, \MDPAction_{t})$}.
+%           %\gauss{\vec{\mu}_{\parameters_{e(p,t)}}\left(\MDPState_{t}^{p}, \MDPAction_{t}\right)}{\varMat_{\parameters_{e(p,t)}}\left(\MDPState_{t}^{p}, \MDPAction_{t}\right)},
+% % \end{align}
+% Unfortunately RS (also MM and DS) render epistemic and aleatoric uncertainty indistinguishable.\todo{reviewer unsure how distinguishing these uncertainties helps in control.}
+%     	We now consider the first sampling approach that is unique to dynamics models based on ensembles.
+%         This sampling scheme, that we call ensemble random sampling, propagates multiple particles, with each particle randomly selecting at each time step a model from the ensemble and using only that single model to update its state. 
+%         As a result this approach is applicable only to ensemble methods, but it is agnostic to whether each single model is probabilistic or deterministic.
+%         However, unlike the previous sampling approach where each particle would be sampled from a distribution, in this approach
+%     	The last class of methods for uncertainty propagation that will be considered in this paper consists of methods that sample some model from an ensemble, and then uses that model to predict the resulting trajectories.
+%         Since these methods rely on the presence of an ensemble of models, this class of methods are only compatible with the bootstrapped ensembles described in an earlier section.
+%         In this work, we consider two possible methods of model sampling; in one, we use the same sampled model for predicting the entire trajectory of a particle, while for another, we sample a different model for every time step in trajectory prediction.
+%         For the probabilistic ensemble, we choose to sample a new particle from the output distribution predicted by the sampled model (as in approximate uncertainty propagation methods), while for the deterministic ensemble, we choose to propagate the mean (as in deterministic uncertainty propagation methods).
+
+% \subsection{Deep Dynamics Model}
+% %%SL.09.13: I think it's better to refer to them as neural network dynamics models, some reviewers will get on your case about how "deep" your model really is
+
+% Deep dynamics models can be divided into two main categories, deterministic and probabilistic.
+
+% \subsubsection{Deterministic Deep Dynamics Models}
+% %%SL.06.08: should discuss that this is just a Gaussian with unit variance...
+
+% \subsubsection{Probabilistic Deep Dynamics Models}
+
+% 	Let $\vec{w} = [\MDPState\T, \MDPAction\T]\T$.
+%     %%SL.09.13: I think it would be clearer to just use s and a throughout, it was really confusing to me to see f(w) | w -- really weird and hard to tell what it means
+% 	One common approach to modeling the aforementioned transition function $\MDPTransition$ is to assume that the conditional distribution $\approximator{\MDPTransition}(\vec{w}) | \vec{w}$ is given by
+% 	%
+% 	\begin{align}
+% 	  \approximator{\MDPTransition}(\vec{w}) | \vec{w} \sim \gauss{\vec{\mean}_{\theta}(\vec{w})}{\varMat},
+%       %%SL.06.08: This notation is a bit weird. Why is f suddenly redefined, and why do you have this w thing? It might be better to just use probability distributions instead of f, in which case Sec III should define p(s_t+1|s_t,a_t) instead of f(s_t,a_t)
+% 	\end{align}
+% 	%
+% 	where $\theta$ is a vector of parameters of some neural network that outputs $\vec{\mean}_{\theta}(\vec{w})$ given some input $\vec{w}$, and $\varMat$ is some fixed diagonal covariance matrix.
+% 	With this assumption, one can derive the usual squared error loss term through maximum likelihood considerations.
+
+% 	We extend this approach to create a deep probabilistic model by assuming that we have the distribution
+%     %%SL.06.08: is this actually an "extension"? I'm sure people have trained models that output variance as a function of inputs before
+% 	%
+% 	\begin{align}
+% 		\approximator{\MDPTransition}(\vec{w}) | \vec{w} \sim \gauss{\vec{\mean}_{\theta}(\vec{w})}{\varMat_{\theta}(\vec{w})}\,, \label{output_distribution}
+% 	\end{align}
+% 	%
+% 	allowing us to model heteroscedastic noise.
+% 	We also assume that the output dimensions are not correlated, i.e. $\varMat_{\theta}(\vec{w})$ is a diagonal matrix.
+%     %%SL.06.08: the stuff below probably deserves its own section, which first motivates using this fully bayesian thing, and then explains how it is done
+% 	Furthermore, we take a fully Bayesian approach by assuming that $\theta \sim \prob(\theta | \D)$.
+% 	By maximizing the log likelihood, one can then derive the cost function
+% 	%
+% 	\begin{align}
+% 		l(\theta) = \sum_{i=1}^{n}{\Delta_i^\top\varMat_{\theta}(\vec{w}_i)^{-1}\Delta_i + \log\det{\varMat_{\theta}(\vec{w}_i)}}\,,
+% 	\end{align}
+% 	%
+% 	where $\Delta_i = \approximator{\MDPTransition}(\vec{w}_i) - \vec{\mean}_{\theta}(\vec{w}_i)$.
+%     %%SL.06.08: I'm confused -- you said before you do max likelihood, and this seems to just be the equation for max likelihood, but why do you talk about the bayesian stuff? this is just max likelihood w/o accounting for distribution over theta
+
+% 	Since computing the full Bayesian posterior $\prob(\theta | \D)$ is computationally infeasible, we implemented the model above as a bootstrapped ensemble of $N$ neural networks.
+%     %%SL.06.08: citation???
+% 	This amounts to assuming that $\theta \sim \unifNo(\{\theta_1, \dots, \theta_N\})$,
+%     %%SL.06.08: U is undefined
+%     where $\theta_i$ is the vector of parameters of a single network trained on some subset of $\D$ obtained by drawing sample points with replacement.
+    
+%     If we apply the laws of total expectation and variance to the distribution in \eq{output_distribution}, we find that
+%    	%
+%     \begin{align}
+%     	\E\left[\approximator{\MDPTransition}(\vec{w}) | \vec{w}\right] &= \E\left[\vec{\mean}_\theta(\vec{w})\right] \\
+%     \var{\left[\approximator{\MDPTransition}(\vec{w}) | \vec{w}\right]} &= \diag{\var{\left[\vec{\mean}_\theta(\vec{w})\right]}} + \E\left[\varMat_{\theta}(\vec{w})\right].
+%     \end{align}
+%     %
+%     In particular, for the case of a bootstrapped model, we have that
+%     %
+%     \begin{align}
+%     	\E\left[\approximator{\MDPTransition}(\vec{w}) | \vec{w}\right] &= \frac{1}{N}\sum_{i=1}^{N}{\vec{\mean}_{\theta_i}(\vec{w})} = \overline{\mean_{\theta}(\vec{w})} \\
+%         \var{\left[\approximator{\MDPTransition}(\vec{w}) | \vec{w}\right]} &= \frac{1}{N}\sum_{i=1}^{N}{\left\{\varMat_{\theta_i}(\vec{w}) + \left[\vec{\mean}_{\theta_i}(\vec{w}) - \overline{\mean_{\theta}(\vec{w})}\right]^2\right\}}.
+%     \end{align}
+%     %%SL.06.08: need to discuss how this relates to other estimators in prior work... novelty will be unclear
+
+% \subsection{Uncertainty Propagation}
+% \label{sec:approach:propagation}
+    
+%     %%SL.06.08: should have separate section about control
+    
+%     Multiple approaches exists to propagate uncertainty~\citep{Girard2002,Quinonero-Candela2003}.
+%     The three main approaches are: deterministic, approximate and sample-based.
+    
+%     	%%SL.06.08: I think the discussion of control should be expanded here, to discuss all the different ways that uncertainty can be incorporated. Maybe use a \paragraph heading for each method?
+% 	In the case of a deterministic model, the computation of $\E_{\approximator{\MDPTransition}}\left[c(\tau) | \MDPAction_\MDPTime, \dots, \MDPAction_{\MDPTime + T}\right]$ is straightforward; since we assume that $\approximator{\MDPTransition}$ represents the true dynamics of the system, we simply use the model to predict the trajectory that would result from the action sequence, and apply the cost function $c$ to that resulting trajectory.
+% 	However, since a probabilistic model instead returns a distribution over the resulting states, it is intractable in general to compute the expectation above.
+% 	Instead, we approximate this expectation by sampling trajectories of several particles for each action sequence.
+% 	    In this procedure, we follow a similar procedure to trajectory prediction in the deterministic case --- the only difference being that after every transition, we sample from the output distribution and assume that the sampled state is the actual output state.
+% 	Following this trajectory prediction scheme for each particle, we then compute the cost for each trajectory and take the average to approximate the desired expectation.
+    
+%     In the next section, we will describe how predicting trajectory distributions can be used to optimize the actions to take, in the model predictive control framework.
+
+% \FloatBarrier

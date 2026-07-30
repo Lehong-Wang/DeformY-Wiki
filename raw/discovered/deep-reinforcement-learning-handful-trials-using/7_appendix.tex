@@ -1,0 +1,297 @@
+
+\FloatBarrier
+\subsection{Well behaved probabilistic networks}
+\label{sec:variance-bounding}
+\FloatBarrier
+
+An under-appreciated detail of probabilistic networks is how the variance output is implemented with automatic differentiation. 
+Often the real-valued output is treated as a log variance (or similar), and transformed through an exponential function (or similar) to produce a nonnegative-valued output, necessary to be interpreted as a variance. 
+However, whilst this variance output is well behaved at points within the training distribution, its value is undefined outside the trained distribution. 
+In fact, during the training, there is no explicit loss term that regulate the behavior of the variance outside of the training points.
+Thus, when this model is then evaluated at previously unseen states, as is often the case during the MBRL learning process, the outputted variance can assume any arbitrary value, and in practice we noticed how it occasionally collapse to zero, or explode toward infinity. 
+
+This behavior is in contrast with other models, such as GPs, where the variance is more well behaving, being bounded and Lipschitz-smooth.
+As a remedy, we found that in our model lower bounding and upper bounding the output variance such that they could not be lower or higher than the lowest and highest values in the training data significantly helped. 
+%
+To bound the variance output for a probabilistic network to be between the upper and lower bounds found during training the network on the training data, we used the following code 
+with automatic differentiation:
+%
+\begin{align*} 
+&\texttt{logvar = max\_logvar - tf.nn.softplus(max\_logvar - logvar)} \\
+&\texttt{logvar = min\_logvar + tf.nn.softplus(logvar - min\_logvar)} \\
+&\texttt{var = tf.exp(logvar)}
+\end{align*}
+%
+with a small regularization penalty on term on \texttt{max\_logvar} so that it does not grow beyond the training distribution's maximum output variance, and on the negative of \texttt{min\_logvar} so that it does not drop below the training distribution's minimum output variance.
+
+\subsection{Fitting PE model to toy function}
+\label{app:pe-model-toy}
+\FloatBarrier
+
+As an initial test, we evaluated all previously described models by fitting to a dataset $\{(x_i, y_i)\}$ of $2000$ points from a sine function, where the $x_i$'s are sampled uniformly from $[-2\pi, -\pi] \cup [\pi, 2\pi]$.
+Before fitting, we introduced heteroscedastic noise by performing the transformation
+\begin{equation}
+  (x, y) \mapsto \left(x, y + \gauss{0}{0.0225\left|\sin\left(\frac{3}{2}x + \frac{\pi}{8}\right)\right|}\right). \label{eq:sine}
+\end{equation}
+The model fit to \eqref{eq:sine} was shown in \fig{fig:diagram}, but reproduced here for convenience as \fig{fig:ourModel}.
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=0.5\linewidth]{fig/ourModel.pdf}
+	\caption{Our probabilistic ensemble (PE) dynamics model: an ensemble of two bootstraps (for visual clarity, we normally use five bootstraps), each a probabilistic neural network that captures aleatoric uncertainty (in this case: observation noise).
+	Note the bootstraps agree near data, but tend to disagree far from data. Such bootstrap disagreement represents our model's epistemic uncertainty.}
+	\label{fig:ourModel}
+\end{figure}
+
+\FloatBarrier
+\subsection{One-step predictions of learned models}
+\label{app:one-step-prediction}
+\FloatBarrier
+
+To visualize and verify the accuracy of our PE model, we took all training data from the experiments and visualized the one-step predictions of the model.
+Since the states are high-dimensional, we resorted to plotting the output dimensions individually, sorting by the ground truth value in each dimension, seen in \fig{fig:one-step-predictions}.
+
+\begin{figure}[htpb]
+	\begin{subfigure}{0.48\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{fig/evalprob/dim-3-train_aleatoric.pdf}
+		\caption{Cartpole dim3 training data aleatoric.}
+	\end{subfigure}
+	\hfill
+    \begin{subfigure}{0.48\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{fig/evalprob/dim-3-holdout_aleatoric.pdf}
+		\caption{Cartpole dim3 holdout data aleatoric.}
+	\end{subfigure}
+	
+    \begin{subfigure}{0.48\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{fig/evalprob/dim-3-train_epistemic.pdf}
+		\caption{Cartpole dim3 training data epistemic.}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.48\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{fig/evalprob/dim-3-holdout_epistemic.pdf}
+		\caption{Cartpole dim3 holdout data epistemic.}
+	\end{subfigure}
+	\caption{One step predictions of the cartpole angular velocity (velocities are typically harder to predict) after 100 trails of training data. Shown are the prediction indexes, monotonically increase in ground truth output value, with two standard deviations at each output prediction. We see the model is certain (w.r.t.\ both uncertainty types) where most of the data lies, but less certain in extreme values of data where there are fewer training data.}
+	\label{fig:one-step-predictions}
+\end{figure}
+
+\FloatBarrier
+\subsection{Uncertainty propagation methods}
+\label{app:propagation}
+\FloatBarrier
+\begin{figure}[htpb]
+	\begin{subfigure}{0.48\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{fig/trajectory/trajpred-TS1.pdf}
+		\caption{Trajectory sampling (TS$1$).}
+	\end{subfigure}
+	\hfill
+    \begin{subfigure}{0.48\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{fig/trajectory/trajpred-TSinfty.pdf}
+		\caption{Trajectory sampling (TS$\infty$).}
+	\end{subfigure}
+	
+    \begin{subfigure}{0.48\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{fig/trajectory/trajpred-DS.pdf}
+		\caption{Distribution sampling (DS).}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.48\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{fig/trajectory/trajpred-MM.pdf}
+		\caption{Moment matching (MM).}
+	\end{subfigure}
+	\caption{Different uncertainty propagation methods discussed in \sec{sec:approach:propagation}. We show a PE model trained after 100 trials on the cartpole system propagating particles given an action sequence from an intermediate state (pole swinging up) that solves the task.}
+	\label{fig:uncertainty-propagation}
+\end{figure}
+
+\FloatBarrier
+\subsection{Forward Dynamics Model}
+\label{app:dynamics}
+
+Following the suggestion presented in~\citep{Deisenroth2014}, instead of learning a forward dynamics in the form $\MDPState_{\MDPTime + 1} = \MDPTransition\left(\MDPState_\MDPTime, \MDPAction_{\MDPTime}\right)$, we learn a model that predicts the difference to the current state $\Delta\MDPState_{\MDPTime + 1} = \MDPTransition\left(\MDPState_\MDPTime, \MDPAction_{\MDPTime}\right)$ such that $\MDPState_{\MDPTime + 1} = \MDPState_{\MDPTime} + \Delta\MDPState_{\MDPTime + 1}$.
+Moreover, for states $\MDPState_i$ that represent angles, we transform the states fed as inputs to the dynamics model to be $[\sin(\MDPState_i), \cos(\MDPState_i)]$ to capture the rotational nature of the joint.
+
+\FloatBarrier
+\subsection{Experimental setting}
+\label{sec:results:setting}
+
+	For our experiments, we used four continuous-control benchmark tasks simulated via MuJoCo~\citep{Todorov2012} that vary in complexity, dimensionality, and the presence of contact forces (pictured \fig{fig:results:tasks}).
+	The simplest is the classical cartpole swing-up benchmark ($\MDPdimState=4$, $\MDPdimAction=1$).
+    To evaluate our model with higher dimensional dynamics and frictional contacts, we use a simulated PR2 robot in a reaching and pushing task ($\MDPdimState=14$, $\MDPdimAction=7$),
+	as well as the half-cheetah ($\MDPdimState=17$, $\MDPdimAction=6$).
+	Each experiment is repeated with different random seeds, and the mean and standard deviation of the cost is reported for each condition.
+	Each neural network dynamics model consist of three fully connected layers, 500 neurons per layer (except 250 for halfcheetah), and swish activation functions~\citep{Ramachandran2017}.
+	The weights of the networks were initially sampled from a truncated Gaussian with variance equal to the reciprocal of the number of fan-in neurons.
+
+	
+\FloatBarrier
+\subsection{Additional considerations}
+\label{sec:results:additional}
+\FloatBarrier
+	\textbf{MPC horizon length}: 
+	choosing the MPC horizon $\horizon$ is nontrivial: `too short' and MPC suffer from bias, `too long' then variance. Probabilistic propagation methods are robust to horizons set `too long'. This effect is due to particle separation over time (e.g.\ \fig{fig:uncertainty-propagation}),
+	which reduces the dependence of actions on \textit{expected}-cost further in time. The action selection procedure then effectively ignores the unpredictable with our method. Deterministic methods have no such mechanism to avoid model bias \citep{Deisenroth2014}, which compounds over longer time horizons, resulting in poor performance if the horizon is set `too high' as seen in \fig{fig:horizon}.
+
+\vspace{-5mm}
+\begin{figure}[htpb]
+	\begin{subfigure}{0.48\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{fig/horizon-exp-trial1.pdf}
+		\caption{Halfcheetah trial 1.}
+	\end{subfigure}
+	\hfill
+    \begin{subfigure}{0.48\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{fig/horizon-exp-trial11.pdf}
+		\caption{Halfcheetah trial 10.}
+	\end{subfigure}
+
+  \begin{subfigure}{0.48\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{fig/horizon-exp-trial41.pdf}
+		\caption{Halfcheetah trial 40.}
+	\end{subfigure}
+	\hfill
+    \begin{subfigure}{0.48\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{fig/horizon-exp-trial81.pdf}
+		\caption{Halfcheetah trial 80.}
+	\end{subfigure}
+	\caption{Effect of MPC horizon on halfcheetah after different amounts of trials. Showing median, and percentile bound 5 and 95, from 5 repeats of experiment.}
+	\label{fig:horizon}
+\end{figure}
+    
+    
+\FloatBarrier
+
+	\vspace{-3mm}
+	\textbf{MPC action sampling}:
+	We hypothesized the higher the state or action dimensionality, the more important that MPC action selection is guided (opposed to the uniform random shooting method, used by \cite{Nagabandi2017}).
+	Thus we tested cross-entropy method (CEM) and random shooting for various tasks confirming this hypothesis (details \app{app:cem}).
+\FloatBarrier
+
+\begin{wrapfigure}{tr}{0.5\textwidth}
+\vspace{-10pt}
+\includegraphics[width=\linewidth]{fig/stochasticity-level-exp}
+\caption{Modeling aleatoric uncertainty makes MBRL more robust to stochasticity.}
+\label{fig:stochastic-tradeoff}
+\end{wrapfigure}
+	\textbf{Stochastic systems}:
+	Finally we evaluate how successful probabilistic networks mitigate the detrimental effects of system stochasticity whilst learning to control.
+	We introduced probabilistic networks as a means of capturing aleatoric uncertainty (inherent and persistent system stochasticities). Here we test how well probabilistic networks perform against deterministic networks under stochasticities in the action space. We add Gaussian noise onto the robot's selected action, of standard deviations ranging 0-20\% of action ranges permitted by MuJoCo. \fig{fig:stochastic-tradeoff} shows that probabilistic PE models perform better and more consistently under system noise. Further visualizations are provided in \app{app:stochastic-systems}.
+	
+\textbf{Model accuracy over time}: 
+\fig{fig:modelaccuracy} shows the evolution of a PE model's accuracy on the halfcheetah as it collects model trails of data (see legend).
+
+\begin{figure}[htpb]
+	\begin{subfigure}{0.48\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{fig/mse.pdf}
+		\caption{Mean squared error.}
+	\end{subfigure}
+	\hfill
+    \begin{subfigure}{0.48\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{fig/neg_log_probs.pdf}
+		\caption{Negative log likelihood.}
+	\end{subfigure}
+	\caption{Model accuracy: our PETS dynamics model at trials 10-100 (see legend) make predictions on trajectory seen at each trial (x-axis) and are scored (y-axis) according to mean squared error (left figure) and negative log likelihood (right figure).}
+	\label{fig:modelaccuracy}
+\end{figure}
+
+\subsection{MPC action selection}
+\label{app:cem}
+\label{sec:results:optimizer}
+
+\begin{wrapfigure}{tr}{0.55\textwidth}
+		\centering
+        \vspace{-15pt}
+        \includegraphics[width=\linewidth]{fig/optimizer-comparison-groundtruth-dyn.pdf}
+		\caption{Average reward achieved on ground truth dynamics of the half-cheetah (using the MuJoCo simulator itself as ground truth dynamics). The cross entropy method (CEM) optimizer performs significantly better than random shooting sampling. For fair comparison, both use 2500 samples: CEM has five iterations of sampling 500 candidate actions before choosing the elite candidates, whereas random shooting simply sampled 2500 times. Shown is the median performance, with error bars showing the 5 and 95 percentile performance across random seeds.}
+		\label{fig:results:optimizer}
+        \vspace{-5pt}
+\end{wrapfigure}
+	We study the impact of the particular choice of action optimization technique.
+	An important criterion when selecting the optimizer is not only the optimality of the selected actions, but also the speed with which the actions can be obtained, which is especially critical for real-world control tasks that must proceed in real time\footnote{Such as robotics, where control frequencies below 20Hz are undesirable, meaning that a decision need to be taken in under 50ms.}.
+    Simple random search techniques have been proposed in prior work due to their simplicity and ease of parallelism~\citep{Nagabandi2017}.
+	However, uniform random search~\citep{Brooks1958} suffers in high-dimensional spaces.
+    In addition to random search, we compare to the cross-entropy method (CEM)~\citep{botev2013}, which iteratively samples solutions from a candidate distribution that is adjusted based on the best sampled solutions.
+    To isolate the comparison of optimizers from our dynamics model, we instead use the ground truth dynamics function (the MuJoCo simulator itself) to evaluate candidate action sequences.
+	The results (\fig{fig:results:optimizer}) show that using CEM significantly outperforms random search on the half-cheetah task. 
+    We use CEM in all of the remaining experiments. 
+
+
+\FloatBarrier
+\newpage
+\subsection{Stochastic systems:}
+\label{app:stochastic-systems}
+
+In \fig{fig:10-PE-TS} we compare and contrast the effect stochastic action noise has w.r.t.\ variable MBRL modeling decisions.
+Notice methods that PE method that propagate uncertainty are generally required for \textit{consistent} performance.
+
+\begin{figure}[htpb]
+    \begin{subfigure}{0.48\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{fig/stochastic/10-D-E.pdf}
+        \caption{D-E}
+        \label{fig:10-D-E}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{fig/stochastic/10-P-E.pdf}
+        \caption{P-E}
+        \label{fig:10-P-E}
+    \end{subfigure}
+    
+    \begin{subfigure}{0.48\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{fig/stochastic/10-PE-DS.pdf}
+        \caption{PE-DS}
+        \label{fig:10-PE-DS}
+    \end{subfigure}%
+    \hfill
+    \begin{subfigure}{0.48\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{fig/stochastic/10-PE-E.pdf}
+        \caption{PE-E}
+        \label{fig:10-PE-E}
+    \end{subfigure}
+    
+    \begin{subfigure}{0.48\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{fig/stochastic/10-PE-TS1.pdf}
+        \caption{PE-TS$1$}
+        \label{fig:10-PE-RS}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{fig/stochastic/10-PE-TSinf.pdf}
+        \caption{PE-TS$\infty$}
+        \label{fig:10-PE-TS}
+    \end{subfigure}
+    \caption{The distribution of cartpole's reward for particular MBRL design decisions in the presence of stochastic system noise (in this case additive noise onto the actions selected by the robot: with standard deviation equal to 10\% of each of the action range.)}
+    \label{fig:stochastic}
+\end{figure}
+
+\FloatBarrier
+\subsection{Linear model comparison:}
+\label{app:linear}
+\FloatBarrier
+
+\fig{fig:linear} shows that a linear model is unable to capture the halfcheetah dynamics well enough to control it, and that a nonlinear model is necessary.
+
+\begin{figure}[htpb]
+    \centering
+    \includegraphics[width=0.55\linewidth]{fig/linear-model-comparison.pdf}
+    \caption{Linear model comparison.}\
+    \label{fig:linear}
+\end{figure}

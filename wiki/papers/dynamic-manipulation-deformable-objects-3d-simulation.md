@@ -73,6 +73,7 @@ DIDP is the first paper that puts a leaderboard-style number on **3D goal-condit
 
 ## Related
 
+- [[dynamic-dlo-tip-targeting]]
 **Foundations used**
 - [[diffusion-policy]] — base policy class extended by DIDP
 - [[deformable-linear-object]] — object class
@@ -86,6 +87,9 @@ DIDP is the first paper that puts a leaderboard-style number on **3D goal-condit
 - [[physics-informed-test-time-adaptation]] — score-modulated diffusion sampling guided by a differentiable physics loss + kinematic boundary condition, with adaptation restricted to the final projection layer
 - [[reduced-order-gvs-model]] — Geometric Variable Strain reduced-order parameterization of the rod + arm system, the differentiable backbone behind DDP
 
+**Concepts used**
+- [[planning-as-diffusion]] — DIDP is a deformable-object instantiation of planning-as-diffusion: a diffusion model over full trajectories steered at sampling time by a cost/physics gradient (PITA is the differentiable-physics specialization of Diffuser's classifier/cost guidance)
+
 **Claims supported**
 - [[didp-3d-rope-tip-targeting-success-rates]]
 - [[physics-informed-tta-improves-diffusion-policy-on-dynamic-dlo]]
@@ -94,6 +98,7 @@ DIDP is the first paper that puts a leaderboard-style number on **3D goal-condit
 
 - [[iterative-residual-policy-goal-conditioned-dynamic]] — `compares_against`: DIDP positions itself as the 3D extension that drops the 2D-image-sequence representation and the Jacobian assumptions of IRP-style residual policy.
 - [[wiggle-go-system-identification-zero-shot]] — `same_problem_as`: both target arbitrary 3D rope-tip points (DIDP in 20-DoF reduced-order Cosserat sim, Wiggle-and-Go on real xArm 7); the two stake out the sim-only-learned vs real-hardware-sysID-then-trajopt ends of the same problem.
+- [[planning-diffusion-flexible-behavior-synthesis]] — `similar_method_to`: Diffuser is the planning-as-diffusion ancestor (guided diffusion over full state+action trajectories); DIDP is the deformable-object instantiation for 3D rope whipping, with PITA's differentiable-physics guidance specializing Diffuser's classifier/cost guidance.
 
 **Important referenced work** (evidence-text only — full citations live in `graph/citations.jsonl` after fan-in)
 - Diffusion Policy (Chi et al. 2023) — the policy class DIDP builds on.

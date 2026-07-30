@@ -20,6 +20,7 @@ date_updated: '2026-05-06'
 related_concepts:
 - '[[task-level-iterative-learning-control]]'
 - '[[optimization-based-inverse-model]]'
+parent_topic: "[[dynamic-dlo-tip-targeting]]"
 ---
 ## Definition
 

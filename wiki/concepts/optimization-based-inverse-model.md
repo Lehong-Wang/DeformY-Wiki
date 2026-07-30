@@ -21,6 +21,7 @@ date_updated: '2026-05-06'
 related_concepts:
 - '[[task-level-iterative-learning-control]]'
 - '[[critical-point-objective]]'
+parent_topic: "[[compact-action-parameterization]]"
 ---
 ## Definition
 

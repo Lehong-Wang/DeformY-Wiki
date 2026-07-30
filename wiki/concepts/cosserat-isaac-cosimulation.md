@@ -3,10 +3,11 @@ title: "Cosserat-Isaac Co-Simulation"
 aliases: ["Cosserat-Isaac cosim", "co-simulated Cosserat rod + Isaac Sim", "cosimulation of dedicated rod engine with general-purpose simulator"]
 tags: [DLO, simulation, cosserat-rod, isaac-sim, sim-to-real, robot-learning]
 maturity: emerging
-key_papers: ["[[deformx-versatile-co-simulation-framework-deformable]]"]
+key_papers: ["[[deformx-versatile-co-simulation-framework-deformable]]", "accurate-simulation-parameter-identification-dlos-using"]
 first_introduced: "2026"
 date_updated: 2026-05-06
 related_concepts: []
+parent_topic: "[[dynamic-deformable-object-simulation]]"
 ---
 
 ## Definition

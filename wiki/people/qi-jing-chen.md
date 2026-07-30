@@ -9,6 +9,7 @@ date_updated: 2026-05-06
 
 ## Research areas
 
+- [[dynamic-deformable-object-simulation]]
 - Accurate physics-based simulation of deformable linear objects (DLOs) for robot manipulation
 - Bridging discrete-elastic-rod theory with general-purpose physics simulators (MuJoCo)
 - Cheap, hardware-light parameter identification pipelines for real DLO stiffness moduli
@@ -19,6 +20,7 @@ date_updated: 2026-05-06
 
 ## Recent work
 
+- [[accurate-simulation-parameter-identification-dlos-using]]
 - DER-MuJoCo coupling and parameter identification pipeline (IROS 2025; arXiv:2310.00911).
 
 ## Collaborators

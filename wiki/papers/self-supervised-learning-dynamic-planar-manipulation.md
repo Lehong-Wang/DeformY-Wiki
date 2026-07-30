@@ -125,6 +125,8 @@ The decision to switch from Isaac Gym FleX (which the predecessor showed dominat
 
 ## Related
 
+- [[compact-action-parameterization]]
+- [[dynamic-dlo-tip-targeting]]
 **Foundations used**
 - [[deformable-linear-object]] — object class
 - [[sim-to-real-transfer]] — empirical setting and evaluation framing

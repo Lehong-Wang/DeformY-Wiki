@@ -103,6 +103,7 @@ The 6-step recovery from rope-knotting is a striking demonstration that the form
 
 ## Related
 
+- [[dynamic-dlo-tip-targeting]]
 **Foundations used**
 
 - [[deformable-linear-object]] — object class (rope and cloth)

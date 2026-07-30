@@ -7,6 +7,7 @@ key_papers: ["[[accurate-simulation-parameter-identification-dlos-using]]"]
 first_introduced: "2025"
 date_updated: 2026-05-06
 related_concepts: []
+parent_topic: "[[dynamic-deformable-object-simulation]]"
 ---
 
 ## Definition

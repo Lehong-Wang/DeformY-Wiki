@@ -9,6 +9,7 @@ date_updated: 2026-05-06
 
 ## Research areas
 
+- [[dynamic-deformable-object-simulation]]
 - Automated demonstration generation for deformable manipulation
 - Imitation learning and visuomotor policies for soft / non-rigid object manipulation
 - Surgical robotics and dexterous manipulation in simulation
@@ -20,6 +21,7 @@ date_updated: 2026-05-06
 
 ## Recent work
 
+- [[softmimicgen-data-generation-system-scalable-robot]]
 - 2026: SoftMimicGen (NVIDIA + UT-Austin + Toronto + Georgia Tech).
 
 ## Collaborators

@@ -1,0 +1,428 @@
+\begin{thebibliography}{64}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Ahmed and Qin(2009)]{ahmed2009surrogate}
+MYM Ahmed and N~Qin.
+\newblock Surrogate-based aerodynamic design optimization: Use of surrogates in
+  aerodynamic design optimization.
+\newblock In \emph{International Conference on Aerospace Sciences and Aviation
+  Technology}, 2009.
+
+\bibitem[Ames et~al.(2014)Ames, Galloway, Sreenath, and
+  Grizzle]{ames2014rapidly}
+Aaron~D Ames, Kevin Galloway, Koushil Sreenath, and Jessy~W Grizzle.
+\newblock Rapidly exponentially stabilizing control lyapunov functions and
+  hybrid zero dynamics.
+\newblock \emph{IEEE Transactions on Automatic Control}, 2014.
+
+\bibitem[Apgar et~al.(2018)Apgar, Clary, Green, Fern, and Hurst]{apgar2018fast}
+Taylor Apgar, Patrick Clary, Kevin Green, Alan Fern, and Jonathan~W Hurst.
+\newblock Fast online trajectory optimization for the bipedal robot cassie.
+\newblock In \emph{Robotics: Science and Systems}, 2018.
+
+\bibitem[Barragan et~al.(2018)Barragan, Flowers, and
+  Johnson]{barragan2018minirhex}
+Monica Barragan, Nikolai Flowers, and Aaron~M. Johnson.
+\newblock {MiniRHex}: A small, open-source, fully programmable walking hexapod.
+\newblock In \emph{Robotics: Science and Systems Workshop on ``Design and
+  Control of Small Legged Robots''}, 2018.
+
+\bibitem[Bledt et~al.(2018)Bledt, Powell, Katz, Di~Carlo, Wensing, and
+  Kim]{bledt2018cheetah}
+Gerardo Bledt, Matthew~J Powell, Benjamin Katz, Jared Di~Carlo, Patrick~M
+  Wensing, and Sangbae Kim.
+\newblock Mit cheetah 3: Design and control of a robust, dynamic quadruped
+  robot.
+\newblock In \emph{2018 IEEE/RSJ International Conference on Intelligent Robots
+  and Systems (IROS)}. IEEE, 2018.
+
+\bibitem[Boeing and Br{\"a}unl(2012)]{boeing2012leveraging}
+Adrian Boeing and Thomas Br{\"a}unl.
+\newblock Leveraging multiple simulators for crossing the reality gap.
+\newblock In \emph{2012 12th International Conference on Control Automation
+  Robotics \& Vision (ICARCV)}. IEEE, 2012.
+
+\bibitem[Bongard and Lipson(2005)]{bongard2005nonlinear}
+Josh~C Bongard and Hod Lipson.
+\newblock Nonlinear system identification using coevolution of models and
+  tests.
+\newblock \emph{IEEE Transactions on Evolutionary Computation}, 2005.
+
+\bibitem[Calandra et~al.(2016)Calandra, Seyfarth, Peters, and
+  Deisenroth]{calandra2016bayesian}
+Roberto Calandra, Andr{\'e} Seyfarth, Jan Peters, and Marc~Peter Deisenroth.
+\newblock Bayesian optimization for learning gaits under uncertainty.
+\newblock \emph{Annals of Mathematics and Artificial Intelligence}, 2016.
+
+\bibitem[Choromanski et~al.(2018)Choromanski, Iscen, Sindhwani, Tan, and
+  Coumans]{choromanski2018optimizing}
+Krzysztof Choromanski, Atil Iscen, Vikas Sindhwani, Jie Tan, and Erwin Coumans.
+\newblock Optimizing simulations with noise-tolerant structured exploration.
+\newblock In \emph{2018 IEEE International Conference on Robotics and
+  Automation (ICRA)}. IEEE, 2018.
+
+\bibitem[Clavera et~al.(2019)Clavera, Nagabandi, Liu, Fearing, Abbeel, Levine,
+  and Finn]{clavera2018learning}
+Ignasi Clavera, Anusha Nagabandi, Simin Liu, Ronald~S. Fearing, Pieter Abbeel,
+  Sergey Levine, and Chelsea Finn.
+\newblock Learning to adapt in dynamic, real-world environments through
+  meta-reinforcement learning.
+\newblock In \emph{International Conference on Learning Representations}, 2019.
+
+\bibitem[De~Lasa et~al.(2010)De~Lasa, Mordatch, and Hertzmann]{de2010feature}
+Martin De~Lasa, Igor Mordatch, and Aaron Hertzmann.
+\newblock Feature-based locomotion controllers.
+\newblock \emph{ACM Transactions on Graphics (TOG)}, 2010.
+
+\bibitem[Di~Carlo et~al.(2018)Di~Carlo, Wensing, Katz, Bledt, and
+  Kim]{di2018dynamic}
+Jared Di~Carlo, Patrick~M Wensing, Benjamin Katz, Gerardo Bledt, and Sangbae
+  Kim.
+\newblock Dynamic locomotion in the mit cheetah 3 through convex
+  model-predictive control.
+\newblock In \emph{2018 IEEE/RSJ International Conference on Intelligent Robots
+  and Systems (IROS)}. IEEE, 2018.
+
+\bibitem[Finn et~al.(2017)Finn, Abbeel, and Levine]{finn2017model}
+Chelsea Finn, Pieter Abbeel, and Sergey Levine.
+\newblock Model-agnostic meta-learning for fast adaptation of deep networks.
+\newblock In \emph{International Conference on Machine Learning}. PMLR, 2017.
+
+\bibitem[Fujimoto et~al.(2018)Fujimoto, Hoof, and
+  Meger]{fujimoto2018addressing}
+Scott Fujimoto, Herke Hoof, and David Meger.
+\newblock Addressing function approximation error in actor-critic methods.
+\newblock In \emph{International Conference on Machine Learning}. PMLR, 2018.
+
+\bibitem[Gehring et~al.(2016)Gehring, Coros, Hutter, Bellicoso, Heijnen,
+  Diethelm, Bloesch, Fankhauser, Hwangbo, Hoepflinger,
+  et~al.]{gehring2016practice}
+Christian Gehring, Stelian Coros, Marco Hutter, Carmine~Dario Bellicoso, Huub
+  Heijnen, Remo Diethelm, Michael Bloesch, P{\'e}ter Fankhauser, Jemin Hwangbo,
+  Mark Hoepflinger, et~al.
+\newblock Practice makes perfect: An optimization-based approach to controlling
+  agile motions for a quadruped robot.
+\newblock \emph{IEEE Robotics \& Automation Magazine}, 2016.
+
+\bibitem[Geyer et~al.(2003)Geyer, Seyfarth, and Blickhan]{geyer2003positive}
+Hartmut Geyer, Andre Seyfarth, and Reinhard Blickhan.
+\newblock Positive force feedback in bouncing gaits?
+\newblock \emph{Proceedings of the Royal Society of London. Series B:
+  Biological Sciences}, 2003.
+
+\bibitem[Guo et~al.(2016)Guo, Li, and Iorio]{guo2016convolutional}
+Xiaoxiao Guo, Wei Li, and Francesco Iorio.
+\newblock Convolutional neural networks for steady flow approximation.
+\newblock In \emph{Proceedings of the 22nd ACM SIGKDD international conference
+  on knowledge discovery and data mining}, 2016.
+
+\bibitem[Haarnoja et~al.(2019)Haarnoja, Ha, Zhou, Tan, Tucker, and
+  Levine]{haarnoja2019learningtowalk}
+Tuomas Haarnoja, Sehoon Ha, Aurick Zhou, Jie Tan, George Tucker, and Sergey
+  Levine.
+\newblock Learning to walk via deep reinforcement learning.
+\newblock In \emph{Robotics: Science and Systems}, 2019.
+
+\bibitem[Hanna and Stone(2017)]{hanna2017grounded}
+Josiah Hanna and Peter Stone.
+\newblock Grounded action transformation for robot learning in simulation.
+\newblock In \emph{Proceedings of the AAAI Conference on Artificial
+  Intelligence}, 2017.
+
+\bibitem[Hutter et~al.(2016)Hutter, Gehring, Jud, Lauber, Bellicoso, Tsounis,
+  Hwangbo, Bodie, Fankhauser, Bloesch, et~al.]{hutter2016anymal}
+Marco Hutter, Christian Gehring, Dominic Jud, Andreas Lauber, C~Dario
+  Bellicoso, Vassilios Tsounis, Jemin Hwangbo, Karen Bodie, Peter Fankhauser,
+  Michael Bloesch, et~al.
+\newblock Anymal-a highly mobile and dynamic quadrupedal robot.
+\newblock In \emph{2016 IEEE/RSJ International Conference on Intelligent Robots
+  and Systems (IROS)}. IEEE, 2016.
+
+\bibitem[Hwangbo(2020-2021)]{raisimgymtorch}
+Jemin Hwangbo.
+\newblock {RaisimGymTorch}.
+\newblock \url{https://raisim.com/sections/RaisimGymTorch.html}, 2020-2021.
+
+\bibitem[Hwangbo et~al.(2018)Hwangbo, Lee, and Hutter]{raisim}
+Jemin Hwangbo, Joonho Lee, and Marco Hutter.
+\newblock Per-contact iteration method for solving contact dynamics.
+\newblock \emph{IEEE Robotics and Automation Letters}, 2018.
+\newblock URL \url{www.raisim.com}.
+
+\bibitem[Hwangbo et~al.(2019)Hwangbo, Lee, Dosovitskiy, Bellicoso, Tsounis,
+  Koltun, and Hutter]{hwangbo2019learning}
+Jemin Hwangbo, Joonho Lee, Alexey Dosovitskiy, Dario Bellicoso, Vassilios
+  Tsounis, Vladlen Koltun, and Marco Hutter.
+\newblock Learning agile and dynamic motor skills for legged robots.
+\newblock \emph{Science Robotics}, 2019.
+
+\bibitem[Hyun et~al.(2016)Hyun, Lee, Park, and Kim]{hyun2016implementation}
+Dong~Jin Hyun, Jongwoo Lee, SangIn Park, and Sangbae Kim.
+\newblock Implementation of trot-to-gallop transition and subsequent gallop on
+  the mit cheetah i.
+\newblock \emph{The International Journal of Robotics Research}, 2016.
+
+\bibitem[Iscen et~al.(2018)Iscen, Caluwaerts, Tan, Zhang, Coumans, Sindhwani,
+  and Vanhoucke]{iscen2018policies}
+Atil Iscen, Ken Caluwaerts, Jie Tan, Tingnan Zhang, Erwin Coumans, Vikas
+  Sindhwani, and Vincent Vanhoucke.
+\newblock Policies modulating trajectory generators.
+\newblock In \emph{Conference on Robot Learning}. PMLR, 2018.
+
+\bibitem[Johnson et~al.(2012)Johnson, Libby, Chang-Siu, Tomizuka, Full, and
+  Koditschek]{johnson2012tail}
+Aaron~M Johnson, Thomas Libby, Evan Chang-Siu, Masayoshi Tomizuka, Robert~J
+  Full, and Daniel~E Koditschek.
+\newblock Tail assisted dynamic self righting.
+\newblock In \emph{Adaptive Mobile Robotics}. World Scientific, 2012.
+
+\bibitem[Kalakrishnan et~al.(2010)Kalakrishnan, Buchli, Pastor, Mistry, and
+  Schaal]{kalakrishnan2010fast}
+Mrinal Kalakrishnan, Jonas Buchli, Peter Pastor, Michael Mistry, and Stefan
+  Schaal.
+\newblock Fast, robust quadruped locomotion over challenging terrain.
+\newblock In \emph{2010 IEEE International Conference on Robotics and
+  Automation}. IEEE, 2010.
+
+\bibitem[Khoramshahi et~al.(2013)Khoramshahi, Bidgoly, Shafiee, Asaei,
+  Ijspeert, and Ahmadabadi]{khoramshahi2013piecewise}
+Mahdi Khoramshahi, Hamed~Jalaly Bidgoly, Soroosh Shafiee, Ali Asaei, Auke~Jan
+  Ijspeert, and Majid~Nili Ahmadabadi.
+\newblock Piecewise linear spine for speed--energy efficiency trade-off in
+  quadruped robots.
+\newblock \emph{Robotics and Autonomous Systems}, 2013.
+
+\bibitem[Kingma and Ba(2015)]{kingma2014adam}
+Diederik~P. Kingma and Jimmy Ba.
+\newblock Adam: {A} method for stochastic optimization.
+\newblock In \emph{3rd International Conference on Learning Representations},
+  2015.
+
+\bibitem[Kober et~al.(2013)Kober, Bagnell, and Peters]{kober2013reinforcement}
+Jens Kober, J~Andrew Bagnell, and Jan Peters.
+\newblock Reinforcement learning in robotics: A survey.
+\newblock \emph{The International Journal of Robotics Research}, 2013.
+
+\bibitem[Koos et~al.(2010)Koos, Mouret, and Doncieux]{koos2010crossing}
+Sylvain Koos, Jean-Baptiste Mouret, and St{\'e}phane Doncieux.
+\newblock Crossing the reality gap in evolutionary robotics by promoting
+  transferable controllers.
+\newblock In \emph{Proceedings of the 12th annual conference on Genetic and
+  evolutionary computation}, 2010.
+
+\bibitem[Lee et~al.(2020)Lee, Hwangbo, Wellhausen, Koltun, and
+  Hutter]{lee2020learning}
+Joonho Lee, Jemin Hwangbo, Lorenz Wellhausen, Vladlen Koltun, and Marco Hutter.
+\newblock Learning quadrupedal locomotion over challenging terrain.
+\newblock \emph{Science robotics}, 2020.
+
+\bibitem[Lillicrap et~al.(2016)Lillicrap, Hunt, Pritzel, Heess, Erez, Tassa,
+  Silver, and Wierstra]{lillicrap2016continuous}
+Timothy~P. Lillicrap, Jonathan~J. Hunt, Alexander Pritzel, Nicolas Heess, Tom
+  Erez, Yuval Tassa, David Silver, and Daan Wierstra.
+\newblock Continuous control with deep reinforcement learning.
+\newblock In \emph{ICLR}, 2016.
+
+\bibitem[Luo and Hauser(2017)]{luo2017robust}
+Jingru Luo and Kris Hauser.
+\newblock Robust trajectory optimization under frictional contact with
+  iterative learning.
+\newblock \emph{Autonomous Robots}, 2017.
+
+\bibitem[Matthis et~al.(2018)Matthis, Yates, and Hayhoe]{matthis2018gaze}
+Jonathan~Samir Matthis, Jacob~L Yates, and Mary~M Hayhoe.
+\newblock Gaze and the control of foot placement when walking in natural
+  terrain.
+\newblock \emph{Current Biology}, 2018.
+
+\bibitem[Miura and Shimoyama(1984)]{miura1984dynamic}
+Hirofumi Miura and Isao Shimoyama.
+\newblock Dynamic walk of a biped.
+\newblock \emph{The International Journal of Robotics Research}, 1984.
+
+\bibitem[Mnih et~al.(2016)Mnih, Badia, Mirza, Graves, Lillicrap, Harley,
+  Silver, and Kavukcuoglu]{mnih2016asynchronous}
+Volodymyr Mnih, Adria~Puigdomenech Badia, Mehdi Mirza, Alex Graves, Timothy
+  Lillicrap, Tim Harley, David Silver, and Koray Kavukcuoglu.
+\newblock Asynchronous methods for deep reinforcement learning.
+\newblock In \emph{International conference on machine learning}. PMLR, 2016.
+
+\bibitem[Nachum et~al.(2020)Nachum, Ahn, Ponte, Gu, and Kumar]{nachum2020multi}
+Ofir Nachum, Michael Ahn, Hugo Ponte, Shixiang~Shane Gu, and Vikash Kumar.
+\newblock Multi-agent manipulation via locomotion using hierarchical sim2real.
+\newblock In \emph{Conference on Robot Learning}. PMLR, 2020.
+
+\bibitem[Neunert et~al.(2017)Neunert, Boaventura, and Buchli]{neunert2017off}
+Michael Neunert, Thiago Boaventura, and Jonas Buchli.
+\newblock Why off-the-shelf physics simulators fail in evaluating feedback
+  controller performance-a case study for quadrupedal robots.
+\newblock In \emph{Advances in Cooperative Robotics}. World Scientific, 2017.
+
+\bibitem[Peng et~al.(2018)Peng, Andrychowicz, Zaremba, and Abbeel]{peng2018sim}
+Xue~Bin Peng, Marcin Andrychowicz, Wojciech Zaremba, and Pieter Abbeel.
+\newblock Sim-to-real transfer of robotic control with dynamics randomization.
+\newblock In \emph{2018 IEEE international conference on robotics and
+  automation (ICRA)}. IEEE, 2018.
+
+\bibitem[Peng et~al.(2020)Peng, Coumans, Zhang, Lee, Tan, and
+  Levine]{peng2020learning}
+Xue~Bin Peng, Erwin Coumans, Tingnan Zhang, Tsang-Wei~Edward Lee, Jie Tan, and
+  Sergey Levine.
+\newblock Learning agile robotic locomotion skills by imitating animals.
+\newblock In \emph{Robotics: Science and Systems}, 2020.
+
+\bibitem[Polet and Bertram(2019)]{polet2019inelastic}
+Delyle~T Polet and John~EA Bertram.
+\newblock An inelastic quadrupedal model discovers four-beat walking, two-beat
+  running, and pseudo-elastic actuation as energetically optimal.
+\newblock \emph{PLoS computational biology}, 2019.
+
+\bibitem[Raibert(1984)]{raibert1984hopping}
+Marc~H Raibert.
+\newblock Hopping in legged systems—modeling and simulation for the
+  two-dimensional one-legged case.
+\newblock \emph{IEEE Transactions on Systems, Man, and Cybernetics}, 1984.
+
+\bibitem[Ratliff et~al.(2009)Ratliff, Zucker, Bagnell, and
+  Srinivasa]{ratliff2009chomp}
+Nathan Ratliff, Matt Zucker, J~Andrew Bagnell, and Siddhartha Srinivasa.
+\newblock Chomp: Gradient optimization techniques for efficient motion
+  planning.
+\newblock In \emph{2009 IEEE International Conference on Robotics and
+  Automation}. IEEE, 2009.
+
+\bibitem[Ross et~al.(2011)Ross, Gordon, and Bagnell]{ross2011reduction}
+St{\'e}phane Ross, Geoffrey Gordon, and Drew Bagnell.
+\newblock A reduction of imitation learning and structured prediction to
+  no-regret online learning.
+\newblock In \emph{Proceedings of the fourteenth international conference on
+  artificial intelligence and statistics}, 2011.
+
+\bibitem[Saranli et~al.(2001)Saranli, Buehler, and Koditschek]{saranli2001rhex}
+Uluc Saranli, Martin Buehler, and Daniel~E Koditschek.
+\newblock Rhex: A simple and highly mobile hexapod robot.
+\newblock \emph{The International Journal of Robotics Research}, 2001.
+
+\bibitem[Schulman et~al.(2016)Schulman, Moritz, Levine, Jordan, and
+  Abbeel]{schulman2016gae}
+John Schulman, Philipp Moritz, Sergey Levine, Michael~I. Jordan, and Pieter
+  Abbeel.
+\newblock High-dimensional continuous control using generalized advantage
+  estimation.
+\newblock In \emph{4th International Conference on Learning Representations},
+  2016.
+
+\bibitem[Schulman et~al.(2017)Schulman, Wolski, Dhariwal, Radford, and
+  Klimov]{schulman2017proximal}
+John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, and Oleg Klimov.
+\newblock Proximal policy optimization algorithms.
+\newblock \emph{arXiv preprint arXiv:1707.06347}, 2017.
+
+\bibitem[Song et~al.(2020)Song, Yang, Choromanski, Caluwaerts, Gao, Finn, and
+  Tan]{song2020rapidly}
+Xingyou Song, Yuxiang Yang, Krzysztof Choromanski, Ken Caluwaerts, Wenbo Gao,
+  Chelsea Finn, and Jie Tan.
+\newblock Rapidly adaptable legged robots via evolutionary meta-learning.
+\newblock In \emph{International Conference on Intelligent Robots and Systems
+  (IROS)}, 2020.
+
+\bibitem[Sreenath et~al.(2011)Sreenath, Park, Poulakakis, and
+  Grizzle]{sreenath2011compliant}
+Koushil Sreenath, Hae-Won Park, Ioannis Poulakakis, and Jessy~W Grizzle.
+\newblock A compliant hybrid zero dynamics controller for stable, efficient and
+  fast bipedal walking on mabel.
+\newblock \emph{The International Journal of Robotics Research}, 2011.
+
+\bibitem[Tan et~al.(2018)Tan, Zhang, Coumans, Iscen, Bai, Hafner, Bohez, and
+  Vanhoucke]{tan2018sim}
+Jie Tan, Tingnan Zhang, Erwin Coumans, Atil Iscen, Yunfei Bai, Danijar Hafner,
+  Steven Bohez, and Vincent Vanhoucke.
+\newblock Sim-to-real: Learning agile locomotion for quadruped robots.
+\newblock In \emph{Robotics: Science and Systems}, 2018.
+
+\bibitem[Tobin et~al.(2017)Tobin, Fong, Ray, Schneider, Zaremba, and
+  Abbeel]{tobin2017domain}
+Josh Tobin, Rachel Fong, Alex Ray, Jonas Schneider, Wojciech Zaremba, and
+  Pieter Abbeel.
+\newblock Domain randomization for transferring deep neural networks from
+  simulation to the real world.
+\newblock In \emph{2017 IEEE/RSJ international conference on intelligent robots
+  and systems (IROS)}. IEEE, 2017.
+
+\bibitem[Wang()]{unitree}
+Xingxing Wang.
+\newblock {Unitree Robotics}.
+\newblock \url{https://www.unitree.com/}.
+
+\bibitem[Xie et~al.(2020)Xie, Da, van~de Panne, Babich, and
+  Garg]{xie2020dynamics}
+Zhaoming Xie, Xingye Da, Michiel van~de Panne, Buck Babich, and Animesh Garg.
+\newblock Dynamics randomization revisited: A case study for quadrupedal
+  locomotion.
+\newblock \emph{arXiv preprint arXiv:2011.02404}, 2020.
+
+\bibitem[Yang et~al.(2020)Yang, Caluwaerts, Iscen, Zhang, Tan, and
+  Sindhwani]{yang2020data}
+Yuxiang Yang, Ken Caluwaerts, Atil Iscen, Tingnan Zhang, Jie Tan, and Vikas
+  Sindhwani.
+\newblock Data efficient reinforcement learning for legged robots.
+\newblock In \emph{Conference on Robot Learning}. PMLR, 2020.
+
+\bibitem[Yin et~al.(2007)Yin, Loken, and Van~de Panne]{yin2007simbicon}
+KangKang Yin, Kevin Loken, and Michiel Van~de Panne.
+\newblock Simbicon: Simple biped locomotion control.
+\newblock \emph{ACM Transactions on Graphics (TOG)}, 2007.
+
+\bibitem[Yu et~al.(2017)Yu, Tan, Liu, and Turk]{yu2017preparing}
+Wenhao Yu, Jie Tan, C.~Karen Liu, and Greg Turk.
+\newblock Preparing for the unknown: Learning a universal policy with online
+  system identification.
+\newblock In \emph{Robotics: Science and Systems}, 2017.
+
+\bibitem[Yu et~al.(2018)Yu, Liu, and Turk]{yu2018policy}
+Wenhao Yu, C~Karen Liu, and Greg Turk.
+\newblock Policy transfer with strategy optimization.
+\newblock In \emph{International Conference on Learning Representations}, 2018.
+
+\bibitem[Yu et~al.(2019)Yu, Kumar, Turk, and Liu]{yu2019biped}
+Wenhao Yu, Visak C.~V. Kumar, Greg Turk, and C.~Karen Liu.
+\newblock Sim-to-real transfer for biped locomotion.
+\newblock In \emph{2019 {IEEE/RSJ} International Conference on Intelligent
+  Robots and Systems}. {IEEE}, 2019.
+
+\bibitem[Yu et~al.(2020)Yu, Tan, Bai, Coumans, and Ha]{yu2020learning}
+Wenhao Yu, Jie Tan, Yunfei Bai, Erwin Coumans, and Sehoon Ha.
+\newblock Learning fast adaptation with meta strategy optimization.
+\newblock \emph{IEEE Robotics and Automation Letters}, 2020.
+
+\bibitem[Zhou et~al.(2019)Zhou, Pinto, and Gupta]{zhou2019environment}
+Wenxuan Zhou, Lerrel Pinto, and Abhinav Gupta.
+\newblock Environment probing interaction policies.
+\newblock In \emph{7th International Conference on Learning Representations,
+  ICLR 2019}, 2019.
+
+\bibitem[Zico~Kolter and Ng(2011)]{zico2011stanford}
+J~Zico~Kolter and Andrew~Y Ng.
+\newblock The stanford littledog: A learning and rapid replanning approach to
+  quadruped locomotion.
+\newblock \emph{The International Journal of Robotics Research}, 2011.
+
+\bibitem[Zucker et~al.(2010)Zucker, Bagnell, Atkeson, and
+  Kuffner]{zucker2010optimization}
+Matt Zucker, J~Andrew Bagnell, Christopher~G Atkeson, and James Kuffner.
+\newblock An optimization approach to rough terrain locomotion.
+\newblock In \emph{2010 IEEE International Conference on Robotics and
+  Automation}. IEEE, 2010.
+
+\bibitem[Zucker et~al.(2011)Zucker, Ratliff, Stolle, Chestnutt, Bagnell,
+  Atkeson, and Kuffner]{zucker2011optimization}
+Matt Zucker, Nathan Ratliff, Martin Stolle, Joel Chestnutt, J~Andrew Bagnell,
+  Christopher~G Atkeson, and James Kuffner.
+\newblock Optimization and learning for rough terrain legged locomotion.
+\newblock \emph{The International Journal of Robotics Research}, 2011.
+
+\end{thebibliography}

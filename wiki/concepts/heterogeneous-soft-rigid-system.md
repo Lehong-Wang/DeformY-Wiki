@@ -18,6 +18,7 @@ key_papers:
 first_introduced: ''
 date_updated: 2026-05-06
 related_concepts: []
+parent_topic: "[[dynamic-dlo-tip-targeting]]"
 ---
 ## Definition
 

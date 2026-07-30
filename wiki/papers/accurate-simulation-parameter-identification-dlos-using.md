@@ -69,6 +69,7 @@ The contribution that matters for the DeformY arc is the **clean architectural b
 
 ## Related
 
+- [[dynamic-deformable-object-simulation]]
 **Foundations used**
 - [[discrete-elastic-rods]] — the bending+twisting energy formulation adapted into MuJoCo
 - [[cosserat-rod-theory]] — the broader rod theory DER discretizes (cited as the parent theory; stretch/shear dropped here)

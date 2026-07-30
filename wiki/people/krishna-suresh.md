@@ -9,6 +9,7 @@ date_updated: "2026-05-06"
 
 ## Research areas
 
+- [[dynamic-dlo-tip-targeting]]
 - Dynamic manipulation of deformable linear objects (ropes, cables, knots) on real hardware
 - Iterative Learning Control (Task-Level ILC; norm-optimal QP formulations) for sample-efficient real-system learning
 - System-identification approaches for sim-to-real rope dynamics
@@ -21,6 +22,8 @@ date_updated: "2026-05-06"
 
 ## Recent work
 
+- [[wiggle-go-system-identification-zero-shot]]
+- [[learning-deformable-object-manipulation-using-task]]
 (Suresh's S2 record shows ~6 papers as of 2026-05-06; the Task-Level ILC and Wiggle-and-Go papers are the most-cited lines.)
 
 ## Collaborators

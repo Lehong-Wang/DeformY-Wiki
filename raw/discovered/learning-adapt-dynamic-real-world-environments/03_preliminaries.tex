@@ -1,0 +1,44 @@
+\vspsec
+\section{Preliminaries} \label{sec:prelim}
+\vspsec
+In this section, we present model-based reinforcement learning, introduce the meta-learning formulation, and describe the two main meta-learning approaches.
+\vspsubsec
+\subsection{Model-Based Reinforcement Learning} \label{sec:prelim-mb}
+\vspsubsec
+Reinforcement learning agents aim to perform actions that maximize some notion of cumulative reward. Concretely, consider a Markov decision process (MDP)
+defined by the tuple $(\mathcal{S}, \mathcal{A}, p, r, \gamma, \rho_0, H)$. Here, $\mathcal{S}$ is the set of states, $\mathcal{A}$ is the set of actions, $p({\bf s'}|{\bf s}, {\bf a})$ is the state transition distribution, $r: \mathcal{S} \times \mathcal{A} \rightarrow \mathbb{R}$ is a bounded reward function, $\rho_0: \mathcal{S} \to \mathbb{R}_+$ is the initial state distribution, $\gamma$ is the discount factor, and $H$ is the horizon. A trajectory segment is denoted by  $\tau(i, j) := ({\bf s}_{i}, {\bf a}_{i}, ..., {\bf s}_{j}, {\bf a}_{j}, {\bf s}_{j+1})$. Finally, the sum of expected rewards from a trajectory is the return. In this framework, RL aims to find a policy $\pi: \mathcal{S} \rightarrow \mathcal{A}$ that prescribes the optimal action to take from each state in order to maximize the expected return. 
+
+Model-based RL aims to solve this problem by learning the transition distribution $p({\bf s'}|{\bf s}, {\bf a})$, which is also referred to as the dynamics model. This can be done using a function approximator $\hat p_{\bm{\theta}}({\bf s'}|{\bf s}, {\bf a})$ to approximate the dynamics, where the weights $\bm{\theta}$ are optimized to maximize the log-likelihood of the observed data $\mathcal{D}$. In practice, this model is then used in the process of action selection by either producing data points from which to train a policy, or by producing predictions and dynamics constraints to be optimized by a controller.
+
+\vspsubsec
+\subsection{Meta-Learning} \label{sec:prelim-meta}
+\vspsubsec
+
+Meta-learning is concerned with automatically learning learning algorithms that are more efficient and effective than learning from scratch. These algorithms leverage data from \emph{previous} tasks to acquire a learning procedure that can quickly adapt to new tasks. These methods operate under the assumption that the previous meta-training tasks and the new meta-test tasks are drawn from the same task distribution $\rho(\mathcal{T})$ and share a common structure that can be exploited for fast learning. In the supervised learning setting, we aim to learn a function $f_{\bm{\theta}}$
+with parameters ${\bm \theta}$ that minimizes 
+a supervised loss $\mathcal{L}_{\mathcal{T}}$. 
+Then, the goal of meta-learning is to find a learning procedure, denoted as $\bm{\theta}'= u_{\bm{\psi}}(\mathcal{D}_\mathcal{T}^\text{tr}, \bm{\theta})$, 
+that can learn a range of tasks $\mathcal{T}$ from small datasets $\mathcal{D}_\mathcal{T}^\text{tr}$.
+
+We can formalize this meta-learning problem setting as optimizing
+for the parameters of the learning procedure ${\bm \theta}, {\bm \psi}$ as follows:
+\begin{align}
+    \min_{\bm{\theta}, \bm{\psi}} \hspace{4pt} \mathbb{E}_{\mathcal{T} \sim \rho({\mathcal{T}})} %\mathbb{E}_{(\bm{x}, \bm{y}) \sim \mathcal{T}}  
+    \big[ \mathcal{L}(\data_\task^\text{test}, {\bm \theta}') \big] \hspace{10pt}
+\text{s.t.} \hspace{10pt} \bm{\theta}'= u_{\bm{\psi}}(\mathcal{D}_\mathcal{T}^\text{tr}, \bm{\theta})
+\end{align}
+where $\data_\task^\text{tr}, \data_\task^\text{test}$ are sampled without replacement from the meta-training dataset $\data_\task$.
+
+Once meta-training optimizes for the parameters ${\bm \theta}_*, {\bm \psi}_*$, the learning procedure $u_{\bm \psi}(\cdot, {\bm \theta})$ can then be used to learn new held-out tasks from small amounts of data.
+We will also refer to the learning procedure $u$ as the update function.
+
+\paragraph{Gradient-based meta-learning.} Model-agnostic meta-learning (MAML)~\citep{finn2017maml} aims to learn the initial parameters of a neural network such that taking one or several gradient descent steps from this initialization leads to effective generalization (or few-shot generalization) to new tasks. Then, when presented with new tasks, the model with the meta-learned initialization can be quickly fine-tuned using a few data points from the new tasks.
+Using the notation from before, MAML uses gradient descent as a learning algorithm:
+\begin{align}
+    u_{\bm{\psi}}(\data_\mathcal{T}^\text{tr}, \bm{\theta}) = \bm{\theta} - \alpha \nabla_{\bm{\theta}} %\mathbb{E}_{(\bm{x}, \bm{y}) \sim \mathcal{T}}  \big[
+    \mathcal{L}(\data_\task^\text{tr}, {\bm \theta})
+    %\big]
+\end{align}
+The learning rate $\alpha$ may be a learnable paramter (in which case $\bm{\psi}=\alpha$) or fixed as a hyperparameter, leading to $\bm{\psi}=\varnothing$. Despite the update rule being fixed, a learned initialization of an overparameterized deep network followed by gradient descent is  as expressive as update rules represented by deep recurrent networks~\citep{finn2017metauniv}.
+
+\paragraph{Recurrence-based meta-learning.} Another approach to meta-learning is to use recurrent models. In this case, the update function is always learned, and $\bm{\psi}$ corresponds to the weights of the recurrent model that update the hidden state. The parameters $\bm{\theta}$ of the prediction model correspond to the remainder of the weights of the recurrent model and the hidden state. Both gradient-based and recurrence-based meta-learning methods have been used for meta model-free RL~\citep{finn2017maml,duan2016rl2}. We will build upon these ideas to develop a meta model-based RL algorithm that enables adaptation in dynamic environments, in an online way.

@@ -129,6 +129,7 @@ Two transfer caveats worth flagging early. (i) The pullback tube relies on a tra
 
 ## Related
 
+- [[dynamic-throwing-and-hitting]]
 **Foundations used**
 - [[model-predictive-control]] — the conceptual ancestor of pullback tube acceleration (constant-acceleration release window with receding-horizon convex resolves)
 - [[model-based-reinforcement-learning]] — three-layer stack mixes model-free RL with a model-based optimizer (the QP)
