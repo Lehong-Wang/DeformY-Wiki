@@ -1,5 +1,15 @@
 # Field Report — Open-Loop, Zero-Shot Rope-Tip Targeting (Position + Direction)
 
+> ⚠️ **Method framing is stale (2026-06-16 document).** The "Scope" line below judges the
+> field against a *model-based* pipeline (forward model + meta-adaptation + robust
+> planning). That framing was superseded on 2026-07-24/25 — see
+> `rope_swing_decisions.md`. **The landscape facts, pillar syntheses, and paper
+> assessments remain valid and are the field record**; only "how it maps to our
+> pipeline" judgements should be re-read against
+> `rope_swing_sim_experiment_plan.md` (v3.2). Newer anchors found after this report
+> (DA-MMP, DeformX-CMU, DLO-Lab, Wiggle&Go numbers) are in the plan's §9 field-scan
+> addendum and `.agent/NOTES.md`.
+
 **Audience:** PI. **Scope:** judge everything against OUR exact problem — a robot arm swings a flexible rope so the TIP reaches a 3D target position arriving along a specified unit DIRECTION, executed as ONE open-loop joint trajectory with NO feedback and NO per-target online adaptation; zero-shot after a one-time per-rope calibration; GPU sim + real arm + mocap; model-based (forward-model + meta-adaptation + robust planning + optional wind-up).
 
 ---

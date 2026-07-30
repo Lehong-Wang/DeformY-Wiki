@@ -18,7 +18,8 @@ key_papers:
   - "[[wiggle-go-system-identification-zero-shot]]"
   - "[[planar-robot-casting-real2sim2real-self-supervised]]"
   - "[[deform-differentiable-discrete-elastic-rods-real]]"
-linked_ideas: []
+linked_ideas:
+  - "[[direction-conditioned-open-loop-rope-tip-targeting]]"
 ---
 
 ## Overview
@@ -62,6 +63,8 @@ Transferring a dynamic policy trained in simulation to a real, never-before-seen
 
 - **Implicit vs explicit identification for whipping**: RMA-style amortized adaptation vs single-wiggle explicit system-ID have not been compared head-to-head on free-tip 3D targeting.
 - **Identifiability of high-speed DLO parameters** from a short, safe calibration motion remains open.
+- **Ranking robustness ≠ accuracy, and only accuracy gets measured.** Any method that selects among candidate actions by rolling them out in a *calibrated* simulator depends on the mis-calibrated model preserving the candidate *ordering* — a strictly weaker requirement than matching the true dynamics, and one no paper in this literature isolates. Calibration residuals are reported as parameter error or trajectory error, never as rank correlation. Proposed test: [[sim-stage-c-robustness-and-verifier-mismatch]].
+- **Arm-side fidelity is treated as free.** The deformable object's true input is the *achieved* end-effector motion, not the commanded one, and at dynamic envelopes the two diverge. No amount of object-side calibration absorbs that residual, and DLO sim-to-real work generally does not report the arm's tracking error at the speeds used.
 
 ## Concepts
 - [[rma-particle-dynamics-adaptation]]

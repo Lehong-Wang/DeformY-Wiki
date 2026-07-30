@@ -1,8 +1,9 @@
 # Rope-Swing Project Brief
 
-> One-page problem definition + scope of record. Method is deliberately left open — see
-> `rope_swing_research_handover.md` for candidate approaches and `rope_swing_field_report.md`
-> for the field landscape. Updated 2026-06-16.
+> One-page problem definition + scope of record. Method is deliberately left open at the
+> *brief* level — the method actually chosen for the sim phase (2026-07-25) is in
+> `rope_swing_base_experiment.md`; the field landscape is in `rope_swing_field_report.md`.
+> Updated 2026-06-16; simulator asset line corrected 2026-07-29.
 
 ## The task
 
@@ -62,7 +63,15 @@ the handover and field report.
 
 ## Pointers
 
-`rope_swing_research_handover.md` (candidate architecture + reading list) ·
-`rope_swing_field_report.md` (7-pillar field synthesis) ·
+**Current:** `rope_swing_decisions.md` (append-only decision ledger — the authority) ·
+`rope_swing_sim_experiment_plan.md` (staged sim campaign, v3.2) ·
+`rope_swing_base_experiment.md` (chosen base method + go/no-go logic)
+
+**Historical:** `rope_swing_field_report.md` (7-pillar field synthesis) ·
 `rope_swing_related_work.md` (57-paper table) ·
-`rope_swing_decisions.md` (append-only decision log)
+`rope_swing_code_resources.md` (27 verified repos) ·
+`rope_swing_research_handover.md` (*superseded on method*)
+
+Wiki entities mirroring this brief: idea
+`[[direction-conditioned-open-loop-rope-tip-targeting]]`, experiments `[[sim-stage-0-harness]]`
+… `[[sim-stage-d-gated-extensions]]`. See `research/README.md`.

@@ -1,5 +1,18 @@
 # Research Handover — Learning to Swing a Rope to Hit a Target (Open-Loop, Zero-Shot)
 
+> ⚠️ **SUPERSEDED ON METHOD (as of 2026-07-25).** §3 commits to a meta-learned
+> forward model + robust cost-guided planner (§3.1–3.5). That architecture was
+> replaced: the 2026-07-24 decision **rejected forward-model machinery for the sim
+> phase** (the simulator is its own perfect model), and 2026-07-25 chose
+> per-timestep hindsight relabeling + conditional flow matching over smooth basis
+> parameters + sim-verified best-of-N. See `rope_swing_decisions.md` (2026-07-24/25),
+> `rope_swing_base_experiment.md`, and `rope_swing_sim_experiment_plan.md` (v3.2).
+>
+> Still valid and worth reading: §1–2 (problem + constraints), §3.4 (compact smooth
+> action parameterization — this survived and became the base method's action space),
+> §3.6 (wind-up), §5 (risks), §7 (reading list). An IRP-style residual forward model
+> remains a live candidate for the *real-robot calibration* stage only (plan §6.5).
+
 > **Purpose of this document.** Hand off the research direction to another agent. It states the problem and constraints, the architecture we settled on and *why*, the end-to-end pipeline, the central risks and mitigations, the open questions still to resolve, a categorized reading list, and a suggested order of work. Citation details (arXiv IDs, venues) should be double-checked before relying on them.
 
 ---

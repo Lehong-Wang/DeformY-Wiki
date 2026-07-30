@@ -78,9 +78,17 @@ truth?"
   out-of-plane targets, independently validating the azimuth-equivariance
   simplification; DLO-Lab (ICML'26) — released differentiable DLO sim with a
   dynamic slingshot task (candidate second verifier / sweep generator).
-- **Before launching any new literature search, read the repo-root artifact
-  set first**: `rope_swing_field_report.md` (7-pillar synthesis),
-  `rope_swing_related_work.md` (57-paper scored table),
-  `rope_swing_code_resources.md` (27 verified repos + build-vs-reuse
+- **Before launching any new literature search, read the `research/` artifact
+  set first** (moved from repo root 2026-07-30; index + per-file status in
+  `research/README.md`): `research/rope_swing_field_report.md` (7-pillar
+  synthesis), `research/rope_swing_related_work.md` (57-paper scored table),
+  `research/rope_swing_code_resources.md` (27 verified repos + build-vs-reuse
   brainstorm), `raw/notes/papers/` (~97 notes). Most "find papers on X"
   requests are already answered there.
+- **`research/rope_swing_research_handover.md` is superseded on method.** It
+  proposes a meta-learned forward model + robust planner; the 2026-07-25
+  base-method decision replaced that with hindsight relabeling + conditional
+  flow matching, and 2026-07-24 explicitly rejected forward-model machinery for
+  the sim phase. Its reading list and problem framing are still good. The
+  `field_report`'s method framing carries the same staleness; its landscape
+  facts do not.

@@ -13,18 +13,20 @@ abstract: "DeformY-Wiki: an ΩmegaWiki research knowledge base supporting the
 Research knowledge base (markdown wiki + Python tools + Claude skills) for one
 robot-learning project: swinging a rope so its tip reaches a 3D target
 position arriving along a specified direction — one open-loop joint
-trajectory, zero-shot per target, trained mostly in a GPU simulator (~10K
-ropes @ 100 Hz, already built, out of scope to replace). `wiki/` is the
-product surface; `runtime/` is the schema contract; `raw/` holds sources and
-notes; `rope_swing_*.md` at repo root is the curated research-artifact set
-(brief, decisions, field report, related-work table, code resources).
+trajectory, zero-shot per target, trained mostly in a GPU simulator
+(`DeformX/Cosserat-Rod-Sim-CUDA`: wall-mounted UR5 + tube + 1.0 m rope,
+**60 Hz** control, 512–2048 parallel envs — already built, out of scope to
+replace). `wiki/` is the product surface; `runtime/` is the schema contract;
+`raw/` holds sources and notes; `research/` holds the curated project-artifact
+set (brief, decisions, plan, base experiment, field report, related-work table,
+code resources — see `research/README.md` for per-file status).
 
 ## Agent
 
 - Role: research assistant on the rope-swing project
 - Specialty: literature search/ingestion, wiki graph upkeep, research planning
 - Goals: solution-first recommendations (novelty not required); keep the wiki
-  lint-clean; record scope decisions in `rope_swing_decisions.md`
+  lint-clean; record scope decisions in `research/rope_swing_decisions.md`
 
 ## Rules
 
@@ -42,4 +44,9 @@ notes; `rope_swing_*.md` at repo root is the curated research-artifact set
 ## Conventions
 
 - Wikilinks `[[slug]]`; slugs lowercase-hyphenated.
-- Project-scope decisions: `rope_swing_decisions.md` is the canonical ledger.
+- Project-scope decisions: `research/rope_swing_decisions.md` is the canonical
+  ledger. The wiki mirrors *entities and status*, never replaces the ledger.
+- Project entities in the wiki: idea
+  `direction-conditioned-open-loop-rope-tip-targeting`, its 5 method pages, and
+  the 5 `sim-stage-*` experiment pages. Keep their status fields in step with
+  the ledger.

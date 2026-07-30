@@ -334,8 +334,8 @@ people:
     tags: [robotics, deformable-linear-objects, differentiable-simulation, manipulation]
     affiliation: "Department of Robotics, University of Michigan, Ann Arbor (ROAHM Lab)"
   - slug: yonghyeon-lee
-    tags: [motion-manifolds, movement-primitives, geometric-machine-learning, robot-learning, trajectory-generation]
-    affiliation: "MIT (Biomimetic Robotics Lab, postdoc); previously KIAS AI Research Fellow; PhD SNU"
+    kind: researcher
+    affiliation: "MIT (Biomimetic Robotics Lab, postdoc, since 2025); previously KIAS AI Research Fellow (2023-2025); PhD SNU Robotics Lab (Frank C. Park, 2023)"
   - slug: yuntao-ma
     tags: [legged-robotics, whole-body-control, residual-policy, sim-to-real, loco-manipulation]
     affiliation: "Robotic Systems Lab, ETH Zürich"
@@ -347,25 +347,70 @@ people:
     affiliation: "Purdue University, Department of Computer Science"
 
 ideas:
+  - slug: direction-conditioned-open-loop-rope-tip-targeting
+    title: "Direction-Conditioned Open-Loop Rope-Tip Targeting"
+    tags: [DLO, rope, dynamic-manipulation, tip-targeting, arrival-direction, goal-conditioned, open-loop, zero-shot, hindsight-relabeling, flow-matching, test-time-verification, robot-learning]
+    status: in_progress
+    priority: 5
 
 methods:
+  - slug: conditional-flow-matching-motion-parameters
+    tags: [flow-matching, conditional-generative-model, movement-primitives, amortized-inference, one-to-many-inverse, goal-conditioned, trajectory-generation, robot-learning]
+    type: architecture
   - slug: diffuser-guided-diffusion-planning
     tags: [diffusion-model, planning, trajectory-optimization, model-based-reinforcement-learning, classifier-guidance, offline-rl, generative-planning, receding-horizon-control]
     type: inference
+  - slug: direction-reachability-atlas
+    tags: [reachability, coverage, quality-diversity, CVT-archive, evaluation-protocol, arrival-direction, DLO, rope, open-loop, task-box]
+    type: evaluation
   - slug: grbal-rebal-online-meta-learned-dynamics-adaptation
     tags: [meta-reinforcement-learning, model-based-reinforcement-learning, online-adaptation, MAML, recurrent-model, MPC, dynamics-model, sim-to-real]
     type: training
   - slug: mmp-parametric-curve-motion-manifold-primitives
     tags: [movement-primitives, motion-manifold, autoencoder, parametric-curve, latent-space-planning, isometric-regularization, gaussian-mixture-model, kernel-density-estimation, online-replanning, learning-from-demonstration]
     type: architecture
+  - slug: per-timestep-hindsight-relabeling
+    tags: [hindsight-relabeling, HER, GCSL, goal-conditioned, data-generation, DLO, rope, tip-targeting, arrival-direction, self-supervised]
+    type: data
   - slug: pets-probabilistic-ensembles-trajectory-sampling
     tags: [model-based-reinforcement-learning, probabilistic-ensemble, trajectory-sampling, uncertainty-propagation, model-predictive-control, cross-entropy-method, sampling-based-planning, sample-efficiency]
     type: inference
   - slug: rma-rapid-motor-adaptation
     tags: [sim-to-real, online-adaptation, teacher-student, context-encoder, system-identification, reinforcement-learning, legged-locomotion, privileged-learning]
     type: training
+  - slug: sim-verified-best-of-n-selection
+    tags: [test-time-scaling, best-of-N, physics-verifier, offline-planning, open-loop, robust-selection, sim-to-real, digital-twin, robot-learning]
+    type: inference
+  - slug: smooth-basis-swing-parameterization
+    tags: [action-parameterization, movement-primitives, minimum-jerk, via-points, trajectory-generation, smoothness, DLO, rope, dynamic-manipulation, open-loop]
+    type: architecture
 
 experiments:
+  - slug: sim-stage-0-harness
+    title: "Sim Stage 0 — Harness, Locked Protocol, and Smooth-Regime Check"
+    tags: [harness, evaluation-protocol, smooth-regime, jitter-sensitivity, cost-landscape, determinism, DLO, rope, simulation]
+    status: planned
+    linked_idea: [[direction-conditioned-open-loop-rope-tip-targeting]]
+  - slug: sim-stage-a-atlas-and-data-factory
+    title: "Sim Stage A — Direction-Reachability Atlas and Data Factory"
+    tags: [sweep, hindsight-relabeling, coverage, atlas, quality-diversity, CVT, CMA-ES, speed-stratification, margins, multimodality, DLO, rope]
+    status: planned
+    linked_idea: [[direction-conditioned-open-loop-rope-tip-targeting]]
+  - slug: sim-stage-b-amortization-shootout
+    title: "Sim Stage B — Amortization Shootout and Evaluation Ladder"
+    tags: [amortization, shootout, flow-matching, regression, nearest-neighbour, motion-manifold, GCSL, evaluation-ladder, holdout, wilson-intervals, DLO, rope]
+    status: planned
+    linked_idea: [[direction-conditioned-open-loop-rope-tip-targeting]]
+  - slug: sim-stage-c-robustness-and-verifier-mismatch
+    title: "Sim Stage C — Robustness, Robust Atlas, and the Verifier-Mismatch Ranking Test"
+    tags: [robustness, verifier-mismatch, ranking-robustness, calibration-residual, margin-aware-selection, robust-atlas, handle-tracking-error, sim-to-real, DLO, rope]
+    status: planned
+    linked_idea: [[direction-conditioned-open-loop-rope-tip-targeting]]
+  - slug: sim-stage-d-gated-extensions
+    title: "Sim Stage D — Gated Extensions (Speed Goal, Mirror Symmetry, Multi-Rope, Wind-Up, Gradients)"
+    tags: [extensions, gated, speed-goal, mirror-symmetry, multi-rope, privileged-conditioning, wind-up, differentiable-simulation, RMA, DLO, rope]
+    status: planned
+    linked_idea: [[direction-conditioned-open-loop-rope-tip-targeting]]
 
 Summary:
   - slug: dlo-dynamic-tip-targeting

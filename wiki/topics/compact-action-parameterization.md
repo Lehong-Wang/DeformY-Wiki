@@ -14,7 +14,8 @@ key_papers:
   - "[[planar-robot-casting-real2sim2real-self-supervised]]"
   - "[[self-supervised-learning-dynamic-planar-manipulation]]"
   - "[[mmp-motion-manifold-primitives-parametric-curve]]"
-linked_ideas: []
+linked_ideas:
+  - "[[direction-conditioned-open-loop-rope-tip-targeting]]"
 ---
 
 ## Overview
@@ -48,6 +49,8 @@ A low-dimensional, smooth action space is the practical key to data-efficient an
 
 - **Single-waypoint expressivity ceiling**: a single apex cannot express multi-phase whip motions or very long cables; when to add a second waypoint is unresolved.
 - **Open-loop within an episode**: compact-primitive actions are typically open-loop once executed, with no in-motion correction.
+- **Planar-canonical parameterizations cannot shape out-of-plane arrival direction.** In-plane swings produce mostly in-plane arrival directions, so the whole low-dimensional planar family ([[apex-point-trajectory-parameterization]], [[two-arc-planar-motion-primitive]]) is expressively insufficient the moment the goal includes a direction. The open question is what the *minimum* dimension is that can cover arrival directions — [[smooth-basis-swing-parameterization]] uses ~25–37 as a working answer and ablates a physics-informed strike-frame family against it.
+- **"Compact" and "smooth" are separable, and the literature conflates them.** A parametric-curve layer gives *hard* smoothness for every parameter vector including random ones; a learned latent over such curves ([[motion-manifold-primitives]]) adds only *statistical* smoothness — staying near the demonstration distribution. Which of the two a given result depends on is usually not reported.
 
 ### Methodological gaps
 

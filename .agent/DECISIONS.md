@@ -26,7 +26,7 @@ specific decision from a commit, split into `decisions/NNNN-slug.md`.
 ---
 
 Note: project-*scope* decisions (task definition, constraints, assets) live in
-the canonical ledger `rope_swing_decisions.md` at repo root. This file records
+the canonical ledger `research/rope_swing_decisions.md`. This file records
 decisions about how the agent works and which research directions to lead with.
 
 ### 2026-07-23 — Lead with motion-manifold / latent-space planning; demote Flying Knots & Wiggle-and-Go
@@ -87,3 +87,32 @@ decisions about how the agent works and which research directions to lead with.
 - **Why**: On the real robot the budget is spent in the calibrated model,
   not the world — that is what keeps it inside the open-loop/no-adaptation
   constraint. Flagged by the 2026-07-28 independent review (issue #6).
+
+### 2026-07-30 — Project knowledge is mirrored into wiki entities; the ledger stays canonical
+- **Status**: accepted
+- **Context**: All rope-swing project knowledge lived in loose repo-root
+  markdown plus this directory. `wiki/ideas/` and `wiki/experiments/` were
+  empty, so the project's own research was absent from the entity graph the
+  wiki exists to provide — queries, `neighbors`, `compile-context` and the
+  Obsidian graph all saw literature but not the work.
+- **Decision**: One idea page (`direction-conditioned-open-loop-rope-tip-targeting`),
+  five method pages for the base-method machinery, and one experiment page per
+  campaign stage (`sim-stage-0` … `sim-stage-d`). Narrative artifacts moved to
+  `research/` with a status index. **Division of labour: reasoning chains and
+  dated decisions live in `research/`; entities, relations and lifecycle status
+  live in `wiki/`.** When the two disagree, the ledger wins and the wiki page is
+  corrected.
+- **Why**: Skills (`/ask`, `/exp-*`, `/paper-plan`, `/novelty`) operate on wiki
+  entities, so knowledge outside them is invisible to the tooling the repo is
+  built around. Stage-per-experiment granularity matches the plan's own exit
+  criteria, so each stage can transition status independently. Rejected
+  alternatives: one umbrella experiment page (cannot carry five separate exit
+  criteria or outcomes); creating concept pages for our own method internals
+  (concepts are for literature ideas — over-modelling); hand-writing stub paper
+  pages for DA-MMP / DMMP / MMFP / DLO-Lab / DeformX-CMU (that is `/ingest`'s
+  job — recorded as pending instead).
+- **Consequences to maintain**: `methods.source_papers` is empty on all five
+  method pages by design (they are ours, not lifted from a paper) — precursors
+  are body wikilinks plus `inspired_by` edges. Legacy `claims/` slugs were
+  **not** linked from the new pages, to avoid adding to the mid-migration
+  broken-link debt; numbers are cited against the paper page instead.

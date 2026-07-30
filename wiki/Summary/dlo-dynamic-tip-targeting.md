@@ -8,8 +8,8 @@ key_topics:
   - dynamic-deformable-object-simulation
   - dynamic-throwing-and-hitting
   - compact-action-parameterization
-paper_count: 18
-date_updated: 2026-05-06
+paper_count: 23
+date_updated: 2026-07-30
 sources:
   - raw/notes/dlo-tip-targeting-survey-claude.md
   - raw/notes/dlo-tip-targeting-survey-agentic.md
@@ -82,9 +82,38 @@ The trend line is clear: sim-side maturity (DEFORM 2024 → DEFT 2025 → MAT-Di
 - **Single-arm vs bimanual whipping** — SoftMimicGen explicitly enumerates bimanual + humanoid + surgical embodiments; no published bimanual whip-to-target benchmark yet.
 - **VLM / language goal conditioning for whipping** — Hierarchical DLO Routing (UMN 2025) uses VLMs for routing only; no work yet conditions a whip-tip target on language.
 
+## Active project direction (added 2026-07-30)
+
+This synthesis is a **field record as of 2026-05-06**. The project it supports has since made
+decisions that override parts of it. The live research direction is the idea page
+[[direction-conditioned-open-loop-rope-tip-targeting]], executed as
+[[sim-stage-0-harness]] → [[sim-stage-a-atlas-and-data-factory]] →
+[[sim-stage-b-amortization-shootout]] → [[sim-stage-c-robustness-and-verifier-mismatch]] →
+[[sim-stage-d-gated-extensions]]. Narrative documents live in `research/`; the canonical
+decision ledger is `research/rope_swing_decisions.md`.
+
+**Which recommendations below are superseded, and by what:**
+
+| Below | Status |
+|---|---|
+| Rec 1 — "Reproduce IRP on UR5 first" | **Not the plan.** The starting point is a sweep + hindsight-relabel data factory in the existing GPU sim ([[per-timestep-hindsight-relabeling]]). IRP remains the conceptual anchor and the iterative-baseline reference |
+| Rec 2 — "Pick DER, not PBD/XPBD" | **Settled and closed.** Simulator selection is out of scope: `DeformX/Cosserat-Rod-Sim-CUDA` (Stable Cosserat Rods in Isaac Lab) is the simulator of record. No further rope-simulator surveys or fidelity benchmarking |
+| Rec 3 — "Use a structured action representation" | **Adopted**, as [[smooth-basis-swing-parameterization]] — with the refinement that planar-canonical families are insufficient once the goal includes arrival direction |
+| Rec 4 — "Build in online adaptation… 1–10 real refinement iterations (IRP-style)" | **Rejected by project constraint.** Per-target iteration and intra-swing feedback are out of scope; open-loop zero-shot *is* the research contribution. Per-*rope* calibration (one-time, few minutes) stays in scope. Deployment-time sim *verification* is allowed under a declared budget — ruling still **proposed, awaiting user confirmation** |
+| Rec 5 — "Borrow residual physics from TossingBot" | **Not the chosen method.** TossingBot contributes the hindsight-outcome-labeling idea rather than the residual-on-analytic-prior architecture. A residual forward model re-enters only as a candidate for real-rope calibration |
+| Decision threshold "One-shot only → IPA / DA-MMP / motion-manifold" | **Partly followed**: the DA-MMP recipe is validated and adopted; the motion-manifold arm is demoted to one arm of the [[sim-stage-b-amortization-shootout]], not a prerequisite |
+
+**Field facts added since this synthesis** (2026-07-28 scan; none of these has a wiki paper
+page — `/ingest` pending): DeformX-CMU 6.6 cm real planar hit-target; DLO-Lab (ICML 2026,
+code released) differentiable DLO sim with a slingshot task; DA-MMP (ICRA 2026) and MMFP
+(RA-L 2025) for the conditional-flow-over-primitives recipe; Wiggle&Go's 3.55 → 15.34 cm
+degradation under parameter error. Also confirmed: **no 2025–2026 rope/DLO paper conditions
+on arrival direction.**
+
 ## Recommendations
 
-Synthesized from the three surveys' recommendations sections:
+Synthesized from the three surveys' recommendations sections. **See the table above — Recs 1,
+4 and 5 are superseded by project decisions.**
 
 1. **Reproduce IRP on UR5 first** — it is the published real-hardware floor and gives the right action parameterization (low-D swing parameters) to compare against. Code is on the Columbia AI Robotics page.
 2. **For simulation, pick DER, not PBD/XPBD** — DER ([[deform-differentiable-discrete-elastic-rods-real]] or [[accurate-simulation-parameter-identification-dlos-using]]) captures bending+twisting at high speed. PyElastica is the alternative for Python-native Cosserat. Avoid linear-stiffness rope models (basic mass-spring, MuJoCo native composite) for whipping.
