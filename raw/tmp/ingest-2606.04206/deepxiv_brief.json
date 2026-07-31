@@ -1,0 +1,16 @@
+{
+  "arxiv_id": "2606.04206",
+  "title": "DLO-Lab: Benchmarking Deformable Linear Object Manipulations with Differentiable Physics",
+  "tldr": "[Research Paper] This work introduces DLO-Lab, a differentiable physics simulator and benchmark suite designed to address the challenges of manipulating deformable linear objects like ropes and cables. The framework enables versatile material modeling and policy learning through a specialized agent that handles topological complexity and strategic grasping, with successful sim-to-real transfer demonstrated.",
+  "keywords": [
+    "differentiable physics",
+    "deformable linear object",
+    "robotic manipulation",
+    "sim-to-real transfer",
+    "benchmark suite"
+  ],
+  "citations": null,
+  "published": "2026-06-02T20:49:44",
+  "src_url": "https://arxiv.org/pdf/2606.04206",
+  "github_url": null
+}

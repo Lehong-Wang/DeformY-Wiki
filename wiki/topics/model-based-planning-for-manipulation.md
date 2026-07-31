@@ -19,6 +19,8 @@ key_papers:
   - "[[ropedreamer-kinematic-recurrent-state-space-model]]"
   - "[[daxbench-benchmarking-deformable-object-manipulation-differentiable]]"
   - "[[mmp-motion-manifold-primitives-parametric-curve]]"
+  - "[[differentiable-motion-manifold-primitives-reactive-motion]]"
+  - "[[diffusion-policy-visuomotor-policy-learning-action]]"
 linked_ideas: []
 ---
 
@@ -40,6 +42,8 @@ This topic covers the paradigm at the heart of the research direction: **learn a
 - **[[deep-reinforcement-learning-handful-trials-using]]** (Chua et al., NeurIPS 2018, PETS) — probabilistic ensemble dynamics + [[trajectory-sampling-uncertainty-propagation]] planned with CEM; the reference recipe for sample-efficient model-based control.
 - **[[planning-diffusion-flexible-behavior-synthesis]]** (Janner et al., ICML 2022, Diffuser) — establishes [[planning-as-diffusion]]: trajectory-level generative planning with classifier-guided test-time objectives.
 - **[[mmp-motion-manifold-primitives-parametric-curve]]** (Lee, T-RO 2024, MMP++/IMMP++) — planning as constrained optimization over a 3–6-dim latent state $(z,\tau)$ of a learned trajectory manifold ([[motion-manifold-primitives]]): in-distribution constraint replaces a dynamics model, 10 Hz replanning around moving obstacles, 3–4 orders of magnitude faster than RRT-Connect.
+- **[[diffusion-policy-visuomotor-policy-learning-action]]** (Chi et al., RSS 2023 / IJRR 2024) — the policy-side counterpart of [[planning-as-diffusion]]: conditional $p(A|O)$ with FiLM conditioning instead of joint $p(A,O)$ with inpainting, which is what makes diffusion viable inside a real-time visual control loop. Listed here because [[planning-diffusion-flexible-behavior-synthesis]] and [[dynamic-manipulation-deformable-objects-3d-simulation]] both sit in this topic and neither is legible without it.
+- **[[differentiable-motion-manifold-primitives-reactive-motion]]** (Lee, ICRA 2026, DMMP) — offline manifold + online sample-and-verify as the planning substrate: constraint satisfaction is amortized into the generator via [[trajectory-manifold-optimization]], yet a 0.2 s physics verifier is *still* required at deployment and dominates runtime. The clearest published statement that amortization does not remove the verifier.
 
 ## SOTA tracker
 
@@ -73,3 +77,4 @@ This topic covers the paradigm at the heart of the research direction: **learn a
 - [[self-curriculum-goal-generation]]
 - [[planning-as-diffusion]]
 - [[dynamics-informed-diffusion-policy]]
+- [[planner-generated-motion-corpus]] — use a slow classical planner offline to manufacture the corpus a fast amortizer is then trained on.

@@ -16,6 +16,7 @@ Generative modeling with an emphasis on **energy-based models, diffusion models,
 ## Recent work
 
 - [[planning-diffusion-flexible-behavior-synthesis]] — Diffuser: trajectory-level diffusion planning; the compositional guided-sampling formulation (summing reward/constraint gradients) underlies its multi-task and goal-conditioned flexibility (co-first author).
+- [[diffusion-policy-visuomotor-policy-learning-action]] — Diffusion Policy; co-author. The score-vs-energy argument (∇ₐ log Z = 0, so the partition function that destabilizes InfoNCE-trained EBM policies never appears) connects directly to his energy-based-model line.
 
 ## My notes
 

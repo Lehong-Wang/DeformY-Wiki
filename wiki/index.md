@@ -5,6 +5,10 @@ papers:
     title: "Accurate Simulation and Parameter Identification of Deformable Linear Objects using Discrete Elastic Rods in Generalized Coordinates"
     tags: [DLO, deformable-linear-object, discrete-elastic-rods, mujoco, simulation, parameter-identification, bending-stiffness, twisting-stiffness]
     importance: 4
+  - slug: da-mmp-learning-coordinated-accurate-throwing
+    title: "DA-MMP: Learning Coordinated and Accurate Throwing with Dynamics-Aware Motion Manifold Primitives"
+    tags: [motion-manifold, movement-primitives, flow-matching, autoencoder, latent-space-planning, dynamic-manipulation, throwing, goal-conditioned, trajectory-generation, variable-length-trajectory, sampling-based-planning, dynamics-gap, sim-to-real, action-representation, robot-learning]
+    importance: 4
   - slug: daxbench-benchmarking-deformable-object-manipulation-differentiable
     title: "DaXBench: Benchmarking Deformable Object Manipulation with Differentiable Physics"
     tags: [DLO, deformable-object-manipulation, differentiable-physics, JAX, MPM, mass-spring, benchmark, RL, imitation-learning, planning, APG, SHAC, PPO, sim-to-real]
@@ -21,6 +25,18 @@ papers:
     title: "DeformX: A Versatile Co-Simulation Framework for Deformable Linear Objects"
     tags: [DLO, deformable-linear-object, cosserat-rod, simulation, sim-to-real, robot-learning, dataset, isaac-sim]
     importance: 3
+  - slug: differentiable-motion-manifold-primitives-reactive-motion
+    title: "Differentiable Motion Manifold Primitives for Reactive Motion Generation under Kinodynamic Constraints"
+    tags: [movement-primitives, motion-manifold, kinodynamic-constraints, trajectory-optimization, continuous-time-trajectory, differentiable-decoder, flow-matching, latent-flow, task-conditioned-generation, dynamic-throwing, rejection-sampling, amortized-planning, online-replanning]
+    importance: 4
+  - slug: diffusion-policy-visuomotor-policy-learning-action
+    title: "Diffusion Policy: Visuomotor Policy Learning via Action Diffusion"
+    tags: [diffusion-model, visuomotor-policy, imitation-learning, behavior-cloning, manipulation, action-chunking, receding-horizon-control, multimodal-action-distribution, energy-based-model, robot-learning]
+    importance: 5
+  - slug: dlo-lab-benchmarking-deformable-linear-object
+    title: "DLO-Lab: Benchmarking Deformable Linear Object Manipulations with Differentiable Physics"
+    tags: [DLO, deformable-linear-object, differentiable-physics, discrete-elastic-rods, benchmark, simulation, Genesis, Taichi, trajectory-optimization, CMA-ES, SHAC, SAPO, sim-to-real, VLM-agent, two-way-coupling, MPM, bending-plasticity, open-loop-control]
+    importance: 4
   - slug: dynamic-manipulation-deformable-objects-3d-simulation
     title: "Dynamic Manipulation of Deformable Objects in 3D: Simulation, Benchmark and Learning Strategy"
     tags: [DLO, deformable-linear-object, diffusion-policy, test-time-adaptation, reduced-order-model, GVS, cosserat-rod, benchmark, 3D-rope-manipulation, simulation, sim-only]
@@ -48,6 +64,10 @@ papers:
   - slug: mmp-motion-manifold-primitives-parametric-curve
     title: "MMP++: Motion Manifold Primitives with Parametric Curve Models"
     tags: [movement-primitives, motion-manifold, learning-from-demonstration, autoencoder, latent-space-planning, parametric-curve, via-point-modulation, isometric-regularization, trajectory-generation, online-replanning, SE3]
+    importance: 4
+  - slug: motion-manifold-flow-primitives-task-conditioned
+    title: "Motion Manifold Flow Primitives for Task-Conditioned Trajectory Generation Under Complex Task-Motion Dependencies"
+    tags: [movement-primitives, motion-manifold, flow-matching, autoencoder, latent-space-planning, task-conditioned, language-conditioned, trajectory-generation, learning-from-demonstration, conditional-generative-model, small-data, SE3]
     importance: 4
   - slug: planar-robot-casting-real2sim2real-self-supervised
     title: "Real2Sim2Real: Self-Supervised Learning of Physical Single-Step Dynamic Actions for Planar Robot Casting"
@@ -106,6 +126,10 @@ concepts:
     title: "Automated Demonstration Generation for Deformable Manipulation"
     tags: [deformable, data-generation, imitation-learning, mimicgen, non-rigid-registration, trajectory-transfer, robot-learning]
     maturity: emerging
+  - slug: complex-task-motion-dependencies
+    title: "Complex Task-Motion Dependencies"
+    tags: [task-conditioned, conditional-generative-model, movement-primitives, motion-manifold, multi-modality, flow-matching, goal-conditioned, action-representation]
+    maturity: emerging
   - slug: cosserat-isaac-cosimulation
     title: "Cosserat-Isaac Co-Simulation"
     tags: [DLO, simulation, cosserat-rod, isaac-sim, sim-to-real, robot-learning]
@@ -137,6 +161,14 @@ concepts:
     title: "Dynamics-Informed Diffusion Policy (DIDP)"
     tags: [DLO, diffusion-policy, imitation-learning, trajectory-optimization, reduced-order-model, robot-learning]
     maturity: emerging
+  - slug: execution-outcome-conditioned-trajectory-generation
+    title: "Execution-Outcome-Conditioned Trajectory Generation"
+    tags: [goal-conditioned, generative-model, hindsight-relabeling, dynamics-gap, sim-to-real, inverse-model, trajectory-generation, dynamic-manipulation, data-efficiency, robot-learning]
+    maturity: emerging
+  - slug: gradient-inaccessibility-contact-mediated-manipulation
+    title: "Gradient Inaccessibility in Contact-Mediated Manipulation"
+    tags: [differentiable-physics, differentiable-simulation, trajectory-optimization, contact-rich-manipulation, tool-use, zeroth-order-optimization, CMA-ES, sparse-reward, DLO]
+    maturity: emerging
   - slug: heterogeneous-soft-rigid-system
     title: "Heterogeneous Soft-Rigid System"
     maturity: emerging
@@ -159,6 +191,10 @@ concepts:
     title: "Motion Manifold Primitives"
     tags: [movement-primitives, motion-manifold, autoencoder, latent-space-planning, learning-from-demonstration, trajectory-generation, action-representation, multi-modality]
     maturity: active
+  - slug: multimodal-action-distributions-behavior-cloning
+    title: "Multimodal Action Distributions in Behavior Cloning"
+    tags: [behavior-cloning, imitation-learning, multimodality, mode-collapse, generative-policy, energy-based-model, policy-representation, robot-learning]
+    maturity: stable
   - slug: neural-residual-on-physics-model
     title: "Neural Residual on a Physics Model"
     tags: [residual-learning, physics-informed-learning, simulation, hybrid-model, differentiable-simulation]
@@ -178,6 +214,10 @@ concepts:
     title: "Physics-Informed Test-Time Adaptation (PITA) for Diffusion Sampling"
     tags: [diffusion-policy, test-time-adaptation, score-based-sampling, physics-prior, robot-learning, DLO]
     maturity: emerging
+  - slug: planner-generated-motion-corpus
+    title: "Planner-Generated Motion Corpus"
+    tags: [data-generation, motion-planning, sampling-based-planning, movement-primitives, motion-manifold, scaling, self-supervised, simulation, trajectory-generation, robot-learning]
+    maturity: emerging
   - slug: planning-as-diffusion
     title: "Planning as Diffusion"
     tags: [diffusion-model, planning, trajectory-optimization, model-based-reinforcement-learning, generative-planning, control-as-inference]
@@ -194,6 +234,10 @@ concepts:
     title: "Real2Sim2Real Pipeline"
     tags: [DLO, sim-to-real, system-identification, self-supervised, robot-learning]
     maturity: emerging
+  - slug: receding-horizon-action-chunk-execution
+    title: "Receding-Horizon Action-Chunk Execution"
+    tags: [action-representation, imitation-learning, behavior-cloning, closed-loop-control, temporal-consistency, latency-robustness, visuomotor-policy, robot-learning]
+    maturity: stable
   - slug: reduced-order-gvs-model
     title: "Reduced-Order GVS (Geometric Variable Strain) Model"
     tags: [DLO, cosserat-rod, simulation, reduced-order-model, differentiable-simulation, soft-robotics]
@@ -221,6 +265,10 @@ concepts:
     title: "Throwing Motion Primitive"
     tags: [robotics, motion-primitive, throwing, dynamic-manipulation, manipulation, end-effector-trajectory]
     maturity: active
+  - slug: trajectory-manifold-optimization
+    title: "Trajectory Manifold Optimization"
+    tags: [kinodynamic-constraints, trajectory-generation, motion-manifold, amortized-planning, constraint-satisfaction, fine-tuning, differentiable-constraints, task-conditioned-generation]
+    maturity: emerging
   - slug: trajectory-sampling-uncertainty-propagation
     title: "Trajectory Sampling Uncertainty Propagation"
     tags: [model-based-reinforcement-learning, probabilistic-ensemble, uncertainty-propagation, aleatoric-uncertainty, epistemic-uncertainty, planning, particle-method]
@@ -270,18 +318,30 @@ people:
   - slug: cheng-chi
     tags: [robot-learning, manipulation, deformable-objects, diffusion-policy, dynamic-manipulation]
     affiliation: "Columbia University (at time of publication); Stanford University (subsequent)"
+  - slug: chi-chu
+    kind: researcher
+    affiliation: "Shanghai Qi Zhi Institute"
   - slug: chris-atkeson
     tags: [robot-learning, iterative-learning-control, dynamic-manipulation, ILC, locally-weighted-learning]
     affiliation: "Robotics Institute, Carnegie Mellon University"
+  - slug: chuang-gan
+    kind: researcher
+    affiliation: "University of Massachusetts Amherst; MIT-IBM Watson AI Lab"
   - slug: deepak-pathak
     kind: researcher
     affiliation: "Carnegie Mellon University"
+  - slug: frank-park
+    kind: researcher
+    affiliation: "Seoul National University, Robotics Laboratory (Department of Mechanical Engineering)"
   - slug: guanzhou-lan
     tags: [diffusion-policy, deformable-object-manipulation, robot-learning, soft-robotics]
     affiliation: "Northwestern Polytechnical University"
   - slug: harry-zhang
     tags: [robotics, deformable-object-manipulation, dynamic-manipulation, self-supervised-learning]
     affiliation: "AUTOLab, UC Berkeley"
+  - slug: huazhe-xu
+    kind: researcher
+    affiliation: "Institute for Interdisciplinary Information Sciences (IIIS), Tsinghua University; Shanghai Qi Zhi Institute"
   - slug: jan-peters
     tags: [robot-learning, reinforcement-learning, policy-search, imitation-learning]
     affiliation: "TU Darmstadt (Intelligent Autonomous Systems); German Research Center for Artificial Intelligence (DFKI); hessian.AI; Robotics Institute Germany (RIG); Centre for Cognitive Science"
@@ -294,6 +354,9 @@ people:
   - slug: jonathan-wang
     tags: [DLO, robot-learning, sim-to-real, dynamic-manipulation, free-end-cable, autolab]
     affiliation: "AUTOLAB, UC Berkeley (at time of paper)"
+  - slug: junyi-cao
+    kind: researcher
+    affiliation: "University of Massachusetts Amherst"
   - slug: ken-goldberg
     tags: [robot-learning, deformable-object-manipulation, cable-manipulation, AUTOLAB, untangling, sim-to-real]
     affiliation: "AUTOLAB, UC Berkeley"
@@ -357,15 +420,30 @@ methods:
   - slug: conditional-flow-matching-motion-parameters
     tags: [flow-matching, conditional-generative-model, movement-primitives, amortized-inference, one-to-many-inverse, goal-conditioned, trajectory-generation, robot-learning]
     type: architecture
+  - slug: da-mmp-dynamics-aware-motion-manifold
+    tags: [motion-manifold, movement-primitives, autoencoder, flow-matching, classifier-free-guidance, variable-length-trajectory, via-point-primitive, radial-basis-functions, kinodynamic-planning, dynamic-manipulation, throwing, goal-conditioned, dynamics-gap]
+    type: architecture
   - slug: diffuser-guided-diffusion-planning
     tags: [diffusion-model, planning, trajectory-optimization, model-based-reinforcement-learning, classifier-guidance, offline-rl, generative-planning, receding-horizon-control]
     type: inference
+  - slug: diffusion-policy-visuomotor-action-diffusion
+    tags: [diffusion-model, visuomotor-policy, behavior-cloning, imitation-learning, action-chunking, receding-horizon-control, FiLM-conditioning, diffusion-transformer, DDIM, manipulation]
+    type: architecture
   - slug: direction-reachability-atlas
     tags: [reachability, coverage, quality-diversity, CVT-archive, evaluation-protocol, arrival-direction, DLO, rope, open-loop, task-box]
     type: evaluation
+  - slug: dlo-agent
+    tags: [VLM, LLM-agent, grasp-selection, task-decomposition, reward-generation, long-horizon-manipulation, DLO, deformable-linear-object, structural-prior, closed-loop-replanning]
+    type: protocol
+  - slug: dmmp-differentiable-motion-manifold-primitives
+    tags: [motion-manifold, movement-primitives, kinodynamic-constraints, continuous-time-trajectory, differentiable-decoder, deeponet, flow-matching, latent-flow, rejection-sampling, amortized-planning, dynamic-throwing]
+    type: architecture
   - slug: grbal-rebal-online-meta-learned-dynamics-adaptation
     tags: [meta-reinforcement-learning, model-based-reinforcement-learning, online-adaptation, MAML, recurrent-model, MPC, dynamics-model, sim-to-real]
     type: training
+  - slug: mmfp-motion-manifold-flow-primitives
+    tags: [movement-primitives, motion-manifold, flow-matching, autoencoder, latent-generative-model, task-conditioned, language-conditioned, learning-from-demonstration, small-data, trajectory-generation]
+    type: architecture
   - slug: mmp-parametric-curve-motion-manifold-primitives
     tags: [movement-primitives, motion-manifold, autoencoder, parametric-curve, latent-space-planning, isometric-regularization, gaussian-mixture-model, kernel-density-estimation, online-replanning, learning-from-demonstration]
     type: architecture
@@ -452,6 +530,9 @@ foundations:
     status: mainstream
   - slug: finite-element-method
     title: "Finite Element Method"
+    status: mainstream
+  - slug: flow-matching
+    title: "Flow Matching"
     status: mainstream
   - slug: forward-kinematics
     title: "Forward Kinematics"

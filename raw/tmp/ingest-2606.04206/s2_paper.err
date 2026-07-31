@@ -1,0 +1,16 @@
+Rate limited, waiting 60s... (attempt 1/3)
+Rate limited, waiting 120s... (attempt 2/3)
+Rate limited, waiting 180s... (attempt 3/3)
+Traceback (most recent call last):
+  File "/Users/tietie/Desktop/Research/DeformY-Wiki/tools/fetch_s2.py", line 239, in <module>
+    main()
+    ~~~~^^
+  File "/Users/tietie/Desktop/Research/DeformY-Wiki/tools/fetch_s2.py", line 225, in main
+    result = paper(args.arxiv_id)
+  File "/Users/tietie/Desktop/Research/DeformY-Wiki/tools/fetch_s2.py", line 103, in paper
+    return _get(f"/paper/ARXIV:{_bare_arxiv_id(arxiv_id)}", {"fields": FIELDS})
+  File "/Users/tietie/Desktop/Research/DeformY-Wiki/tools/fetch_s2.py", line 84, in _get
+    return _request("GET", f"{BASE_URL}{endpoint}", params=params)
+  File "/Users/tietie/Desktop/Research/DeformY-Wiki/tools/fetch_s2.py", line 80, in _request
+    raise RuntimeError(f"S2 API rate limited after {MAX_RETRIES} retries")
+RuntimeError: S2 API rate limited after 3 retries

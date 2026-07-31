@@ -61,6 +61,16 @@ sweep-then-learn cannot bootstrap into regions the prior misses. **Canonicalize 
 before training (truncate/retime to a canonical pass phase, or condition on normalized pass
 time).
 
+**A1.5 — Repeatability filter (added 2026-07-30 from the DA-MMP ingest).** Execute every
+swept trajectory **twice** and keep it only if the two rollouts agree within a tolerance,
+discarding dynamically chaotic plans **before** they enter the relabeled pool.
+[[da-mmp-learning-coordinated-accurate-throwing]] does exactly this for ring-tossing; a rope
+swing is at least as chaos-prone. The ordering is the point: a chaotic swing that happens to
+pass through a goal once teaches the amortizer a lie, and no amount of downstream
+verification removes it from the training distribution. Cost is one extra rollout per
+candidate — cheap against a 20-minute 10⁶-rollout sweep. Log the discard rate as a
+diagnostic; a high rate is itself a finding about the operating envelope.
+
 **A2 — Atlas v1.** Per position cell, the empirically reached subset of S², layered by speed
 and smoothness. Tests the structured-band hypothesis. Defines the honest task box for all later
 evaluation — reported *alongside* the pre-registered box, never instead of it.

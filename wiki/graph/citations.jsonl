@@ -1,4 +1,3 @@
-
 {"from": "papers/iterative-residual-policy-goal-conditioned-dynamic", "to": "papers/planar-robot-casting-real2sim2real-self-supervised", "type": "cites", "source": "semantic_scholar", "date": "2026-05-06"}
 {"from": "papers/iterative-residual-policy-goal-conditioned-dynamic", "to": "papers/robots-lost-arc-self-supervised-learning", "type": "cites", "source": "semantic_scholar", "date": "2026-05-06"}
 {"from": "papers/iterative-residual-policy-goal-conditioned-dynamic", "to": "papers/tossingbot-learning-throw-arbitrary-objects-residual", "type": "cites", "source": "semantic_scholar", "date": "2026-05-06"}
@@ -31,3 +30,18 @@
 {"from": "papers/rapid-adaptation-particle-dynamics-generalized-deformable", "to": "papers/rma-rapid-motor-adaptation-legged-robots", "type": "cites", "source": "semantic_scholar", "date": "2026-06-16"}
 {"from": "papers/wiggle-go-system-identification-zero-shot", "to": "papers/rma-rapid-motor-adaptation-legged-robots", "type": "cites", "source": "semantic_scholar", "date": "2026-06-16"}
 {"from": "papers/planning-diffusion-flexible-behavior-synthesis", "to": "papers/deep-reinforcement-learning-handful-trials-using", "type": "cites", "source": "semantic_scholar", "date": "2026-06-16"}
+{"from": "papers/differentiable-motion-manifold-primitives-reactive-motion", "to": "papers/mmp-motion-manifold-primitives-parametric-curve", "type": "cites", "source": "semantic_scholar", "date": "2026-07-30"}
+{"from": "papers/differentiable-motion-manifold-primitives-reactive-motion", "to": "papers/motion-manifold-flow-primitives-task-conditioned", "type": "cites", "source": "semantic_scholar", "date": "2026-07-30"}
+{"from": "papers/da-mmp-learning-coordinated-accurate-throwing", "to": "papers/differentiable-motion-manifold-primitives-reactive-motion", "type": "cites", "source": "semantic_scholar", "date": "2026-07-30"}
+{"from": "papers/da-mmp-learning-coordinated-accurate-throwing", "to": "papers/tossingbot-learning-throw-arbitrary-objects-residual", "type": "cites", "source": "semantic_scholar", "date": "2026-07-30"}
+{"from": "papers/da-mmp-learning-coordinated-accurate-throwing", "to": "papers/iterative-residual-policy-goal-conditioned-dynamic", "type": "cites", "source": "semantic_scholar", "date": "2026-07-30"}
+{"from": "papers/da-mmp-learning-coordinated-accurate-throwing", "to": "papers/mmp-motion-manifold-primitives-parametric-curve", "type": "cites", "source": "semantic_scholar", "date": "2026-07-30"}
+{"from": "papers/da-mmp-learning-coordinated-accurate-throwing", "to": "papers/learning-accurate-whole-body-throwing-high", "type": "cites", "source": "semantic_scholar", "date": "2026-07-30"}
+{"from": "papers/da-mmp-learning-coordinated-accurate-throwing", "to": "papers/implicit-physics-aware-policy-dynamic-manipulation", "type": "cites", "source": "semantic_scholar", "date": "2026-07-30"}
+{"from": "papers/motion-manifold-flow-primitives-task-conditioned", "to": "papers/mmp-motion-manifold-primitives-parametric-curve", "type": "cites", "source": "semantic_scholar", "date": "2026-07-30"}
+{"from": "papers/da-mmp-learning-coordinated-accurate-throwing", "to": "papers/motion-manifold-flow-primitives-task-conditioned", "type": "cites", "source": "semantic_scholar", "date": "2026-07-30"}
+{"from": "papers/dlo-lab-benchmarking-deformable-linear-object", "to": "papers/daxbench-benchmarking-deformable-object-manipulation-differentiable", "type": "cites", "source": "parsed_bib", "date": "2026-07-30"}
+{"from": "papers/dlo-lab-benchmarking-deformable-linear-object", "to": "papers/deform-differentiable-discrete-elastic-rods-real", "type": "cites", "source": "parsed_bib", "date": "2026-07-30"}
+{"from": "papers/diffusion-policy-visuomotor-policy-learning-action", "to": "papers/planning-diffusion-flexible-behavior-synthesis", "type": "cites", "source": "parsed_bib", "date": "2026-07-30"}
+{"from": "papers/dynamic-manipulation-deformable-objects-3d-simulation", "to": "papers/diffusion-policy-visuomotor-policy-learning-action", "type": "cites", "source": "manual", "date": "2026-07-30"}
+{"from": "papers/softmimicgen-data-generation-system-scalable-robot", "to": "papers/diffusion-policy-visuomotor-policy-learning-action", "type": "cites", "source": "manual", "date": "2026-07-30"}

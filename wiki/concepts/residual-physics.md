@@ -3,9 +3,9 @@ title: "Residual Physics"
 aliases: ["residual-physics", "residual on physics-based controller", "residual learning on analytical action prior", "residual policy on physics prior", "physics-residual hybrid controller"]
 tags: [robotics, hybrid-controller, residual-learning, sim-to-real, action-space, manipulation, throwing]
 maturity: active
-key_papers: ["[[tossingbot-learning-throw-arbitrary-objects-residual]]"]
+key_papers: ["[[tossingbot-learning-throw-arbitrary-objects-residual]]", "[[da-mmp-learning-coordinated-accurate-throwing]]"]
 first_introduced: "2019"
-date_updated: 2026-05-06
+date_updated: 2026-07-30
 related_concepts: []
 parent_topic: "[[dynamic-throwing-and-hitting]]"
 ---

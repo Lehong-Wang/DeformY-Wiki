@@ -3,10 +3,10 @@ title: "Differentiable Deformable-Object Benchmark"
 aliases: ["differentiable DOM benchmark", "JAX deformable benchmark", "batched differentiable DOM simulator", "differentiable physics benchmark for DOM", "DaXBench-style benchmark"]
 tags: [DLO, DOM, deformable-object-manipulation, differentiable-physics, JAX, MPM, mass-spring, benchmark, RL, imitation-learning, planning]
 maturity: emerging
-key_papers: ["[[daxbench-benchmarking-deformable-object-manipulation-differentiable]]"]
+key_papers: ["[[daxbench-benchmarking-deformable-object-manipulation-differentiable]]", "[[dlo-lab-benchmarking-deformable-linear-object]]"]
 first_introduced: "2023"
-date_updated: 2026-05-06
-related_concepts: []
+date_updated: 2026-07-30
+related_concepts: ["[[gradient-inaccessibility-contact-mediated-manipulation]]"]
 parent_topic: "[[dynamic-deformable-object-simulation]]"
 ---
 

@@ -24,7 +24,10 @@ date_updated: 2026-05-06
 
 ## Recent work
 
-(Authoritative profile not yet ingested into this wiki — Shuran Song's group has produced FlingBot, GarmentNets, Diffusion Policy, UMI, and other manipulation foundation work that would warrant later ingestion via `/edit`.)
+- [[iterative-residual-policy-goal-conditioned-dynamic]] — IRP (RSS 2022 Best Paper / IJRR 2024), senior author.
+- [[diffusion-policy-visuomotor-policy-learning-action]] — Diffusion Policy (RSS 2023; IJRR 2024), senior author.
+
+(Not yet ingested from this group: FlingBot, GarmentNets, UMI — see `raw/notes/papers/` for notes-level coverage.)
 
 ## Collaborators
 

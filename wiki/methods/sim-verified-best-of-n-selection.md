@@ -21,6 +21,18 @@ The constraint that makes this delicate: the project brief bans "online adaptati
 target is given", yet best-of-N *is* per-target computation. Without a declared budget, the
 headline number sits on an unlabeled point of the amortization–optimization continuum.
 
+**External evidence that this component is load-bearing, not decorative (2026-07-30).**
+[[da-mmp-learning-coordinated-accurate-throwing]] runs the closest published pipeline and
+executes **one** sampled candidate with no verifier and no rejection — and eats a 40%
+failure rate. Conversely
+[[differentiable-motion-manifold-primitives-reactive-motion]] spends an entire fine-tuning
+stage ([[trajectory-manifold-optimization]]) trying to make its generator feasible *by
+construction*, gets to 95.8%, and **still needs a 0.2 s physics verifier at deployment** to
+reach 100% — a verification step that dominates its runtime (candidate generation is 0.012 s).
+Two independent groups therefore arrive at this component from opposite directions: one by
+omitting it and paying, one by trying to amortize it away and failing. Its 95.8 → 100 gap is
+the same "blind ≪ verified" quantity Stage B reports.
+
 ## Mechanism
 
 Roll out all N candidates in the simulator, score them against the cost, and execute the best.
@@ -64,6 +76,15 @@ Until confirmed, treat every verified number as budget-annotated.
   accuracy is not required — ranking robustness is. This is untested and is the single place
   the campaign could silently build toward a dead end, which is why
   [[sim-stage-c-robustness-and-verifier-mismatch]] exists.
+  **An independent second verifier is now available:**
+  [[dlo-lab-benchmarking-deformable-linear-object]] (ICML 2026, Apache-2.0, released) is a
+  differentiable Taichi DER inside Genesis whose `eval_traj(trajs, qpos=...)` path rolls out
+  externally supplied open-loop joint-position sequences batched over environments, IK
+  bypassed — and whose `reset()` already randomizes masses and bending/stretching stiffness,
+  so per-clone perturbation is built in. At ~6.1k FPS on 100 envs it is ~25× slower than the
+  primary stack: unusable as a data engine, comfortably fast enough to verify N = 64
+  candidates in under a second. Caveat: it models **no aerodynamic drag**, the same blind
+  spot as the primary simulator — so it cannot arbitrate the drag term, only the elastic one.
 - Simulation is cheap enough that N × (goals) rollouts are affordable at deployment
   (comfortable: ~153k env-steps/s at 2048 envs).
 - Execution fidelity: the rope's true input is the *achieved* handle motion, so the action

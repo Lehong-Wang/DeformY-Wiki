@@ -6,7 +6,8 @@ tags: [action-parameterization, movement-primitives, minimum-jerk, via-points, t
 source_papers: []
 parent_methods: []
 child_methods: []
-realizes_concepts: []
+realizes_concepts:
+- "[[planner-generated-motion-corpus]]"
 date_updated: 2026-07-30
 ---
 
@@ -101,7 +102,10 @@ direction-coverage gains; ablated in Stage A.
 | Against | This method |
 |---|---|
 | Planar / low-D primitives ([[two-arc-planar-motion-primitive]], [[apex-point-trajectory-parameterization]]) | Can shape out-of-plane arrival directions at all; costs ~10× the dimension and a harder oracle-search problem |
-| Learned motion manifold ([[motion-manifold-primitives]]) | No autoencoder, no data prerequisite, identical *hard* smoothness — the manifold's extra value is statistical, and it cannot be trained before a successful-swing pool exists |
+| Learned motion manifold ([[motion-manifold-primitives]]) | No autoencoder, no data prerequisite, identical *hard* smoothness — the manifold's extra value is statistical, and it cannot be trained before a successful-swing pool exists. **Corroborated 2026-07-30**: [[differentiable-motion-manifold-primitives-reactive-motion]]'s own data-collection stage is a fixed boundary-pinned Gaussian-basis curve model — structurally this method — used as the *ground truth* its neural manifold imitates, and its ablation shows the manifold architecture alone scoring *worse* than the baseline it replaces |
+| Uniform waypoints at matched parameter count | [[da-mmp-learning-coordinated-accurate-throwing]] measured this directly: gated-RBF + Hermite curves beat 32 uniform waypoints by ~2× smoothness (MSSD), and **the gap does not close with more data** (0.9k → 90k trajectories). Structural smoothness is not something a learner recovers from volume |
+
+**Missing ingredient identified 2026-07-30 — a repeatability filter.** DA-MMP executes every planned trajectory **twice** and keeps it only if the two outcomes agree, discarding dynamically chaotic plans before they ever reach the training corpus. This sweep has no analogous filter, and a rope swing is at least as chaos-prone as a ring toss. The filter belongs in [[sim-stage-a-atlas-and-data-factory]] **before** the relabeled pool is built — a chaotic swing that happens to pass through a goal once teaches the amortizer a lie, and no amount of downstream verification removes it from the training distribution.
 | Per-step joint deltas (the simulator's native RL interface) | One vector per swing, so hindsight relabeling and generative amortization become possible; loses in-episode reactivity (irrelevant under the open-loop constraint) |
 
 ## Evaluated by

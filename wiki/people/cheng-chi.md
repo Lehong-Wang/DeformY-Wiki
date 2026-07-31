@@ -22,7 +22,8 @@ date_updated: 2026-05-06
 
 ## Recent work
 
-(Authoritative profile not yet ingested into this wiki — follow-up `/edit` could add Diffusion Policy and other downstream contributions when those papers are ingested.)
+- [[iterative-residual-policy-goal-conditioned-dynamic]] — IRP (RSS 2022 Best Paper / IJRR 2024), first author: learned delta-dynamics over a low-dimensional swing primitive with iterative action refinement; zero-shot sim-to-real rope whipping.
+- [[diffusion-policy-visuomotor-policy-learning-action]] — Diffusion Policy (RSS 2023; IJRR 2024), joint first author. Conditional denoising diffusion over action chunks with receding-horizon execution; +46.9% average over prior BC methods across 15 tasks in 4 benchmarks.
 
 ## Collaborators
 

@@ -137,34 +137,62 @@ Isaac Lab; wall-mounted UR5 (base z = 1.7 m, −90° about X) + 0.8 m rigid tube
 
 ## Novelty argument
 
-Two deltas survived an independent full-field scan on 2026-07-28. Both are **open claims to
-re-verify near submission**, not settled facts.
+Two deltas survived an independent full-field scan on 2026-07-28, and **both were verified
+against primary sources on 2026-07-30** when the four load-bearing anchors were ingested.
+Still open claims to re-verify near submission, but no longer secondhand.
 
 1. **No 2025–2026 rope/DLO paper conditions on arrival direction.** DIDP, Wiggle&Go,
-   DeformX, DLO-Lab and Flying Knots all target tip position only.
+   DeformX, DLO-Lab and Flying Knots all target tip position only. Checked directly against
+   the [[dlo-lab-benchmarking-deformable-linear-object]] source: "position-only" is an
+   *understatement* there — DLO-Lab is **not goal-conditioned at all**, with all 10 tasks
+   baking a single fixed goal into a hand-written reward (its Slingshot task rewards the
+   cube's y-coordinate along a hard-coded axis). The newest DLO benchmark in the field still
+   treats goals as scene constants, which widens the gap rather than narrowing it.
 2. **The composition appears unpublished.** Sweep → *per-timestep* hindsight relabel →
-   conditional generative model → sample-and-verify has no published instance. DA-MMP
-   (ICRA 2026) labels **one** outcome per trajectory; the planar-casting line
+   conditional generative model → sample-and-verify has no published instance.
+   Verified in [[da-mmp-learning-coordinated-accurate-throwing]]'s text: it conditions on a
+   single executed landing point per trajectory via classifier-free guidance — 60 throws, 60
+   training pairs. The planar-casting line
    ([[planar-robot-casting-real2sim2real-self-supervised]],
    [[self-supervised-learning-dynamic-planar-manipulation]]) does relabel + regression
    without a generative head or verification;
    [[tossingbot-learning-throw-arbitrary-objects-residual]] uses hindsight outcome labels
    on a ballistic primitive.
 
+   **State this precisely or it is easy to attack.** DA-MMP *does* use hindsight relabeling —
+   conditioning on the achieved outcome rather than the commanded target — just at one label
+   per rollout. The delta is **label multiplicity**, not relabeling per se. And the reason
+   DA-MMP cannot do better is **task structure**: a released ring lands once, whereas a rope
+   tip is continuously in goal space. That is a far stronger defense than an oversight claim,
+   and it is also why the composition does not transfer back to throwing.
+
 **What is explicitly *not* claimed as novel.** The recipe itself is 2026 state of the art
 and that is by design — this project is solution-first, not novelty-first (2026-07-12
-decision). DA-MMP independently validates sweep → compact trajectory parametrization →
-conditional flow matching conditioned on goal (90k planned throws; beats trained humans at
-ring-tossing); MMFP (RA-L 2025) and DMMP validate the latent-manifold variant;
-[[motion-manifold-primitives]] / [[mmp-parametric-curve-motion-manifold-primitives]] supply
-the curve-parameter layer. The deployment step is best framed as *test-time scaling with a
-physics verifier*.
+decision). [[da-mmp-learning-coordinated-accurate-throwing]] independently validates
+sweep → compact trajectory parametrization → conditional flow matching conditioned on goal
+(90k planner-generated throws, 64-D latent, 60 real throws for outcome conditioning; 60% real
+ring-toss vs 56.7% for trained human experts);
+[[motion-manifold-flow-primitives-task-conditioned]] (RA-L 2025) and
+[[differentiable-motion-manifold-primitives-reactive-motion]] (ICRA 2026) validate the
+latent-manifold variant; [[motion-manifold-primitives]] /
+[[mmp-parametric-curve-motion-manifold-primitives]] supply the curve-parameter layer. The
+deployment step is best framed as *test-time scaling with a physics verifier*.
+
+**Attribution correction (2026-07-30).** DA-MMP is by Chi Chu & Huazhe Xu (Shanghai Qi Zhi /
+Tsinghua IIIS) — an **independent group**, not part of the Lee/Park MMP line — and it is
+**arXiv 2025, not ICRA 2026** as the 2026-07-28 ledger entry states. Both errors propagated
+from the secondhand field scan.
 
 `novelty_score` is deliberately unset: the 2026-07-28 scan was an external field scout, not
-the in-repo `/novelty` skill. Run `/novelty --write` on this page to populate it.
+the in-repo `/novelty` skill. Run `/novelty --write` on this page to populate it — the
+primary-source verification on 2026-07-30 removes the main reason to hold off.
 
-**Not yet ingested** (cited throughout but with no wiki paper page): DA-MMP, DMMP, MMFP,
-DLO-Lab, DeformX-CMU. Any novelty statement should wait on `/ingest` for these.
+**Ingest status.** DA-MMP, DMMP, MMFP and DLO-Lab were ingested 2026-07-30; DeformX-CMU was
+already in the wiki as [[deformx-versatile-co-simulation-framework-deformable]] (it *is* the
+6.6 cm paper, and §V of its source contains the base-rotation argument this project later
+retracted for the wall mount). Remaining gap worth closing before a novelty statement:
+**flow matching itself has no wiki foundation page** despite being this idea's primary
+amortizer — Lipman et al. 2210.02747, flagged independently by three of the four ingests.
 
 ## Target venue
 

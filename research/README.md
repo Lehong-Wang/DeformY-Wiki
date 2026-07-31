@@ -50,6 +50,16 @@ the remote sim-server agent.
 - **Simulator README inconsistency** — "0.8 m tube" (coupling section) vs "tube 0.65"
   (reach breakdown). It sets the task box's outer rim; resolve upstream in
   `DeformX/Cosserat-Rod-Sim-CUDA`.
-- **Not yet ingested** — DA-MMP, DMMP, MMFP, DLO-Lab, DeformX-CMU are load-bearing 2026
-  anchors cited throughout the plan with no wiki paper page yet. Run `/ingest` on them
-  before any novelty statement.
+- **Anchors ingested 2026-07-30** — DA-MMP, DMMP, MMFP and DLO-Lab now have wiki paper pages;
+  DeformX-CMU never needed one (it was already in the wiki, and *is* the 6.6 cm paper). Both
+  novelty deltas were verified against primary text. Three field-scan facts were corrected in
+  the process — see the ledger's 2026-07-30 entry before quoting the 07-28 entry.
+- **Plan v3.3 candidates not yet written into the plan** — the 2026-07-30 ledger entry records
+  five adopted changes (B4 respecified to MMFP form + latent-dim sweep; new B3-TMO arm; new
+  Stage-A A1.5 repeatability filter; DLO-Lab as Stage-C second verifier; tightened D5 gate).
+  The wiki experiment pages already carry them; `rope_swing_sim_experiment_plan.md` does not.
+- **Still missing** — flow matching has no wiki foundation page (Lipman et al. 2210.02747),
+  flagged independently by three of four ingests. EMMP (CoRL 2023, MIT-licensed code) is the
+  highest-value follow-up ingest.
+- **Standing watch** — `https://diffmmp.github.io/` and `https://mmflowp.github.io/` for code
+  release; see the Watch list in `.agent/NOTES.md`.

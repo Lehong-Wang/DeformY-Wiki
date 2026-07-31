@@ -85,6 +85,7 @@ DaXBench is the most influential broad-coverage differentiable DOM benchmark in 
 
 - [[dynamic-deformable-object-simulation]]
 - [[model-based-planning-for-manipulation]]
+- [[gradient-inaccessibility-contact-mediated-manipulation]] — the counterweight to WhipRope's APG result: [[dlo-lab-benchmarking-deformable-linear-object]] (ICML 2026) finds analytic gradients *losing* to CMA-ES on 7 of 8 DLO tasks wherever the reward depends on an object not yet contacted.
 **Foundations used**
 - [[deformable-linear-object]] — rope is one of the four object classes
 - [[mass-spring-system]] — used to model cloth dynamics in DaX

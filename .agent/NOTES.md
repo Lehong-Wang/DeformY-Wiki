@@ -52,16 +52,50 @@ truth?"
   independent of position — a large fraction is likely unreachable; evaluation
   must stratify (see plan §6.6 pre-registration), not average over the sphere.
 
-- **Manifold-lineage code availability (re-checked 2026-07-28):** DMMP
-  (ICRA'26), DA-MMP (ICRA'26), and D-Cubed have NO public code ("coming
-  soon"). The working entry points are **MMP++** (`Gabe-YHLee/MMPpp-public`,
-  PyTorch, license unknown — pin the commit) and **EMMP**
-  (`dlsfldl/EMMP-public`, MIT). Same author line (Yonghyeon Lee) also wrote
-  OSMP (Hopf limit-cycle motion policies) and MMFP (RA-L'25, flow matching in
-  manifold latent space). Re-check DMMP's page periodically. Practical
-  generative-over-primitive-parameters stack: **torchcfm (MIT) +
-  ALRhub/MP_PyTorch**, with `ScheiklP/movement-primitive-diffusion` as the
-  architectural reference repo.
+- **Manifold-lineage code availability (re-checked 2026-07-30 during ingest):**
+  DMMP, MMFP, DA-MMP and D-Cubed have NO public code ("coming soon"). The
+  working entry points are **MMP++** (`Gabe-YHLee/MMPpp-public`, PyTorch,
+  license unknown — pin the commit) and **EMMP** (`dlsfldl/EMMP-public`, MIT).
+  Same author line (Yonghyeon Lee) also wrote OSMP (Hopf limit-cycle motion
+  policies). Practical generative-over-primitive-parameters stack: **torchcfm
+  (MIT) + ALRhub/MP_PyTorch**, with `ScheiklP/movement-primitive-diffusion` as
+  the architectural reference repo.
+- **Three attribution errors that propagated from the 2026-07-28 secondhand
+  field scan — corrected 2026-07-30, do not reintroduce them:**
+  (a) **DA-MMP is NOT the Lee/Park line** — it is Chi Chu & Huazhe Xu (Shanghai
+  Qi Zhi / Tsinghua IIIS), an independent group building on MMP++;
+  (b) **DA-MMP is NOT ICRA 2026** — arXiv 2509.23721, 2025;
+  (c) **MMFP's two apparent papers are one paper** — arXiv 2407.19681 was
+  retitled at v3 ("Language-Guided" → "Task-Conditioned…") for RA-L 2025; S2
+  failed to merge the preprint stub with the journal record. Also:
+  diffmmp.github.io says "Paper (Coming soon)", which is **stale** — DMMP's
+  paper is on arXiv at 2410.12193 and that is what this wiki ingested; only its
+  *code* is unreleased.
+- **The manifold line's own evidence argues against the manifold** (from
+  ingesting it, 2026-07-30). DMMP's data-collection stage is a fixed
+  boundary-pinned Gaussian-basis curve model — structurally our own action
+  space — used as the ground truth its neural manifold imitates; its ablation
+  has the manifold architecture alone at 17.5% vs a 77.4% discrete-time
+  baseline, with all the gain from TMO. MMFP's "flow in trajectory space fails"
+  result is against flow over raw ~5000-D discrete-time trajectories, not over
+  compact curve parameters. And latent dim does not stay small under continuous
+  goals: MMFP m=3 (~15 discrete labels), DMMP m=32 (no ablation), DA-MMP m=64.
+  **Counterweight to keep honest:** DA-MMP's AE ablation found raw-parameter CFM
+  "rarely executable" — our escape is decoder-enforced feasibility, which must
+  be argued rather than assumed.
+
+## Watch list
+
+Checked manually; nothing automated is scheduled. Re-check when touching the
+manifold line or before a novelty statement.
+
+| What | Where | Last checked | State |
+|---|---|---|---|
+| DMMP code release | <https://diffmmp.github.io/> | 2026-07-30 | "Code (Coming soon)". Its "Paper (Coming soon)" is stale — paper is at arXiv 2410.12193 |
+| MMFP code release | <https://mmflowp.github.io/> | 2026-07-30 | "Code (Coming soon)" |
+| DA-MMP code | — | 2026-07-30 | No repo, no project page anywhere in the tex |
+| EMMP | `dlsfldl/EMMP-public` | 2026-07-30 | **MIT, available** — highest-value follow-up ingest in this lineage |
+| DLO-Lab | `UMass-Embodied-AGI/DLO-Lab` | 2026-07-30 | **Apache-2.0, available**; assets ship via a personal SharePoint link (fragile) |
 - **Novelty scan result (2026-07-28, full-field sweep):** no 2025–2026
   rope/DLO paper conditions on **arrival direction** — DIDP, Wiggle&Go,
   DeformX, DLO-Lab, and Flying Knots all target tip position only. Also, the

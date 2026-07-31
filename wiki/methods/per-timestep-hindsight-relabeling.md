@@ -6,7 +6,8 @@ tags: [hindsight-relabeling, HER, GCSL, goal-conditioned, data-generation, DLO, 
 source_papers: []
 parent_methods: []
 child_methods: []
-realizes_concepts: []
+realizes_concepts:
+- "[[execution-outcome-conditioned-trajectory-generation]]"
 date_updated: 2026-07-30
 ---
 
@@ -97,7 +98,7 @@ or confidence claim must be computed at rollout granularity.
 | Against | This method |
 |---|---|
 | Per-step RL (PPO/SAC) | Removes exploration entirely; costs the ability to react within an episode (irrelevant — execution is open-loop by constraint) |
-| One-outcome-per-trajectory labeling (DA-MMP, [[tossingbot-learning-throw-arbitrary-objects-residual]]) | ~10² × more pairs per rollout and free goal-space coverage; costs a pass-time canonicalization step that single-label schemes don't need |
+| One-outcome-per-trajectory labeling ([[da-mmp-learning-coordinated-accurate-throwing]], [[tossingbot-learning-throw-arbitrary-objects-residual]]) | ~10² × more pairs per rollout and free goal-space coverage; costs a pass-time canonicalization step that single-label schemes don't need |
 | Relabel + deterministic regression (the planar-casting line: [[planar-robot-casting-real2sim2real-self-supervised]], [[self-supervised-learning-dynamic-planar-manipulation]]) | Same labeling idea, but paired with a generative head so the one-to-many inverse is represented rather than averaged |
 | Iterative per-goal refinement ([[iterative-residual-policy]], [[task-level-iterative-learning-control]]) | Zero per-goal real-world trials; costs reliance on sim fidelity |
 

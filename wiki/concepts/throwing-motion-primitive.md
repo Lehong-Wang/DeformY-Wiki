@@ -3,9 +3,9 @@ title: "Throwing Motion Primitive"
 aliases: ["throwing primitive", "throw primitive", "release primitive", "parameterized throw motion", "projectile launch motion primitive"]
 tags: [robotics, motion-primitive, throwing, dynamic-manipulation, manipulation, end-effector-trajectory]
 maturity: active
-key_papers: ["[[tossingbot-learning-throw-arbitrary-objects-residual]]"]
+key_papers: ["[[tossingbot-learning-throw-arbitrary-objects-residual]]", "[[da-mmp-learning-coordinated-accurate-throwing]]"]
 first_introduced: "2019"
-date_updated: 2026-05-06
+date_updated: 2026-07-30
 related_concepts: []
 parent_topic: "[[dynamic-throwing-and-hitting]]"
 ---

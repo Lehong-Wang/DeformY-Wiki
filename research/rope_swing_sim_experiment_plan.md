@@ -1,5 +1,21 @@
 # DeformY — Pure-Simulation Experiment Plan (v3.2, 2026-07-29)
 
+## Abstract
+
+A pure-simulation campaign testing whether (target position, arrival direction) → one
+open-loop rope swing can be amortized zero-shot. The goal space is 5D — 3 position +
+2 direction — against 2–3 in all prior rope work, which is what kills lookup tables, planar
+action families, and per-step RL. The data engine is per-timestep hindsight relabeling: every
+timestep of every rollout is an exact goal→parameter pair, so 10⁶ sweeps of a smooth ~30-D
+via-point family yield ~10⁸ pairs at no extra sim cost. Five stages: a harness that locks the
+success predicate and task box *before* any data exists (Stage 0); a sweep plus
+direction-reachability atlas measuring which arrival directions are physically reachable per
+position under smooth motion (Stage A); a five-arm amortizer shootout — nearest-neighbour,
+regression, conditional flow matching, conditional manifold, GCSL (Stage B); a
+verifier-mismatch ranking test, the single assumption real-robot deployment stands on
+(Stage C); gated extensions (Stage D). Target ≥85% at 5 cm ∧ 15° sim-verified, ≥65% blind
+top-1. The open question is physics, not learning: coverage, not precision.
+
 > v3.2: the simulator of record is identified (`DeformX/Cosserat-Rod-Sim-CUDA`: Stable
 > Cosserat Rods in Isaac Lab, wall-mounted UR5 + 0.8 m tube + 1.0 m rope, 60 Hz control,
 > ~153k env-steps/s @2048 envs). Consequences folded in: the **task box is pre-registered**

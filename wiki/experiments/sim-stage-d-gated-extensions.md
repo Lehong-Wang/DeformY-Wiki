@@ -63,9 +63,23 @@ the *only* closed-loop variant the project will ever consider, and it is a non-c
 recorded in the 2026-06-16 control-regime decision, not scheduled here.
 
 **D5 — Differentiable-sim gradient polish.** Gate: the remote environment exposes gradients.
-The simulator of record does not, currently. DLO-Lab (ICML 2026, code released) is a candidate
-differentiable second verifier and sweep generator — it also appears as a fallback in
-[[sim-stage-c-robustness-and-verifier-mismatch]].
+The simulator of record does not, currently.
+[[dlo-lab-benchmarking-deformable-linear-object]] (ICML 2026, Apache-2.0, code released) does —
+Taichi autodiff over the whole rod solver including contact, with FluidLab-style CPU gradient
+checkpointing making backward memory independent of horizon.
+
+**But it is also the strongest argument for keeping D5 gated (evidence added 2026-07-30).** On
+its own benchmark, analytic-gradient descent hit the **do-nothing floor with 0% success on all
+three tool-use tasks** (Gathering, Lifting, Slingshot) because ∂r/∂a ≡ 0 before contact, while
+an 18-parameter CMA-ES search reached 93% on Slingshot. Overall: CMA-ES 86.6% average success
+vs SAPO 35.0%, PPO 29.3%, gradient descent 25.0%. The concept is recorded as
+[[gradient-inaccessibility-contact-mediated-manipulation]].
+
+The rope-swing task is better placed than those three — the tip position is continuous in
+handle motion throughout free flight, so there is no pre-contact dead zone — but the
+closest-approach soft-min direction term reintroduces landscape ruggedness. **Revised gate:**
+scope D5 to polishing a CMA-ES-selected candidate *inside an already-smooth basin*, and require
+a measured win over CMA-ES refinement of the same candidate before it enters the pipeline.
 
 ## Results
 

@@ -1,0 +1,56 @@
+\section{Preliminaries}
+\label{sec:prelim}
+This section introduces autoencoder-based manifold learning and flow matching models.
+
+\subsection{Autoencoder-based manifold learning}
+\label{sec:prelim-part1}
+In this section, we briefly introduce an {\it autoencoder} and its manifold learning perspective~\cite{arvanitidis2017latent,lee2021neighborhood,lee2022statistical,yonghyeon2022regularized,janggeometrically,lee2023geometric,lee2023explicit,lim2024graph}. Consider a high-dimensional data space ${\cal X}$ and a set of data points ${\cal D}=\{x^i \in {\cal X}\}_{i=1}^{N}$, and assume the data points $\{x^i\}$ lie approximately on some lower-dimensional manifold ${\cal M}$ in ${\cal X}$ (the manifold hypothesis). 
+Suppose ${\cal M}$ is an $m$-dimensional manifold and let ${\cal Z}$ be a latent space $\mathbb{R}^{m}$.
+
+An autoencoder consists of an encoder, a mapping $g:{\cal X} \to {\cal Z}$, and a decoder, a mapping $f:{\cal Z} \to {\cal X}$. 
+These are often approximated with deep neural networks and trained to minimize the reconstruction loss 
+\begin{equation}
+    \frac{1}{N}\sum_{i=1}^{N} d^2(f\circ g(x^i), x^i)
+\end{equation}
+given a distance metric $d(\cdot, \cdot)$ on ${\cal X}$. 
+We note that, given a sufficiently low reconstruction error, all the data points $\{x^i\}$ should lie on the image of the decoder $f$. 
+Under some mild conditions -- that are (i) $m$ is lower than the dimension of the data space ${\cal X}$ and (ii) $f$ is smooth and its Jacobian $\frac{\partial f}{\partial z}(z) \in \mathbb{R}^{dim({\cal X}) \times m}$ is full rank everywhere --, the image of $f$ is an $m$-dimensional differentiable manifold embedded in ${\cal X}$. 
+In other words, the decoder produces a lower-dimensional manifold where the data points approximately lie.   
+
+\subsection{Flow matching models} 
+\label{sec:prelim-part2}
+In this section, we give a brief overview of \textit{flow matching models}~\cite{lipman2022flow,lipman2024flow}, a state-of-the-art class of deep generative models.
+Let $\{x^i \in {\cal X}\}_{i=1}^{N}$ be a set of data points sampled from the underlying probability density $q(x)$. 
+Consider a non-autonomous vector field $v:[0,1] \times {\cal X} \to T{\cal X}$ that leads to a flow $\phi:[0,1] \times {\cal X} \to {\cal X}$ via the following ordinary differential equation (ODE): 
+\begin{equation}
+    \frac{d}{ds}\phi_s(x) = v_s(\phi_s(x)),     
+\end{equation}
+where $\phi_0(x) = x$.
+Given a prior density at $s=0$ denoted by $p_0$, the flow $\phi_s$ leads to a probability density path for $s \in [0,1]$~\cite{lipman2022flow}: 
+\begin{equation}
+    p_s(x) = p_0(\phi_s^{-1}(x)) \det\big(\frac{\partial \phi_s^{-1}}{\partial x}(x)\big).
+\end{equation}
+Our objective is to learn a neural network model of $v_s(x)$ so that the flow of $v_s(x)$ transforms a simple prior density $p_0$ (e.g., Gaussian) to the target data distribution $p_1 \approx q$. Then we can sample new data points by solving the ODE, $x'=v_s(x)$, from $s=0$ to $s=1$ with initial points sampled from $p_0$. 
+
+A key innovation in~\cite{lipman2022flow,lipman2024flow} is the \emph{flow matching loss}, which enables training \(v_s(x)\) efficiently \emph{without} simulating the ODE:
+\begin{equation}
+\label{eq:fmloss}
+\mathbb{E}_{x_0 \sim p_0(x), \; x_1 \sim q(x), \; s \sim \mathcal{U}[0,1]}
+\Bigl[
+    \| v_s(x_s) - (x_1 - x_0) \|^2
+\Bigr],
+\end{equation}
+where $x_s = (1-s)x_0 + s x_1$.
+Here, \(\mathcal{U}[0,1]\) is the uniform distribution over \([0,1]\). Minimizing (\ref{eq:fmloss}) gives a vector field \(v_s(x)\) that transforms \(p_0\) into a final density \(p_1\), closely approximating the data distribution \(q\).
+
+We are particularly interested in a \emph{conditional} density function \(p(x | c)\), where \(c\) is a conditioning variable. To address this, a neural network vector field \(v_s(x, c)\) takes both \(x\) and \(c\) as inputs, and is trained using a similar objective:
+\begin{equation}
+\label{eq:cfmloss}
+\mathbb{E}_{x_0 \sim p(x_0), \; (x_1,c) \sim q(x,c), \; s \sim \mathcal{U}[0,1]}
+\Bigl[
+    \| v_s(x_s, c) - (x_1 - x_0) \|^2
+\Bigr],
+\end{equation}
+where $x_s = (1-s)x_0 + s x_1$, and \(q(x,c)\) is the underlying joint distribution of data points and their conditioning variables. By incorporating \(c\) into the vector field, the flow can adapt to various context inputs, enabling conditional sample generation.
+% We note that this model can represent the complex dependency of the distribution on the condition variable, e.g., when the number of modalities or the support volumes of \( p(x|c) \) vary significantly as \( c \) changes. This is because, while a single continuous neural network model is not capable of representing \( p(x|c) \) when it changes dramatically depending on \( c \), a vector field \( v_s(x,c) \), with an additional input \( s \), can continuously transform the distribution as \( s \) progresses from \( s = 0 \) to \( s = 1 \), thereby representing complex \( p(x|c) \).
+% In this work, the inherent complex text-dependency of the motion distribution will be captured by leveraging these flow-based models.

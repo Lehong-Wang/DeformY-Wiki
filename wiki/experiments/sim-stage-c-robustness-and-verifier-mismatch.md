@@ -46,6 +46,24 @@ Known simulator limits that feed the perturbation model (from the simulator repo
 sim-to-real list): **linear + isotropic air drag** (its own #1 item), rigid tube, no rope
 self-collisions.
 
+**Independent second verifier, now concrete (added 2026-07-30).**
+[[dlo-lab-benchmarking-deformable-linear-object]] (ICML 2026) is a differentiable Taichi
+Discrete-Elastic-Rods solver inside Genesis, released under **Apache-2.0** at
+`UMass-Embodied-AGI/DLO-Lab`. Three properties make it usable here without adaptation work:
+
+- `eval_traj(trajs, qpos=...)` rolls out **externally supplied open-loop joint-position
+  sequences** batched over environments, with IK bypassed entirely — exactly this campaign's
+  interface.
+- `reset()` already randomizes masses and bending/stretching stiffness, so per-clone
+  parameter perturbation is built in.
+- Throughput ~6.1k FPS at 100 envs — about 25× slower than the primary stack, which rules it
+  out as a data engine but is ample for ranking N = 64 candidates.
+
+**Its one disqualifying blind spot for this stage: no aerodynamic drag term anywhere** — the
+same omission as the primary simulator. It can therefore cross-check the *elastic* model but
+**cannot arbitrate drag**, which is the primary simulator's own #1 sim-to-real risk. Use it as
+a second opinion on ranking, not as a drag oracle.
+
 ## Procedure
 
 1. **Verifier-mismatch ranking test.** Rank the N candidates in a simulator perturbed by a

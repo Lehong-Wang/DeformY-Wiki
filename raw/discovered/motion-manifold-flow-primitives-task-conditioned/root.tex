@@ -1,0 +1,73 @@
+\documentclass[lettersize,journal]{IEEEtran}
+\usepackage{amsmath,amsfonts}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage{array}
+\usepackage[caption=false,font=normalsize,labelfont=sf,textfont=sf]{subfig}
+\usepackage{textcomp}
+\usepackage{stfloats}
+\usepackage{url}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{cite}
+\hyphenation{op-tical net-works semi-conduc-tor IEEE-Xplore}
+% updated with editorial comments 8/9/2021
+
+% MY PACKAGES %
+\usepackage{gensymb}
+\usepackage{setspace}
+\usepackage{amsfonts} 
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{lipsum}
+%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\title{Motion Manifold Flow Primitives for Task-Conditioned \\ Trajectory Generation under Complex Task-Motion Dependencies}
+
+%\author{
+%Anonymous authors
+%}
+\author{
+ {Yonghyeon Lee$^{1}$, Byeongho Lee$^{2}$, Seungyeon Kim$^{2}$, and Frank C. Park$^{2}$}
+ \thanks{$^{1}$Y. Lee is with Center for AI and Natural Sciences (CAINS), Korea Institute for Advanced Study (KIAS), Seoul 02455, South Korea.  (e-mail: ylee@kias.re.kr). $^{2}$B. Lee, S. Kim, and F. C. Park are with Robotics Laboratory, Seoul National university, Seoul 08826, South Korea.}
+ \thanks{This work has been submitted to the IEEE for possible publication. Copyright may be transferred without notice, after which this version may no longer be accessible.}
+% \thanks{Y. Lee was the beneficiary of an individual grant from CAINS supported by a KIAS Individual Grant (AP092701) via the Center for AI and Natural Sciences at Korea Institute for Advanced Study. B. Lee, S. Kim, and F. C. Park were supported in part by IITP-MSIT grant RS-2021-II212068 (SNU AI Innovation Hub), IITP-MSIT grant RS-2022-II220480 (Training and Inference Methods for Goal Oriented AI Agents), IITP-MSIT grant RS-2024-00436680 (Collaborative Research Projects with Microsoft Research), KIAT grant P0020536 (HRD Program for Industrial Innovation), ATC+ MOTIE Technology Innovation Program grant 20008547, SRRC NRF grant RS-2023-00208052, SNU-AIIS, SNU-IPAI, SNU-IAMD, SNU BK21+ Program in Mechanical Engineering, and SNU Institute for Engineering Research.}
+ }
+
+% The paper headers
+\markboth{Journal of \LaTeX\ Class Files,~Vol.~14, No.~8, August~2021}%
+{Shell \MakeLowercase{\textit{et al.}}: A Sample Article Using IEEEtran.cls for IEEE Journals}
+
+% \IEEEpubid{0000--0000/00\$00.00~\copyright~2021 IEEE}
+% Remember, if you use this you must call \IEEEpubidadjcol in the second
+% column for its text to clear the IEEEpubid mark.
+
+\maketitle
+
+\begin{abstract}
+Effective movement primitives should be capable of encoding and generating a rich repertoire of trajectories -- typically collected from human demonstrations -- conditioned on task-defining parameters such as vision or language inputs. While recent methods based on the motion manifold hypothesis, which assumes that a set of trajectories lies on a lower-dimensional nonlinear subspace, address challenges such as limited dataset size and the high dimensionality of trajectory data, they often struggle to capture complex task-motion dependencies, i.e., when motion distributions shift drastically with task variations. To address this, we introduce Motion Manifold Flow Primitives (MMFP), a framework that decouples the training of the motion manifold from task-conditioned distributions. Specifically, we employ flow matching models, state-of-the-art conditional deep generative models, to learn task-conditioned distributions in the latent coordinate space of the learned motion manifold. Experiments are conducted on language-guided trajectory generation tasks, where many-to-many text-motion correspondences introduce complex task-motion dependencies, highlighting MMFP's superiority over existing methods.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Movement primitives, manifold learning, flow matching models, task-conditioned motion generation
+\end{IEEEkeywords}
+
+\input{tabs/1_intro}
+\input{tabs/2_related_works}
+\input{tabs/3_prelim}
+\input{tabs/4_mmfp}
+\input{tabs/5_exp}
+\input{tabs/6_con}
+
+\bibliographystyle{IEEEtran}
+\bibliography{ref}
+
+
+\vfill
+
+\end{document}
+
+

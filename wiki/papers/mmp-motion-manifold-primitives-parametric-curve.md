@@ -13,7 +13,10 @@ tldr: "Applies the motion-manifold-primitives autoencoder framework to parametri
 contribution_type: [method]
 datasets: ["2-DoF planar obstacle-avoidance demonstrations (Env1-3)", "7-DoF Franka collision-free arm demonstrations (demo types 1-2)", "water-pouring SE(3) trajectory dataset"]
 code_url: "https://github.com/Gabe-YHLee/MMPpp-public"
-cited_by: []
+cited_by:
+- "[[differentiable-motion-manifold-primitives-reactive-motion]]"
+- "[[motion-manifold-flow-primitives-task-conditioned]]"
+- "[[da-mmp-learning-coordinated-accurate-throwing]]"
 ---
 
 ## Problem & Context

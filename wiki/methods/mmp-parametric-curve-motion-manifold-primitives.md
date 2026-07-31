@@ -6,11 +6,14 @@ tags: [movement-primitives, motion-manifold, autoencoder, parametric-curve, late
 source_papers:
 - "[[mmp-motion-manifold-primitives-parametric-curve]]"
 parent_methods: []
-child_methods: []
+child_methods:
+- "[[mmfp-motion-manifold-flow-primitives]]"
+- "[[dmmp-differentiable-motion-manifold-primitives]]"
+- "[[da-mmp-dynamics-aware-motion-manifold]]"
 realizes_concepts:
 - "[[motion-manifold-primitives]]"
 code_repo: "https://github.com/Gabe-YHLee/MMPpp-public"
-date_updated: 2026-07-23
+date_updated: 2026-07-30
 ---
 
 ## Problem setting
@@ -52,7 +55,7 @@ Representative settings: $B=20$ bases; latent dim 2 (robot arm); GMM components 
 ## Limitations
 
 - Cannot generate outside the demonstrated manifold; excessive new constraints can make the feasible set on the manifold empty.
-- One model per environment/task instance; no vision conditioning (the DMMP/DA-MMP successors attack this, code not public as of 2026-07).
+- One model per environment/task instance; no vision conditioning. The [[dmmp-differentiable-motion-manifold-primitives]] successor attacks the kinodynamic-constraint side; [[da-mmp-dynamics-aware-motion-manifold]] (a **separate group** — Chu & Xu, not the Lee line) attacks the dynamics side instead. Neither has public code as of 2026-07-30, and nor does [[mmfp-motion-manifold-flow-primitives]].
 - Replanning optimizer is a sampling heuristic — fast but without completeness/optimality guarantees; travel-back in $\tau$ can stall progress.
 - Latent density choice (GMM vs KDE) must match demo topology, adding a manual modeling decision.
 - Repo (`Gabe-YHLee/MMPpp-public`: PyTorch training code, all three dataset families, pretrained weights) states **no license** — pin the commit; reuse terms unresolved.
@@ -69,3 +72,4 @@ Representative settings: $B=20$ bases; latent dim 2 (robot arm); GMM components 
 ## Evaluated by
 
 - [[mmp-motion-manifold-primitives-parametric-curve]] — 2-DoF planar obstacle avoidance (Env1-3), 7-DoF Franka collision-free motion (clustered + manifold demos), RRT-Connect planning-time comparison, and SE(3) water-pouring with online replanning around unseen moving obstacles.
+- [[sim-stage-b-amortization-shootout]] — the unconditional-manifold necessary-condition ablation under the **B4** arm (latent dim must reach ~4-5 to span the canonical 5D goal manifold).

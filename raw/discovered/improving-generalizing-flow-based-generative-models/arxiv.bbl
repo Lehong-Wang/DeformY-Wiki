@@ -1,0 +1,445 @@
+\begin{thebibliography}{87}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Albergo \& {Vanden-Eijnden}(2023)Albergo and {Vanden-Eijnden}]{albergo_building_2023}
+Michael~S. Albergo and Eric {Vanden-Eijnden}.
+\newblock Building normalizing flows with stochastic interpolants.
+\newblock \emph{International Conference on Learning Representations (ICLR)}, 2023.
+
+\bibitem[Albergo et~al.(2023)Albergo, Boffi, and {Vanden-Eijnden}]{albergo_stochastic_2023}
+Michael~S. Albergo, Nicholas~M. Boffi, and Eric {Vanden-Eijnden}.
+\newblock Stochastic interpolants: A unifying framework for flows and diffusions.
+\newblock \emph{arXiv preprint 2303.08797}, 2023.
+
+\bibitem[Aliee et~al.(2021)Aliee, Theis, and Kilbertus]{aliee_beyond_2021}
+Hananeh Aliee, Fabian~J. Theis, and Niki Kilbertus.
+\newblock Beyond predictions in neural {ODEs}: Identification and interventions.
+\newblock \emph{arXiv preprint 2106.12430}, 2021.
+
+\bibitem[Ambrosio \& Gigli(2013)Ambrosio and Gigli]{Ambrosio2013}
+Luigi Ambrosio and Nicola Gigli.
+\newblock \emph{A User's Guide to Optimal Transport}, pp.\  1--155.
+\newblock Springer Berlin Heidelberg, Berlin, Heidelberg, 2013.
+
+\bibitem[Austin et~al.(2021)Austin, Johnson, Ho, Tarlow, and van~den Berg]{austin_structured_2021}
+Jacob Austin, Daniel~D. Johnson, Jonathan Ho, Daniel Tarlow, and Rianne van~den Berg.
+\newblock Structured denoising diffusion models in discrete state-spaces.
+\newblock \emph{Neural Information Processing Systems (NeurIPS)}, 2021.
+
+\bibitem[Bao et~al.(2022)Bao, Li, Zhu, and Zhang]{bao_analytic-dpm_2022}
+Fan Bao, Chongxuan Li, Jun Zhu, and Bo~Zhang.
+\newblock Analytic-dpm: An analytic estimate of the optimal reverse variance in diffusion probabilistic models.
+\newblock \emph{International Conference on Learning Representations (ICLR)}, 2022.
+
+\bibitem[{Ben-Hamu} et~al.(2022){Ben-Hamu}, Cohen, Bose, Amos, Grover, Nickel, Chen, and Lipman]{ben-hamu_matching_2022}
+Heli {Ben-Hamu}, Samuel Cohen, Joey Bose, Brandon Amos, Aditya Grover, Maximilian Nickel, Ricky T.~Q. Chen, and Yaron Lipman.
+\newblock Matching normalizing flows and probability paths on manifolds.
+\newblock \emph{International Conference on Machine Learning (ICML)}, 2022.
+
+\bibitem[Benamou \& Brenier(2000)Benamou and Brenier]{Benamou(2000)}
+Jean-David Benamou and Yann Brenier.
+\newblock A computational fluid mechanics solution to the {M}onge-{K}antorovich mass transfer problem.
+\newblock \emph{Numerische Mathematik}, 84\penalty0 (3):\penalty0 375--393, 2000.
+
+\bibitem[Brenier(1991)]{brenier_polar_1991}
+Yann Brenier.
+\newblock Polar factorization and monotone rearrangement of vector-valued functions.
+\newblock \emph{Communications on Pure and Applied Mathematics}, 44\penalty0 (4):\penalty0 375--417, 1991.
+
+\bibitem[Bunne et~al.(2022)Bunne, {Meng-Papaxanthos}, Krause, and Cuturi]{bunne_proximal_2022}
+Charlotte Bunne, Laetitia {Meng-Papaxanthos}, Andreas Krause, and Marco Cuturi.
+\newblock Proximal optimal transport modeling of population dynamics.
+\newblock \emph{Artificial Intelligence and Statistics (AISTATS)}, 2022.
+
+\bibitem[Bunne et~al.(2023)Bunne, Stark, Gut, del Castillo, Levesque, Lehmann, Pelkmans, Krause, and R{\"a}tsch]{Bunne2023}
+Charlotte Bunne, Stefan~G. Stark, Gabriele Gut, Jacobo~Sarabia del Castillo, Mitch Levesque, Kjong-Van Lehmann, Lucas Pelkmans, Andreas Krause, and Gunnar R{\"a}tsch.
+\newblock Learning single-cell perturbation responses using neural optimal transport.
+\newblock \emph{Nature Methods}, 20\penalty0 (11):\penalty0 1759--1768, Nov 2023.
+\newblock ISSN 1548-7105.
+\newblock \doi{10.1038/s41592-023-01969-x}.
+\newblock URL \url{https://doi.org/10.1038/s41592-023-01969-x}.
+
+\bibitem[Burkhardt et~al.(2022)Burkhardt, Bloom, Cannoodt, Luecken, Krishnaswamy, Lance, Pisco, and Theis]{burkhardt_multimodal_2022}
+Daniel Burkhardt, Jonathan Bloom, Robrecht Cannoodt, Malte~D Luecken, Smita Krishnaswamy, Christopher Lance, Angela~O Pisco, and Fabian~J Theis.
+\newblock Multimodal single-cell integration across time, individuals, and batches.
+\newblock In \emph{{{NeurIPS Competitions}}}, 2022.
+
+\bibitem[Chen et~al.(2018)Chen, Rubanova, Bettencourt, and Duvenaud]{chen_neural_2018}
+Ricky T.~Q. Chen, Yulia Rubanova, Jesse Bettencourt, and David Duvenaud.
+\newblock Neural ordinary differential equations.
+\newblock \emph{Neural Information Processing Systems (NeurIPS)}, 2018.
+
+\bibitem[Chen \& Lipman(2024)Chen and Lipman]{chen2023riemannian}
+Ricky~T.Q. Chen and Yaron Lipman.
+\newblock Flow matching on general geometries.
+\newblock \emph{International Conference on Learning Representations (ICLR)}, 2024.
+
+\bibitem[Chen et~al.(2022)Chen, Liu, and Theodorou]{chen_likelihood_2022}
+Tianrong Chen, Guan-Horng Liu, and Evangelos~A. Theodorou.
+\newblock Likelihood training of {Schr\"odinger} bridge using forward-backward {SDEs} theory.
+\newblock \emph{International Conference on Learning Representations (ICLR)}, 2022.
+
+\bibitem[Corso et~al.(2023)Corso, St{\"a}rk, Jing, Barzilay, and Jaakkola]{corso_diffdock_2022}
+Gabriele Corso, Hannes St{\"a}rk, Bowen Jing, Regina Barzilay, and Tommi Jaakkola.
+\newblock {DiffDock}: Diffusion steps, twists, and turns for molecular docking.
+\newblock \emph{International Conference on Learning Representations (ICLR)}, 2023.
+
+\bibitem[Cuturi(2013)]{cuturi_sinkhorn_2013}
+Marco Cuturi.
+\newblock Sinkhorn distances: Lightspeed computation of optimal transport.
+\newblock \emph{Neural Information Processing Systems (NIPS)}, 2013.
+
+\bibitem[Damodaran et~al.(2018)Damodaran, Kellenberger, Flamary, Tuia, and Courty]{Damodarandeepjdot2018}
+Bharath~Bhushan Damodaran, Benjamin Kellenberger, Remi Flamary, Devis Tuia, and Nicolas Courty.
+\newblock {DeepJDOT}: Deep joint distribution optimal transport for unsupervised domain adaptation.
+\newblock \emph{European Conference on Computer Vision (ECCV)}, 2018.
+
+\bibitem[De~Bortoli et~al.(2021)De~Bortoli, Thornton, Heng, and Doucet]{de_bortoli_diffusion_2021}
+Valentin De~Bortoli, James Thornton, Jeremy Heng, and Arnaud Doucet.
+\newblock Diffusion {Schr\"odinger} bridge with applications to score-based generative modeling.
+\newblock \emph{Neural Information Processing Systems (NeurIPS)}, 2021.
+
+\bibitem[Dhariwal \& Nichol(2021)Dhariwal and Nichol]{dhariwal_diffusion_2021}
+Prafulla Dhariwal and Alex Nichol.
+\newblock Diffusion models beat {GANs} on image synthesis.
+\newblock \emph{Neural Information Processing Systems (NeurIPS)}, 2021.
+
+\bibitem[Fatras et~al.(2020)Fatras, Zine, Flamary, Gribonval, and Courty]{fatras_learning_2020}
+Kilian Fatras, Younes Zine, R{\'e}mi Flamary, R{\'e}mi Gribonval, and Nicolas Courty.
+\newblock Learning with minibatch {Wasserstein}: Asymptotic and gradient properties.
+\newblock \emph{Artificial Intelligence and Statistics (AISTATS)}, 2020.
+
+\bibitem[Fatras et~al.(2021{\natexlab{a}})Fatras, Sejourne, Flamary, and Courty]{fatras_unbalanced_2021}
+Kilian Fatras, Thibault Sejourne, R{\'e}mi Flamary, and Nicolas Courty.
+\newblock Unbalanced minibatch optimal transport; applications to domain adaptation.
+\newblock \emph{International Conference on Machine Learning (ICML)}, 2021{\natexlab{a}}.
+
+\bibitem[Fatras et~al.(2021{\natexlab{b}})Fatras, Zine, Majewski, Flamary, Gribonval, and Courty]{fatras_minibatch_2021}
+Kilian Fatras, Younes Zine, Szymon Majewski, R{\'e}mi Flamary, R{\'e}mi Gribonval, and Nicolas Courty.
+\newblock Minibatch optimal transport distances; analysis and applications.
+\newblock \emph{arXiv preprint 2101.01792}, 2021{\natexlab{b}}.
+
+\bibitem[Finlay et~al.(2020)Finlay, Jacobsen, Nurbekyan, and Oberman]{finlay_how_2020}
+Chris Finlay, J{\"o}rn-Henrik Jacobsen, Levon Nurbekyan, and Adam~M. Oberman.
+\newblock How to train your neural ode: The world of jacobian and kinetic regularization.
+\newblock \emph{International Conference on Machine Learning (ICML)}, 2020.
+
+\bibitem[Flamary et~al.(2021)Flamary, Courty, Gramfort, Alaya, Boisbunon, Chambon, Chapel, Corenflos, Fatras, Fournier, Gautheron, Gayraud, Janati, Rakotomamonjy, Redko, Rolet, Schutz, Seguy, Sutherland, Tavenard, Tong, and Vayer]{flamary_pot_2021}
+Remi Flamary, Nicolas Courty, Alexandre Gramfort, Mokhtar~Z Alaya, Aurelie Boisbunon, Stanislas Chambon, Laetitia Chapel, Adrien Corenflos, Kilian Fatras, Nemo Fournier, Leo Gautheron, Nathalie T~H Gayraud, Hicham Janati, Alain Rakotomamonjy, Ievgen Redko, Antoine Rolet, Antony Schutz, Vivien Seguy, Danica~J Sutherland, Romain Tavenard, Alexander Tong, and Titouan Vayer.
+\newblock {POT}: {Python Optimal Transport}.
+\newblock \emph{Journal of Machine Learning Research (JMLR)}, 22, 2021.
+
+\bibitem[Genevay et~al.(2018)Genevay, Peyre, and Cuturi]{genevay_2018}
+Aude Genevay, Gabriel Peyre, and Marco Cuturi.
+\newblock Learning generative models with {Sinkhorn} divergences.
+\newblock \emph{Artificial Intelligence and Statistics (AISTATS)}, 2018.
+
+\bibitem[Goodfellow et~al.(2014)Goodfellow, Pouget-Abadie, Mirza, Xu, Warde-Farley, Ozair, Courville, and Bengio]{goodfellow_generative_2014}
+Ian~J. Goodfellow, Jean Pouget-Abadie, Mehdi Mirza, Bing Xu, David Warde-Farley, Sherjil Ozair, Aaron Courville, and Yoshua Bengio.
+\newblock Generative adversarial nets.
+\newblock \emph{Neural Information Processing Systems (NIPS)}, 2014.
+
+\bibitem[Grathwohl et~al.(2019)Grathwohl, Chen, Bettencourt, Sutskever, and Duvenaud]{grathwohl_ffjord:_2019}
+Will Grathwohl, Ricky T.~Q. Chen, Jesse Bettencourt, Ilya Sutskever, and David Duvenaud.
+\newblock Ffjord: Free-form continuous dynamics for scalable reversible generative models.
+\newblock \emph{International Conference on Learning Representations (ICLR)}, 2019.
+
+\bibitem[Hairer et~al.(1993)Hairer, N{\o}rsett, and Wanner]{hairer1993solving}
+Ernst Hairer, Syvert~P N{\o}rsett, and Gerhard Wanner.
+\newblock \emph{Solving ordinary differential equations I. Nonstiff problems}.
+\newblock Springer, 1993.
+
+\bibitem[Ho et~al.(2020)Ho, Jain, and Abbeel]{ho_denoising_2020}
+Jonathan Ho, Ajay Jain, and Pieter Abbeel.
+\newblock Denoising diffusion probabilistic models.
+\newblock \emph{Neural Information Processing Systems (NeurIPS)}, 2020.
+
+\bibitem[Hoffman \& Gelman(2011)Hoffman and Gelman]{nuts}
+Matthew~D. Hoffman and Andrew Gelman.
+\newblock The {No-U-turn} sampler: adaptively setting path lengths in {Hamiltonian Monte Carlo}.
+\newblock \emph{Journal of Machine Learning Research (JMLR)}, 15:\penalty0 1593--1623, 2011.
+
+\bibitem[Huguet et~al.(2022{\natexlab{a}})Huguet, Magruder, Tong, Fasina, Kuchroo, Wolf, and Krishnaswamy]{huguet_manifold_2022}
+Guillaume Huguet, D.~S. Magruder, Alexander Tong, Oluwadamilola Fasina, Manik Kuchroo, Guy Wolf, and Smita Krishnaswamy.
+\newblock Manifold interpolating optimal-transport flows for trajectory inference.
+\newblock \emph{Neural Information Processing Systems (NeurIPS)}, 2022{\natexlab{a}}.
+
+\bibitem[Huguet et~al.(2022{\natexlab{b}})Huguet, Tong, Zapatero, Wolf, and Krishnaswamy]{huguet_geodesic_2022}
+Guillaume Huguet, Alexander Tong, Mar{\'i}a~Ramos Zapatero, Guy Wolf, and Smita Krishnaswamy.
+\newblock Geodesic {Sinkhorn}: Optimal transport for high-dimensional datasets.
+\newblock \emph{arXiv preprint 2211.00805}, 2022{\natexlab{b}}.
+
+\bibitem[Kingma \& Welling(2014)Kingma and Welling]{kingma_auto-encoding_2014}
+Diederik~P. Kingma and Max Welling.
+\newblock Auto-encoding variational bayes.
+\newblock \emph{International Conference on Learning Representations (ICLR)}, 2014.
+
+\bibitem[Klambauer et~al.(2017)Klambauer, Unterthiner, Mayr, and Hochreiter]{klambauer_self-normalizing_2017}
+G{\"u}nter Klambauer, Thomas Unterthiner, Andreas Mayr, and Sepp Hochreiter.
+\newblock Self-normalizing neural networks.
+\newblock \emph{Neural Information Processing Systems (NIPS)}, 2017.
+
+\bibitem[Korotin et~al.(2021)Korotin, Li, Genevay, Solomon, Filippov, and Burnaev]{korotin_do_2021}
+Alexander Korotin, Lingxiao Li, Aude Genevay, Justin~M Solomon, Alexander Filippov, and Evgeny Burnaev.
+\newblock Do neural optimal transport solvers work? a continuous wasserstein-2 benchmark.
+\newblock \emph{Neural Information Processing Systems (NeurIPS)}, 2021.
+
+\bibitem[Korotin et~al.(2023{\natexlab{a}})Korotin, Selikhanovych, and Burnaev]{kernel_neural_ot}
+Alexander Korotin, Daniil Selikhanovych, and Evgeny Burnaev.
+\newblock Kenrnel neural optimal transport.
+\newblock \emph{International Conference on Learning Representations (ICLR)}, 2023{\natexlab{a}}.
+
+\bibitem[Korotin et~al.(2023{\natexlab{b}})Korotin, Selikhanovych, and Burnaev]{neural_ot}
+Alexander Korotin, Daniil Selikhanovych, and Evgeny Burnaev.
+\newblock Neural optimal transport.
+\newblock \emph{International Conference on Learning Representations (ICLR)}, 2023{\natexlab{b}}.
+
+\bibitem[Lehmann \& Casella(2006)Lehmann and Casella]{lehmann2006theory}
+Erich~L Lehmann and George Casella.
+\newblock \emph{Theory of point estimation}.
+\newblock Springer Science \& Business Media, 2006.
+
+\bibitem[L{\'e}onard(2014{\natexlab{a}})]{leonard_path_measures}
+Christian L{\'e}onard.
+\newblock Some properties of path measures.
+\newblock In Catherine Donati-Martin, Antoine Lejay, and Alain Rouault (eds.), \emph{{S\'e}minaire de Probabilit{\'e}s XLVI}, pp.\  207--230. Springer, 2014{\natexlab{a}}.
+
+\bibitem[L{\'e}onard(2014{\natexlab{b}})]{leonard_schrodinger}
+Christian L{\'e}onard.
+\newblock A survey of the {Schr\"odinger} problem and some of its connections with optimal transport.
+\newblock \emph{Discrete and Continuous Dynamical Systems}, 34\penalty0 (4):\penalty0 1533--1574, 2014{\natexlab{b}}.
+
+\bibitem[Leygonie et~al.(2019)Leygonie, She, Almahairi, Rajeswar, and Courville]{leygonie_adversarial_2019}
+Jacob Leygonie, Jennifer She, Amjad Almahairi, Sai Rajeswar, and Aaron Courville.
+\newblock Adversarial computation of optimal transport maps.
+\newblock \emph{arXiv preprint 1906.09691}, 2019.
+
+\bibitem[Li et~al.(2020)Li, Wong, Chen, and Duvenaud]{li_scalable_2020}
+Xuechen Li, Ting-Kam~Leonard Wong, Ricky T.~Q. Chen, and David Duvenaud.
+\newblock Scalable gradients for stochastic differential equations.
+\newblock \emph{Artificial Intelligence and Statistics (AISTATS)}, 2020.
+
+\bibitem[Lipman et~al.(2023)Lipman, Chen, {Ben-Hamu}, Nickel, and Le]{lipman_flow_2022}
+Yaron Lipman, Ricky T.~Q. Chen, Heli {Ben-Hamu}, Maximilian Nickel, and Matt Le.
+\newblock Flow matching for generative modeling.
+\newblock \emph{International Conference on Learning Representations (ICLR)}, 2023.
+
+\bibitem[Liu et~al.(2022{\natexlab{a}})Liu, Chen, So, and Theodorou]{liu_deep_2022}
+Guan-Horng Liu, Tianrong Chen, Oswin So, and Evangelos~A Theodorou.
+\newblock Deep generalized {Schr\"odinger} bridge.
+\newblock \emph{Neural Information Processing Systems (NeurIPS)}, 2022{\natexlab{a}}.
+
+\bibitem[Liu et~al.(2023{\natexlab{a}})Liu, Vahdat, Huang, Theodorou, Nie, and Anandkumar]{liu_sb_2023}
+Guan-Horng Liu, Arash Vahdat, De-An Huang, Evangelos~A. Theodorou, Weili Nie, and Anima Anandkumar.
+\newblock I$^2$sb: Image-to-image schr\"odinger bridge.
+\newblock \emph{International Conference on Machine Learning (ICML)}, 2023{\natexlab{a}}.
+
+\bibitem[Liu(2022)]{liu_rectified_2022}
+Qiang Liu.
+\newblock Rectified flow: A marginal preserving approach to optimal transport.
+\newblock \emph{arXiv preprint 2209.14577}, 2022.
+
+\bibitem[Liu et~al.(2022{\natexlab{b}})Liu, Wu, Ye, and Liu]{liu2022let}
+Xingchao Liu, Lemeng Wu, Mao Ye, and Qiang Liu.
+\newblock Let us build bridges: Understanding and extending diffusion generative models, 2022{\natexlab{b}}.
+
+\bibitem[Liu et~al.(2023{\natexlab{b}})Liu, Gong, and Liu]{liu_flow_2023}
+Xingchao Liu, Chengyue Gong, and Qiang Liu.
+\newblock Flow straight and fast: Learning to generate and transfer data with rectified flow.
+\newblock \emph{International Conference on Learning Representations (ICLR)}, 2023{\natexlab{b}}.
+
+\bibitem[Liu et~al.(2015)Liu, Luo, Wang, and Tang]{celeb}
+Ziwei Liu, Ping Luo, Xiaogang Wang, and Xiaoou Tang.
+\newblock Deep learning face attributes in the wild.
+\newblock \emph{International Conference on Computer Vision (ICCV)}, 2015.
+
+\bibitem[Loshchilov \& Hutter(2019)Loshchilov and Hutter]{loshchilov_decoupled_2019}
+Ilya Loshchilov and Frank Hutter.
+\newblock Decoupled weight decay regularization.
+\newblock \emph{International Conference on Learning Representations (ICLR)}, 2019.
+
+\bibitem[Lu et~al.(2022)Lu, Zhou, Bao, Chen, Li, and Zhu]{lu_dpm-solver_2022}
+Cheng Lu, Yuhao Zhou, Fan Bao, Jianfei Chen, Chongxuan Li, and Jun Zhu.
+\newblock Dpm-solver: A fast ode solver for diffusion probabilistic model sampling in around 10 steps.
+\newblock \emph{Neural Information Processing Systems (NeurIPS)}, 2022.
+
+\bibitem[Makkuva et~al.(2020)Makkuva, Taghvaei, Oh, and Lee]{makkuva_optimal_2020}
+Ashok~Vardhan Makkuva, Amirhossein Taghvaei, Sewoong Oh, and Jason~D. Lee.
+\newblock Optimal transport mapping via input convex neural networks.
+\newblock \emph{International Conference on Machine Learning (ICML)}, 2020.
+
+\bibitem[Mallasto et~al.(2022)Mallasto, Gerolin, and Ha~Quang]{mallasto_entropy_2021}
+Anton Mallasto, Augusto Gerolin, and Minh Ha~Quang.
+\newblock Entropy-regularized {2-Wasserstein} distance between {Gaussian} measures.
+\newblock \emph{Information Geometry}, 5, 07 2022.
+
+\bibitem[Moon et~al.(2019)Moon, {van Dijk}, Wang, Gigante, Burkhardt, Chen, Yim, van~den Elzen, Hirn, Coifman, Ivanova, Wolf, and Krishnaswamy]{moon_visualizing_2019}
+Kevin~R. Moon, David {van Dijk}, Zheng Wang, Scott Gigante, Daniel~B. Burkhardt, William~S. Chen, Kristina Yim, Antonia van~den Elzen, Matthew~J. Hirn, Ronald~R. Coifman, Natalia~B. Ivanova, Guy Wolf, and Smita Krishnaswamy.
+\newblock Visualizing structure and transitions in high-dimensional biological data.
+\newblock \emph{Nature Biotechnology}, 37\penalty0 (12):\penalty0 1482--1492, 2019.
+
+\bibitem[Neklyudov et~al.(2023)Neklyudov, Severo, and Makhzani]{neklyudov_action_2022}
+Kirill Neklyudov, Daniel Severo, and Alireza Makhzani.
+\newblock Action matching: Learning stochastic dynamics from samples.
+\newblock \emph{International Conference on Machine Learning (ICML)}, 2023.
+
+\bibitem[Nichol \& Dhariwal(2021)Nichol and Dhariwal]{nichol_improved_2021}
+Alex Nichol and Prafulla Dhariwal.
+\newblock Improved denoising diffusion probabilistic models.
+\newblock \emph{International Conference on Machine Learning (ICML)}, 2021.
+
+\bibitem[Onken et~al.(2021)Onken, Fung, Li, and Ruthotto]{onken_ot-flow_2021}
+Derek Onken, Samy~Wu Fung, Xingjian Li, and Lars Ruthotto.
+\newblock {OT-Flow}: Fast and accurate continuous normalizing flows via optimal transport.
+\newblock \emph{Association for the Advancement of Artificial Intelligence (AAAI)}, 2021.
+
+\bibitem[Paszke et~al.(2019)Paszke, Gross, Massa, Lerer, Bradbury, Chanan, Killeen, Lin, Gimelshein, Antiga, Desmaison, Kopf, Yang, DeVito, Raison, Tejani, Chilamkurthy, Steiner, Fang, Bai, and Chintala]{paszke_pytorch_2019}
+Adam Paszke, Sam Gross, Francisco Massa, Adam Lerer, James Bradbury, Gregory Chanan, Trevor Killeen, Zeming Lin, Natalia Gimelshein, Luca Antiga, Alban Desmaison, Andreas Kopf, Edward Yang, Zachary DeVito, Martin Raison, Alykhan Tejani, Sasank Chilamkurthy, Benoit Steiner, Lu~Fang, Junjie Bai, and Soumith Chintala.
+\newblock {PyTorch}: An imperative style, high-performance deep learning library.
+\newblock \emph{Neural Information Processing Systems (NeurIPS)}, 2019.
+
+\bibitem[Peluchetti(2023)]{peluchetti2022nondenoising}
+Stefano Peluchetti.
+\newblock Non-denoising forward-time diffusions.
+\newblock \emph{arXiv preprint arXiv:2312.14589}, 2023.
+
+\bibitem[Peyr\'e \& Cuturi(2019)Peyr\'e and Cuturi]{peyre_computational_2019}
+Gabriel Peyr\'e and Marco Cuturi.
+\newblock Computational optimal transport.
+\newblock \emph{Foundations and Trends in Machine Learning}, 11\penalty0 (5-6):\penalty0 355--607, 2019.
+
+\bibitem[Pooladian et~al.(2023)Pooladian, Ben-Hamu, Domingo-Enrich, Amos, Lipman, and Chen]{pooladian_2023_multisample}
+Aram-Alexandre Pooladian, Heli Ben-Hamu, Carles Domingo-Enrich, Brandon Amos, Yaron Lipman, and Ricky~T.Q. Chen.
+\newblock Multisample flow matching: Straightening flows with minibatch couplings.
+\newblock \emph{International Conference on Learning Representations (ICLR)}, 2023.
+
+\bibitem[Rezende \& Mohamed(2015)Rezende and Mohamed]{rezende_variational_2015}
+Danilo~Jimenez Rezende and Shakir Mohamed.
+\newblock Variational inference with normalizing flows.
+\newblock \emph{International Conference on Machine Learning (ICML)}, 2015.
+
+\bibitem[Rozen et~al.(2021)Rozen, Grover, Nickel, and Lipman]{rozen_moser_2021}
+Noam Rozen, Aditya Grover, Maximilian Nickel, and Yaron Lipman.
+\newblock Moser flow: Divergence-based generative modeling on manifolds.
+\newblock \emph{Neural Information Processing Systems (NeurIPS)}, 2021.
+
+\bibitem[Salimans \& Ho(2022)Salimans and Ho]{salimans_progressive_2022}
+Tim Salimans and Jonathan Ho.
+\newblock Progressive distillation for fast sampling of diffusion models.
+\newblock \emph{International Conference on Learning Representations (ICLR)}, 2022.
+
+\bibitem[Schiebinger et~al.(2019)Schiebinger, Shu, Tabaka, Cleary, Subramanian, Solomon, Gould, Liu, Lin, Berube, Lee, Chen, Brumbaugh, Rigollet, Hochedlinger, Jaenisch, Regev, and Lander]{schiebinger_optimal-transport_2019}
+Geoffrey Schiebinger, Jian Shu, Marcin Tabaka, Brian Cleary, Vidya Subramanian, Aryeh Solomon, Joshua Gould, Siyan Liu, Stacie Lin, Peter Berube, Lia Lee, Jenny Chen, Justin Brumbaugh, Philippe Rigollet, Konrad Hochedlinger, Rudolf Jaenisch, Aviv Regev, and Eric~S. Lander.
+\newblock Optimal-transport analysis of single-cell gene expression identifies developmental trajectories in reprogramming.
+\newblock \emph{Cell}, 176\penalty0 (4):\penalty0 928--943.e22, 2019.
+
+\bibitem[Schr\"odinger(1932)]{schrodinger}
+Erwin Schr\"odinger.
+\newblock {Sur la th\'eorie} relativiste de {l'\'electron} et {l'interpr\'etation} de la {m\'ecanique} quantique.
+\newblock \emph{Annales de l'Institut Henri Poincar\'e}, 2\penalty0 (4):\penalty0 269--310, 1932.
+
+\bibitem[Shi et~al.(2022)Shi, De~Bortoli, Deligiannidis, and Doucet]{shi_conditional_2022}
+Yuyang Shi, Valentin De~Bortoli, George Deligiannidis, and Arnaud Doucet.
+\newblock Conditional simulation using diffusion {Schr\"odinger} bridges.
+\newblock \emph{Uncertainty in Artificial Intelligence (UAI)}, 2022.
+
+\bibitem[Shi et~al.(2023)Shi, Bortoli, Campbell, and Doucet]{shi2023diffusion}
+Yuyang Shi, Valentin~De Bortoli, Andrew Campbell, and Arnaud Doucet.
+\newblock Diffusion schr{\"o}dinger bridge matching.
+\newblock \emph{Neural Information Processing Systems (NeurIPS)}, 2023.
+
+\bibitem[{Sohl-Dickstein} et~al.(2015){Sohl-Dickstein}, Weiss, Maheswaranathan, and Ganguli]{sohl-dickstein_deep_2015}
+Jascha {Sohl-Dickstein}, Eric~A. Weiss, Niru Maheswaranathan, and Surya Ganguli.
+\newblock Deep unsupervised learning using nonequilibrium thermodynamics.
+\newblock \emph{International Conference on Machine Learning (ICML)}, 2015.
+
+\bibitem[Somnath et~al.(2023)Somnath, Pariset, Hsieh, Martinez, Krause, and Bunne]{somnath2023aligned}
+Vignesh~Ram Somnath, Matteo Pariset, Ya-Ping Hsieh, Maria~Rodriguez Martinez, Andreas Krause, and Charlotte Bunne.
+\newblock Aligned diffusion schr{\"o}dinger bridges.
+\newblock \emph{Uncertainty in Artificial Intelligence (UAI)}, 2023.
+
+\bibitem[Song et~al.(2021{\natexlab{a}})Song, Meng, and Ermon]{song_denoising_2021}
+Jiaming Song, Chenlin Meng, and Stefano Ermon.
+\newblock Denoising diffusion implicit models.
+\newblock \emph{International Conference on Learning Representations (ICLR)}, 2021{\natexlab{a}}.
+
+\bibitem[Song \& Ermon(2019)Song and Ermon]{song_generative_2019}
+Yang Song and Stefano Ermon.
+\newblock Generative modeling by estimating gradients of the data distribution.
+\newblock \emph{Neural Information Processing Systems (NeurIPS)}, 2019.
+
+\bibitem[Song \& Ermon(2020)Song and Ermon]{song_improved_2020}
+Yang Song and Stefano Ermon.
+\newblock Improved techniques for training score-based generative models.
+\newblock \emph{Neural Information Processing Systems (NeurIPS)}, 2020.
+
+\bibitem[Song et~al.(2021{\natexlab{b}})Song, {Sohl-Dickstein}, Kingma, Kumar, Ermon, and Poole]{song_score-based_2021}
+Yang Song, Jascha {Sohl-Dickstein}, Diederik~P. Kingma, Abhishek Kumar, Stefano Ermon, and Ben Poole.
+\newblock Score-based generative modeling through stochastic differential equations.
+\newblock \emph{International Conference on Learning Representations (ICLR)}, 2021{\natexlab{b}}.
+
+\bibitem[Sun et~al.(2014)Sun, Wang, and Tang]{celeba}
+Yi~Sun, Xiaogang Wang, and Xiaoou Tang.
+\newblock Deep learning face representation by joint identification-verification.
+\newblock \emph{Neural Information Processing Systems (NIPS)}, 2014.
+
+\bibitem[Tong et~al.(2020)Tong, Huang, Wolf, {van Dijk}, and Krishnaswamy]{tong_trajectorynet_2020}
+Alexander Tong, Jessie Huang, Guy Wolf, David {van Dijk}, and Smita Krishnaswamy.
+\newblock {TrajectoryNet}: A dynamic optimal transport network for modeling cellular dynamics.
+\newblock \emph{International Conference on Machine Learning (ICML)}, 2020.
+
+\bibitem[Tong et~al.(2024)Tong, Malkin, Fatras, Atanackovic, Zhang, Huguet, Wolf, and Bengio]{singlecell}
+Alexander Tong, Nikolay Malkin, Kilian Fatras, Lazar Atanackovic, Yanlei Zhang, Guillaume Huguet, Guy Wolf, and Yoshua Bengio.
+\newblock Simulation-free schr{\"o}dinger bridges via score and flow matching.
+\newblock \emph{Artificial Intelligence and Statistics (AISTATS)}, 2024.
+
+\bibitem[Vargas et~al.(2021)Vargas, Thodoroff, Lawrence, and Lamacraft]{vargas_solving_2021}
+Francisco Vargas, Pierre Thodoroff, Neil~D. Lawrence, and Austen Lamacraft.
+\newblock Solving {Schr\"{o}dinger} bridges via maximum likelihood.
+\newblock \emph{Entropy}, 23\penalty0 (9), 2021.
+
+\bibitem[Villani(2009)]{Villani(2009)}
+C\'{e}dric Villani.
+\newblock \emph{Optimal transport}, volume 338 of \emph{Grundlehren der mathematischen Wissenschaften [Fundamental Principles of Mathematical Sciences]}.
+\newblock Springer-Verlag, Berlin, 2009.
+
+\bibitem[Wang et~al.(2021)Wang, Jiao, Xu, Wang, and Yang]{wang_deep_2021}
+Gefei Wang, Yuling Jiao, Qian Xu, Yang Wang, and Can Yang.
+\newblock Deep generative learning via {Schr\"odinger} bridge.
+\newblock \emph{International Conference on Machine Learning (ICML)}, 2021.
+
+\bibitem[Watson et~al.(2022{\natexlab{a}})Watson, Chan, Ho, and Norouzi]{watson_learning_2022}
+Daniel Watson, William Chan, Jonathan Ho, and Mohammad Norouzi.
+\newblock Learning fast samplers for diffusion models by differentiating through sample quality.
+\newblock \emph{International Conference on Learning Representations (ICLR)}, 2022{\natexlab{a}}.
+
+\bibitem[Watson et~al.(2022{\natexlab{b}})Watson, Juergens, Bennett, Trippe, Yim, Eisenach, Ahern, Borst, Ragotte, Milles, Wicky, Hanikel, Pellock, Courbet, Sheffler, Wang, Venkatesh, Sappington, Torres, Lauko, De~Bortoli, Mathieu, Barzilay, Jaakkola, DiMaio, Baek, and Baker]{watson_broadly_2022}
+Joseph~L. Watson, David Juergens, Nathaniel~R. Bennett, Brian~L. Trippe, Jason Yim, Helen~E. Eisenach, Woody Ahern, Andrew~J. Borst, Robert~J. Ragotte, Lukas~F. Milles, Basile I.~M. Wicky, Nikita Hanikel, Samuel~J. Pellock, Alexis Courbet, William Sheffler, Jue Wang, Preetham Venkatesh, Isaac Sappington, Susana~V{\'a}zquez Torres, Anna Lauko, Valentin De~Bortoli, Emile Mathieu, Regina Barzilay, Tommi~S. Jaakkola, Frank DiMaio, Minkyung Baek, and David Baker.
+\newblock Broadly applicable and accurate protein design by integrating structure prediction networks and diffusion generative models.
+\newblock \emph{bioRxiv preprint 2022.12.09.519842}, 2022{\natexlab{b}}.
+
+\bibitem[Ye et~al.(2022)Ye, Wu, and Liu]{ye2022hitting}
+Mao Ye, Lemeng Wu, and Qiang Liu.
+\newblock First hitting diffusion models for generating manifold, graph and categorical data.
+\newblock \emph{Neural Information Processing Systems (NeurIPS)}, 2022.
+
+\bibitem[Yeo et~al.(2021)Yeo, Saksena, and Gifford]{yeo_generative_2021}
+Grace Hui~Ting Yeo, Sachit~D. Saksena, and David~K. Gifford.
+\newblock Generative modeling of single-cell time series with {{PRESCIENT}} enables prediction of cell trajectories with interventions.
+\newblock \emph{Nature Communications}, 12\penalty0 (1):\penalty0 3222, 2021.
+
+\bibitem[Zhang \& Chen(2022)Zhang and Chen]{zhang2022path}
+Qinsheng Zhang and Yongxin Chen.
+\newblock Path integral sampler: a stochastic control approach for sampling.
+\newblock \emph{International Conference on Learning Representations (ICLR)}, 2022.
+
+\bibitem[Zhu et~al.(2017)Zhu, Park, Isola, and Efros]{cyclegan}
+Jun-Yan Zhu, Taesung Park, Phillip Isola, and Alexei~A Efros.
+\newblock Unpaired image-to-image translation using cycle-consistent adversarial networks.
+\newblock \emph{International Conference on Computer Vision (ICCV)}, 2017.
+
+\end{thebibliography}

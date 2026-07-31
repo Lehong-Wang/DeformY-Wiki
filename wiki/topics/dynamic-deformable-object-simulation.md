@@ -17,6 +17,7 @@ key_papers:
   - "[[accurate-simulation-parameter-identification-dlos-using]]"
   - "[[daxbench-benchmarking-deformable-object-manipulation-differentiable]]"
   - "[[softmimicgen-data-generation-system-scalable-robot]]"
+  - "[[dlo-lab-benchmarking-deformable-linear-object]]"
 linked_ideas: []
 ---
 
@@ -38,6 +39,7 @@ A fast, accurate, and ideally differentiable rope simulator is the data factory 
 
 - **[[deform-differentiable-discrete-elastic-rods-real]]** (Chen et al., CoRL 2024) — real-time differentiable DER with a learned physics residual; the reference differentiable DLO simulator for sim-to-real.
 - **[[accurate-simulation-parameter-identification-dlos-using]]** (Chen, Bretl, Pham, IROS 2025) — Bergou DER bending + twisting energies coupled into MuJoCo's generalized-coordinate solver; MJX-compatible and GPU-batched.
+- **[[dlo-lab-benchmarking-deformable-linear-object]]** (Cao et al., ICML 2026) — first DLO simulator combining differentiability with two-way rigid + MPM coupling, bending plasticity and loop topology; Taichi DER inside Genesis, **Apache-2.0, code released**.
 
 ## SOTA tracker
 
@@ -47,6 +49,7 @@ A fast, accurate, and ideally differentiable rope simulator is the data factory 
 ## Key benchmarks
 
 - **[[daxbench-benchmarking-deformable-object-manipulation-differentiable]]** (ICLR 2023 Oral) — JAX differentiable-physics benchmark including the WhipRope task; APG 0.83 vs SHAC 0.66 vs PPO 0.25 baselines.
+- **[[dlo-lab-benchmarking-deformable-linear-object]]** (ICML 2026) — 10 DLO tasks (8 fixed-horizon + 2 long-horizon) with differentiable rewards. Headline finding runs *against* differentiability: gradient-free CMA-ES 86.6% avg success vs SAPO 35.0%, PPO 29.3%, analytic-gradient descent 25.0%.
 
 ## Open problems
 
@@ -57,7 +60,7 @@ A fast, accurate, and ideally differentiable rope simulator is the data factory 
 
 ### Methodological gaps
 
-- **Differentiable simulators as the planning/system-ID substrate**: tighter coupling of differentiable DLO physics with offline planners and per-object identification is under-explored at whip speeds.
+- **Differentiable simulators as the planning/system-ID substrate**: tighter coupling of differentiable DLO physics with offline planners and per-object identification is under-explored at whip speeds. **Partially addressed** by [[dlo-lab-benchmarking-deformable-linear-object]] (2026) — differentiable rope system-ID from image-mask projection error — but its own benchmark shows first-order trajectory optimization *losing* to CMA-ES on 7 of 8 tasks; see [[gradient-inaccessibility-contact-mediated-manipulation]].
 - **Inextensibility and momentum preservation** under large, fast deformation remain modeling challenges (see [[momentum-preserving-pbd-inextensibility]]).
 
 ## Concepts
@@ -68,4 +71,5 @@ A fast, accurate, and ideally differentiable rope simulator is the data factory 
 - [[cosserat-isaac-cosimulation]]
 - [[differentiable-deformable-benchmark]]
 - [[der-mujoco-generalized-coordinate-coupling]]
+- [[gradient-inaccessibility-contact-mediated-manipulation]] — when the reward depends on an object the robot has not touched yet, ∂r/∂a ≡ 0 and analytic gradients carry no signal, however differentiable the simulator is.
 - [[differentiable-discrete-elastic-rods]]

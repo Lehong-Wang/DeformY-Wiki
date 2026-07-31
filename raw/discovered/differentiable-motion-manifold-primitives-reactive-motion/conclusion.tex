@@ -1,0 +1,13 @@
+\section{Conclusion}
+% We proposed identifying a trajectory manifold offline, consisting of diverse task‑completing trajectories, and performing fast kinodynamic motion planning by searching within this manifold online.  
+% Our framework, {\it Differentiable Motion Manifold Primitives (DMMP)}, represents a manifold of continuous‑time, differentiable trajectories and is trained through four steps:  
+% (i) data collection via trajectory optimization, (ii) differentiable motion‑manifold learning, (iii) latent‑flow learning, and (iv) trajectory‑manifold optimization.  
+% Using dynamic throwing tasks with a 7‑DoF robot arm, we demonstrated that our method can quickly generate diverse trajectories that satisfy both task requirements and kinodynamic constraints.
+
+We have proposed Differentiable Motion Manifold Primitives (DMMP), which learns a manifold of continuous‑time, differentiable trajectories offline and enables fast kinodynamic motion planning through online search.  
+We have trained DMMP through four steps: data collection, manifold learning, latent‑flow learning, and manifold optimization.  
+Through dynamic throwing experiments with a 7‑DoF arm, we have demonstrated that DMMP can rapidly generate trajectories that satisfy both task objectives and kinodynamic constraints.
+
+Our work can be further strengthened by improving the initial data‑collection step -- currently based on randomizing initial and final configurations -- as the diversity of collected trajectories directly determines the richness of the learned manifold and, consequently, the efficiency of online adaptation. Additionally, while this study focuses on planning, integrating tracking control and real‑world experiments would more comprehensively validate and demonstrate the effectiveness of the proposed approach.
+
+

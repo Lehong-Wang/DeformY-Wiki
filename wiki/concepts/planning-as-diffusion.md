@@ -4,7 +4,7 @@ aliases: ["planning-as-diffusion", "diffusion planning", "trajectory-level diffu
 tags: [diffusion-model, planning, trajectory-optimization, model-based-reinforcement-learning, generative-planning, control-as-inference]
 maturity: active
 definition: "A planning formulation in which a diffusion model over full (state, action) trajectories is trained on feasible behavior, so that sampling from the model is nearly identical to planning, and lightweight cost/classifier guidance or inpainting constraints steer samples toward high-return or goal-satisfying plans."
-key_papers: ["[[planning-diffusion-flexible-behavior-synthesis]]", "[[dynamic-manipulation-deformable-objects-3d-simulation]]"]
+key_papers: ["[[planning-diffusion-flexible-behavior-synthesis]]", "[[dynamic-manipulation-deformable-objects-3d-simulation]]", "[[motion-manifold-flow-primitives-task-conditioned]]"]
 first_introduced: "2022"
 date_updated: 2026-06-16
 related_concepts:

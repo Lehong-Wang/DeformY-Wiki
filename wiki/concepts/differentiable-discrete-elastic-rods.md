@@ -3,9 +3,9 @@ title: "Differentiable Discrete Elastic Rods (DDER)"
 aliases: ["DDER", "differentiable DER", "diff-DER"]
 tags: [DLO, simulation, discrete-elastic-rods, differentiable-simulation, system-identification]
 maturity: emerging
-key_papers: ["[[deform-differentiable-discrete-elastic-rods-real]]", "self-supervised-learning-dynamic-planar-manipulation"]
+key_papers: ["[[deform-differentiable-discrete-elastic-rods-real]]", "[[self-supervised-learning-dynamic-planar-manipulation]]", "[[dlo-lab-benchmarking-deformable-linear-object]]"]
 first_introduced: "2024"
-date_updated: 2026-05-06
+date_updated: 2026-07-30
 related_concepts: []
 parent_topic: "[[dynamic-deformable-object-simulation]]"
 ---
